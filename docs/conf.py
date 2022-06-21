@@ -73,7 +73,7 @@ html_context = {
     "github_user": "aiidateam",
     "github_repo": "aiida-website",
     "github_version": "main",
-    "doc_path": "docs/source/",
+    "doc_path": "docs/",
 }
 
 html_sidebars = {
