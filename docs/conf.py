@@ -99,3 +99,4 @@ html_sidebars = {
 # https://ablog.readthedocs.io/
 blog_path = "news/index"
 blog_title = "News and Events"
+fontawesome_included = True
