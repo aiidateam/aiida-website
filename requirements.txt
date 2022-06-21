@@ -1,0 +1,3 @@
+myst-parser~=0.18.0
+pydata-sphinx-theme~=0.9.0
+ablog~=0.10.25

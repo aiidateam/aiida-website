@@ -1,0 +1,77 @@
+/* on large desktops, increase distance between search and link icons */
+@media (min-width: 1200px) {
+    .bd-search {
+        margin-right: 0;
+    }
+}
+
+/* on large desktops, increase distance between nav items */
+@media (min-width: 1200px) {
+    .nav-item .nav-link {
+        margin-right: 0.5rem;
+    }
+}
+
+/* on mobile, hide the sidebar
+ * See https://github.com/pydata/pydata-sphinx-theme/issues/329
+*/
+@media (max-width: 960px) {
+    .bd-sidebar {
+        display: none;
+    }
+}
+
+/* on mobile, increase distance between links
+ * See https://github.com/pydata/pydata-sphinx-theme/issues/195
+*/
+@media (max-width: 960px) {
+    .nav-item .nav-link.nav-external,
+    .toctree-l1.nav-item .nav-link {
+        margin-bottom: 0.2rem;
+        margin-top: 0.2rem;
+      }
+}
+
+/* AiiDA sidebar */
+div.sbar-aiida {
+    text-align: left;
+    border-bottom: 1px solid var(--pst-color-border);
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+div.sbar-aiida span.tagline {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+svg.abstract-network{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+div.feature_shortlist {
+	display:grid;
+	grid-template-columns: repeat( auto-fill, minmax(120px, 1fr) );
+	grid-column-gap: 0.5rem;
+}
+div.feature_shortlist p.feature_item {
+    font-size: 1rem;
+    color: var(--pst-color-text-muted);
+}
+div.feature_shortlist p.feature_item a {
+    margin-left: 0.15em;
+}
+div.sbar-aiida div.cite {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+}
+
+/* improve ablog postlist */
+.ablog-post-expand {
+    border-bottom: 1px solid var(--pst-color-border);
+    padding-bottom: 1.15rem;
+}
+.postlist .ablog-post:last-child {
+    margin-bottom: 2rem;
+}
+.ablog-post-title {
+    font-weight: bold;
+}
