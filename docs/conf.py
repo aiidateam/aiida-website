@@ -99,4 +99,6 @@ html_sidebars = {
 # https://ablog.readthedocs.io/
 blog_path = "news/index"
 blog_title = "News and Events"
+blog_authors = {"AiiDA": ("The AiiDA team", "developers@aiida.net")}
+blog_default_author = "AiiDA"
 fontawesome_included = True

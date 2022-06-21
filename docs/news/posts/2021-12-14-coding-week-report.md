@@ -1,7 +1,7 @@
 ---
 blogpost: true
-tags: news,reports
-author: Admin
+category: News
+tags: report
 date: 2021-12-14
 ---
 

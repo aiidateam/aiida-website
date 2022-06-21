@@ -1,7 +1,7 @@
 ---
 blogpost: true
-tags: news,positions
-author: Admin
+category: News
+tags: positions
 date: 2022-02-17
 ---
 

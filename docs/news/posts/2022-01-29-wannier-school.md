@@ -1,7 +1,7 @@
 ---
 blogpost: true
-tags: news,schools
-author: Admin
+category: Events
+tags: school
 date: 2022-01-29
 ---
 

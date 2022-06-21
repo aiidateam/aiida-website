@@ -1,7 +1,7 @@
 ---
 blogpost: true
-tags: news
-author: Admin
+category: News
+tags: article
 date: 2022-05-18
 ---
 

@@ -16,4 +16,4 @@ The primary website for AiiDA.
 - Home in top bar
 - Dropdown for "More"
 - Feedback forms (contact us, Join us)
-- Decide on set of post tags
+- Decide on set of post categories/tags
