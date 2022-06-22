@@ -1,7 +1,7 @@
 # Testimonials
 
 A selection of testimonials from AiiDA users illustrating different use cases.
-For scientific papers using AiiDA, see [here](https://www.aiida.net/science/).
+For scientific papers using AiiDA, see [here](./science.md).
 
 **[Dr. Carlo A. Pignedoli](https://www.empa.ch/web/s205/carlo-pignedoli), Deputy Group Leader Atomistic Simulations, [nanotech@surfaces Laboratory](http://surfaces.ch/), Empa, Switzerland**
 

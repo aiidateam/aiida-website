@@ -90,7 +90,7 @@ Director, National Centre for Competence in Research NCCR MARVEL, EPFL*\
 
 ### General questions about AiiDA
 
-Please ask on the [AiiDA mailing list](https://www.aiida.net/mailing-list/).
+Please ask on the [AiiDA mailing list](more/mailing_list.md).
 
 ### Bug reports
 

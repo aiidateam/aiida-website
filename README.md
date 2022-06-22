@@ -17,3 +17,7 @@ The primary website for AiiDA.
 - Dropdown for "More"
 - Feedback forms (contact us, Join us)
 - Decide on set of post categories/tags
+- Sort out `docs/more/events.md`
+  - Replace `www.aiida.net` links
+  - More prominent?
+  - Integration with ablog?
