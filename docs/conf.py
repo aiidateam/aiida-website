@@ -104,3 +104,8 @@ blog_title = "News and Events"
 blog_authors = {"AiiDA": ("The AiiDA team", "developers@aiida.net")}
 blog_default_author = "AiiDA"
 fontawesome_included = True
+
+# linkcheck
+linkcheck_ignore = [
+    r"https://www.youtube.com/.*",
+]

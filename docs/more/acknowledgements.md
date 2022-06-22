@@ -17,7 +17,7 @@ AiiDA development is supported or has been supported by:
     *European H2020 MarketPlace project*
 
 * - ![logo](../pics/sponsors/intersect-logo-300x150.png)
-  - [INTERSECT](http://intersect-project.eu/)\
+  - [INTERSECT](https://intersect-project.eu/)\
     *European H2020 INTERSECT project*
 
 * - ![logo](../pics/sponsors/pasc-logo-300x150.png)
