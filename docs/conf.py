@@ -8,8 +8,10 @@ copyright = (
 )
 
 extensions = ["myst_parser", "ablog", "sphinx.ext.intersphinx"]
-html_theme = "pydata_sphinx_theme"
 
+myst_enable_extensions = ["colon_fence"]
+
+html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 templates_path = ["_templates"]

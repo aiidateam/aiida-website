@@ -11,7 +11,64 @@ Besides the AiiDA team at EPFL listed below, we thank our [numerous external cod
 
 ## The AiiDA team at EPFL
 
-...
+:::{list-table}
+
+* - ![Portrait](./team_pics/simon.jpg)
+  - **Simon Adorf**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](http://people.epfl.ch/simon.adorf)
+
+* - ![Portrait](./team_pics/marnik.jpg)
+  - **Marnik Bercx**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](http://people.epfl.ch/marnik.bercx)
+
+* - ![Portrait](./team_pics/dossantos.jpg)
+  - **Flaviano Dos Santos**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](https://people.epfl.ch/flaviano.dossantos)
+
+* - ![Portrait](./team_pics/huber.png)
+  - **Sebastiaan P. Huber**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](http://people.epfl.ch/sebastiaan.huber)
+
+* - ![Portrait](./team_pics/boris.png)
+  - **Boris Kozinsky**\
+    *Professor, Materials Intelligence Research, Harvard University (USA)*\
+    [havard.edu](https://bkoz.seas.harvard.edu/people/boris-kozinsky)
+
+* - ![Portrait](./team_pics/nicola.png)
+  - **Nicola Marzari**\
+    *Chair, Theory and Simulation of Materials, EPFL
+Director, National Centre for Competence in Research NCCR MARVEL, EPFL*\
+    [epfl.ch](http://people.epfl.ch/nicola.marzari)
+
+* - ![Portrait](./team_pics/gio.png)
+  - **Giovanni Pizzi**\
+    *Staff Scientist, Theory and Simulation of Materials, EPFL*
+
+* - ![Portrait](./team_pics/Ramirez.jpg)
+  - **Francisco F. Ramirez**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](http://people.epfl.ch/francisco.ramirez)
+
+* - ![Portrait](./team_pics/talirz.jpg)
+  - **Leopold Talirz**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](http://people.epfl.ch/leopold.talirz)
+
+* - ![Portrait](./team_pics/Yakutovich.jpg)
+  - **Aliaksandr Yakutovich**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](http://people.epfl.ch/aliaksandr.yakutovich)
+
+* - ![Portrait](./team_pics/JusongYu.jpg)
+  - **Jusong Yu**\
+    *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
+    [epfl.ch](http://people.epfl.ch/jusong.yu)
+
+:::
 
 ### Former members
 
