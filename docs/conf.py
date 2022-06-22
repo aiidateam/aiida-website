@@ -7,7 +7,7 @@ copyright = (
     "All rights reserved"
 )
 
-extensions = ["myst_parser", "ablog"]
+extensions = ["myst_parser", "ablog", "sphinx.ext.intersphinx"]
 html_theme = "pydata_sphinx_theme"
 
 html_static_path = ["_static"]
