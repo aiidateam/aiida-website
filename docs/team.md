@@ -2,7 +2,7 @@
 
 ## Credits
 
-AiiDA is a joint effort of [THEOS](http://theossrv1.epfl.ch/)/[MARVEL](http://nccr-marvel.ch/) at EPFL (Switzerland) and of [Bosch RTC](http://www.bosch.us/) in Cambridge MA (USA). Its development is supported by [a number of supporting partners and institutions](more/acknowledgements.md).
+AiiDA is a joint effort of [THEOS](http://theossrv1.epfl.ch/)/[MARVEL](https://nccr-marvel.ch/) at EPFL (Switzerland) and of [Bosch RTC](https://www.bosch.us/) in Cambridge MA (USA). Its development is supported by [a number of supporting partners and institutions](more/acknowledgements.md).
 Data generated with AiiDA are disseminated through [materialscloud.org](http://materialscloud.org/).
 
 ## External contributors
@@ -13,60 +13,60 @@ Besides the AiiDA team at EPFL listed below, we thank our [numerous external cod
 
 :::{list-table}
 
-* - ![Portrait](./team_pics/simon.jpg)
+* - ![Portrait](./pics/team/simon.jpg)
   - **Simon Adorf**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](http://people.epfl.ch/simon.adorf)
+    [epfl.ch](https://people.epfl.ch/simon.adorf)
 
-* - ![Portrait](./team_pics/marnik.jpg)
+* - ![Portrait](./pics/team/marnik.jpg)
   - **Marnik Bercx**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](http://people.epfl.ch/marnik.bercx)
+    [epfl.ch](https://people.epfl.ch/marnik.bercx)
 
-* - ![Portrait](./team_pics/dossantos.jpg)
+* - ![Portrait](./pics/team/dossantos.jpg)
   - **Flaviano Dos Santos**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/flaviano.dossantos)
 
-* - ![Portrait](./team_pics/huber.png)
+* - ![Portrait](./pics/team/huber.png)
   - **Sebastiaan P. Huber**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](http://people.epfl.ch/sebastiaan.huber)
+    [epfl.ch](https://people.epfl.ch/sebastiaan.huber)
 
-* - ![Portrait](./team_pics/boris.png)
+* - ![Portrait](./pics/team/boris.png)
   - **Boris Kozinsky**\
     *Professor, Materials Intelligence Research, Harvard University (USA)*\
     [havard.edu](https://bkoz.seas.harvard.edu/people/boris-kozinsky)
 
-* - ![Portrait](./team_pics/nicola.png)
+* - ![Portrait](./pics/team/nicola.png)
   - **Nicola Marzari**\
     *Chair, Theory and Simulation of Materials, EPFL
 Director, National Centre for Competence in Research NCCR MARVEL, EPFL*\
-    [epfl.ch](http://people.epfl.ch/nicola.marzari)
+    [epfl.ch](https://people.epfl.ch/nicola.marzari)
 
-* - ![Portrait](./team_pics/gio.png)
+* - ![Portrait](./pics/team/gio.png)
   - **Giovanni Pizzi**\
     *Staff Scientist, Theory and Simulation of Materials, EPFL*
 
-* - ![Portrait](./team_pics/Ramirez.jpg)
+* - ![Portrait](./pics/team/Ramirez.jpg)
   - **Francisco F. Ramirez**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](http://people.epfl.ch/francisco.ramirez)
+    [epfl.ch](https://people.epfl.ch/francisco.ramirez)
 
-* - ![Portrait](./team_pics/talirz.jpg)
+* - ![Portrait](./pics/team/talirz.jpg)
   - **Leopold Talirz**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](http://people.epfl.ch/leopold.talirz)
+    [epfl.ch](https://people.epfl.ch/leopold.talirz)
 
-* - ![Portrait](./team_pics/Yakutovich.jpg)
+* - ![Portrait](./pics/team/Yakutovich.jpg)
   - **Aliaksandr Yakutovich**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](http://people.epfl.ch/aliaksandr.yakutovich)
+    [epfl.ch](https://people.epfl.ch/aliaksandr.yakutovich)
 
-* - ![Portrait](./team_pics/JusongYu.jpg)
+* - ![Portrait](./pics/team/JusongYu.jpg)
   - **Jusong Yu**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](http://people.epfl.ch/jusong.yu)
+    [epfl.ch](https://people.epfl.ch/jusong.yu)
 
 :::
 
@@ -90,7 +90,7 @@ Director, National Centre for Competence in Research NCCR MARVEL, EPFL*\
 
 ### General questions about AiiDA
 
-Please ask on the [AiiDA mailing list](http://www.aiida.net/mailing-list/).
+Please ask on the [AiiDA mailing list](https://www.aiida.net/mailing-list/).
 
 ### Bug reports
 
