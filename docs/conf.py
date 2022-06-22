@@ -104,3 +104,13 @@ blog_title = "News and Events"
 blog_authors = {"AiiDA": ("The AiiDA team", "developers@aiida.net")}
 blog_default_author = "AiiDA"
 fontawesome_included = True
+
+# linkcheck
+linkcheck_exclude_documents = []
+linkcheck_ignore = [
+    r"https://www.youtube.com/.*",
+    r"http://indico.ictp.it/.*",
+    r"https://events\.prace-ri\.eu/event/957/overview",
+    r"https://events\.prace-ri\.eu/event/709/",
+    r"http://pcoss.xmu.edu.cn/workshop/",
+]
