@@ -12,7 +12,7 @@ researcher at National Institute for Materials Science (NIMS), Japan**
 
 > Today’s computational materials science (in our case, force constant calculations at finite temperature, deformation twinning, etc.) usually involves workflows that combine multiple different simulation codes. AiiDA is a robust environment to write and execute such workflows (supporting high algorithmic complexity, if needed) and to inspect their results consistently. Once a workflow is written, it is straightforward to perform systematic materials simulations over the parameters of interest, which is extremely important to generate data that are durable in posterior analysis. This is fairly difficult to achieve without using AiiDA.
 
-**Dr. Benedikt Ziebarth, Principal Scientist Materials Informatics, [Schott AG](http://www.schott.com/rd), Germany**
+**Dr. Benedikt Ziebarth, Principal Scientist Materials Informatics, Schott AG, Germany**
 
 > We at Schott are using the AiiDA environment for standardizing our workflows and thereby assure a high quality of our simulations. Due to the open plugin-driven platform approach, our internal codes and post-processing tools can be easily embedded into AiiDA workchains. Without AiiDA, making the transition from hand-driven simulation to automated calculation would have been much more difficult in the special area of glass simulations.
 

@@ -5,7 +5,7 @@ AiiDA development is supported or has been supported by:
 :::{list-table}
 
 * - ![logo](../pics/sponsors/marvel-logo-300x150.png)
-  - [NCCR MARVEL](http://nccr-marvel.ch/)\
+  - [NCCR MARVEL](https://nccr-marvel.ch/)\
     *MARVEL National Centre for Competence in Research*
 
 * - ![logo](../pics/sponsors/max-logo-300x150.png)

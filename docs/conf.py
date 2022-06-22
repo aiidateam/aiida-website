@@ -106,6 +106,7 @@ blog_default_author = "AiiDA"
 fontawesome_included = True
 
 # linkcheck
+linkcheck_exclude_documents = [r".*/posts/2022-01-29-wannier-school.*"]
 linkcheck_ignore = [
     r"https://www.youtube.com/.*",
 ]
