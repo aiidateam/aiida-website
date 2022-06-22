@@ -6,7 +6,9 @@ Team <team.md>
 More <more/index.md>
 ```
 
-# Latest news
+# AiiDA: Advancing scientific workflows
+
+## Latest News
 
 ```{postlist} 5
 :list-style: none

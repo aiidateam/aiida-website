@@ -1,15 +1,14 @@
 # Events
 
-## Upcoming events
+Besides the public events, the AiiDA team holds biweekly developer meetings  (see [public meeting notes](https://hackmd.io/@aiida)). [Contact us](mailto:developers@aiida.net) if you would like to join the developer meeting via zoom, e.g. to present your AiiDA-related developments.
 
-- \[Trieste (IT) 16-20 May 2022\] Wannier 2022 Summer School ([event site](http://indico.ictp.it/event/9789/))
+## Upcoming events
 
 _More events coming soon!_
 
-Besides the public events, the AiiDA team holds biweekly developer meetings  (see [public meeting notes](https://hackmd.io/@aiida)). [Contact us](mailto:developers@aiida.net) if you would like to join the developer meeting via zoom, e.g. to present your AiiDA-related developments.
-
 ## Past events
 
+- \[Trieste (IT) 16-20 May 2022\] Wannier 2022 Summer School ([event site](http://indico.ictp.it/event/9789/))
 - **\[University of Antwerp (BE) 20 May 2022\]** AiiDA introductory tutorial with ~15 participants.
 - **\[Leysin (CH) 6-10 December 2021\]** Fifth annual AiiDA coding week with ~15 participants ([event site](https://www.aiida.net/aiida-coding-week-2021/), [report](https://www.aiida.net/report-from-the-aiida-coding-week-dec-2021/))
 - **\[Week of July 5th, 2021\]** Online tutorial on running and writing workflows with AiiDA – available for all timezones ~ 130 participants ([event site](https://www.aiida.net/aiida-virtual-tutorial-july-2021/), [tutorial material](https://aiida-tutorials.readthedocs.io/en/tutorial-2021-intro/), [report](https://www.aiida.net/report-on-the-2021-aiida-virtual-tutorial/))
@@ -24,7 +23,7 @@ Besides the public events, the AiiDA team holds biweekly developer meetings  (s
 - **\[ISSP University of Tokyo (JP) 19-20 December 2019\]** AiiDA tutorial ([tutorial site](https://atztogo.github.io/AiiDA-tutorial-ISSP/))
 - **\[Fiesch (CH) 9-13 December 2019\]** Fourth annual AiiDA coding week with ~15 participants ([event site](http://www.aiida.net/aiida-coding-week-2019/))
 - **\[IIT Mandi (IN) 9-11 October 2019\]** Writing reproducible workflows for computational materials science using AiiDA ([tutorial site](http://aiidaworkshop.iitmandi.ac.in/))
-- **\[SINTEF Oslo (NO) 23-27 September 2019\]** VASP & AiiDA workshop ([tutorial site](https://www.sigma2.no/content/vasp-and-aiida-workshop))
+- **\[SINTEF Oslo (NO) 23-27 September 2019\]** VASP & AiiDA workshop ([tutorial site](https://www.sigma2.no/vasp-and-aiida-workshop-0))
 - **\[Ljubljana, 16-20 September 2019\]** AiiDA tutorial within the [summer school on _Advanced Materials and Molecular Modelling with Quantum ESPRESSO (QE-2019)_](http://qe2019.ijs.si/index.html).
 - **\[Xiamen University (CN) 6 September 2019\]** Introduction to AiiDA 1.0 (as part of a workshop on [computational chemistry and machine learning](http://pcoss.xmu.edu.cn/workshop/))
 - **\[EPF Lausanne (CH) 21-24 May 2019\]** [Writing reproducible workflows for computational materials science](http://www.aiida.net/tutorial-reproducible-workflows/), using AiiDA 1.0 (with >50 participants)

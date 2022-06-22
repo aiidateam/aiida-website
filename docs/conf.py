@@ -109,4 +109,5 @@ fontawesome_included = True
 linkcheck_exclude_documents = [r".*/posts/2022-01-29-wannier-school.*"]
 linkcheck_ignore = [
     r"https://www.youtube.com/.*",
+    r"http://indico.ictp.it/.*",
 ]
