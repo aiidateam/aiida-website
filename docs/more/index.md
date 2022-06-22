@@ -3,5 +3,7 @@
 ```{toctree}
 :maxdepth: 1
 
+mailing_list.md
+testimonials.md
 acknowledgements.md
 ```
