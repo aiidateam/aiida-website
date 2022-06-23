@@ -1,7 +1,7 @@
 ---
 blogpost: true
-category: News
-tags: report
+category: Reports
+tags: report,tutorial
 date: 2021-08-17
 ---
 

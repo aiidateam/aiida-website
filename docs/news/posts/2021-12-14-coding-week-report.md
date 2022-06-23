@@ -1,6 +1,6 @@
 ---
 blogpost: true
-category: News
+category: Reports
 tags: report
 date: 2021-12-14
 ---
