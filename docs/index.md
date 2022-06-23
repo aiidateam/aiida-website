@@ -8,10 +8,19 @@ More <more/index.md>
 
 # AiiDA: Advancing scientific workflows
 
+## Upcoming Events
+
+```{upcominglist}
+:date: "%A, %B %d, %Y"
+:excerpts:
+```
+
+\
+See the [Events](more/events.md) section, for more information.
+
 ## Latest News
 
 ```{postlist} 5
-:list-style: none
 :date: "%A, %B %d, %Y"
 :excerpts:
 :expand: Read more ...

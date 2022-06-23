@@ -4,14 +4,17 @@ Besides the public events, the AiiDA team holds biweekly developer meetings  (s
 
 ## Upcoming events
 
-_More events coming soon!_
+```{upcominglist}
+:date: "%A, %B %d, %Y"
+:list-style: disc
+```
 
 ## Past events
 
-- \[Trieste (IT) 16-20 May 2022\] Wannier 2022 Summer School ([event site](http://indico.ictp.it/event/9789/))
+- **\[Trieste (IT) 16-20 May 2022\]** Wannier 2022 Summer School ([event site](../news/posts/2022-01-29-wannier-school.md))
 - **\[University of Antwerp (BE) 20 May 2022\]** AiiDA introductory tutorial with ~15 participants.
-- **\[Leysin (CH) 6-10 December 2021\]** Fifth annual AiiDA coding week with ~15 participants ([event site](https://www.aiida.net/aiida-coding-week-2021/), [report](https://www.aiida.net/report-from-the-aiida-coding-week-dec-2021/))
-- **\[Week of July 5th, 2021\]** Online tutorial on running and writing workflows with AiiDA – available for all timezones ~ 130 participants ([event site](https://www.aiida.net/aiida-virtual-tutorial-july-2021/), [tutorial material](https://aiida-tutorials.readthedocs.io/en/tutorial-2021-intro/), [report](https://www.aiida.net/report-on-the-2021-aiida-virtual-tutorial/))
+- **\[Leysin (CH) 6-10 December 2021\]** Fifth annual AiiDA coding week with ~15 participants ([event site](https://www.aiida.net/aiida-coding-week-2021/), [report](../news/posts/2021-12-14-coding-week-report.md))
+- **\[Week of July 5th, 2021\]** Online tutorial on running and writing workflows with AiiDA – available for all timezones ~ 130 participants ([event site](https://www.aiida.net/aiida-virtual-tutorial-july-2021/), [tutorial material](https://aiida-tutorials.readthedocs.io/en/tutorial-2021-intro/), [report](../news/posts/2021-08-17-aiida-tutorial-report.md))
 - **\[28 May 2021\]** AiiDA tutorial at the MaX School on Advanced Materials and Molecular Modelling with Quantum ESPRESSO ~ 100 participants ([event site](<http://indico.ictp.it/event/9616/#:~:text=The%20school%20will%20introduce%20students,%2DPerformance%20Computing%20(HPC).>))
 - **\[10 Feb 2021\]** AiiDA tutorial at the Federal University of ABC, São Paulo – Brazil, with ~20 participants.
 - **\[2 Dec 2020\]** AiiDA tutorial at the BIG-MAP workshop with ~80 participants ([event site](https://multiscale-modelling.eu/BigMapWorkshop2020))
