@@ -89,6 +89,12 @@ html_sidebars = {
         "categories",
         "archives",
     ],
+    "news/index/**": [
+        "recentposts",
+        "tagcloud",
+        "categories",
+        "archives",
+    ],
     "news/posts/*": [
         "postcard",
         "recentposts",

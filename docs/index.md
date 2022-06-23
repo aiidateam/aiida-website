@@ -15,7 +15,6 @@ More <more/index.md>
 :excerpts:
 ```
 
-\
 See the [Events](more/events.md) section, for more information.
 
 ## Latest News
