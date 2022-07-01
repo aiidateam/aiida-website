@@ -7,7 +7,7 @@ copyright = (
     "All rights reserved"
 )
 
-extensions = ["myst_parser", "ablog", "sphinx.ext.intersphinx"]
+extensions = ["myst_parser", "ablog", "sphinx.ext.intersphinx", "sphinx_subfigure"]
 
 myst_enable_extensions = ["colon_fence"]
 

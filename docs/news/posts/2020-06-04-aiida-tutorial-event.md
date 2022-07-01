@@ -60,14 +60,19 @@ We are very grateful to our sponsors for helping to make this event possible:
 
 The [MaX European Centre of Excellence,](http://www.max-centre.eu/) the [swissuniversities P-5 project “Materials Cloud”](https://www.materialscloud.org/swissuniversities), the [MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/), the [H2020 MARKETPLACE project](https://www.the-marketplace-project.eu/), the [H2020 INTERSECT project](http://intersect-project.eu/) and the [PASC project](https://www.pasc-ch.org/) for funding.
 
-:::{list-table}
-:widths: 50 50
+:::{subfigure} 2
+:layout-sm: 1
 
-- - ![](../../pics/sponsors/max-logo-300x150.png)
-  - ![](../../pics/sponsors/marvel-logo-300x150.png)
-- - ![](../../pics/sponsors/swissuniversities-logo-300x150.png)
-  - ![](../../pics/sponsors/intersect-logo-300x150.png)
-- - ![](../../pics/sponsors/marketplace-logo-300x150.png)
-  - ![](../../pics/sponsors/pasc-logo-300x150.png)
+![](../../pics/sponsors/max-logo-300x150.png)
+
+![](../../pics/sponsors/marvel-logo-300x150.png)
+
+![](../../pics/sponsors/swissuniversities-logo-300x150.png)
+
+![](../../pics/sponsors/intersect-logo-300x150.png)
+
+![](../../pics/sponsors/marketplace-logo-300x150.png)
+
+![](../../pics/sponsors/pasc-logo-300x150.png)
 
 :::
