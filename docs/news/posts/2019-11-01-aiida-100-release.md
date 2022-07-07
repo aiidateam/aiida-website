@@ -21,7 +21,7 @@ For more details on the changes, see the [change log](https://github.com/aiidate
 
 As usual, you can install AiiDA 1.0 using `pip install aiida-core==1.0.0` – but please follow the installation instructions from the [documentation](https://aiida-core.readthedocs.io/en/latest/) if you are upgrading from AiiDA 0.x as the prerequisites have changed
 
-Please note that AiiDA 1.0 includes a number of [backwards-incompatible changes in the python API](https://aiida-core.readthedocs.io/en/latest/install/updating_installation.html#backwards-incompatible-changes) compared to v0.12 (the API of 1.0 beta has been stable since the first beta release in February 2019). Existing databases are migrated automatically and will be fully compatible with `v1.0.0`.
+Please note that AiiDA 1.0 includes a number of [backwards-incompatible changes in the python API](https://aiida-core.readthedocs.io/en/v1.0.0/install/updating_installation.html#backwards-incompatible-changes) compared to v0.12 (the API of 1.0 beta has been stable since the first beta release in February 2019). Existing databases are migrated automatically and will be fully compatible with `v1.0.0`.
 
 The changes in the API, however, require existing code and [plugins to be updated](https://github.com/aiidateam/aiida-core/wiki/AiiDA-1.0-plugin-migration-guide) in order to work with 1.0. Many plugins already have been successfully migrated, as you can see on the [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/), and most are expected to provide stable releases soon.
 

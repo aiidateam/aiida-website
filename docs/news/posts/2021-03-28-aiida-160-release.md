@@ -10,7 +10,7 @@ date: 2021-03-28
 We are happy to inform you that we have just released v1.6.0!
 As per SemVer versioning, this release is fully backwards-compatible.
 
-The full changelog can be found at: [https://github.com/aiidateam/aiida-core/blob/develop/CHANGELOG.md#v160—2021-03-15](https://github.com/aiidateam/aiida-core/blob/develop/CHANGELOG.md#v160---2021-03-15), but here are some highlights:
+The full changelog can be found at: [CHANGELOG](https://github.com/aiidateam/aiida-core/blob/v1.6.0/CHANGELOG.md), but here are some highlights:
 
 ## Migration to asyncio ♻️
 
@@ -60,9 +60,9 @@ In addition to `verdi config`, numerous other new commands and options have been
 ## New REST API Query endpoint ✨
 
 The `/querybuilder` endpoint is the first POST method available for AiiDA’s RESTful API.
-The POST endpoint returns what the QueryBuilder would return, when providing it with a proper `queryhelp` dictionary ([see the documentation here](https://aiida.readthedocs.io/projects/aiida-core/en/latest/topics/database.html#the-queryhelp)).
+The POST endpoint returns what the QueryBuilder would return, when providing it with a proper `queryhelp` dictionary ([see the documentation here](https://aiida.readthedocs.io/projects/aiida-core/en/v1.6.0/topics/database.html#the-queryhelp)).
 
-See [AiiDA REST API documentation](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/rest_api.html) for more details.
+See [AiiDA REST API documentation](https://aiida.readthedocs.io/projects/aiida-core/en/v1.6.0/reference/rest_api.html) for more details.
 
 Happy computing!
 
