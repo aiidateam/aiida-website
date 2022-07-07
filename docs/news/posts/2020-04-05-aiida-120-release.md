@@ -16,23 +16,23 @@ reentry scan
 
 **N.B.:**  the `reentry scan` step is crucial as we have added new entry points.
 
-This is the second minor version of the v1 series and comes with mostly new features.  
+This is the second minor version of the v1 series and comes with mostly new features.
 Especially groups have received a lot of new functionality.
 
-**Groups can now be subclassed**  
+**Groups can now be subclassed**
 The `Group` class can now be subclassed to implement custom functionality, just like for example the `Data` node class. They can be registered through entry points in the new entry point category “aiida.groups”. Please refer to the documentation for more details.
 
-**Virtual group hierarchy through `GroupPath`  
+**Virtual group hierarchy through `GroupPath`
 **The group concept in AiiDA so far has been “flat”. That is to say, group can contain nodes, but you a group cannot contain another group. Many users have expressed the wish to be able to treat groups a bit more like folders on a filesystem and add some hierarchy to them. Thanks to a contribution by Chris Sewell, the `GroupPath` utility now provides a virtual hierarchy based on the group labels. Forward slash characters `/` in group labels will be interpreted as sub groups. A very short demonstration:
 
 ```pycon
 In [1]: from aiida.tools.groups import GroupPath
    ...: Group(label='project/sub/a')
    ...: Group(label='project/sub/b')
-In [2]: path = GroupPath('project/sub')    
-   ...: for child in path.children:    
-   ...:     group = child.get\_group()    
-   ...:     print('Group<{}> contains {} nodes'.format(group.label, group.count()))    
+In [2]: path = GroupPath('project/sub')   
+   ...: for child in path.children:   
+   ...:     group = child.get\_group()   
+   ...:     print('Group<{}> contains {} nodes'.format(group.label, group.count()))   
    ...:
 
 Group<project/sub/a> contains 0 nodes
