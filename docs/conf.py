@@ -119,6 +119,7 @@ linkcheck_ignore = [
     r"https://events\.prace-ri\.eu/event/957/overview",
     r"https://events\.prace-ri\.eu/event/709/",
     r"http://pcoss.xmu.edu.cn/workshop/",
+    r"https://emmc.eu/",
 ]
 
 
