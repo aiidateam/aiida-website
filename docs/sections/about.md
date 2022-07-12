@@ -37,7 +37,7 @@ Keeping track of data provenance means being able to **reconstruct the complete 
 
 In AiiDA, **data provenance is tracked automatically** and stored in the form of a **directed acyclic graph**. For example, each calculation is represented by a node, that is linked to its input and output data nodes. The provenance graph is stored in a local database that can be queried using a high-level python interface that allows for performant queries on millions of nodes.
 
-![AiiDA Graph Demo](./pics/aida_graph_demo1.png)
+![AiiDA Graph Demo](../pics/aida_graph_demo1.png)
 
 (feat-plugin-framework)=
 

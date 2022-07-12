@@ -1,4 +1,4 @@
 myst-parser~=0.18.0
-pydata-sphinx-theme~=0.9.0
+pydata-sphinx-theme @ git+https://github.com/pydata/pydata-sphinx-theme.git@3d90a696386816590385581c9d19bd476d687992#egg=pydata-sphinx-theme
 ablog~=0.10.25
 sphinx_subfigure~=0.2.1

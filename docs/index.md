@@ -1,9 +1,17 @@
 ```{toctree}
 :hidden:
-About <about.md>
+About <sections/about.md>
 News <news/index.md>
-Team <team.md>
-More <more/index.md>
+Documentation  <https://aiida-core.readthedocs.io>
+Plugins <https://aiidateam.github.io/aiida-registry>
+Tutorials <https://aiida-tutorials.readthedocs.io>
+sections/team.md
+sections/events.md
+sections/mailing_list.md
+sections/science.md
+sections/testimonials.md
+sections/graph_gallery.md
+sections/acknowledgements.md
 ```
 
 # AiiDA: Advancing scientific workflows
@@ -15,7 +23,7 @@ More <more/index.md>
 :excerpts:
 ```
 
-See the [Events](more/events.md) section, for more information.
+See the [Events](sections/events.md) section, for more information.
 
 ## Latest News
 
