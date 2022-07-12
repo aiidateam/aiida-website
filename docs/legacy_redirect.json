@@ -26,5 +26,11 @@
     "news/aiida-v1-4-0-released/": "news/posts/2020-09-24-aiida-140-release.md",
     "news/aiida-v1-5-0-released/": "news/posts/2020-11-13-aiida-150-release.md",
     "news/aiida-v1-6-0-released/": "news/posts/2021-03-28-aiida-160-release.md",
-    "news/new-materials-cloud-archive/": "news/posts/2020-05-27-new_mc_archive"
+    "news/new-materials-cloud-archive/": "news/posts/2020-05-27-new_mc_archive",
+    "news/two-4-year-postdoctoral-positions-marzariepfl/": "docs/news/posts/2020-10-26-postdoc-positions.md",
+    "news/2020-preprints/": "docs/news/posts/2020-03-30-paper-preprints.md",
+    "news/gsoc2020/": "docs/news/posts/2020-03-05-summer-of-code-2020.md",
+    "news/notes-from-aiida-hackathon-on-plugin-and-workflow-development/": "docs/news/posts/2020-03-03-hackathon-notes.md",
+    "news/aiida-becomes-numfocus-affiliated-project/": "docs/news/posts/2020-02-05-numfocus-affiliation.md",
+    "news/aiida-hackathon-developing-code-plugins-and-robust-scientific-workflows-cineca-bologna-italy/": "docs/news/posts/2020-01-22-hackathon-announcement.md",
 }

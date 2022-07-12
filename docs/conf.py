@@ -120,6 +120,8 @@ linkcheck_ignore = [
     r"https://events\.prace-ri\.eu/event/709/",
     r"http://pcoss.xmu.edu.cn/workshop/",
     r"https://emmc.eu/",
+    r"http://morty.tech",
+    r"https://events.prace-ri.eu/event/957/attachments/1116/1988/AiiDA_CINECA_Final_Agenda.pdf",
 ]
 
 
