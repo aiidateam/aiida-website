@@ -2,7 +2,7 @@
 
 ## Credits
 
-AiiDA is a joint effort of [THEOS](http://theossrv1.epfl.ch/)/[MARVEL](https://nccr-marvel.ch/) at EPFL (Switzerland) and of [Bosch RTC](https://www.bosch.us/) in Cambridge MA (USA). Its development is supported by [a number of supporting partners and institutions](more/acknowledgements.md).
+AiiDA is a joint effort of [THEOS](http://theossrv1.epfl.ch/)/[MARVEL](https://nccr-marvel.ch/) at EPFL (Switzerland) and of [Bosch RTC](https://www.bosch.us/) in Cambridge MA (USA). Its development is supported by [a number of supporting partners and institutions](acknowledgements.md).
 Data generated with AiiDA are disseminated through [materialscloud.org](http://materialscloud.org/).
 
 ## External contributors
@@ -13,57 +13,57 @@ Besides the AiiDA team at EPFL listed below, we thank our [numerous external cod
 
 :::{list-table}
 
-* - ![Portrait](./pics/team/simon.jpg)
+* - ![Portrait](../pics/team/simon.jpg)
   - **Simon Adorf**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/simon.adorf)
 
-* - ![Portrait](./pics/team/marnik.jpg)
+* - ![Portrait](../pics/team/marnik.jpg)
   - **Marnik Bercx**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/marnik.bercx)
 
-* - ![Portrait](./pics/team/dossantos.jpg)
+* - ![Portrait](../pics/team/dossantos.jpg)
   - **Flaviano Dos Santos**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/flaviano.dossantos)
 
-* - ![Portrait](./pics/team/huber.png)
+* - ![Portrait](../pics/team/huber.png)
   - **Sebastiaan P. Huber**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/sebastiaan.huber)
 
-* - ![Portrait](./pics/team/boris.png)
+* - ![Portrait](../pics/team/boris.png)
   - **Boris Kozinsky**\
     *Professor, Materials Intelligence Research, Harvard University (USA)*\
     [havard.edu](https://bkoz.seas.harvard.edu/people/boris-kozinsky)
 
-* - ![Portrait](./pics/team/nicola.png)
+* - ![Portrait](../pics/team/nicola.png)
   - **Nicola Marzari**\
     *Chair, Theory and Simulation of Materials, EPFL
 Director, National Centre for Competence in Research NCCR MARVEL, EPFL*\
     [epfl.ch](https://people.epfl.ch/nicola.marzari)
 
-* - ![Portrait](./pics/team/gio.png)
+* - ![Portrait](../pics/team/gio.png)
   - **Giovanni Pizzi**\
     *Staff Scientist, Theory and Simulation of Materials, EPFL*
 
-* - ![Portrait](./pics/team/Ramirez.jpg)
+* - ![Portrait](../pics/team/Ramirez.jpg)
   - **Francisco F. Ramirez**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/francisco.ramirez)
 
-* - ![Portrait](./pics/team/talirz.jpg)
+* - ![Portrait](../pics/team/talirz.jpg)
   - **Leopold Talirz**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/leopold.talirz)
 
-* - ![Portrait](./pics/team/Yakutovich.jpg)
+* - ![Portrait](../pics/team/Yakutovich.jpg)
   - **Aliaksandr Yakutovich**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/aliaksandr.yakutovich)
 
-* - ![Portrait](./pics/team/JusongYu.jpg)
+* - ![Portrait](../pics/team/JusongYu.jpg)
   - **Jusong Yu**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
     [epfl.ch](https://people.epfl.ch/jusong.yu)
@@ -90,7 +90,7 @@ Director, National Centre for Competence in Research NCCR MARVEL, EPFL*\
 
 ### General questions about AiiDA
 
-Please ask on the [AiiDA mailing list](more/mailing_list.md).
+Please ask on the [AiiDA mailing list](mailing_list.md).
 
 ### Bug reports
 
