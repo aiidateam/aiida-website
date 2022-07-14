@@ -7,7 +7,7 @@ date: 2019-01-19
 
 # Tutorial on writing reproducible workflows for computational materials science
 
-### Coordinates
+## Coordinates
 
 **When** May 21st, 2019 (9:00) until May 24th, 2019 (13:00)
 
@@ -19,13 +19,13 @@ date: 2019-01-19
 
 **Materials** [Hands-on instructions](https://aiida-tutorials.readthedocs.io/en/latest/pages/2019_MARVEL_Psik_MaX/index.html)
 
-### Schedule
+## Schedule
 
 ﻿﻿﻿﻿﻿﻿﻿
 
 Talks marked by (R) are planned to be recorded
 
-### About
+## About
 
 This 3.5-day tutorial is designed to get Master students, PhD students and Postdocs from the field of computational materials science started with writing reproducible workflows. Participants will be introduced to the state of the art in workflow management and high-throughput computations by experts in the field, and gain in-depth hands-on experience using a tool that they can directly apply to their own research.
 
@@ -65,7 +65,7 @@ While this tutorial is deliberately open to computational materials scientists a
 
 * full participation for (at least) the last 2.5 days
 
-### Speakers & organisers
+## Speakers & organisers
 
 The tutorial is organised by **Leopold Talirz (EPFL, CH), Sebastiaan Huber (EPFL, CH), Espen Flage-Larsen (SINTEF, NO), Alberto García (ICMAB, ES) and Andrea Ferretti (CNR, IT)** who bring expertise in a diverse set of *ab initio* codes and their applications in different work environments (universities, research institutes and companies).
 
@@ -103,13 +103,13 @@ Tutorial lectures and assistance during hands-on session will be provided by a t
 
 For generic information concerning the tutorial, contact [aiida.workflows2019@gmail.com](mailto:aiida.workflows2019@gmail.com) .
 
-### How to get there
+## How to get there
 
 Registration will take place in the [2nd floor of the MED building](https://plan.epfl.ch/?room==MED%202%201124).
 
 For general directions on how to arrive to EPFL, see [here](http://theossrv1.epfl.ch/Main/Contact).
 
-### Funding
+## Funding
 
 The tutorial will be offered free of charge, with roughly 40 participants. By default, **participants are expected to cover their costs for travel and lodging**, but we aim to reimburse the cost of lodging for participants who require financial assistance (which they need to motivate during registration).
 

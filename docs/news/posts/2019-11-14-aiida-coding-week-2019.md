@@ -7,17 +7,17 @@ date: 2019-11-14
 
 # AiiDA Coding Week 2019
 
-### Coordinates
+## Coordinates
 
 **When** December 9th, 2019 (morning) until December 13th, 2019 (afternoon)
 
 **Where** [Fiescherhof](http://www.fiescherhof.ch/en/), Furkastrasse 75, CH-3984 Fiesch, Switzerland
 
-### Schedule
+## Schedule
 
 ﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
 
-### About
+## About
 
 The Coding Week is an annual event meant to develop, discuss, and focus on the core of AiiDA, i.e., the [aiida-core](https://github.com/aiidateam/aiida-core) package.
 
@@ -27,7 +27,7 @@ The week includes a group excursion. Last year this was a walk/trek in the surro
 
 Since the recent release of AiiDA 1.0.0, we are looking forward to 1.1.0. Several subjects have already been circulated internally to focus on and will be discussed in plenum in Fiesch.
 
-### Funding
+## Funding
 
 Out of the 30 people invited, 16 will be participating. By default, **participants are expected to cover their costs for travel and lodging**, but we aim to reimburse the cost of lodging for participants who require financial assistance.
 

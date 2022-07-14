@@ -7,13 +7,13 @@ date: 2021-10-26
 
 # AiiDA Coding Week 2021
 
-### Coordinates
+## Coordinates
 
 **When** December 6th, 2021 until December 10th, 2021
 
 **Where** [Hôtel Central Résidence](https://www.hotelcr.ch/home), route du Belvédère 20, CH-1854 Leysin, Switzerland
 
-### Schedule
+## Schedule
 
 .tg {border-collapse:collapse;border-spacing:0;}
 
@@ -87,7 +87,7 @@ date: 2021-10-26
 
 |  |  | = Coding |  |  |  |
 
-### About
+## About
 
 The Coding Week is an annual event meant to develop, discuss, and focus on the core of AiiDA, i.e., the [aiida-core](https://github.com/aiidateam/aiida-core) package.
 
@@ -97,7 +97,7 @@ The week includes a group excursion. Last time this was a walk/trek in the surro
 
 We are focusing on the release of version 2.0 and the work after 2.0. Several subjects have already been circulated internally to focus on and will be discussed in plenum in Leysin.
 
-### Funding
+## Funding
 
 Out of the 30 people invited, 16 will be participating. By default, **participants are expected to cover their costs for travel and lodging**, but we aim to reimburse the cost of lodging for participants who require financial assistance.
 

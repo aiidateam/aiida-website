@@ -13,4 +13,4 @@ This 3-day tutorial (from lunchtime on the 7th to lunchtime on the 10th) is desi
 
 **Target Audience**: Computational scientists both from academia and from industry are encouraged to apply. Experience with python is required, but prior experience with AiiDA is not.
 
-**Registration**: Participation in the event is free of charge, with the possibility of covering the accomodation expenses for some applicants. For more information and a link to the registration form, please visit the [official page of the event](http://www.aiida.net/aiida-tutorial-at-vilnius-university-vilnius-lithuania). **Registration deadline is the 3rd of May.**
+**Registration**: Participation in the event is free of charge, with the possibility of covering the accomodation expenses for some applicants. For more information and a link to the registration form, please visit the [official page of the event](http://www.wannier.org/events/school-2020-virtual-edition/). **Registration deadline is the 3rd of May.**

@@ -7,7 +7,7 @@ date: 2019-01-21
 
 # Tutorial on writing reproducible workflows for computational materials science
 
-### Coordinates
+## Coordinates
 
 **When** May 21st, 2019 (9:00) until May 24th, 2019 (13:00)
 
@@ -15,7 +15,7 @@ date: 2019-01-21
 
 **Registration** On the [tutorial web site](http://www.aiida.net/tutorial-reproducible-workflows/)
 
-### About
+## About
 
 This 3.5-day tutorial is designed to get Master students, PhD students and Postdocs from the field of computational materials science started with writing reproducible workflows. Participants will be introduced to the state of the art in workflow management and high-throughput computations by experts in the field, and gain in-depth hands-on experience using a tool that they can directly apply to their own research.
 
@@ -31,7 +31,7 @@ On the third day, participants will have the choice to either explore advanced a
 
 For more information, please head over to the [tutorial web site](http://www.aiida.net/tutorial-reproducible-workflows/).
 
-### Funding
+## Funding
 
 We are very grateful to our sponsors for helping to make this event possible:
 
