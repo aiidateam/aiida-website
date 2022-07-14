@@ -11,16 +11,16 @@ Besides the public events, the AiiDA team holds biweekly developer meetings (see
 
 ## Past events
 
-- **[Trieste (IT) 16-20 May 2022]** Wannier 2022 Summer School ([event site](../news/posts/2022-01-29-wannier-school-event.md))
+- **[Trieste (IT) 16-20 May 2022]** Wannier 2022 Summer School ([event site](../news/posts/2022-01-28-wannier-2022-summer-school.md))
 - **[University of Antwerp (BE) 20 May 2022]** AiiDA introductory tutorial with ~15 participants.
-- **[Leysin (CH) 6-10 December 2021]** Fifth annual AiiDA coding week with ~15 participants ([event site](../news/posts/2021-12-06-coding-week-event.md), [report](../news/posts/2021-12-14-coding-week-report.md))
-- **[Week of July 5th, 2021]** Online tutorial on running and writing workflows with AiiDA – available for all timezones ~ 130 participants ([event site](../news/posts/2021-05-05-aiida-tutorial-event.md), [tutorial material](https://aiida-tutorials.readthedocs.io/en/tutorial-2021-intro/), [report](../news/posts/2021-08-17-aiida-tutorial-report.md))
+- **[Leysin (CH) 6-10 December 2021]** Fifth annual AiiDA coding week with ~15 participants ([event site](../news/posts/2021-10-26-aiida-coding-week-2021.md), [report](../news/posts/2021-12-14-report-from-the-aiida.md))
+- **[Week of July 5th, 2021]** Online tutorial on running and writing workflows with AiiDA – available for all timezones ~ 130 participants ([event site](../news/posts/2021-05-05-aiida-virtual-tutorial-july.md), [tutorial material](https://aiida-tutorials.readthedocs.io/en/tutorial-2021-intro/), [report](../news/posts/2021-08-17-report-on-the-2021.md))
 - **[28 May 2021]** AiiDA tutorial at the MaX School on Advanced Materials and Molecular Modelling with Quantum ESPRESSO ~ 100 participants ([event site](<http://indico.ictp.it/event/9616/#:~:text=The%20school%20will%20introduce%20students,%2DPerformance%20Computing%20(HPC).>))
 - **[10 Feb 2021]** AiiDA tutorial at the Federal University of ABC, São Paulo – Brazil, with ~20 participants.
 - **[2 Dec 2020]** AiiDA tutorial at the BIG-MAP workshop with ~80 participants ([event site](https://multiscale-modelling.eu/BigMapWorkshop2020))
 - **[10 July 2020 – 4 pm CT ]** Materials Science Q&A @ SciPy 2020 ([event site](https://www.scipy2020.scipy.org/schedule))
 - **[9 July 2020 – 5 pm CT ]** AiiDA talk @ SciPy 2020 ([event site](https://www.scipy2020.scipy.org/schedule)).
-- **[7-10 July 2020]** AiiDA virtual tutorial week, sponsored by MARVEL, MaX, CECAM, swissuniversities and MarketPlace. Introductory presentations and hands-on workshops for ~80 participants ([event site](../news/posts/2020-06-04-aiida-tutorial-event.md), [tutorial material](https://aiida-tutorials.readthedocs.io/en/latest/pages/2020_Intro_Week/index.html), [report](../news/posts/2020-07-22-aiida-tutorial-report.md))
+- **[7-10 July 2020]** AiiDA virtual tutorial week, sponsored by MARVEL, MaX, CECAM, swissuniversities and MarketPlace. Introductory presentations and hands-on workshops for ~80 participants ([event site](../news/posts/2020-06-04-aiida-virtual-tutorial-july.md), [tutorial material](https://aiida-tutorials.readthedocs.io/en/latest/pages/2020_Intro_Week/index.html), [report](../news/posts/2020-07-22-report-on-the-2020.md))
 - **[Oxford (UK) 25-27 March 2020]** Introduction to AiiDA, aiida-wannier90 plugin, and the workflows to compute automatically Wannier functions within the School “Wannier90 v3.0: new features and applications” with ~40 participants ([event site](http://www.wannier.org/events/school-oxford-2020/)) ([slides, material and video recordings](https://www.materialscloud.org/learn/sections/C8ad91/wannier90-v3-0-school-virtual-edition-2020))
 - **[CINECA Bologna (IT) 17-21 February 2020]** Hackathon on plugin and workflow development for AiiDA with ~25 participants ([event site](https://events.prace-ri.eu/event/957/overview))
 - **[ISSP University of Tokyo (JP) 19-20 December 2019]** AiiDA tutorial ([tutorial site](https://atztogo.github.io/AiiDA-tutorial-ISSP/))
