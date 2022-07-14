@@ -1,0 +1,14 @@
+---
+blogpost: true
+category:
+tags:
+date: 2018-05-02
+---
+
+# New release AiiDA v0.12.0
+
+A new AiiDA release v0.12.0 is available! You can find more information at our [download page](http://www.aiida.net/download/).
+
+This is a minor release with various bug fixes, improvements and the implementation of a caching mechanism. This mechanism allows AiiDA to skip calculations that have already been successfully completed before, for example when rerunning a workchain that crashed at a late stage. With this feature, especially during plugin development, a lot of valuable computer time can be saved. For more details on this new powerful feature of AiiDA, please refer to [the documentation](http://aiida-core.readthedocs.io/en/v0.12.0/caching/index.html)
+
+A detailed overview of a all the changes can be found in the change log on [GitHub.](https://github.com/aiidateam/aiida_core/blob/v0.12.0/CHANGELOG.md)
