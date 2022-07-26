@@ -7,6 +7,8 @@ copyright = (
     "All rights reserved"
 )
 
+import pydata_sphinx_theme
+
 extensions = ["myst_parser", "ablog", "sphinx.ext.intersphinx", "sphinx_subfigure"]
 
 myst_enable_extensions = ["colon_fence"]
@@ -34,11 +36,6 @@ html_theme_options = {
             "href": "favicon-32x32.png",
         },
     ],
-    "external_links": [
-        {"name": "Docs ", "url": "https://aiida-core.readthedocs.io"},
-        {"name": "Tutorials ", "url": "https://aiida-tutorials.readthedocs.io"},
-        {"name": "Plugins ", "url": "https://aiidateam.github.io/aiida-registry"},
-    ],
     "icon_links": [
         {
             "name": "Twitter",
@@ -61,9 +58,8 @@ html_theme_options = {
     ],
     "show_prev_next": False,
     "navbar_end": [
-        "theme-switcher.html",
-        "search-field.html",
-        "navbar-icon-links.html",
+        "theme-switcher",
+        "navbar-icon-links",
     ],
     "footer_items": ["copyright"],
     "use_edit_page_button": True,
