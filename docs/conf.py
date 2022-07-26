@@ -9,7 +9,13 @@ copyright = (
 
 import pydata_sphinx_theme
 
-extensions = ["myst_parser", "ablog", "sphinx.ext.intersphinx", "sphinx_subfigure"]
+extensions = [
+    "myst_parser",
+    "ablog",
+    "sphinx.ext.intersphinx",
+    "sphinx_subfigure",
+    "notfound.extension",
+]
 
 myst_enable_extensions = ["colon_fence"]
 
