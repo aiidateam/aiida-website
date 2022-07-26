@@ -4,11 +4,6 @@
     opacity: 0.5;
 }
 
-/* Fix: https://github.com/pydata/pydata-sphinx-theme/issues/806 */
-.navbar-nav > .nav-item > .dropdown-toggle {
-    border-top-width: 0;
-}
-
 /* AiiDA sidebar */
 div.sbar-aiida {
     text-align: left;

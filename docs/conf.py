@@ -58,7 +58,6 @@ html_theme_options = {
     ],
     "show_prev_next": False,
     "navbar_end": [
-        "search-button",
         "theme-switcher",
         "navbar-icon-links",
     ],
