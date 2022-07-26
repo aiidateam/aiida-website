@@ -1,35 +1,7 @@
-/* on large desktops, increase distance between search and link icons */
-@media (min-width: 1200px) {
-    .bd-search {
-        margin-right: 0;
-    }
-}
-
-/* on large desktops, increase distance between nav items */
-@media (min-width: 1200px) {
-    .nav-item .nav-link {
-        margin-right: 0.5rem;
-    }
-}
-
-/* on mobile, hide the sidebar
- * See https://github.com/pydata/pydata-sphinx-theme/issues/329
-*/
-@media (max-width: 960px) {
-    .bd-sidebar {
-        display: none;
-    }
-}
-
-/* on mobile, increase distance between links
- * See https://github.com/pydata/pydata-sphinx-theme/issues/195
-*/
-@media (max-width: 960px) {
-    .nav-item .nav-link.nav-external,
-    .toctree-l1.nav-item .nav-link {
-        margin-bottom: 0.2rem;
-        margin-top: 0.2rem;
-      }
+/* Add icon after external links in the top bar */
+.navbar-nav > .nav-item > .reference.external::after {
+    content: " \2197";
+    opacity: 0.5;
 }
 
 /* AiiDA sidebar */
