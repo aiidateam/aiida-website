@@ -12,6 +12,7 @@ sections/mailing_list.md
 sections/science.md
 sections/testimonials.md
 sections/graph_gallery.md
+Roadmap <https://github.com/aiidateam/aiida-core/wiki/AiiDA-release-roadmap>
 sections/acknowledgements.md
 ```
 
