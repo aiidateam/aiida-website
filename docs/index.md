@@ -1,6 +1,7 @@
 ```{toctree}
 :hidden:
 About <sections/about.md>
+Download <sections/download.md>
 News <news/index.md>
 Documentation  <https://aiida-core.readthedocs.io>
 Plugins <https://aiidateam.github.io/aiida-registry>
