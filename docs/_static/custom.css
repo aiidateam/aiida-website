@@ -1,5 +1,6 @@
 /* Add icon after external links in the top bar */
-.navbar-nav > .nav-item > .reference.external::after {
+.navbar-nav > .nav-item > .reference.external::after,
+.dropdown-menu > .nav-item > .reference.external::after {
     content: " \2197";
     opacity: 0.5;
 }
