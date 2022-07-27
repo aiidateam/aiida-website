@@ -7,8 +7,6 @@ copyright = (
     "All rights reserved"
 )
 
-import pydata_sphinx_theme
-
 extensions = [
     "myst_parser",
     "ablog",
@@ -126,17 +124,68 @@ linkcheck_ignore = [
     r"https://events.prace-ri.eu/event/957/attachments/1116/1988/AiiDA_CINECA_Final_Agenda.pdf",
 ]
 
+REDIRECT_TEMPLATE = """
+<html>
+    <head>
+        <noscript>
+            <meta http-equiv="refresh" content="0; url={rel_url}"/>
+        </noscript>
+    </head>
+    <body>
+        <script>
+            window.location.href = '{rel_url}' + (window.location.search || '') + (window.location.hash || '');
+        </script>
+        <p>You should have been redirected.</p>
+        <a href="{rel_url}">If not, click here to continue.</a>
+    </body>
+</html>
+
+"""
+
+import json
+from os.path import relpath
+from pathlib import Path
+from typing import Dict, Optional
+
+from sphinx.application import Sphinx
+from sphinx.util import logging
+
+logger = logging.getLogger(__name__)
+
+
+def build_redirects(app: Sphinx, exception: Optional[Exception]) -> None:
+    """Build and write redirects."""
+    if app.builder.format != "html":
+        return
+    logger.info("Writing redirects...")
+    build_redirect_base = Path(app.outdir)
+    redirects: Dict[str, str] = json.loads(
+        Path(app.srcdir).joinpath("legacy_redirect.json").read_text()
+    )
+    for redirect_from, redirect_to in redirects.items():
+        if redirect_from.endswith("/"):
+            redirect_from = redirect_from + "index.html"
+        build_redirect_from = build_redirect_base / redirect_from
+        if build_redirect_from.exists():
+            logger.warning(f"redirect-from already exists: {build_redirect_from}")
+        build_redirect_to = build_redirect_base / (redirect_to + ".html")
+        if not build_redirect_to.exists():
+            logger.warning(f"redirect-to does not exist: {build_redirect_to}")
+        build_redirect_from.parent.mkdir(parents=True, exist_ok=True)
+        build_redirect_from.write_text(
+            REDIRECT_TEMPLATE.format(
+                rel_url=relpath(build_redirect_to, build_redirect_from.parent)
+            )
+        )
+
 
 # ablog custom code
-
-from datetime import datetime
 from string import Formatter
 
 from ablog.blog import Blog, revise_pending_xrefs
 from ablog.post import _missing_reference
 from docutils import nodes
 from docutils.parsers.rst import directives
-from sphinx.application import Sphinx
 from sphinx.locale import _ as translate
 from sphinx.util.docutils import SphinxDirective
 
@@ -278,3 +327,4 @@ def setup(app: Sphinx):
     app.add_directive("upcominglist", UpcomingEventListDirective)
     # make this 1 greater than the default priority that process_postlist uses
     app.connect("doctree-resolved", process_upcominglist, priority=501)
+    app.connect("build-finished", build_redirects)
