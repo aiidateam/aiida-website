@@ -142,28 +142,35 @@ REDIRECT_TEMPLATE = """
 
 """
 
+import json
 from os.path import relpath
 from pathlib import Path
 from typing import Dict, Optional
 
 from sphinx.application import Sphinx
+from sphinx.util import logging
+
+logger = logging.getLogger(__name__)
 
 
 def build_redirects(app: Sphinx, exception: Optional[Exception]) -> None:
-    """Build amd write redirects."""
+    """Build and write redirects."""
     if app.builder.format != "html":
         return
-    # log writing redirects
+    logger.info("Writing redirects...")
     build_redirect_base = Path(app.outdir)
-    redirects: Dict[str, str] = {
-        "news/aiida-v1-1-1-released/": "news/posts/2020-03-03-aiida-111-release",
-    }
+    redirects: Dict[str, str] = json.loads(
+        Path(app.srcdir).joinpath("legacy_redirect.json").read_text()
+    )
     for redirect_from, redirect_to in redirects.items():
         if redirect_from.endswith("/"):
             redirect_from = redirect_from + "index.html"
         build_redirect_from = build_redirect_base / redirect_from
+        if build_redirect_from.exists():
+            logger.warning(f"redirect-from already exists: {build_redirect_from}")
         build_redirect_to = build_redirect_base / (redirect_to + ".html")
-        # TODO check build_redirect_from overwrite and that build_redirect_to exists
+        if not build_redirect_to.exists():
+            logger.warning(f"redirect-to does not exist: {build_redirect_to}")
         build_redirect_from.parent.mkdir(parents=True, exist_ok=True)
         build_redirect_from.write_text(
             REDIRECT_TEMPLATE.format(
