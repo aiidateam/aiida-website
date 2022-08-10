@@ -123,6 +123,11 @@ linkcheck_ignore = [
     r"https://emmc.eu/",
     r"http://morty.tech",
     r"https://events.prace-ri.eu/event/957/attachments/1116/1988/AiiDA_CINECA_Final_Agenda.pdf",
+    r"http://www.max-centre.eu/2017/07/18/prize/",
+    r"http://www.max-centre.eu/max-hackathon/",
+    r"https://events.prace-ri.eu/event/709",
+    r"https://www.cecam.org/wp-content/uploads/2019/04/2019_03_EPFL_materials_science_researcher_software_engineer.pdf",
+    r"https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/",
 ]
 
 REDIRECT_TEMPLATE = """
