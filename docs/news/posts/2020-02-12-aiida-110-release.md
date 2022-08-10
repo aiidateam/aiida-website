@@ -7,7 +7,7 @@ date: 2020-02-12
 
 # AiiDA v1.1.0 released
 
-A new AiiDA release `v1.1.0` is available! You can find more information at our [download page](http://www.aiida.net/download/).
+A new AiiDA release `v1.1.0` is available! You can find more information at our [download page](/sections/download.md).
 
 This is the first minor release of the v1 series, in which we finally **drop the support for older python 2** versions (critical bug fixes for python 2 will be supported until July 1 2020 on the `v1.0.*` release series) and **add support for python 3.8**, thus becoming compatible with all current python versions that are not end-of-life (i.e.: 3.5, 3.6, 3.7, 3.8). You can find the reasoning for doing this without a major version change in the corresponding [AEP 001](https://github.com/aiidateam/AEP/tree/master/001_drop_python2).
 

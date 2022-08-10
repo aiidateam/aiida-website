@@ -16,6 +16,7 @@ extensions = [
 ]
 
 myst_enable_extensions = ["colon_fence"]
+myst_substitutions = {"aiida": "AiiDA"}
 
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
@@ -112,7 +113,10 @@ blog_default_author = "AiiDA"
 fontawesome_included = True
 
 # linkcheck
-linkcheck_exclude_documents = []
+linkcheck_exclude_documents = [
+    # ignore old (pre-2020) blog pages
+    r"news/posts/201[0-9].*",
+]
 linkcheck_ignore = [
     r"https://www.youtube.com/.*",
     r"http://indico.ictp.it/.*",
@@ -122,6 +126,11 @@ linkcheck_ignore = [
     r"https://emmc.eu/",
     r"http://morty.tech",
     r"https://events.prace-ri.eu/event/957/attachments/1116/1988/AiiDA_CINECA_Final_Agenda.pdf",
+    r"http://www.max-centre.eu/2017/07/18/prize/",
+    r"http://www.max-centre.eu/max-hackathon/",
+    r"https://events.prace-ri.eu/event/709",
+    r"https://www.cecam.org/wp-content/uploads/2019/04/2019_03_EPFL_materials_science_researcher_software_engineer.pdf",
+    r"https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/",
 ]
 
 REDIRECT_TEMPLATE = """
