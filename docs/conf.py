@@ -113,7 +113,10 @@ blog_default_author = "AiiDA"
 fontawesome_included = True
 
 # linkcheck
-linkcheck_exclude_documents = []
+linkcheck_exclude_documents = [
+    # ignore old (pre-2020) blog pages
+    r"news/posts/201[0-9].*",
+]
 linkcheck_ignore = [
     r"https://www.youtube.com/.*",
     r"http://indico.ictp.it/.*",
