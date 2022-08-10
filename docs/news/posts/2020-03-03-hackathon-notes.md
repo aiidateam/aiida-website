@@ -13,6 +13,7 @@ Those interested can find links to **slides of presentations**, **video recordin
 
 :::{subfigure} 2
 :layout-sm: 1
+:gap: 1em
 
 ![](../pics/2020-hackathon/Day1-intro.JPG)
 

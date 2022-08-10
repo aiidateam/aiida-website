@@ -13,41 +13,51 @@ The tutorial took place between May 29 and June 1 2018, at CINECA Bologna (Italy
 
 More than twenty participants, with a strong female representation, joined in this introductory tutorial to the AiiDA framework.
 
-<!-- [caption id="attachment\_996" align="aligncenter" width="1000"] -->
-![](../pics/legacy/34085739_832899146917608_5297871850724917248_o-1024x683.jpg)
-<!-- Group photo from the AiiDA tutorial in May 2018[/caption] -->
+```{figure} ../pics/legacy/cineca_tutorial1.jpg
+:width: 1000
+
+Group photo from the AiiDA tutorial in May 2018
+```
 
 On the first day, an introductory talk was delivered by Spyros Zoupanos about the general architecture and design of AiiDA, after which the participants started with the hands-on exercises to get to know with AiiDA's interface.
 
 A more detailed presentation on the workflow system was given by Martin Uhrin.
 
-<!-- [caption id="attachment\_998" align="aligncenter" width="1000"] -->
-![](../pics/legacy/33943248_832898696917653_2033115175782973440_o-1024x683.jpg)
-<!-- Introduction by the organisers of the AiiDA tutorial (May 2018)[/caption] -->
+```{figure} ../pics/legacy/cineca_tutorial2.jpg
+:width: 1000
+
+Introduction by the organisers of the AiiDA tutorial (May 2018)
+```
 
 On the second and third day, Giovanni Pizzi and Leonid Kahle gave an exposé on their research projects that actually implemented and used the AiiDA platform to discover new two-dimensional materials and solid state ionic conductors in a high-throughput way, respectively.
 
 This gave a good idea to the tutorial participants of the potential of AiiDA in a broader sense.
 
-<!-- [caption id="attachment\_1001" align="aligncenter" width="1000"] -->
-![](../pics/legacy/33943928_832898790250977_5230334486427729920_o-1024x768.jpg)
-<!-- Room with participants at the AiiDA tutorial[/caption] -->
+```{figure} ../pics/legacy/cineca_tutorial3.jpg
+:width: 1000
+
+Room with participants at the AiiDA tutorial
+```
 
 The opportunity was also used to introduce participants to the concept of open source collaboration - in particular, Sebastiaan Huber gave a crash course on the use of Git and GitHub to contribute to open source projects (branches, forks and pull requests).
 
 During the tutorial, a poster session was also organized, where the participants had the chance to present their own work and get to know that of their colleagues, in an informal setting with drinks and fingerfood.
 
-<!-- [caption id="attachment\_1000" align="aligncenter" width="1000"] -->
-![](../pics/legacy/34072634_833339350206921_374135709256122368_o-1024x768.jpg)
-<!-- Poster session at the AiiDA tutorial[/caption] -->
+```{figure} ../pics/legacy/cineca_tutorial4.jpg
+:width: 1000
+
+Poster session at the AiiDA tutorial
+```
 
 In between these extra events, the main focus lay on introducing the participants to AiiDA through a hands-on tutorial and exercises, with all the instructors available to provide support and explanation in person.
 
 The participants were very committed during the tutorial and already provided comments to improve the tutorial during the event.
 
-<!-- [caption id="attachment\_999" align="aligncenter" width="1000"] -->
-![](../pics/legacy/33985681_833338973540292_2697533336435294208_o-1024x768.jpg)
-<!-- Instructors helping out participants at the tutorial[/caption] -->
+```{figure} ../pics/legacy/cineca_tutorial5.jpg
+:width: 1000
+
+Instructors helping out participants at the tutorial
+```
 
 At the end of the tutorial, all participants were asked to give feedback by completing an evaluation questionnaire, which will be used to further improve the tutorial and AiiDA itself.
 

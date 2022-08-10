@@ -13,6 +13,8 @@ Information and registration at the following link: <http://www.max-centre.eu/ma
 
 The hackathon will be an informal brain-storming environment with practical coding sessions on the MaX Centre of Excellence flagship codes (including AiiDA and its plugins, Quantum ESPRESSO, YAMBO, FLEUR, Siesta).
 
-<!-- [caption id="attachment\_1007" align="aligncenter" width="828"] -->
-![](../pics/legacy/max-hackaton3.png)
-<!-- MaX Hackathon, July 16-20 2018, Barcelona (Spain)[/caption] -->
+```{figure} ../pics/legacy/max-hackaton3.png
+:width: 828
+
+MaX Hackathon, July 16-20 2018, Barcelona (Spain)
+```

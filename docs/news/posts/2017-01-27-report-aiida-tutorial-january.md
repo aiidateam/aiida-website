@@ -15,14 +15,20 @@ Throughout the tutorial, five members of the AiiDA team were present to answer a
 
 The feedback on the quality of the tutorial itself, in terms of content and planning, were overall very positive
 
-<!-- [caption id="attachment\_813" align="aligncenter" width="958"] -->
-![AiiDA tutorial Jan 2017 feedback 2](../pics/legacy/aiida_tutorial_feedback_02.png)
-<!-- Participant feedback on the quality of the tutorial[/caption] -->
+```{figure} ../pics/legacy/aiida_tutorial_feedback_02.png
+:alt: AiiDA tutorial Jan 2017 feedback 2
+:width: 958px
+
+Participant feedback on the quality of the tutorial
+```
 
 The results of the feedback also show that the tutorial really helped improve the skill and knowledge of the participants regarding the use of AiiDA
 
-<!-- [caption id="attachment\_814" align="aligncenter" width="958"] -->
-![AiiDA tutorial Jan 2017 feedback 1](../pics/legacy/aiida_tutorial_feedback_01.png)
-<!-- The skill level of the participants before and after the tutorial[/caption] -->
+```{figure} ../pics/legacy/aiida_tutorial_feedback_01.png
+:alt: AiiDA tutorial Jan 2017 feedback 1
+:width: 958px
+
+The skill level of the participants before and after the tutorial
+```
 
 The AiiDA team thanks the organisers of the event for making this tutorial possible and all the participants for their enthusiasm. Until the next AiiDA event!

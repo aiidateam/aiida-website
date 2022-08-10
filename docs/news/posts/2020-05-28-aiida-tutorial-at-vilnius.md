@@ -49,7 +49,7 @@ For local information of Vilnius you can contact Andrius (andrius.merkys at gmc.
 
 Below is a tentative schedule for the event (click to zoom).
 
-![](../pics/legacy/schedule-1024x562.png)
+![schedule](../pics/legacy/schedule-1024x562.png)
 
 ## Funding
 
@@ -57,18 +57,23 @@ We are very grateful to our sponsors for helping to make this event possible:
 
 [Vilnius University](https://www.vu.lt/) for hosting the event and for providing administrative support; the [MaX European Centre of Excellence,](http://www.max-centre.eu/) [Centre Européen de Calcul Atomique et Moléculaire (CECAM)](https://www.cecam.org/), the [swissuniversities P-5 project "Materials Cloud"](https://www.materialscloud.org/swissuniversities), the [MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/), the [H2020 MARKETPLACE project](https://www.the-marketplace-project.eu/), the [H2020 INTERSECT project](http://intersect-project.eu/) and the [PASC project](https://www.pasc-ch.org/) for funding.
 
-![](../pics/legacy/logovu.png)
+:::{subfigure} 2
+:layout-sm: 1
+:gap: 1em
 
-![](../pics/legacy/ebdc2ee9.max_-300x170.png)
+![logovu](../pics/legacy/logovu.png)
 
-![](../pics/legacy/cecam-300x56.png)
+![max_](../pics/legacy/ebdc2ee9.max_-300x170.png)
 
-![](../pics/legacy/894d22ec.swissuniversities-300x35.png)
+![cecam](../pics/legacy/cecam-300x56.png)
 
-![](../pics/legacy/214f921c.marvel_nccr.png)
+![swissuniversities](../pics/legacy/894d22ec.swissuniversities-300x35.png)
 
-![](../pics/legacy/marketplace-300x60.png)
+![marvel_nccr](../pics/legacy/214f921c.marvel_nccr.png)
 
-![](../pics/legacy/intersect-300x100.png)
+![marketplace](../pics/legacy/marketplace-300x60.png)
 
-![](../pics/legacy/pasc.png)
+![intersect](../pics/legacy/intersect-300x100.png)
+
+![pasc](../pics/legacy/pasc.png)
+:::

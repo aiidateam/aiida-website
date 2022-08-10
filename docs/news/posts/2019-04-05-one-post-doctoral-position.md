@@ -18,4 +18,4 @@ The initial appointment is for one year, renewable upon mutual satisfaction for 
 For best consideration, applications must be submitted **by April 28th 2019**.
 The position will however remain open until a suitable candidate is found.
 
-![](../pics/legacy/OSSCAR-logo.png)
+![oscar logo](../pics/legacy/OSSCAR-logo.png)

@@ -11,6 +11,8 @@ Starting this January, AiiDA graphs will be on the cover image of [Computational
 
 Cover figure:
 
-<!-- [caption id="attachment\_799" align="aligncenter" width="572"] -->
-![](../pics/legacy/cover_2017.jpg)
-<!-- Cover of the Computational Materials Science journal (since Jan 2017). AiiDA graph: picture on the left.[/caption] -->
+```{figure} ../pics/legacy/cover_2017.jpg
+:width: 572
+
+Cover of the Computational Materials Science journal (since Jan 2017). AiiDA graph: picture on the left.
+```

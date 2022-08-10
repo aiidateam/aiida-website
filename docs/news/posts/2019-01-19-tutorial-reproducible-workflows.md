@@ -133,7 +133,7 @@ We are very grateful to our sponsors for helping to make this event possible:
 
 [![](../pics/legacy/psi-k-crystal_low.png)](http://psi-k.net)
 
-![](../pics/legacy/EPFL_Logo_Digital_RGB_PROD.png)
+![EPFL logo](../pics/legacy/EPFL_Logo_Digital_RGB_PROD.png)
 
 [![](../pics/legacy/214f921c.marvel_nccr.png)](http://nccr-marvel.ch/)
 
