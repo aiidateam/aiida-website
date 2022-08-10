@@ -7,7 +7,7 @@ date: 2020-07-21
 
 # AiiDA v1.3.0 released
 
-A new AiiDA release v1.3.0 is available! You can find more information at our [download page](http://www.aiida.net/download/). It can be installed through `pip` as:
+A new AiiDA release v1.3.0 is available! You can find more information at our [download page](/sections/download.md). It can be installed through `pip` as:
 
 ```sh
 pip install aiida-core==1.3.0

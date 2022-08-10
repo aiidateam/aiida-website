@@ -16,6 +16,7 @@ extensions = [
 ]
 
 myst_enable_extensions = ["colon_fence"]
+myst_substitutions = {"aiida": "AiiDA"}
 
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]

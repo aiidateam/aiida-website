@@ -2,12 +2,12 @@
 blogpost: true
 category: Releases
 tags: aiida-core
-date: 2020-04-05
+date: 2020-04-15
 ---
 
 # AiiDA v1.2.0 released
 
-A new AiiDA release v1.2.0 is available! You can find more information at our [download page](http://www.aiida.net/download/). It can be installed through pip as:
+A new AiiDA release v1.2.0 is available! You can find more information at our [download page](/sections/download.md). It can be installed through pip as:
 
 ```bash
 pip install aiida-core==1.2.0

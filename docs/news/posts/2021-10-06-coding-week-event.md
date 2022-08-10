@@ -2,7 +2,7 @@
 blogpost: true
 category: Events
 tags: hackathon
-date: 2021-12-06
+date: 2021-10-06
 ---
 
 # AiiDA Coding Week 2021

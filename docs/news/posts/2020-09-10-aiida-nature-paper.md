@@ -1,7 +1,7 @@
 ---
 blogpost: true
 category: News
-tags: article,aiida-core,matcloud
+tags: article,aiida-core,materials-cloud
 date: 2020-09-10
 ---
 

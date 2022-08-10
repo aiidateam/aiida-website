@@ -88,7 +88,7 @@ While the AiiDA team are proponents of open source software, AiiDA plugins can c
 - **Users:** See the [documentation](http://aiida-core.readthedocs.io/) for how to download & install AiiDA
 - **Developers:** [clone it from github](https://github.com/aiidateam/aiida-core/tree/master) or [download a source release](https://github.com/aiidateam/aiida-core/releases).
 - [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/): AiiDA plugins provide interfaces with external codes as well as new features.
-- [AiiDA tutorials](http://www.aiida.net/tutorials/): Tutorials with downloadable materials and virtual environments
+- [AiiDA tutorials](https://aiida-tutorials.readthedocs.io): Tutorials with downloadable materials and virtual environments
 - [Quantum Mobile](https://materialscloud.org/work/quantum-mobile): A virtual machine based on Ubuntu Linux that comes pre-installed with AiiDA and a number of simulation codes.
 
 ## License note

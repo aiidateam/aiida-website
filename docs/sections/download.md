@@ -8,7 +8,7 @@
 ## Further resources
 
 - [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/): AiiDA plugins provide interfaces with external codes as well as new features.
-- [AiiDA tutorials](http://www.aiida.net/tutorials/): Tutorials with downloadable materials and virtual environments
+- [AiiDA tutorials](https://aiida-tutorials.readthedocs.io): Tutorials with downloadable materials and virtual environments
 - [Quantum Mobile](https://materialscloud.org/work/quantum-mobile): A virtual machine based on Ubuntu Linux that comes pre-installed with AiiDA and a number of simulation codes.
 
 ## Compatibility timeline
