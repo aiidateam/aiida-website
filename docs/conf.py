@@ -4,10 +4,7 @@ from os import path
 
 project = "AiiDA"
 author = "The AiiDA team."
-copyright = (
-    f"2012-{date.today().year} AiiDA. All Rights Reserved. "
-    "AiiDA is supported by a number of partners and funding institutions"
-)
+copyright = f"2012-{date.today().year} AiiDA. All Rights Reserved"
 
 extensions = [
     "myst_parser",
