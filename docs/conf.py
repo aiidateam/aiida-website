@@ -13,6 +13,8 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_subfigure",
     "notfound.extension",
+    "sphinxcontrib.youtube",
+    # local extensions
     "legacy_redirects",
     "ablog_plus",
 ]

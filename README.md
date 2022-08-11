@@ -19,12 +19,16 @@ You can use the [update](https://ablog.readthedocs.io/en/latest/manual/posting-a
 
 Use the [subfigure directive](https://sphinx-subfigure.readthedocs.io), to arrange multiple images in a figure.
 
+Use the [youtube directive](https://sphinxcontrib-youtube.readthedocs.io), to embed YouTube videos.
+
 ## Building the documentation locally
 
 Install and run [`tox`](https://tox.wiki/en/latest/) to install a local virtual environment and build the documentation,
 or directly install `requirements.txt` and run: `sphinx-build -nW --keep-going -b html docs/ docs/_build/html`.
 
 To check HTML links, run `tox -e linkcheck` or `sphinx-build -b linkcheck docs/ docs/_build/linkcheck`.
+
+To re-install the virtual environment, use the `tox -r` flag.
 
 ## TODO
 

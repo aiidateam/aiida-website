@@ -3,6 +3,7 @@
 About <sections/about.md>
 Download <sections/download.md>
 News <news/index.md>
+Media <sections/media.md>
 Documentation  <https://aiida-core.readthedocs.io>
 Plugins <https://aiidateam.github.io/aiida-registry>
 Tutorials <https://aiida-tutorials.readthedocs.io>
