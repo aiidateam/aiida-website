@@ -1,11 +1,10 @@
+import sys
+from datetime import date
+from os import path
+
 project = "AiiDA"
 author = "The AiiDA team."
-copyright = (
-    "2022, EPFL, "
-    "Theory and Simulation of Materials (THEOS) and "
-    "National Centre for Computational Design and Discovery of Novel Materials (NCCR MARVEL). "
-    "All rights reserved"
-)
+copyright = f"2012-{date.today().year} AiiDA. All Rights Reserved"
 
 extensions = [
     "myst_parser",
@@ -137,7 +136,4 @@ linkcheck_ignore = [
 ]
 
 # add path to local sphinx extensions
-import sys
-from os import path
-
 sys.path.append(path.join(path.dirname(path.abspath(__file__)), "extensions"))
