@@ -1,5 +1,5 @@
 myst-parser~=0.18.0
 pydata-sphinx-theme @ git+https://github.com/pydata/pydata-sphinx-theme.git@689ff9374800f9ec780516f6ec8496c140b3a2f1#egg=pydata-sphinx-theme
 ablog~=0.10.25
-sphinx_subfigure~=0.2.1
-sphinx-notfound-page
+sphinx_subfigure~=0.2.4
+sphinx-notfound-page~=0.8.3
