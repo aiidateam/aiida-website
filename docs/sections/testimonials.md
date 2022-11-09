@@ -7,7 +7,7 @@ For scientific papers using AiiDA, see [here](./science.md).
 
 > AiiDA and the AiiDA lab have considerably reduced the human time spent on routine computational workflows in our lab, [resulting in two subsequent annual bonuses for high productivity](https://nccr-marvel.ch/highlights/2020-04AiiDAtestimonial). Experimental PhDs and Postdocs now submit workflows based on Quantum ESPRESSO through the AiiDA lab to compute the electronic properties of graphene nanoribbons, and monitor/visualize the results of more advanced workflows (e.g. NEB with CP2K, geometry optimizations, STM,STS and AFM simulations of molecules adsorbed on surfaces) submitted by their computational colleagues.
 
-**[Dr. Atsushi Togo](https://atztogo.github.io/), lead developer of [phonopy](https://phonopy.github.io/phonopy/) and [spglib](https://atztogo.github.io/spglib/), senior
+**[Dr. Atsushi Togo](https://atztogo.github.io/), lead developer of [phonopy](https://phonopy.github.io/phonopy/) and [spglib](https://spglib.github.io/spglib/), senior
 researcher at National Institute for Materials Science (NIMS), Japan**
 
 > Today’s computational materials science (in our case, force constant calculations at finite temperature, deformation twinning, etc.) usually involves workflows that combine multiple different simulation codes. AiiDA is a robust environment to write and execute such workflows (supporting high algorithmic complexity, if needed) and to inspect their results consistently. Once a workflow is written, it is straightforward to perform systematic materials simulations over the parameters of interest, which is extremely important to generate data that are durable in posterior analysis. This is fairly difficult to achieve without using AiiDA.
