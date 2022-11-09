@@ -24,6 +24,7 @@ html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 templates_path = ["_templates"]
+html_show_sourcelink = False
 
 # see https://pydata-sphinx-theme.readthedocs.io
 html_theme_options = {
@@ -69,7 +70,7 @@ html_theme_options = {
         "navbar-icon-links",
     ],
     "footer_items": ["copyright"],
-    "use_edit_page_button": True,
+    "use_edit_page_button": False,
     "search_bar_text": "Search ...",
 }
 
