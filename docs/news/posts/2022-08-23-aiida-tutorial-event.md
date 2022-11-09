@@ -28,9 +28,7 @@ The goal of this 4 day-tutorial is to help students and researchers from the fie
 
 **Where:** Virtual Zoom Meeting, details will be communicated on October 1st.
 
-**Registration:** Registration is free of charge, simply fill in the following (short) form before October 1st 2022:
-
-[https://forms.gle/MjXi8Fb1rXquyETb8](https://forms.gle/MjXi8Fb1rXquyETb8)
+**Registration closed on October 1st 2022**
 
 ### Virtual tutorial
 
@@ -46,7 +44,7 @@ The goal of this 4 day-tutorial is to help students and researchers from the fie
 
 The tutorial is organised by Chris Sewell (EPFL, CH), Marnik Bercx (EPFL, CH) and Giovanni Pizzi (EPFL, CH).
 
-Tutorial lectures and assistance during hands-on sessions will be provided by the organisers and a team of core AiiDA developers: Jusong Yu, Francisco Ramirez, Sebastiaan Huber, Flaviano dos Santos, and Carl Simon Adorf.
+Tutorial lectures and assistance during hands-on sessions will be provided by the organisers and a team of core AiiDA developers: Jusong Yu, Francisco Ramirez, Sebastiaan Huber, Flaviano dos Santos, Carl Simon Adorf, and Aliaksandr Yakutovich.
 
 For general information concerning the tutorial you can contact Chris (chris.sewell@epfl.ch) or Marnik (marnik.bercx@epfl.ch).
 
