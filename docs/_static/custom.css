@@ -36,7 +36,7 @@ div.sbar-aiida div.cite {
 }
 
 /* improve ablog postlist */
-.ablog-post-expand {
+.postlist .ablog-post-expand {
     border-bottom: 1px solid var(--pst-color-border);
     padding-bottom: 1.15rem;
 }
