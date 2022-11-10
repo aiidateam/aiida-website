@@ -48,19 +48,19 @@ html_theme_options = {
         {
             "name": "Twitter",
             "url": "https://twitter.com/aiidateam",
-            "icon": "fab fa-twitter-square",
+            "icon": "fa-brands fa-square-twitter",
             "type": "fontawesome",
         },
         {
             "name": "Facebook",
             "url": "https://www.facebook.com/aiidateam",
-            "icon": "fab fa-facebook-square",
+            "icon": "fa-brands fa-square-facebook",
             "type": "fontawesome",
         },
         {
             "name": "GitHub",
             "url": "https://www.github.com/aiidateam/aiida-core",
-            "icon": "fab fa-github-square",
+            "icon": "fa-brands fa-square-github",
             "type": "fontawesome",
         },
     ],
