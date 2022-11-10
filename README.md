@@ -29,13 +29,8 @@ To check HTML links, run `tox -e linkcheck` or `sphinx-build -b linkcheck docs/ 
 ## TODO
 
 - Home in top bar
-- Dropdown for "More"
 - Feedback forms (contact us, Join us)
 - Decide on set of post categories/tags
-- Sort out `docs/more/events.md`
-  - Replace `www.aiida.net` links
-  - More prominent?
-  - More integration with ablog?
 - Upstream to ablog
   - Empty `postlist` placeholder
   - image number for topmatter

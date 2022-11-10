@@ -1,3 +1,7 @@
+---
+html_theme.sidebar_secondary.remove: true
+---
+
 ```{toctree}
 :hidden:
 About <sections/about.md>
