@@ -11,9 +11,11 @@ extensions = [
     "ablog",
     "sphinx.ext.intersphinx",
     "sphinx_subfigure",
+    "sphinx_design",
     "notfound.extension",
     "legacy_redirects",
     "ablog_plus",
+    "selective_css",
 ]
 
 # see https://myst-parser.readthedocs.io
@@ -28,6 +30,7 @@ html_show_sourcelink = False
 
 # see https://pydata-sphinx-theme.readthedocs.io
 html_theme_options = {
+    "announcement": "Welcome to the new AiiDA site!",
     "logo": {
         "image_light": "logo-light.svg",
         "image_dark": "logo-dark.svg",
@@ -64,6 +67,7 @@ html_theme_options = {
             "type": "fontawesome",
         },
     ],
+    "header_links_before_dropdown": 6,
     "show_prev_next": False,
     "navbar_end": [
         "theme-switcher",
@@ -83,8 +87,7 @@ html_context = {
 }
 
 html_sidebars = {
-    "index": ["sbar-aiida"],
-    "*": ["sbar-aiida", "sidebar-nav-bs"],
+    "index": [],
     "sections/**": ["sbar-aiida", "sidebar-nav-bs"],
     "news/index": [
         "recentposts",

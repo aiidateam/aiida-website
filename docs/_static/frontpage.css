@@ -1,0 +1,83 @@
+/** Set front page specific CSS **/
+
+h1 {
+    visibility: hidden;
+    font-size: 0;
+}
+
+.bd-container__inner.bd-page-width {
+    max-width: 100% !important;
+}
+
+.bd-article-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+.bd-article {
+    padding: 0 !important;
+}
+
+ul.postlist {
+    padding-left: 0;
+}
+
+html[data-theme="dark"] {
+    --alternate-bg-color: #1e1e1e;
+}
+
+html[data-theme="light"] {
+    --alternate-bg-color: #1e1e1e0f;
+}
+
+.alternate-bg {
+    background: var(--alternate-bg-color);
+}
+
+.section-flex {
+    display: flex;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.section-contents {
+    width: 100%;
+    max-width: 66rem;
+}
+
+.grid-container {
+    display: grid;
+    row-gap: 1em;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-item {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+}
+
+@media (min-width:576px) {
+    .grid-sm-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width:768px) {
+    .grid-md-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width:992px) {
+    .grid-lg-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width:1200px) {
+    .grid-xl-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
