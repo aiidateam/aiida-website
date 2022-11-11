@@ -85,8 +85,7 @@ html_context = {
 html_sidebars = {
     "index": ["sbar-aiida"],
     "*": ["sbar-aiida", "sidebar-nav-bs"],
-    "team/**": ["sbar-aiida", "sidebar-nav-bs"],
-    "more/**": ["sbar-aiida", "sidebar-nav-bs"],
+    "sections/**": ["sbar-aiida", "sidebar-nav-bs"],
     "news/index": [
         "recentposts",
         "tagcloud",
