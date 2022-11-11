@@ -3,6 +3,14 @@
     opacity: 0.4;
 }
 
+/* Make links in top bar bigger */
+@media (min-width:960px) {
+    .nav-item,
+    .btn.nav-item {
+        font-size: 1.1rem;
+    }
+}
+
 /* AiiDA sidebar */
 div.sbar-aiida {
     text-align: left;
