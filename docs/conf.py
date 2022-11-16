@@ -110,6 +110,9 @@ html_sidebars = {
     ],
 }
 
+# https://sphinx-notfound-page.readthedocs.io/e
+notfound_urls_prefix = "/"
+
 # https://ablog.readthedocs.io/
 blog_path = "news/index"
 blog_title = "News and Events"
