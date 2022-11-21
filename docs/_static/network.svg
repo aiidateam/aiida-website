@@ -106,7 +106,7 @@
       stroke="#0096DE"
       stroke-width="10"
     />
-    <circle cx="1809" cy="647" r="135" fill="#30B808" />
+    <circle cx="1809" cy="647" r="135" fill="#30B808" class="big" />
     <circle cx="2367" cy="539" r="25" fill="#30B808" />
     <circle cx="2019" cy="311" r="25" fill="#30B808" />
     <circle cx="1695" cy="1265" r="25" fill="#30B808" />
