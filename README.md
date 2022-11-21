@@ -2,8 +2,6 @@
 
 The primary website for AiiDA.
 
-**IN DRAFT**: this is intended to replace the current <https://www.aiida.net/>
-
 ## How to add a post
 
 1. Create a Markdown file in `docs/source/news/posts`, named by the date and keyword.
@@ -34,7 +32,6 @@ To check HTML links, run `tox -e linkcheck` or `sphinx-build -b linkcheck docs/ 
 
 ## TODO
 
-- Home in top bar
 - Feedback forms (contact us, Join us)
 - Decide on set of post categories/tags
 - Upstream to ablog
