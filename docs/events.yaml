@@ -1,0 +1,276 @@
+# This should contain all events
+#
+# required fields:
+# - name: The name of the event
+# - start: ISO 8601 format start date(time) of the event,
+#          plus optional timezone name at end, in parentheses (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+# - location: Location of the event
+#
+# optional fields:
+# - duration: Duration of the event
+# - description: Description of the event
+# - url/urls: URL for the event, or list of URLs
+# - announce: internal post annoncing the event
+# - report: internal post reporting the event
+# - participants: number of participants
+
+- name: AiiDA online demonstration and virtual tutorial
+  start: 2022-10-04
+  duration: 3 days
+  location: Online
+  announce: /news/posts/2022-08-23-aiida-tutorial-event.md
+
+- name: Wannier 2022 Summer School
+  start: 2022-05-16
+  duration: 4 days
+  location: Trieste (IT)
+  announce: /news/posts/2022-01-29-wannier-school-event.md
+
+- name: AiiDA introductory tutorial
+  start: 2022-05-20
+  location: University of Antwerp (BE)
+  participants: ~15
+
+- name: Fifth annual AiiDA coding week
+  start: 2021-12-06
+  duration: 4 days
+  location: Leysin (CH)
+  announce: /news/posts/2021-10-06-coding-week-event.md
+  report: /news/posts/2021-12-14-coding-week-report.md
+  participants: ~15
+
+- name: Tutorial on running and writing workflows with AiiDA
+  start: 2021-07-05
+  duration: 4 days
+  location: Online
+  announce: /news/posts/2021-05-05-aiida-tutorial-event.md
+  report: /news/posts/2021-08-17-aiida-tutorial-report.md
+  url: https://aiida-tutorials.readthedocs.io/en/tutorial-2021-intro/
+  participants: ~130
+
+- name: AiiDA tutorial at the MaX School on Advanced Materials and Molecular Modelling with Quantum ESPRESSO
+  start: 2021-05-28
+  location: Online
+  url: http://indico.ictp.it/event/9616/#:~:text=The%20school%20will%20introduce%20students,%2DPerformance%20Computing%20(HPC)
+  participants: ~100
+
+- name: AiiDA tutorial
+  start: 2021-02-10
+  location: Federal University of ABC, São Paulo - Brazil
+  participants: ~20
+
+- name: AiiDA tutorial at the BIG-MAP workshop
+  start: 2020-12-02
+  location: Online
+  url: https://multiscale-modelling.eu/BigMapWorkshop2020
+  participants: ~80
+
+- name: Materials Science Q&A @ SciPy 2020
+  start: 2020-07-10 16:00 (US/Central)
+  location: Online
+  url: https://www.scipy2020.scipy.org/schedule
+
+- name: AiiDA talk @ SciPy 2020
+  start: 2020-07-09 17:00 (US/Central)
+  location: Online
+  url: https://www.scipy2020.scipy.org/schedule
+
+- name: AiiDA virtual tutorial week
+  start: 2020-07-07
+  duration: 3 days
+  location: Online
+  url: https://aiida-tutorials.readthedocs.io/en/latest/pages/2020_Intro_Week/index.html
+  announce: /news/posts/2020-06-04-aiida-tutorial-event.md
+  report: /news/posts/2020-07-22-aiida-tutorial-report.md
+  description: |
+    Sponsored by MARVEL, MaX, CECAM, swissuniversities and MarketPlace.
+    Introductory presentations and hands-on workshops.
+  participants: ~80
+
+- name: Introduction to AiiDA, aiida-wannier90 plugin, and the workflows to compute automatically Wannier functions
+  start: 2020-03-25
+  duration: 2 days
+  location: Oxford (UK)
+  url: http://www.wannier.org/events/school-oxford-2020/
+  description:  |
+    Within the School "Wannier90 v3.0: new features and applications",
+    [slides, material and video recordings](https://www.materialscloud.org/learn/sections/C8ad91/wannier90-v3-0-school-virtual-edition-2020)
+  participants: ~40
+
+- name: Hackathon on plugin and workflow development for AiiDA
+  start: 2020-02-17
+  duration: 4 days
+  location: CINECA Bologna (IT)
+  url: https://events.prace-ri.eu/event/957/overview
+  participants: ~25
+
+- name: AiiDA tutorial
+  start: 2019-12-19
+  duration: 1 day
+  location: ISSP University of Tokyo (JP)
+  url: https://atztogo.github.io/AiiDA-tutorial-ISSP/
+
+- name: Fourth annual AiiDA coding week
+  start: 2019-12-09
+  duration: 4 days
+  location: Fiesch (CH)
+  announce: /news/posts/2019-11-14-aiida-coding-week-2019.md
+  participants: ~15
+
+- name: Writing reproducible workflows for computational materials science using AiiDA
+  start: 2019-10-09
+  duration: 2 days
+  location: IIT Mandi (IN)
+  url: http://aiidaworkshop.iitmandi.ac.in/
+
+- name: VASP & AiiDA workshop
+  start: 2019-09-23
+  duration: 4 days
+  location: SINTEF Oslo (NO)
+  url: https://www.sigma2.no/vasp-and-aiida-workshop-0
+
+- name: AiiDA tutorial within the summer school on Advanced Materials and Molecular Modelling with Quantum ESPRESSO
+  start: 2019-09-16
+  duration: 4 days
+  location: Ljubljana
+  url: http://qe2019.ijs.si/index.html
+
+- name: Introduction to AiiDA 1.0
+  start: 2019-09-06
+  location: Xiamen University (CN)
+  url: http://pcoss.xmu.edu.cn/workshop/
+  description: As part of a workshop on computational chemistry and machine learning
+
+- name: Writing reproducible workflows for computational materials science, using AiiDA 1.0
+  start: 2019-05-21
+  duration: 3 days
+  location: EPF Lausanne (CH)
+  announce: /news/posts/2019-01-19-tutorial-reproducible-workflows.md
+  participants: ">50"
+
+- name: AiiDA plugins migration workshop
+  start: 2019-03-25
+  duration: 4 days
+  location: EPF Lausanne (CH)
+  announce: /news/posts/2019-01-11-aiida-plugins-migration-workshop.md
+  description: To support existing plugins in migrating to python 2+3 and the new AiiDA 1.0 release.
+  participants: ~25
+
+- name: Third AiiDA coding week
+  start: 2019-12-03
+  duration: 4 days
+  location: Fiesch (CH)
+
+- name: >
+    PRACE-MaX Tutorial on high-throughput computations: general methods and applications using AiiDA
+  start: 2018-05-30
+  duration: 2 days
+  location: CINECA - Casalecchio di Reno (Bologna, IT)
+  url: https://events.prace-ri.eu/event/709/
+  report: /news/posts/2018-06-04-report-aiida-tutorial-cineca.md
+  description: |
+    Hosted at the Italian Supercomputer Center CINECA and co-sponsored by [PRACE](http://www.prace-ri.eu) and the [H2020 MaX CoE](http://max-centre.eu).
+    It was preceded by an optional two-day introduction to Python.
+    Photos [here](https://www.facebook.com/media/set/?set=a.832898416917681.1073741841.254260741448121&type=1&l=d8cf65a9fa).
+
+- name: Second AiiDA coding week
+  start: 2017-10-16
+  duration: 4 days
+  location: Leukerbad (CH)
+  report: /news/posts/2017-10-25-outcome-of-the-aiida.md
+
+- name: Second edition of the MARVEL/Psi-k/MaX AiiDA tutorial
+  start: 2017-05-29
+  duration: 2 days
+  location: EPF Lausanne (CH)
+  urls:
+  - http://nccr-marvel.ch/en/events/aiida-tutorial-may-2017
+  - http://psi-k.net/report-on-the-high-throughput-tutorial-using-aiida-2017/
+  description: |
+    Targeted at students, postdocs and researchers interested in applying high-throughput computations
+    in their research and interested in learning how to use the AiiDA platform.
+    Photos [here](https://www.facebook.com/media/set/?set=a.659849004222624.1073741839.254260741448121&type=1&l=aa10a3771b).
+  participants: ~50
+
+- name: MARVEL/MaX advanced AiiDA tutorial
+  start: 2017-03-06
+  duration: 1 day
+  location: EPF Lausanne (CH)
+  url: http://nccr-marvel.ch/en/events/marvel-max-meeting-march-2017
+  description: Aimed at encouraging collaborations and at discussing about integration of workflows, plugins and curated data within AiiDA and Materials cloud.
+  participants: ~20
+
+- name: AiiDA tutorial within the ICTP (Advanced Workshop on High-Performance & High-Throughput Materials Simulations using Quantum ESPRESSO)
+  start: 2017-01-24
+  end: 2017-01-25
+  location: ICTP Trieste (IT)
+  url: http://indico.ictp.it/event/7921/
+  report: /news/posts/2017-01-27-report-aiida-tutorial-january.md
+  participants: ~75
+
+- name: First AiiDA coding week
+  start: 2016-12-05
+  duration: 4 days
+  location: Leysin (CH)
+  report: /news/posts/2016-12-13-report-from-the-aiida.md
+
+- name: AiiDA tutorial for users.
+  start: 2016-07-14
+  duration: 1 day
+  location: ICTP Trieste (IT)
+  participants: ~50
+  description: |
+    This was one of the activities of the ICTP event [“College on Multiscale Computational Modeling of Materials for Energy Applications”](http://indico.ictp.it/event/7656/overview)
+    ([photos here](https://www.facebook.com/media/set/?set=a.524912414382951.1073741836.254260741448121&type=1&l=994febf474)).
+
+- name: First edition of the MARVEL/MaX/Psi-k AiiDA tutorial
+  start: 2016-06-22
+  duration: 2 days
+  location: EPF Lausanne (CH)
+  url: http://nccr-marvel.ch/en/events/aiida-tutorial-june-2016
+  report: /news/posts/2017-01-19-report-of-the-aiida.md
+  participants: ~50
+  description: |
+    Photos here:
+    [day1](https://www.facebook.com/media/set/?set=a.503196473221212.1073741833.254260741448121&type=1&l=85d4593322),
+    [day2](https://www.facebook.com/media/set/?set=a.503233563217503.1073741834.254260741448121&type=1&l=3f930b62c5),
+    [day3](https://www.facebook.com/media/set/?set=a.503525399854986.1073741835.254260741448121&type=1&l=7ec21a0901).
+
+- name: AiiDA tutorial
+  start: 2016-03-01
+  location: Kyoto (JAP)
+  description: |
+    For some Japanese groups
+    ([photos here](https://www.facebook.com/media/set/?set=a.457922641081929.1073741831.254260741448121&type=1&l=4bdb3dbc74)).
+  participants: ~20
+
+- name: AiiDA tutorial
+  start: 2015-12-15
+  location: Trieste (IT)
+  description: For the [Master in HPC](http://www.mhpc.it).
+  participants: ~10
+
+- name: AiiDA tutorial for users and developers
+  start: 2015-11-02
+  duration: 4 days
+  location: EPF Lausanne (CH)
+  url: http://nccr-marvel.ch/en/events/aiida-tutorial-coding-days
+  participants: ~40
+  description: |
+    This was especially targeted to the developers within the new EU H2020 MaX Centre of Excellence on “Materials Design at the Exascale”,
+    and to the [NCCR MARVEL](http://nccr-marvel.ch/) community.
+    Some pictures of the event can be found
+    on our [Facebook page](https://www.facebook.com/media/set/?set=a.423304691210391.1073741830.254260741448121&type=3).
+
+- name: AiiDA tutorial for the whole CECAM/Psi-K community
+  start: 2015-02-05
+  location: Berlin (DE)
+  participants: ~40
+  description: |
+    Held after the [CECAM/Psi-k Research Conference](http://th.fhi-berlin.mpg.de/sitesub/meetings/cecampsik2015/index.php?n=Meeting.Program "CECAM/Psi-k Research Conference Berlin 2015")
+
+- name: AiiDA tutorial
+  start: 2014-10-31
+  location: Zurich (CH)
+  description: For members of the [MARVEL NCCR](http://nccr-marvel.ch/).
+  participants: ~30

@@ -9,11 +9,17 @@ The primary website for AiiDA.
 1. Create a Markdown file in `docs/source/news/posts`, named by the date and keyword.
 2. Add the [ablog topmatter](https://ablog.readthedocs.io/en/latest/manual/markdown/) to the page
 3. Write in [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html)
-4. Create a PR
+4. If the post announces or reports on an event, then update the [`docs/events.yaml`](docs/events.yaml) file.
+5. Create a PR
 
 ### Tips
 
-Setting `category: Events` and a `date` in the future will make the post show on the front page `Upcoming Events`.
+The top-matter `category` should be one of the following:
+
+- `News`: To announce a general news
+- `Events`: To announce an event
+- `Reports`: To report on an event
+- `Release`: To announce a new release
 
 You can use the [update](https://ablog.readthedocs.io/en/latest/manual/posting-and-listing/#directive-update) directive to note an update to an existing post.
 

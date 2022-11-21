@@ -6,7 +6,7 @@
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="988" cy="325" r="120" fill="#FF7D17" />
+    <circle cx="988" cy="325" r="120" fill="#FF7D17" class="big" />
     <circle cx="1126" cy="766" r="25" fill="#FF7D17" />
     <circle cx="865" cy="832" r="25" fill="#FF7D17" />
     <circle cx="768" cy="119" r="25" fill="#FF7D17" />
@@ -57,7 +57,7 @@
     <circle cx="1193" cy="1055" r="30" fill="#0096DE" />
     <circle cx="1406" cy="1139" r="60" stroke="#0096DE" stroke-width="10" />
     <circle cx="1524" cy="1421" r="30" fill="#0096DE" />
-    <circle cx="1266" cy="1520" r="115" fill="#0096DE" />
+    <circle cx="1266" cy="1520" r="115" fill="#0096DE" class="big" />
     <line
       x1="1384.72"
       y1="1199.65"
@@ -106,7 +106,7 @@
       stroke="#0096DE"
       stroke-width="10"
     />
-    <circle cx="1809" cy="647" r="135" fill="#30B808" />
+    <circle cx="1809" cy="647" r="135" fill="#30B808" class="big" />
     <circle cx="2367" cy="539" r="25" fill="#30B808" />
     <circle cx="2019" cy="311" r="25" fill="#30B808" />
     <circle cx="1695" cy="1265" r="25" fill="#30B808" />
@@ -224,7 +224,7 @@
     <circle cx="2963" cy="1167" r="25" fill="#FF7D17" />
     <circle cx="3296" cy="1168" r="30" fill="#FF7D17" />
     <circle cx="3406" cy="1076" r="20" fill="#FF7D17" />
-    <circle cx="2801" cy="1435" r="115" fill="#FF7D17" />
+    <circle cx="2801" cy="1435" r="115" fill="#FF7D17" class="big" />
     <line
       x1="2630"
       y1="1108.91"
@@ -320,7 +320,7 @@
     <circle cx="3894" cy="277" r="25" fill="#30B808" />
     <circle cx="3956" cy="503" r="25" fill="#30B808" />
     <circle cx="4050" cy="1458" r="25" fill="#30B808" />
-    <circle cx="3771" cy="857" r="110" fill="#30B808" />
+    <circle cx="3771" cy="857" r="110" fill="#30B808" class="big" />
     <line
       x1="3430.11"
       y1="830.054"
@@ -399,7 +399,7 @@
     <circle cx="4412" cy="1135" r="25" fill="#0096DE" />
     <circle cx="4401" cy="444" r="25" fill="#0096DE" />
     <circle cx="4686" cy="541" r="25" fill="#0096DE" />
-    <circle cx="4778" cy="1007" r="110" fill="#0096DE" />
+    <circle cx="4778" cy="1007" r="110" fill="#0096DE" class="big" />
     <line
       x1="4614.54"
       y1="649.608"
@@ -440,7 +440,7 @@
       stroke="#0096DE"
       stroke-width="10"
     />
-    <circle cx="2896" cy="359" r="110" fill="#0096DE" />
+    <circle cx="2896" cy="359" r="110" fill="#0096DE" class="big" />
     <circle cx="3345" cy="123" r="25" fill="#0096DE" />
     <circle cx="3555" cy="244" r="25" fill="#0096DE" />
     <circle cx="2761" cy="972" r="25" fill="#0096DE" />
@@ -517,7 +517,7 @@
     <circle cx="671" cy="1101" r="25" fill="#30B808" />
     <circle cx="230" cy="1390" r="25" fill="#30B808" />
     <circle cx="391" cy="518" r="30" stroke="#30B808" stroke-width="10" />
-    <circle cx="152" cy="876" r="115" fill="#30B808" />
+    <circle cx="152" cy="876" r="115" fill="#30B808" class="big" />
     <circle cx="531" cy="1367" r="75" fill="#30B808" />
     <circle cx="324" cy="646" r="70" fill="#30B808" />
     <line
