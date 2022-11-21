@@ -33,7 +33,7 @@ REDIRECT_TEMPLATE = """
 
 def build_redirects(app: Sphinx, exception: Optional[Exception]) -> None:
     """Build and write redirects."""
-    if app.builder.format != "html":
+    if exception or app.builder.format != "html":
         return
     logger.info("Writing legacy redirects...")
 

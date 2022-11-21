@@ -84,18 +84,41 @@ Open Source
 ::::{div} section-flex
 :::{div} section-contents
 
-<h2>Upcoming Events
-<a class="headerlink" href="#upcoming-events" title="Permalink to this heading">#</a>
+<h2 class="front">Events
+<a class="headerlink" href="#events" title="Permalink to this heading">#</a>
 </h2>
 
-```{upcominglist}
-:date: "%A, %B %d, %Y"
-:excerpts:
-```
+````{timeline}
+:events: /events.yaml
+:height: 380px
 
-See the [Events](sections/events.md) section, for more information.
+{% if 'report' in e %}
+{% set link = e.report %}
+{% elif 'announce' in e %}
+{% set link = e.announce %}
+{% elif 'url' in e %}
+{% set link = e.url %}
+{% else %}
+{% set link = '/sections/events.md' %}
+{% endif %}
 
-<h2>Latest News
+**{{dtrange}}**\
+[*{{e.name | trim | replace(']', '\]')}}*]({{link|trim}})\
+*{{e.location | trim}}*
+
+{% if 'description' in e %}
+{{e.description}}
+{% endif %}
+
+````
+
+:::
+::::
+
+::::{div} section-flex alternate-bg
+:::{div} section-contents
+
+<h2 class="front">Latest News
 <a class="headerlink" href="#latest-news" title="Permalink to this heading">#</a>
 </h2>
 

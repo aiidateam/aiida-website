@@ -4,7 +4,7 @@
 
 The AiiDA team conducts an **annual survey** on the [AiiDA mailing list](./mailing_list.md) to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](https://aiidateam.github.io/aiida-registry/) used, and further database indicators that inform future development choices.
 
-- **2020**: [results](https://bit.ly/3dvImyu)
+- **2020**: [results](../pics/aiida-powered-research-projects-2020.pdf)
 - **2019**: [results](http://bit.ly/2HRjTWo)
 
 ## AiiDA-powered publications

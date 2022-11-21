@@ -10,11 +10,12 @@ extensions = [
     "myst_parser",
     "ablog",
     "sphinx.ext.intersphinx",
-    "sphinx_subfigure",
     "sphinx_design",
+    "sphinx_subfigure",
+    "sphinx_timeline",
     "notfound.extension",
     "legacy_redirects",
-    "ablog_plus",
+    "check_events",
     "selective_css",
 ]
 
@@ -74,7 +75,7 @@ html_theme_options = {
         "navbar-icon-links",
     ],
     "footer_items": ["copyright"],
-    "use_edit_page_button": False,
+    "use_edit_page_button": True,
     "search_bar_text": "Search ...",
 }
 
@@ -136,6 +137,27 @@ linkcheck_ignore = [
     r"https://events.prace-ri.eu/event/709",
     r"https://www.cecam.org/wp-content/uploads/2019/04/2019_03_EPFL_materials_science_researcher_software_engineer.pdf",
     r"https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/",
+]
+
+aiida_ignore_event_checks = [
+    "news/posts/2015-11-09-aiida-tutorial-in-november",
+    "news/posts/2016-01-19-tutorial-on-high-throughput",
+    "news/posts/2016-03-02-photos-of-the-aiida",
+    "news/posts/2016-05-13-aiida-tutorial-for-users",
+    "news/posts/2016-06-09-aiida-tutorial-june-2016",
+    "news/posts/2016-06-23-news-from-the-aiida",
+    "news/posts/2016-09-01-aiida-tutorial-ictp-jan2017",
+    "news/posts/2017-01-09-new-aiida-tutorial-in",
+    "news/posts/2017-01-25-photos-from-the-aiida",
+    "news/posts/2017-06-21-summary-report-of-the",
+    "news/posts/2018-04-16-aiida-tutorial-at-cineca",
+    "news/posts/2018-06-01-photos-from-the-prace",
+    "news/posts/2018-06-07-max-hackathon-july-2018",
+    "news/posts/2020-01-22-hackathon-announcement",
+    "news/posts/2020-03-03-hackathon-notes",
+    "news/posts/2020-03-06-aiida-tutorial-@-vilnius",
+    "news/posts/2020-05-28-aiida-tutorial-at-vilnius",
+    "news/posts/2022-07-13-scipy-talk",
 ]
 
 # add path to local sphinx extensions
