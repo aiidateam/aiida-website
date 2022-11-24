@@ -4,8 +4,8 @@ The primary website for AiiDA.
 
 ## How to add a post
 
-1. Create a Markdown file in `docs/source/news/posts`, named by the date and keyword.
-2. Add the [ablog topmatter](https://ablog.readthedocs.io/en/latest/manual/markdown/) to the page
+1. Create a Markdown file in `docs/news/posts`, named by the date and keyword.
+2. Add the [ablog topmatter](https://ablog.readthedocs.io/en/latest/manual/markdown.html) to the page
 3. Write in [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html)
 4. If the post announces or reports on an event, then update the [`docs/events.yaml`](docs/events.yaml) file.
 5. Create a PR
