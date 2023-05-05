@@ -7,7 +7,7 @@ date: 2020-01-22
 
 # AiiDA Hackathon: developing code plugins and robust scientific workflows @ Cineca, Bologna, Italy
 
-The hackathon will take place from February 17  to 21 at [Cineca](https://www.cineca.it): [Via Magnanelli, 6/3, 40033 Casalecchio di Reno, Italy](https://goo.gl/maps/B9U2rzavLHXoK1UH9).
+The hackathon will take place from February 17  to 21 at [Cineca](https://www.cineca.it/en/): [Via Magnanelli, 6/3, 40033 Casalecchio di Reno, Italy](https://goo.gl/maps/B9U2rzavLHXoK1UH9).
 
 Participating AiiDA plugin developers will be shown best practices and useful tips on:
 

@@ -10,7 +10,7 @@ date: 2020-07-22
 Due to the ongoing pandemic, this year’s edition of the AiiDA tutorial was organised in an entirely virtual format, which gave us the opportunity to expand our admittance to a truly global audience. In total, we accepted 85 participants from 30 countries and 13 different time zones. Incorporating this wide range of time zones presented an interesting challenge, and so we decided to split participants into two groups, running duplicate hands-on sessions for each group at different times of the day.
 
 ```{seealso}
-All the presentations and material used for the hands-on sessions can be found on the [tutorial webpage](https://aiida-tutorials.readthedocs.io/en/latest/pages/2020_Intro_Week/index.html).
+All the presentations and material used for the hands-on sessions can be found on the [tutorial webpage](https://aiida-tutorials.readthedocs.io/en/legacy/pages/2020_Intro_Week/index.html).
 ```
 
 ![participant map](../pics/2020-tutorial-participants-map.png)

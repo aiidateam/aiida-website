@@ -36,7 +36,7 @@ Besides the AiiDA team at EPFL listed below, we thank our [numerous external cod
 * - ![Portrait](../pics/team/boris.png)
   - **Boris Kozinsky**\
     *Professor, Materials Intelligence Research, Harvard University (USA)*\
-    [havard.edu](https://bkoz.seas.harvard.edu/people/boris-kozinsky)
+    [havard.edu](https://mir.g.harvard.edu/people/boris-kozinsky)
 
 * - ![Portrait](../pics/team/nicola.png)
   - **Nicola Marzari**\
