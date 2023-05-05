@@ -129,8 +129,9 @@ linkcheck_exclude_documents = [
 linkcheck_ignore = [
     r"https://www.youtube.com/.*",
     r"http://indico.ictp.it/.*",
-    r"https://events\.prace-ri\.eu/event/957/overview",
-    r"https://events\.prace-ri\.eu/event/709/",
+    r"https://www.cineca.it/.*",
+    r"https://events.prace-ri.eu/event/957/overview",
+    r"https://events.prace-ri.eu/event/709/",
     r"http://pcoss.xmu.edu.cn/workshop/",
     r"https://emmc.eu/",
     r"http://morty.tech",
@@ -140,6 +141,13 @@ linkcheck_ignore = [
     r"https://events.prace-ri.eu/event/709",
     r"https://www.cecam.org/wp-content/uploads/2019/04/2019_03_EPFL_materials_science_researcher_software_engineer.pdf",
     r"https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/",
+    r"http://www.wannier.org/events/school-oxford-2020/",
+    r"http://doi.org/.*",
+    r"https://doi.org/.*",
+    r"https://onlinelibrary.wiley.com/doi/.*",
+    r"https://aip.scitation.org/doi/.*",
+    r"https://pubs.acs.org/doi/.*",
+    r"https://www.sciencedirect.com/science/.*",
 ]
 
 aiida_ignore_event_checks = [

@@ -85,7 +85,7 @@
   start: 2020-07-07
   duration: 3 days
   location: Online
-  url: https://aiida-tutorials.readthedocs.io/en/latest/pages/2020_Intro_Week/index.html
+  url: https://aiida-tutorials.readthedocs.io/en/legacy/pages/2020_Intro_Week/index.html
   announce: /news/posts/2020-06-04-aiida-tutorial-event.md
   report: /news/posts/2020-07-22-aiida-tutorial-report.md
   description: |
