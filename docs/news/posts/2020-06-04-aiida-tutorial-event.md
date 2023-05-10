@@ -52,7 +52,7 @@ The videos of this tutorial (see also schedule) can be found on [this YouTube pl
 
 ## Tutorial text
 
-The tutorial text can be found on [this page of the AiiDA Tutorials website](https://aiida-tutorials.readthedocs.io/en/latest/pages/2020_Intro_Week/index.html#intro-week-homepage).
+The tutorial text can be found on [this page of the AiiDA Tutorials website](https://aiida-tutorials.readthedocs.io/en/legacy/pages/2020_Intro_Week/index.html).
 
 ## Funding
 
