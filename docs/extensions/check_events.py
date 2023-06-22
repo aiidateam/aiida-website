@@ -71,7 +71,7 @@ def _read_data(data, app: Sphinx) -> tuple[set[str], set[str]]:
                 # check valid docs
                 if docname not in app.env.found_docs:
                     raise ValueError(
-                        f"Event {i} {key!r} value not a valid doc: {event[key]!r}"
+                        f"Event {i} {key!r} value not a valid doc: {event[key]!r} Valid docs: {sorted(app.env.found_docs)}"
                     )
                 event[key] = docname
                 docnames[key].add(docname)
