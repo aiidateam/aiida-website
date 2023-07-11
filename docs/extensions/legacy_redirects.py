@@ -49,7 +49,6 @@ def build_redirects(app: Sphinx, exception: Optional[Exception]) -> None:
         Path(app.srcdir).joinpath("legacy_redirect.json").read_text()
     )
     for redirect_from, redirect_to in redirects.items():
-
         # create paths
         if redirect_from.endswith("/"):
             redirect_from = redirect_from + "index.html"
