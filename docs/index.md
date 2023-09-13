@@ -5,15 +5,15 @@ html_theme.sidebar_secondary.remove: true
 ```{toctree}
 :hidden:
 Home <self>
-About <sections/about.md>
 Download <sections/download.md>
-News <news/index.md>
 Docs <https://aiida-core.readthedocs.io>
+Support <sections/mailing_list.md>
 Plugins <https://aiidateam.github.io/aiida-registry>
+About <sections/about.md>
+News <news/index.md>
 Tutorials <https://aiida-tutorials.readthedocs.io>
 sections/team.md
 sections/events.md
-sections/mailing_list.md
 sections/science.md
 sections/testimonials.md
 sections/graph_gallery.md
