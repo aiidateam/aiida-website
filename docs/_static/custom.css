@@ -63,3 +63,7 @@ div.sbar-aiida div.cite {
 .ablog-post-title {
     font-weight: bold;
 }
+
+#navbar-icon-links i.fa-square-twitter::before {
+    color: #646464;
+}
