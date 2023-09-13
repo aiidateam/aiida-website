@@ -50,21 +50,21 @@ html_theme_options = {
     ],
     "icon_links": [
         {
-            "name": "Twitter",
-            "url": "https://twitter.com/aiidateam",
-            "icon": "fa-brands fa-square-twitter",
-            "type": "fontawesome",
-        },
-        {
-            "name": "Facebook",
-            "url": "https://www.facebook.com/aiidateam",
-            "icon": "fa-brands fa-square-facebook",
+            "name": "Discourse",
+            "url": "https://aiida.discourse.group",
+            "icon": "fa-brands fa-discourse",
             "type": "fontawesome",
         },
         {
             "name": "GitHub",
             "url": "https://www.github.com/aiidateam/aiida-core",
             "icon": "fa-brands fa-square-github",
+            "type": "fontawesome",
+        },
+        {
+            "name": "Twitter",
+            "url": "https://twitter.com/aiidateam",
+            "icon": "fa-brands fa-square-twitter",
             "type": "fontawesome",
         },
     ],
