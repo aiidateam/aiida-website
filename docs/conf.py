@@ -31,7 +31,7 @@ html_show_sourcelink = False
 
 # see https://pydata-sphinx-theme.readthedocs.io
 html_theme_options = {
-    "announcement": "Welcome to the new AiiDA site!",
+    # "announcement": "Welcome to the new AiiDA site!",
     "logo": {
         "image_light": "logo-light.svg",
         "image_dark": "logo-dark.svg",
