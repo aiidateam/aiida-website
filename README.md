@@ -23,6 +23,7 @@ The top-matter `category` should be one of the following:
 - `Events`: To announce an event
 - `Reports`: To report on an event
 - `Release`: To announce a new release
+- `Blog`: A blog post
 
 You can use the [update](https://ablog.readthedocs.io/en/latest/manual/posting-and-listing/#directive-update) directive to note an update to an existing post.
 

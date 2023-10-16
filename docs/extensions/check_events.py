@@ -25,7 +25,9 @@ def check_events(app: Sphinx, env: BuildEnvironment):
             if post["docname"] in env.config.aiida_ignore_event_checks:
                 continue
             category: set[str] = post["category"]
-            if not category.intersection(("Reports", "News", "Events", "Releases")):
+            if not category.intersection(
+                ("Reports", "News", "Events", "Releases", "Blog")
+            ):
                 LOGGER.warning(
                     f"Post does not have a valid category [aiida]",
                     location=post["docname"],
