@@ -4,13 +4,12 @@ html_theme.sidebar_secondary.remove: true
 
 ```{toctree}
 :hidden:
-Home <self>
 Download <sections/download.md>
 Docs <https://aiida-core.readthedocs.io>
 Support <sections/mailing_list.md>
 Plugins <https://aiidateam.github.io/aiida-registry>
+Posts <news/index.md>
 About <sections/about.md>
-News <news/index.md>
 Tutorials <https://aiida-tutorials.readthedocs.io>
 sections/team.md
 sections/events.md
@@ -118,7 +117,7 @@ Open Source
 ::::{div} section-flex alternate-bg
 :::{div} section-contents
 
-<h2 class="front">Latest News
+<h2 class="front">Latest posts
 <a class="headerlink" href="#latest-news" title="Permalink to this heading">#</a>
 </h2>
 
