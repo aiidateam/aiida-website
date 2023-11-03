@@ -24,4 +24,4 @@ jobs:
         pip install --upgrade pip
         pip install -rrequirements.txt
     - name: Run linkcheck
-      run: sphinx-build -b linkcheck docs/ docs/_build/linkcheck
+      run: sphinx-build -b linkcheck docs/ docs/_build/linkcheck --color -q
