@@ -228,4 +228,3 @@ The situation can be summarized as follows:
 * Explicitly capturing parameters modification does not provide any additional valuable information in understanding the origin of the final output of interest
 
 The conclusion in this particular example then is that the non-negligible cost of explicitly tracking the parameters' modification by the workflow is not worth the menial gain of information, if there even is any.
-
