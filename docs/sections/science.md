@@ -23,7 +23,7 @@ A list of publications containing calculations powered by AiiDA, selected from t
 - H. Saßnick, C. Cocchi, [Automated analysis of surface facets: the example of cesium telluride](https://doi.org/10.1038/s41524-024-01224-7), _npj Computational Materials_ **10,** no. 38,  (2024).
 
 
-### Publications from 2023 
+### Publications from 2023
 
 - K. Jablonka, A. Rosen, A. Krishnapriyan, B. Smit, [An Ecosystem for Digital Reticular Chemistry](https://doi.org/10.1021/acscentsci.2c01177), _ACS Central Science_ **9,** 563-581 (2023).
 - F. dos Santos, N. Marzari, [Fermi energy determination for advanced smearing techniques](https://doi.org/10.1103/physrevb.107.195122), _Physical Review B_ **107,** no. 195122,  (2023).
