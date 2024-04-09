@@ -4,6 +4,7 @@
 
 The AiiDA team conducts an **annual survey** on the [AiiDA mailing list](./mailing_list.md) to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](https://aiidateam.github.io/aiida-registry/) used, and further database indicators that inform future development choices.
 
+- **2024**: link to be inserted
 - **2020**: [results](../pics/aiida-powered-research-projects-2020.pdf)
 - **2019**: [results](http://bit.ly/2HRjTWo)
 
@@ -12,6 +13,72 @@ The AiiDA team conducts an **annual survey** on the [AiiDA mailing list](./maili
 :::{figure} ../pics/publication-chart.png
 A list of publications containing calculations powered by AiiDA, selected from the [citations of the AiiDA paper](https://scholar.google.com/scholar?cites=10268089832296963062&as_sdt=2005&sciodt=0,5&hl=en).
 :::
+
+
+### Publications from 2024 (up to March)
+
+- H. Saßnick, F. Machado Ferreira De Araujo, J. Edzards, C. Cocchi, [Impact of Ligand Substitution and Metal Node Exchange in the Electronic Properties of Scandium Terephthalate Frameworks](https://doi.org/10.1021/acs.inorgchem.3c03945), _Inorganic Chemistry_ **63,** 2098-2108 (2024).
+- A. Tellez-Mora, X. He, E. Bousquet, L. Wirtz, A. Romero, [Systematic determination of a material’s magnetic ground state from first principles](https://doi.org/10.1038/s41524-024-01202-z), _npj Computational Materials_ **10,** no. 20,  (2024).
+- D. Grassano, N. Marzari, D. Campi, [High-throughput screening of Weyl semimetals](https://doi.org/10.1103/physrevmaterials.8.024201), _Physical Review Materials_ **8,** no. 024201,  (2024).
+- H. Saßnick, C. Cocchi, [Automated analysis of surface facets: the example of cesium telluride](https://doi.org/10.1038/s41524-024-01224-7), _npj Computational Materials_ **10,** no. 38,  (2024).
+
+
+### Publications from 2023 
+
+- K. Jablonka, A. Rosen, A. Krishnapriyan, B. Smit, [An Ecosystem for Digital Reticular Chemistry](https://doi.org/10.1021/acscentsci.2c01177), _ACS Central Science_ **9,** 563-581 (2023).
+- F. dos Santos, N. Marzari, [Fermi energy determination for advanced smearing techniques](https://doi.org/10.1103/physrevb.107.195122), _Physical Review B_ **107,** no. 195122,  (2023).
+- M. Bonacci, J. Qiao, N. Spallanzani, A. Marrazzo, G. Pizzi, E. Molinari, D. Varsano, A. Ferretti, D. Prezzi, [Towards high-throughput many-body perturbation theory: efficient algorithms and automated workflows](https://doi.org/10.1038/s41524-023-01027-2), _npj Computational Materials_ **9,** no. 74,  (2023).
+- B. Mourino, K. Jablonka, A. Ortega‐Guerrero, B. Smit, [In Search of Covalent Organic Framework Photocatalysts: A DFT‐Based Screening Approach](https://doi.org/10.1002/adfm.202301594), _Advanced Functional Materials_ **33,**  (2023).
+- S. Shepherd, G. Tribello, D. Wilkins, [A fully quantum-mechanical treatment for kaolinite](https://doi.org/10.1063/5.0152361), _The Journal of Chemical Physics_ **158,**  (2023).
+- S. Muy, C. Johnston, N. Marzari, [AiiDA-defects: an automated and fully reproducible workflow for the complete characterization of defect chemistry in functional materials](https://doi.org/10.1088/2516-1075/ace014), _Electronic Structure_ **5,** 024009 (2023).
+- D. Campi, N. Mounet, M. Gibertini, G. Pizzi, N. Marzari, [Expansion of the Materials Cloud 2D Database](https://doi.org/10.1021/acsnano.2c11510), _ACS Nano_ **17,** 11268-11278 (2023).
+- D. Li, H. Wang, K. Li, B. Zhu, K. Jiang, D. Backes, L. Veiga, J. Shi, P. Roy, M. Xiao, A. Chen, Q. Jia, T. Lee, S. Dhesi, D. Scanlon, J. MacManus-Driscoll, P. van Aken, K. Zhang, W. Li, [Emergent and robust ferromagnetic-insulating state in highly strained ferroelastic LaCoO3 thin films](https://doi.org/10.1038/s41467-023-39369-6), _Nature Communications_ **14,** no. 3638,  (2023).
+- S. Ghosh, P. Rüßmann, Y. Mokrousov, F. Freimuth, A. Kosma, [Perspective on spin–orbit torque, topology, and reciprocal and real-space spin textures in magnetic materials and heterostructures](https://doi.org/10.1063/5.0149849), _Journal of Applied Physics_ **133,**  (2023).
+- J. Cen, B. Zhu, D. Scanlon, [Exploring battery cathode materials in the Li-Ni-O phase diagrams using structure prediction](https://doi.org/10.1088/2515-7655/acdd9c), _Journal of Physics: Energy_ **5,** 035005 (2023).
+- F. Yao, V. Multian, Z. Wang, N. Ubrig, J. Teyssier, F. Wu, E. Giannini, M. Gibertini, I. Gutiérrez-Lezama, A. Morpurgo, [Multiple antiferromagnetic phases and magnetic anisotropy in exfoliated CrBr3 multilayers](https://doi.org/10.1038/s41467-023-40723-x), _Nature Communications_ **14,** no. 4969,  (2023).
+- J. Železný, Y. Yahagi, C. Gomez-Olivella, Y. Zhang, Y. Sun, [High-throughput study of the anomalous Hall effect](https://doi.org/10.1038/s41524-023-01113-5), _npj Computational Materials_ **9,** no. 151,  (2023).
+- M. Vogler, J. Busk, H. Hajiyani, P. Jørgensen, N. Safaei, I. Castelli, F. Ramirez, J. Carlsson, G. Pizzi, S. Clark, F. Hanke, A. Bhowmik, H. Stein, [Brokering between tenants for an international materials acceleration platform](https://doi.org/10.1016/j.matt.2023.07.016), _Matter_ **6,** 2647-2665 (2023).
+- D. Grassano, D. Campi, A. Marrazzo, N. Marzari, [Complementary screening for quantum spin Hall insulators in two-dimensional exfoliable materials](https://doi.org/10.1103/physrevmaterials.7.094202), _Physical Review Materials_ **7,** no. 094202,  (2023).
+- L. Ghiringhelli, C. Baldauf, T. Bereau, S. Brockhauser, C. Carbogno, J. Chamanara, S. Cozzini, S. Curtarolo, C. Draxl, S. Dwaraknath, Á. Fekete, J. Kermode, C. Koch, M. Kühbach, A. Ladines, P. Lambrix, M. Himmer, S. Levchenko, M. Oliveira, A. Michalchuk, R. Miller, B. Onat, P. Pavone, G. Pizzi, B. Regler, G. Rignanese, J. Schaarschmidt, M. Scheidgen, A. Schneidewind, T. Sheveleva, C. Su, D. Usvyat, O. Valsson, C. Wöll, M. Scheffler, [Shared metadata for data-centric materials science](https://doi.org/10.1038/s41597-023-02501-8), _Scientific Data_ **10,** no. 626,  (2023).
+- P. Henkel, J. Li, G. Grandhi, P. Vivo, P. Rinke, [Screening Mixed-Metal Sn<sub>2</sub>M(III)Ch<sub>2</sub>X<sub>3</sub> Chalcohalides for Photovoltaic Applications](https://doi.org/10.1021/acs.chemmater.3c01629), _Chemistry of Materials_ **35,** 7761-7769 (2023).
+- J. Qiao, G. Pizzi, N. Marzari, [Automated mixing of maximally localized Wannier functions into target manifolds](https://doi.org/10.1038/s41524-023-01147-9), _npj Computational Materials_ **9,** no. 206,  (2023).
+- Q. Chen, M. Di Giovannantonio, K. Eimre, J. Urgel, P. Ruffieux, C. Pignedoli, K. Müllen, R. Fasel, A. Narita, [On‐Surface Interchain Coupling and Skeletal Rearrangement of Indenofluorene Polymers](https://doi.org/10.1002/macp.202300345), _Macromolecular Chemistry and Physics_ **224,**  (2023).
+- E. Bosoni, L. Beal, M. Bercx, P. Blaha, S. Blügel, J. Bröder, M. Callsen, S. Cottenier, A. Degomme, V. Dikan, K. Eimre, E. Flage-Larsen, M. Fornari, A. Garcia, L. Genovese, M. Giantomassi, S. Huber, H. Janssen, G. Kastlunger, M. Krack, G. Kresse, T. Kühne, K. Lejaeghere, G. Madsen, M. Marsman, N. Marzari, G. Michalicek, H. Mirhosseini, T. Müller, G. Petretto, C. Pickard, S. Poncé, G. Rignanese, O. Rubel, T. Ruh, M. Sluydts, D. Vanpoucke, S. Vijay, M. Wolloch, D. Wortmann, A. Yakutovich, J. Yu, A. Zadoks, B. Zhu, G. Pizzi, [How to verify the precision of density-functional-theory implementations via reproducible and universal workflows](https://doi.org/10.1038/s42254-023-00655-3), _Nature Reviews Physics_ **6,** 45-58 (2023).
+- P. Rüßmann, M. Bahari, S. Blügel, B. Trauzettel, [Interorbital Cooper pairing at finite energies in Rashba surface states](https://doi.org/10.1103/physrevresearch.5.043181), _Physical Review Research_ **5,** no. 043181,  (2023).
+- Q. Yang, I. Surin, J. Geiger, H. Eliasson, M. Agrachev, V. Kondratenko, A. Zanina, F. Krumeich, G. Jeschke, R. Erni, E. Kondratenko, N. López, J. Pérez-Ramírez, [Lattice-Stabilized Chromium Atoms on Ceria for N<sub>2</sub>O Synthesis](https://doi.org/10.1021/acscatal.3c04463), _ACS Catalysis_ **13,** 15977-15990 (2023).
+- P. Si, A. Jayanth, O. Andreussi, [Soft‐sphere continuum solvation models for nonaqueous solvents](https://doi.org/10.1002/jcc.27254), _Journal of Computational Chemistry_ **45,** 719-737 (2023).
+- X. Wei, A. Jalil, P. Rüßmann, Y. Ando, D. Grützmacher, S. Blügel, J. Mayer, [Atomic Diffusion-Induced Polarization and Superconductivity in Topological Insulator-Based Heterostructures](https://doi.org/10.1021/acsnano.3c08601), _ACS Nano_ **18,** 571-580 (2023).
+- G. Gebreyesus, L. Bastonero, M. Kotiuga, N. Marzari, I. Timrov, [Understanding the role of Hubbard corrections in the rhombohedral phase of BaTiO<sub>3<sub>](https://doi.org/10.1103/physrevb.108.235171), _Physical Review B_ **108,** no. 235171,  (2023).
+
+
+### Publications from 2022
+- M. Schmitt, T. Denneulin, A. Kovács, T. Saunderson, P. Rüßmann, A. Shahee, T. Scholz, A. Tavabi, M. Gradhand, P. Mavropoulos, B. Lotsch, R. Dunin-Borkowski, Y. Mokrousov, S. Blügel, M. Kläui, [Skyrmionic spin structures in layered Fe5GeTe2 up to room temperature](https://doi.org/10.1038/s42005-022-01031-w), _Communications Physics_ **5,** no. 254,  (2022).
+- L. Gigli, M. Veit, M. Kotiuga, G. Pizzi, N. Marzari, M. Ceriotti, [Thermodynamics and dielectric response of BaTiO3 by data-driven modeling](https://doi.org/10.1038/s41524-022-00845-0), _npj Computational Materials_ **8,** no. 209,  (2022).
+- V. Borisov, Q. Xu, N. Ntallis, R. Clulow, V. Shtender, J. Cedervall, M. Sahlberg, K. Wikfeldt, D. Thonig, M. Pereiro, A. Bergman, A. Delin, O. Eriksson, [Tuning skyrmions in B20 compounds by 4d and 5d doping](https://doi.org/10.1103/physrevmaterials.6.084401), _Physical Review Materials_ **6,** no. 084401,  (2022).
+- T. Hsu, T. Pham, N. Keilbart, S. Weitzner, J. Chapman, P. Xiao, S. Qiu, X. Chen, B. Wood, [Efficient and interpretable graph network representation for angle-dependent properties applied to optical spectroscopy](https://doi.org/10.1038/s41524-022-00841-4), _npj Computational Materials_ **8,** no. 151,  (2022).
+- W. Xu, K. Reuter, M. Andersen, [Predicting binding motifs of complex adsorbates using machine learning with a physics-inspired graph representation](https://doi.org/10.1038/s43588-022-00280-7), _Nature Computational Science_ **2,** 443-450 (2022).
+- S. Vijay, G. Kastlunger, K. Chan, J. Nørskov, [Limits to scaling relations between adsorption energies?](https://doi.org/10.1063/5.0096625), _The Journal of Chemical Physics_ **156,**  (2022).
+- D. Marchand, W. Curtin, [Machine learning for metallurgy IV: A neural network potential for Al-Cu-Mg and Al-Cu-Mg-Zn](https://doi.org/10.1103/physrevmaterials.6.053803), _Physical Review Materials_ **6,** no. 053803,  (2022).
+- A. Lund, G. Manohara, A. Song, K. Jablonka, C. Ireland, L. Cheah, B. Smit, S. Garcia, J. Reimer, [Characterization of Chemisorbed Species and Active Adsorption Sites in Mg–Al Mixed Metal Oxides for High-Temperature CO<sub>2</sub> Capture](https://doi.org/10.1021/acs.chemmater.1c03101), _Chemistry of Materials_ **34,** 3893-3901 (2022).
+- D. Li, B. Zhu, D. Backes, L. Veiga, T. Lee, H. Wang, Q. He, P. Roy, J. Zhang, J. Shi, A. Chen, P. van Aken, Q. Jia, S. Dhesi, D. Scanlon, K. Zhang, W. Li, [Manipulating the metal-to-insulator transition and magnetic properties in manganite thin films via epitaxial strain](https://doi.org/10.1103/physrevb.105.165426), _Physical Review B_ **105,** no. 165426,  (2022).
+- M. Betti, E. Placidi, C. Izzo, E. Blundo, A. Polimeni, M. Sbroscia, J. Avila, P. Dudin, K. Hu, Y. Ito, D. Prezzi, M. Bonacci, E. Molinari, C. Mariani, [Gap Opening in Double-Sided Highly Hydrogenated Free-Standing Graphene](https://doi.org/10.1021/acs.nanolett.2c00162), _Nano Letters_ **22,** 2971-2977 (2022).
+- H. Yang, N. Bansal, P. Rüßmann, M. Hoffmann, L. Zhang, D. Go, Q. Li, A. Haghighirad, K. Sen, S. Blügel, M. Le Tacon, Y. Mokrousov, W. Wulfhekel, [Magnetic domain walls of the van der Waals material Fe<sub>3</sub>GeTe<sub>2</sub>](https://doi.org/10.1088/2053-1583/ac5d0e), _2D Materials_ **9,** 025022 (2022).
+- P. Rüßmann, S. Blügel, [Density functional Bogoliubov-de Gennes analysis of superconducting Nb and Nb(110) surfaces](https://doi.org/10.1103/physrevb.105.125143), _Physical Review B_ **105,** no. 125143,  (2022).
+- M. Kotiuga, S. Halilov, B. Kozinsky, M. Fornari, N. Marzari, G. Pizzi, [Microscopic picture of paraelectric perovskites from structural prototypes](https://doi.org/10.1103/physrevresearch.4.l012042), _Physical Review Research_ **4,** no. L012042,  (2022).
+- M. Bonacci, M. Zanfrognini, E. Molinari, A. Ruini, M. Caldas, A. Ferretti, D. Varsano, [Excitonic effects in graphene-like C<sub>3</sub>n](https://doi.org/10.1103/physrevmaterials.6.034009), _Physical Review Materials_ **6,** no. 034009,  (2022).
+- H. Saßnick, C. Cocchi, [Exploring cesium–tellurium phase space via high-throughput calculations beyond semi-local density-functional theory](https://doi.org/10.1063/5.0082710), _The Journal of Chemical Physics_ **156,**  (2022).
+- Y. Wang, S. Kavanagh, I. Burgués-Ceballos, A. Walsh, D. Scanlon, G. Konstantatos, [Cation disorder engineering yields AgBiS2 nanocrystals with enhanced optical absorption for efficient ultrathin solar cells](https://doi.org/10.1038/s41566-021-00950-4), _Nature Photonics_ **16,** 235-241 (2022).
+- B. Zhu, D. Scanlon, [Predicting Lithium Iron Oxysulfides for Battery Cathodes](https://doi.org/10.1021/acsaem.1c03094), _ACS Applied Energy Materials_ **5,** 575-584 (2022).
+
+
+### Publications from 2021
+
+- S. Vijay, H. Kristoffersen, Y. Katayama, Y. Shao-Horn, I. Chorkendorff, B. Seger, K. Chan, [How to extract adsorption energies, adsorbate–adsorbate interaction parameters and saturation coverages from temperature programmed desorption experiments](https://doi.org/10.1039/d1cp01992a), _Physical Chemistry Chemical Physics_ **23,** 24396-24402 (2021).
+- R. Goodall, B. Zhu, J. MacManus‐Driscoll, A. Lee, [Materials Informatics Reveals Unexplored Structure Space in Cuprate Superconductors](https://doi.org/10.1002/adfm.202104696), _Advanced Functional Materials_ **31,**  (2021).
+- C. Cocchi, H. Saßnick, [Ab Initio Quantum-Mechanical Predictions of Semiconducting Photocathode Materials](https://doi.org/10.3390/mi12091002), _Micromachines_ **12,** 1002 (2021).
+- A. Jain, D. Marchand, A. Glensk, M. Ceriotti, W. Curtin, [Machine learning for metallurgy III: A neural network potential for Al-Mg-Si](https://doi.org/10.1103/physrevmaterials.5.053805), _Physical Review Materials_ **5,** no. 053805,  (2021).
+- T. Sohier, M. Gibertini, M. Verstraete, [Remote free-carrier screening to boost the mobility of Fröhlich-limited two-dimensional semiconductors](https://doi.org/10.1103/physrevmaterials.5.024004), _Physical Review Materials_ **5,** no. 024004,  (2021).
+
 
 ### Publications from 2020
 
@@ -84,4 +151,4 @@ A list of publications containing calculations powered by AiiDA, selected from t
 - G. Pizzi, M. Gibertini, E. Dib, N. Marzari, G. Iannaccone, G. Fiori, [Performance of arsenene and antimonene double-gate MOSFETs from first principles](http://doi.org/10.1038/ncomms12585), _Nature Communications_ **7** (2016).
 - M. Gibertini, G. Pizzi, N. Marzari, [Engineering polar discontinuities in honeycomb lattices](http://doi.org/10.1038/ncomms6157), _Nature Communications_ **5** (2014).
 
-Last updated: **March 2021**
+Last updated: **March 2024**
