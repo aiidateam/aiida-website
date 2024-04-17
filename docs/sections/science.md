@@ -16,8 +16,8 @@ A histogram of publications containing calculations powered by AiiDA, selected f
 If you use AiiDA in your research and your paper is not listed on this page, feel free to send us an [email](mailto:developers@aiida.net) with the DOI of your paper.
 
 
-### Publications^*^ from 2024 (up to March)
-_^*^ This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
+### Publications<sup>*</sup> from 2024 (up to March)
+_<sup>*</sup> This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
 
 - H. Saßnick, F. Machado Ferreira De Araujo, J. Edzards, C. Cocchi, [Impact of Ligand Substitution and Metal Node Exchange in the Electronic Properties of Scandium Terephthalate Frameworks](https://doi.org/10.1021/acs.inorgchem.3c03945), _Inorganic Chemistry_ **63,** 2098-2108 (2024).
 - A. Tellez-Mora, X. He, E. Bousquet, L. Wirtz, A. Romero, [Systematic determination of a material’s magnetic ground state from first principles](https://doi.org/10.1038/s41524-024-01202-z), _npj Computational Materials_ **10,** no. 20,  (2024).
@@ -25,8 +25,8 @@ _^*^ This is an incomplete list of research papers that utilise AiiDA. Extracted
 - H. Saßnick, C. Cocchi, [Automated analysis of surface facets: the example of cesium telluride](https://doi.org/10.1038/s41524-024-01224-7), _npj Computational Materials_ **10,** no. 38,  (2024).
 
 
-### Publications^*^ from 2023
-_^*^ This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
+### Publications<sup>*</sup> from 2023
+_<sup>*</sup> This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
 
 - K. Jablonka, A. Rosen, A. Krishnapriyan, B. Smit, [An Ecosystem for Digital Reticular Chemistry](https://doi.org/10.1021/acscentsci.2c01177), _ACS Central Science_ **9,** 563-581 (2023).
 - F. dos Santos, N. Marzari, [Fermi energy determination for advanced smearing techniques](https://doi.org/10.1103/physrevb.107.195122), _Physical Review B_ **107,** no. 195122,  (2023).
@@ -54,8 +54,8 @@ _^*^ This is an incomplete list of research papers that utilise AiiDA. Extracted
 - G. Gebreyesus, L. Bastonero, M. Kotiuga, N. Marzari, I. Timrov, [Understanding the role of Hubbard corrections in the rhombohedral phase of BaTiO<sub>3<sub>](https://doi.org/10.1103/physrevb.108.235171), _Physical Review B_ **108,** no. 235171,  (2023).
 
 
-### Publications^*^ from 2022
-_^*^ This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
+### Publications<sup>*</sup> from 2022
+_<sup>*</sup> This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
 
 - M. Schmitt, T. Denneulin, A. Kovács, T. Saunderson, P. Rüßmann, A. Shahee, T. Scholz, A. Tavabi, M. Gradhand, P. Mavropoulos, B. Lotsch, R. Dunin-Borkowski, Y. Mokrousov, S. Blügel, M. Kläui, [Skyrmionic spin structures in layered Fe5GeTe2 up to room temperature](https://doi.org/10.1038/s42005-022-01031-w), _Communications Physics_ **5,** no. 254,  (2022).
 - L. Gigli, M. Veit, M. Kotiuga, G. Pizzi, N. Marzari, M. Ceriotti, [Thermodynamics and dielectric response of BaTiO3 by data-driven modeling](https://doi.org/10.1038/s41524-022-00845-0), _npj Computational Materials_ **8,** no. 209,  (2022).
@@ -76,8 +76,8 @@ _^*^ This is an incomplete list of research papers that utilise AiiDA. Extracted
 - B. Zhu, D. Scanlon, [Predicting Lithium Iron Oxysulfides for Battery Cathodes](https://doi.org/10.1021/acsaem.1c03094), _ACS Applied Energy Materials_ **5,** 575-584 (2022).
 
 
-### Publications^*^ from 2021
-_^*^ This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
+### Publications<sup>*</sup> from 2021
+_<sup>*</sup> This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
 
 - S. Vijay, H. Kristoffersen, Y. Katayama, Y. Shao-Horn, I. Chorkendorff, B. Seger, K. Chan, [How to extract adsorption energies, adsorbate–adsorbate interaction parameters and saturation coverages from temperature programmed desorption experiments](https://doi.org/10.1039/d1cp01992a), _Physical Chemistry Chemical Physics_ **23,** 24396-24402 (2021).
 - R. Goodall, B. Zhu, J. MacManus‐Driscoll, A. Lee, [Materials Informatics Reveals Unexplored Structure Space in Cuprate Superconductors](https://doi.org/10.1002/adfm.202104696), _Advanced Functional Materials_ **31,**  (2021).
