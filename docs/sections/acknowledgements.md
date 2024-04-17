@@ -6,7 +6,8 @@ AiiDA development is supported or has been supported by:
 
 * - ![logo](../pics/sponsors/marvel-logo-300x150.png)
   - [NCCR MARVEL](https://nccr-marvel.ch/)\
-    *MARVEL National Centre for Competence in Research*
+    *MARVEL National Centre for Competence in Research*\
+    *funded by [SNSF](https://www.snf.ch/)*
 
 * - ![logo](../pics/sponsors/max-logo-300x150.png)
   - [MaX CoE](http://www.max-centre.eu/)\
@@ -47,5 +48,14 @@ AiiDA development is supported or has been supported by:
 * - ![logo](../pics/sponsors/bosch-logo-300x150.png)
   - [Bosch](https://www.bosch.com/research/)\
     *Bosch Research and Technology Center (USA)*
+
+* - ![logo](../pics/sponsors/premise-logo-300x150.png)
+  - [ORD-PREMISE](https://www.ord-premise.org/)\
+    *Open and Reproducible Materials Science Research*\
+    *funded by the [ETH Board](https://ethrat.ch/en/)*
+
+* - ![logo](../pics/sponsors/placeholder-logo-300x150.png)
+  - [SwissTwins](https://www.bosch.com/research/)\
+    *funded by the Swiss State Secretariat for Education, Research and Innovation (SERI)*
 
 :::
