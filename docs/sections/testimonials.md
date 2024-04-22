@@ -35,6 +35,9 @@ researcher at National Institute for Materials Science (NIMS), Japan**
 Literature references
 ---------------------
 
+**Malcolm Sim; The Dynamic Orchestration of Self-Driving Laboratories. Master's thesis, University of Toronto, 2024.** [Availabe from](https://tspace.library.utoronto.ca/bitstream/1807/138140/2/Sim_Malcolm_202403_MSc_thesis.pdf)
+> \[…\] To tackle the computational challenges and ensure reproducibility, ChemOS 2.0 embraces the integration of the AiiDA software package. AiiDA plays a critical role in automating data transfers between the user’s local environment and the high-performance supercomputing cluster. […\] Additionally, AiiDA is prepared for distributed computing, enabling efficient utilization of computational resources.
+
 **Foscato, M.; Jensen, V. R. Automated in Silico Design of Homogeneous Catalysts. ACS Catal. 2020, 10 (3), 2354–2377.** [10.1021/acscatal.9b04952](https://doi.org/10.1021/acscatal.9b04952)
 
 > \[…\] Such reuse and repurposing may be realized by making sure that workflow managers such as AiiDA, QMflows, AFlow, Signac, and FireWorks prepare job summaries in standardized data formats used by the community repositories. The most detailed management control is currently offered by AiiDA which keeps track of the complete history, including information on methods, input parameters, computer, postprocessing tools, and dependencies, leading to a computational result, thereby mapping the complete data provenance necessary to ensure reproducibility and repurposing. \[…\]
