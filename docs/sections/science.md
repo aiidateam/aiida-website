@@ -19,6 +19,7 @@ If you use AiiDA in your research and your paper is not listed on this page, fee
 ### Publications<sup>*</sup> from 2024 (up to March)
 _<sup>*</sup> This is an incomplete list of research papers that utilise AiiDA. Extracted manually from all citations of just these two articles ([Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086))_
 
+- Y. Wang, Y. Li, Z. Tang, H. Li, Z. Yuan, H. Tao, N. Zou, T. Bao, X. Liang, Z. Chen, S. Xu, C. Bian, Z. Xu, C. Wang, C. Si, W. Duan, Y. Xu, [Universal materials model of deep-learning density functional theory Hamiltonian](https://doi.org/10.1016/j.scib.2024.06.011), _Science Bulletin_,  *pre-proofs*  (2024).
 - H. Saßnick, F. Machado Ferreira De Araujo, J. Edzards, C. Cocchi, [Impact of Ligand Substitution and Metal Node Exchange in the Electronic Properties of Scandium Terephthalate Frameworks](https://doi.org/10.1021/acs.inorgchem.3c03945), _Inorganic Chemistry_ **63,** 2098-2108 (2024).
 - A. Tellez-Mora, X. He, E. Bousquet, L. Wirtz, A. Romero, [Systematic determination of a material’s magnetic ground state from first principles](https://doi.org/10.1038/s41524-024-01202-z), _npj Computational Materials_ **10,** no. 20,  (2024).
 - D. Grassano, N. Marzari, D. Campi, [High-throughput screening of Weyl semimetals](https://doi.org/10.1103/physrevmaterials.8.024201), _Physical Review Materials_ **8,** no. 024201,  (2024).
