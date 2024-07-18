@@ -1,6 +1,6 @@
 import sys
 from datetime import date
-from os import path
+from os import path, environ
 
 project = "AiiDA"
 author = "The AiiDA team."
@@ -86,6 +86,18 @@ html_context = {
     "github_version": "main",
     "doc_path": "docs/",
 }
+
+# handling deprecation of Sphinx context injection at build time
+# see https://github.com/pydata/xarray/issues/9251
+
+# Set canonical URL from the Read the Docs Domain
+html_baseurl = environ.get("READTHEDOCS_CANONICAL_URL", "")
+
+# Tell Jinja2 templates the build is running on Read the Docs
+if environ.get("READTHEDOCS", "") == "True":
+    html_context["READTHEDOCS"] = True
+
+# end deprecation handling
 
 html_sidebars = {
     "index": [],
