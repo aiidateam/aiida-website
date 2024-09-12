@@ -148,6 +148,8 @@ linkcheck_ignore = [
     r"https://aip.scitation.org/doi/.*",
     r"https://pubs.acs.org/doi/.*",
     r"https://www.sciencedirect.com/science/.*",
+    r"http://dx.doi.org/10.5075/epfl-thesis-7179",  # EPFL blocks repeating requests
+    r"http://qe2019.ijs.si/index.html",  # event page does not exist anymore
 ]
 
 aiida_ignore_event_checks = [
