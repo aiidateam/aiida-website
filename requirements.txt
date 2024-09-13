@@ -6,3 +6,4 @@ sphinx-design~=0.6.1
 sphinx_subfigure~=0.2.4
 sphinx-notfound-page~=1.0.4
 sphinx-timeline~=0.2.1
+sphinx_favicon~=1.0.1
