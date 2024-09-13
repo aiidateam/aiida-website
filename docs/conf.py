@@ -69,7 +69,7 @@ html_theme_options = {
         "theme-switcher",
         "navbar-icon-links",
     ],
-    "footer_items": ["copyright"],
+    "footer_start": ["copyright"],
     "use_edit_page_button": True,
     "search_bar_text": "Search ...",
 }
