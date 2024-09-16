@@ -108,13 +108,13 @@ Upon execution, you will be asked for the remaining options interactively:
 Lastly, please note that the previous commands `verdi setup` and `verdi quicksetup` still work for now, but deprecation
 warnings will be issued as we eventually plan to remove them.
 
-**Have fun getting your feet wet! :rocket:**
+**Have fun getting your feet wet! 🚀**
 
 ---
 
 **Relevant PRs**
 
-For the more tech-savy among us, here are the most relevant PRs with the changes outlined in this blog post:
+For the more tech-savvy among us, here are the most relevant PRs with the changes outlined in this blog post:
 
 - [[#6023]](https://github.com/aiidateam/aiida-core/pull/6023) Add `verdi profile setup`
 - [[#6148]](https://github.com/aiidateam/aiida-core/pull/6148) Add the `SqliteDosStorage` storage backend
@@ -123,9 +123,10 @@ For the more tech-savy among us, here are the most relevant PRs with the changes
 **Footnotes**
 
 [^1]:
-    It should be kept in mind, however, that these two changes come at the cost of lower performance, and should not
-    be used in production. Rather, they are mainly intended for new users to get a running AiiDA instance quickly and be able
-    to play around with the tool. The absence of the broker and daemon does not allow *submitting* of jobs, but only
+    It should be kept in mind, however, that these two changes come at the cost of lower performance, and should, at
+    least for now, not be used in production (we are currently working on reducing possible limitations as much as
+    possible). Rather, they are mainly intended for new users to get a running AiiDA instance quickly and be able to
+    play around with the tool. The absence of the broker and daemon does not allow *submitting* of jobs, but only
     *running* them in a blocking manner (remote execution, e.g. on HPC resources, is still possible, though), and SQLite
     can handle concurrent writes to the database worse than PSQL.
 
