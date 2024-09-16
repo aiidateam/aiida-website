@@ -32,7 +32,7 @@ verdi presto
 
 It only takes 20 seconds, really:
 
-![From zero to AiiDA profile in <20 seconds](./_static/verdi-presto.gif)
+![From zero to AiiDA profile in <20 seconds](./_gifs/verdi-presto.gif)
 
 As you can see in the video above, on running `verdi presto`, you are greeted with:
 
@@ -84,7 +84,7 @@ verdi profile configure-rabbitmq
 
 You can see the full process right here:
 
-![Upgrade profile with RMQ down the road](./_static/configure-rabbitmq.gif)
+![Upgrade profile with RMQ down the road](./_gifs/configure-rabbitmq.gif)
 
 ## New way to manually create a profile
 
@@ -105,7 +105,7 @@ verdi profile setup core.sqlite_dos --profile-name aiida_rocks --email aiida_roc
 
 Upon execution, you will be asked for the remaining options interactively:
 
-![Create a profile with `verdi profile setup`](./_static/verdi-profile-setup.gif)
+![Create a profile with `verdi profile setup`](./_gifs/verdi-profile-setup.gif)
 
 Lastly, please note that the previous commands `verdi setup` and `verdi quicksetup` still work for now, but deprecation
 warnings will be issued as we eventually plan to remove them.
