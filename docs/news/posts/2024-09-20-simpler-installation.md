@@ -30,7 +30,7 @@ verdi presto
 
 It only takes 20 seconds, really:
 
-![From zero to AiiDA profile in <20 seconds](./_gifs/verdi-presto.gif)
+![From zero to AiiDA profile in <20 seconds](./_gifs/verdi-presto-10fps-1080p.gif)
 
 As you can see in the video above, on running `verdi presto`, you are greeted with:
 
