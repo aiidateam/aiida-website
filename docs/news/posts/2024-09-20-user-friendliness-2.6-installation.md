@@ -5,8 +5,6 @@ tags: usability
 date: 2024-09-20
 ---
 
-[TOC]
-
 # Simplifications to the installation of AiiDA since v2.0
 
 Dear users,
