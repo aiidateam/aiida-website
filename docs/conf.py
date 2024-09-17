@@ -146,9 +146,6 @@ linkcheck_ignore = [
     r"http://dx.doi.org/10.5075/epfl-thesis-7179",  # EPFL blocks repeating requests
     r"http://qe2019.ijs.si/index.html",  # event page does not exist anymore
 ]
-linkcheck_anchors_ignore_for_url = [
-    r"https://github\.com/aiidateam/aiida-core/blob/v2\.6\.0/CHANGELOG.md/.*",  # linkcheck cannot figure out the anchor but it works
-]
 
 aiida_ignore_event_checks = [
     "news/posts/2015-11-09-aiida-tutorial-in-november",
