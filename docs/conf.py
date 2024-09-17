@@ -17,6 +17,7 @@ extensions = [
     "legacy_redirects",
     "check_events",
     "selective_css",
+    "sphinx_favicon",
 ]
 
 # see https://myst-parser.readthedocs.io
@@ -29,6 +30,12 @@ html_css_files = ["custom.css"]
 templates_path = ["_templates"]
 html_show_sourcelink = False
 
+# sphinx_favicon
+favicons = [
+    "favicon-16x16.png",
+    "favicon-32x32.png",
+]
+
 # see https://pydata-sphinx-theme.readthedocs.io
 html_theme_options = {
     # "announcement": "Welcome to the new AiiDA site!",
@@ -36,18 +43,6 @@ html_theme_options = {
         "image_light": "logo-light.svg",
         "image_dark": "logo-dark.svg",
     },
-    "favicons": [
-        {
-            "rel": "icon",
-            "sizes": "16x16",
-            "href": "favicon-16x16.png",
-        },
-        {
-            "rel": "icon",
-            "sizes": "32x32",
-            "href": "favicon-32x32.png",
-        },
-    ],
     "icon_links": [
         {
             "name": "Discourse",
@@ -74,7 +69,7 @@ html_theme_options = {
         "theme-switcher",
         "navbar-icon-links",
     ],
-    "footer_items": ["copyright"],
+    "footer_start": ["copyright"],
     "use_edit_page_button": True,
     "search_bar_text": "Search ...",
 }
