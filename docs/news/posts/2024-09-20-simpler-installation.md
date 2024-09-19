@@ -59,8 +59,8 @@ And after successfull profile creation, `verdi status` returns something like:
 the `--use-postgres` flag.
 
 In addition, the command works without RMQ, creating a profile without a
-[broker](https://aiida.readthedocs.io/projects/aiida-core/en/latest/topics/processes/usage.html#manipulating-processes)
-and [daemon](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/daemon.html#daemon). If, instead, RMQ was
+[broker](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/topics/processes/usage.html#manipulating-processes)
+and [daemon](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/topics/daemon.html#daemon). If, instead, RMQ was
 already available on the system[^2], it is automatically set up for your AiiDA profile, and the output of `verdi presto`
 will be slightly different.
 
