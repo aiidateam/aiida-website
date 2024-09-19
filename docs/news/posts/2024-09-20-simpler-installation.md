@@ -44,13 +44,13 @@ Success: Created new profile `presto`.
 Success: Configured the localhost as a computer.
 ```
 
-And after successfull profile creation, `verdi status` returns:
+And after successfull profile creation, `verdi status` returns something like:
 
 ```shell
  ✔ version:     AiiDA v2.6.2
- ✔ config:      /home/aiidateam/aiida_projects/aiida-website/.aiida
+ ✔ config:      /home/geiger_j/aiida_projects/aiida-website/.aiida
  ✔ profile:     presto
- ✔ storage:     SqliteDosStorage[/home/aiidateam/aiida_projects/aiida-website/.aiida/repository/sqlite_dos_d2a4e83ea09141678de8ea4b2250fc69]: open,
+ ✔ storage:     SqliteDosStorage[/home/geiger_j/aiida_projects/aiida-website/.aiida/repository/sqlite_dos_d2a4e83ea09141678de8ea4b2250fc69]: open,
  ⏺ broker:      No broker defined for this profile: certain functionality not available.
  ⏺ daemon:      No broker defined for this profile: daemon is not available.
 ```
