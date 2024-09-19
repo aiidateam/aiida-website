@@ -1,6 +1,6 @@
 ---
 blogpost: true
-category: Releases
+category: Blog
 tags: usability
 date: 2024-09-20
 ---
@@ -30,7 +30,7 @@ verdi presto
 
 It only takes 20 seconds, really:
 
-![From zero to AiiDA profile in <20 seconds](./_gifs/verdi-presto-10fps-1080p.gif)
+![From zero to AiiDA profile in <20 seconds](./_gifs/verdi-presto-white-10fps-1080p.gif)
 
 As you can see in the video above, on running `verdi presto`, you are greeted with:
 
