@@ -7,11 +7,9 @@ date: 2024-09-20
 
 # Simplifications to the installation of AiiDA since v2.0
 
-Dear users,
-
-As we are always working hard to improve your experience with AiiDA, we would like to share with you some of the new
-features aimed at user friendliness since the last major release v2.0. In this blog post, we will cover improvements to
-the installation, so let's get started, shall we?
+Dear users, as we are always working hard to improve your experience with AiiDA, we would like to share with you some of
+the new features aimed at user friendliness since the last major release v2.0. In this blog post, we will cover
+improvements to the installation, so let's get started, shall we?
 
 ## Service-less AiiDA
 
