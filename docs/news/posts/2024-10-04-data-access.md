@@ -19,11 +19,10 @@ As you might be aware, AiiDA uses an SQL
 [database](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/topics/storage.html), as well as an internal [file
 repository](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/repository.html#repository) [^1] to store
 your data locally [^2].
-Both are optimized towards high performance and the difference between the typical file-system approach most of us are
-familiar with, and AiiDA's machine-readable internal data storage can make it difficult to get your data out of it in an
-easily accessible way.
+Both are optimized towards high performance. The difference between the typical file-system approach (that most of us are
+familiar with) and AiiDA's machine-readable internal data storage could make it cumbersome to get your data.
 
-Therefore, you, the user, is effectively forced to use the `verdi` CLI interface or AiiDA's Python API (e.g. the `QueryBuilder`) to access your data, making
+Therefore, you, the user, are effectively forced to use the `verdi` CLI interface or AiiDA's Python API (e.g. the `QueryBuilder`) to access your data, making
 the transition towards AiiDA more challenging. Thus, to ease this transition, we have added functionality to dump AiiDA
 `Process`es to disk in an intuitive directory structure via:
 
@@ -40,7 +39,7 @@ And for a more complex `PwBandsWorkChain` [^3]:
 
 ![PwBandsWorkChain dump](./_gifs/workflow-dump-white-10fps-2160p.gif)
 
-As you can see, the command works for both, individual calculations, as well as nested workflows [^4], resulting in
+As you can see, the command works both for individual calculations and for nested workflows [^4], resulting in
 the following output directories:
 
 **`tree` on a dumped example `CalcJob`**
@@ -93,7 +92,7 @@ dump-PwBandsWorkChain-70
 ```
 
 Therefore, after running the command once, you'll have all data involved in the execution of your workflow directly
-accessible, and can explore it with the Unix command line utilities we all know and love [^5].
+accessible, and can explore it as a standard folder [^5].
 
 So happy grepping!
 
