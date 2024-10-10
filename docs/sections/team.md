@@ -16,22 +16,18 @@ Besides the AiiDA team at EPFL listed below, we thank our [numerous external cod
 * - ![Portrait](../pics/team/simon.jpg)
   - **Simon Adorf**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/simon.adorf)
 
 * - ![Portrait](../pics/team/marnik.jpg)
   - **Marnik Bercx**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/marnik.bercx)
 
 * - ![Portrait](../pics/team/dossantos.jpg)
   - **Flaviano Dos Santos**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/flaviano.dossantos)
 
 * - ![Portrait](../pics/team/huber.png)
   - **Sebastiaan P. Huber**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/sebastiaan.huber)
 
 * - ![Portrait](../pics/team/boris.png)
   - **Boris Kozinsky**\
@@ -51,22 +47,18 @@ Director, National Centre for Competence in Research NCCR MARVEL, EPFL*\
 * - ![Portrait](../pics/team/Ramirez.jpg)
   - **Francisco F. Ramirez**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/francisco.ramirez)
 
 * - ![Portrait](../pics/team/talirz.jpg)
   - **Leopold Talirz**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/leopold.talirz)
 
 * - ![Portrait](../pics/team/Yakutovich.jpg)
   - **Aliaksandr Yakutovich**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/aliaksandr.yakutovich)
 
 * - ![Portrait](../pics/team/JusongYu.jpg)
   - **Jusong Yu**\
     *PostDoc Research Scientist, Theory and Simulation of Materials, EPFL*\
-    [epfl.ch](https://people.epfl.ch/jusong.yu)
 
 :::
 

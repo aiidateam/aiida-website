@@ -42,7 +42,7 @@ See the [Transferring data how-to](https://aiida.readthedocs.io/projects/aiida-
 
 The way the global/profile configuration is accessed has undergone a number of improvements:
 
-* When loaded, the `config.json` (found in the `.aiida` folder) is now validated against a JSON Schema that can be found in [aiida/manage/configuration/schema](https://github.com/aiidateam/aiida-core/tree/develop/aiida/manage/configuration/schema).
+* When loaded, the `config.json` (found in the `.aiida` folder) is now validated against a JSON Schema that can be found in [aiida/manage/configuration/schema](https://github.com/aiidateam/aiida-core/tree/v1.6.0/aiida/manage/configuration/schema).
 * The schema includes a number of new global/profile options, including: `transport.task_retry_initial_interval`, `transport.task_maximum_attempts`, `rmq.task_timeout` and `logging.aiopika_loglevel`.
 * The `cache_config.yml` has now also been **deprecated** and merged into the `config.json`, as part of the profile options. This merge will be handled automatically, upon first load of the `config.json` using the new AiiDA version.
 

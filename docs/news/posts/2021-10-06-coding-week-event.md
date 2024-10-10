@@ -178,7 +178,7 @@ We are very grateful to our sponsors for helping to make this event possible:
 - [EPFL](http://epfl.ch) for for providing administrative support
 - The [MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/) “OSP” for funding
 - The [MaX European Centre of Excellence](http://www.max-centre.eu/) for funding
-- The [swissuniversities P-5 project](https://www.swissuniversities.ch/en/organisation/projects-and-programmes/) “Materials Cloud” and [Empa](https://www.empa.ch/) for funding
+- The [swissuniversities P-5 project](https://www.swissuniversities.ch/en/topics/digitalisation/p-5-scientific-information) “Materials Cloud” and [Empa](https://www.empa.ch/) for funding
 - The [MarketPlace](https://www.the-marketplace-project.eu/) project for funding
 - The [DOME](https://dome40.eu/) project for funding
 - The [Open-Model project](https://www.open-model.eu/) funding

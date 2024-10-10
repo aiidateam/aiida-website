@@ -13,6 +13,7 @@ CATS = {
     "event": "Events",
     "report": "Reports",
     "release": "Releases",
+    "blog": "Blog",
 }
 
 
