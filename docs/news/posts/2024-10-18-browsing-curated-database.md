@@ -33,7 +33,7 @@ This can be easily done by running the following commands in your AiiDA environm
 
 ## Finding band gap nodes
 
-As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. it's universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how it is organized relative to the structure node, which will help us write the complete AiiDA query. 
+As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. it's universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how it is organized relative to the structure node, which will help us write the complete AiiDA query.
 
 ### Using supplementary metadata
 
@@ -44,9 +44,9 @@ Often, when AiiDA databases are published, authors provide a supplementary metad
     {
         ...
         "relaxed_2D_structure_uuid": "ba8bbdd9-defc-4292-af7d-ed3eb73f778e",
-        "formula_reduced": "AgBr", 
-        "band_gap": 1.3, 
-        "bands_uuid": "7fbb633d-a224-46b7-84b1-74a3ceca81e0", 
+        "formula_reduced": "AgBr",
+        "band_gap": 1.3,
+        "bands_uuid": "7fbb633d-a224-46b7-84b1-74a3ceca81e0",
         ...
     },
     ...
