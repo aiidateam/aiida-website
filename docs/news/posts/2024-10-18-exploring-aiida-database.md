@@ -337,5 +337,3 @@ Similarly, you can click on the Explore button next to the band structure plot t
 We invite you to browse the Discover and Explore sections for this database on you own, to get an idea of the features offered by the Materials Cloud interface.
 
 Thank you for reading this blog post and have fun exploring AiiDA!
-
-
