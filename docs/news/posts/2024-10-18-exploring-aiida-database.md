@@ -6,38 +6,49 @@ author: Giovanni Pizzi, Francisco Ramirez, Kristjan Eimre
 date: 2024-10-18
 ---
 
-NOTE: update all _CHANGE_ entries when the new archive entry is online!
 
-# Browsing a curated AiiDA database
+# Exploring an AiiDA Database You Didn't Create
 
-A common source of problems for new users of AiiDA often arises when they receive an exported database (archive) and want to get an idea of its content but don't know how.
+A common source of problems for new users of AiiDA often arises when they receive an exported AiiDA database (i.e. an AiiDA archive) and want to get an idea of its content but don't know how. In this blog post, we illustrate on how to do this for an AiiDA database that is published on the Materials Cloud Archive, titled  ["Two-dimensional materials from high-throughput computational exfoliation of experimentally known compounds"](https://archive.materialscloud.org/record/2024.157).
+The description of this database mentions that it contains a set of two dimensional materials, and for a subset of them, various properties are calculated, including the electronic band structures (and also the corresponding band gaps).
 
-In this blog post we will use the database from ["Two-dimensional materials from high-throughput computational exfoliation of experimentally known compounds"](_CHANGE_).
-The description of the database mentions that it contains a set of two dimensional materials, and for a subset of them, various properties are calculated, including the electronic band structures (and also the corresponding band gaps).
-
-To demonstrate how to start from an unknown database, understand its layout, and query for a particular property, we set a goal for the blog post to filter the materials based on their band gaps and create a corresponding table.
-This will give you guidance on how to apply and extend queries for your own needs.
+To demonstrate how to start from an unfamiliar database, understand its layout, and query for a particular property, we set a goal for this blog post to filter the materials contained in the AiiDA database based on their band gaps and create a corresponding table.
+This will hopefully give you guidance on how to apply and extend queries for your own needs.
 
 Note that while this is a curated database, meaning that it has supplementary metadata provided to help understand it, most of this blog post also applies to uncurated AiiDA archives.
 
 ## Setup
 
-This analysis can be run with AiiDA v2+. If it is not installed, the easiest option is to use [Quantum Mobile 24.04.0](https://quantum-mobile.readthedocs.io/en/latest/releases/versions/24.04.0.html) virtual machine, which was used for this blog post.
-You will also need to download and import the AiiDA archive `two_dimensional_database.aiida` from [the corresponding Materials Cloud Archive entry](_CHANGE_).
-This can be easily done by running the following commands in your AiiDA environment:
+This analysis can be run with AiiDA v2+. One possibility to quickly get started is to use the [Quantum Mobile](https://quantum-mobile.readthedocs.io/) virtual machine. Currently the latest version is 24.04.0, which has `aiida-core` v2.4.3 available.
+
+You will also need to download the AiiDA archive `two_dimensional_database.aiida` from [the corresponding Materials Cloud Archive entry](https://archive.materialscloud.org/record/2024.157), which can also be done via wget:
 
 ```bash
-(aiida) max@qmobile:~$ wget _CHANGE_
-(aiida) max@qmobile:~$ verdi archive import two_dimensional_database.aiida
+$ wget 'https://archive.materialscloud.org/record/file?record_id=2396&filename=two_dimensional_database.aiida' -O two_dimensional_database.aiida
 ```
+
+Next, we need to make the archive data available for the AiiDA environment, and there are two possibilities for this. The first and traditional way is to [set up an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/stable/installation/guide_complete.html#create-a-profile) and import the archive data with
+
+```bash
+$ verdi archive import two_dimensional_database.aiida
+```
+
+The other way is to set up a read-only profile directly from an archive file, which is more suitable for our current use case, as we just want to investigate and analyze the contents without modifying or extending the data. In this case, we can use (Note: this was introduced in AiiDA v2.5.0 and thus is not available in the current Quantum Mobile):
+
+```bash
+$ verdi profile setup core.sqlite_zip --filepath two_dimensional_database.aiida
+```
+
+It's also important to note that this profile is running on the `core.sqlite_zip` storage backend, that can have [some limitations for some queries](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/storage.html), but these don't affect the analysis of this blog post.
+
 
 ## Finding band gap nodes
 
-As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. it's universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how it is organized relative to the structure node, which will help us write the complete AiiDA query.
+As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. its universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how it is organized relative to the structure node, which will help us write the AiiDA query to collect and filter based on all band gap values for all materials.
 
 ### Using supplementary metadata
 
-Often, when AiiDA databases are published, authors provide a supplementary metadata file to help users understand how data is internally linked together. For this current dataset, this is the case, as the authors have provided `structures.json` (inside the tar `2D_materials.tar.gz` from the [published entry](_CHANGE_)), which contains a list of all the computationally investigated structures, together with AiiDA UUID values for corresponding calculated properties. Here's an excerpt from that file:
+When AiiDA databases are published, it is recommended that authors provide a supplementary metadata file to help users understand how data is internally linked together. For this current dataset, this is the case, as the authors have provided `structures.json` (inside the tar `2D_materials.tar.gz` from the [published entry](https://archive.materialscloud.org/record/2024.157)), which contains a list of all the computationally investigated structures, together with AiiDA UUID values for corresponding calculated properties. Here's an excerpt from that file:
 
 ```json
 [
@@ -52,27 +63,16 @@ Often, when AiiDA databases are published, authors provide a supplementary metad
     // ...
 ]
 ```
-where we can see for the silver bromide (AgBr) the AiiDA UUIDs for the relaxed structure itself and the bands property that we want to analyse (the band gap node is a close descendent of this node). This piece of information is already enough to continue to the next section, but let's also investigate alternative ways to get this information.
-
-### Materials Cloud discover section
-
-Arguably, we're even luckier if there is a web app available that allows to explore the AiiDA data in a curated manner. This is the case for this AiiDA database, as [Materials Cloud](https://www.materialscloud.org/) hosts a corresponding [Discover section](https://www.materialscloud.org/discover/mc2d/).
-In the web interface, one can find materials, get access to their available calculated properties, as well to information on the provenance of such properties. Note, however, that the Discover section contains data from other AiiDA databases as well, so for exploring this specific AiiDA database, one would need to find a material that originates from it.
-
-In this story, we are interested in the band gap of a material. Let's access the details page of a material from our AiiDA database, silver bromide (AgBr). You can then use the Explore button (the little AiiDA icon) next to the text `Band gap [eV]: 1.3` to go to the corresponding [actual AiiDA node](https://www.materialscloud.org/explore/mc2d/details/89315c33-2f9b-41ab-b7d4-22aff0ae75f4) in the web AiiDA provenance explorer.
-Similarly, you can click on the Explore button next to the band structure plot to inspect the `BandsData` node, and so on.
-We invite you to browse the Discover and Explore sections for this database on you own, to get an idea of the features offered by the Materials Cloud interface.
-
-For our purposes, now we will just take note of the UUID of the `Dict` node containing the value of the band gap (`89315c33-2f9b-41ab-b7d4-22aff0ae75f4`) and we will see together how to check all information in the local database that you have imported earlier.
+where we can see for the silver bromide (AgBr) the AiiDA UUIDs for the relaxed structure itself and the bands property that we want to analyse (the band gap node is a close descendent of this node). This information is enough to continue to the next section, but let's also explore alternative ways to obtain it.
 
 ### Direct investigation of the AiiDA archive
 
-If there is no supplementary metadata file nor a convenient web app available, one can also directly investigate the data layout.
+If there is no supplementary metadata file nor a web app available, one can also directly investigate the data layout.
 
 First, check the AiiDA groups:
 
 ```bash
-(aiida) max@qmobile:~$ verdi group list --all-users
+$ verdi group list --all-users
   PK  Label                                   Type string    User
 ----  --------------------------------------  -------------  -----------------------
   11  two_dimensional_database_2D_bandgaps    core           aiida@theossrv5.epfl.ch
@@ -84,7 +84,7 @@ First, check the AiiDA groups:
 We see we have a group containing the band gap nodes. To see these, let's first start the interactive AiiDA shell:
 
 ```bash
-(aiida) max@qmobile:~$ verdi shell
+$ verdi shell
 ```
 
 and then load the first band gap node from the group (and note the UUID):
@@ -105,7 +105,7 @@ Now that we have identified a band gap (or a band structure) node, let's see the
 Let's open the AiiDA interactive shell:
 
 ```bash
-(aiida) max@qmobile:~$ verdi shell
+$ verdi shell
 ```
 
 We start by performing some browsing using the AiiDA API to explore the properties and connections of the selected node.
@@ -113,16 +113,16 @@ We start by performing some browsing using the AiiDA API to explore the properti
 1. Load the node by using its UUID (note that the integer identifiers, called PKs, will most probably be different in your DB, but the UUIDs will always be the same):
 
     ```python
-    In [1]: bandgap_node = load_node('89315c33-2f9b-41ab-b7d4-22aff0ae75f4')
+    In [1]: bandgap_node = load_node('138d1979-4aca-4a23-af18-38c707707585')
     In [2]: bandgap_node
-    Out[2]: <Dict: uuid: 89315c33-2f9b-41ab-b7d4-22aff0ae75f4 (pk: 4700)>
+    Out[2]: <Dict: uuid: 138d1979-4aca-4a23-af18-38c707707585 (pk: 692)>
     ```
 
-2. One can check the attributes and discover that the band gap is in eV and is stored in the attribute named `band_gap` (knowing that the parser always returns eV, we are not going to use the units in the following, but one could generalise the query later if necessary).
+2. One can check the attributes and discover that the band gap is in eV and is stored in the attribute named `band_gap` (knowing that the parser always returns eV, we are not going to use the units in the following, but one could generalise the query later if necessary). Note that the current node corresponds to a metal and we also see how this is represented.
 
     ```python
     In [3]: bandgap_node.attributes
-    Out[3]: {'band_gap': 1.25790023795923, 'band_gap_units': 'eV', 'is_insulator': True}
+    Out[3]: {'is_insulator': False, 'band_gap': None, 'band_gap_units': 'eV'}
     ```
 
 3. We start inspecting the provenance using the `.creator` method to get the calculation that generated the `Dict` data node:
@@ -130,7 +130,7 @@ We start by performing some browsing using the AiiDA API to explore the properti
     ```python
     In [4]: calculation_node = bandgap_node.creator
     In [5]: calculation_node
-    Out[5]: <CalcFunctionNode: uuid: 43b7e596-130c-4733-b3dd-13b264b845a0 (pk: 4422)>
+    Out[5]: <CalcFunctionNode: uuid: a2b360b9-4151-4917-b20d-6cde95ae5548 (pk: 45604)>
     ```
 
 
@@ -139,7 +139,7 @@ We start by performing some browsing using the AiiDA API to explore the properti
     ```python
     In [6]: bands_node = calculation_node.inputs.bands
     In [7]: bands_node
-    Out[7]: <BandsData: uuid: 7fbb633d-a224-46b7-84b1-74a3ceca81e0 (pk: 105567)>
+    Out[7]: <BandsData: uuid: 1b786a7c-639d-4fe4-a6e1-d0ac5b71bd39 (pk: 2829)>
     ```
 
 5. In the same way we did before, we can now check the calculation that created this `BandsData` node (i.e., the band structure), to discover that it was a Quantum ESPRESSO run:
@@ -147,14 +147,14 @@ We start by performing some browsing using the AiiDA API to explore the properti
     ```python
     In [8]: qecalc_node = bands_node.creator
     In [9]: qecalc_node
-    Out[9]: <CalcJobNode: uuid: 2a304b31-5a60-4884-bfe7-3c0b1d2c67fc (pk: 7327) (aiida.calculations:quantumespresso.pw)>
+    Out[9]: <CalcJobNode: uuid: c40cd8e3-638b-404e-b902-4377af810276 (pk: 18737) (aiida.calculations:quantumespresso.pw)>
     ```
 
 6. Finally, we can check another input one level up to find the original crystal structure:
 
     ```python
     In [10]: qecalc_node.inputs.structure
-    Out[10]: <StructureData: uuid: ba8bbdd9-defc-4292-af7d-ed3eb73f778e (pk: 1925)>
+    Out[10]: <StructureData: uuid: 9e65c339-2428-4fb1-8d75-a54da9f87879 (pk: 43956)>
     ```
 
     Note that we don't really need all of the intermediate node variables.
@@ -162,7 +162,7 @@ We start by performing some browsing using the AiiDA API to explore the properti
 
     ```python
     In [11]: bandgap_node.creator.inputs.bands.creator.inputs.structure
-    Out[11]: <StructureData: uuid: ba8bbdd9-defc-4292-af7d-ed3eb73f778e (pk: 53436)>
+    Out[11]: <StructureData: uuid: 9e65c339-2428-4fb1-8d75-a54da9f87879 (pk: 43956)>
     ```
 
     The advantage of the long string above is that after every dot you can use tab completion, and therefore (once you get used to it) it becomes very quick to browse advanced provenance graphs in the verdi shell.
@@ -172,7 +172,7 @@ We start by performing some browsing using the AiiDA API to explore the properti
 
     ```python
     In [12]: bandgap_node.creator.attributes.keys()
-    Out[12]: dict_keys(['function_name', 'sealed', 'first_line_source_code', 'namespace', 'source_code', 'source_file'])
+    Out[12]: dict_keys(['first_line_source_code', 'source_code', 'source_file', 'function_name', 'sealed'])
     In [13]: bandgap_node.creator.attributes['function_name']
     Out[13]: 'get_bandgap_inline'
     ```
@@ -182,16 +182,16 @@ We start by performing some browsing using the AiiDA API to explore the properti
 Now, after all these steps, we have a better understanding of the the structure of the data.
 Another useful tool to get a good idea of the connectivity is the graph generator.
 One can use `verdi node graph generate` to visualize the provenance surrounding a node.
-Limiting it to four levels up (ancestors) will be enough for this case; we will also avoid to show any descendants, since we are not interested here in calculations that used the data node as an input.
+Limiting it to four levels up (ancestors) will be enough for this case; we will also avoid showing any descendants, since we are not interested here in calculations that used the data node as an input.
 Note that this command has to be executed outside of the verdi shell.
 
 ```bash
-(aiida) max@qmobile:~$ verdi node graph generate --process-in --process-out --ancestor-depth=4 --descendant-depth=0 89315c33-2f9b-41ab-b7d4-22aff0ae75f4
+$ verdi node graph generate --process-in --process-out --ancestor-depth=4 --descendant-depth=0 138d1979-4aca-4a23-af18-38c707707585
 ```
 
 The result should look something like this:
 
-![provenance](../pics/2023-curated-database-provenance.png)
+![provenance](../pics/2024-exploring-aiida-database.png)
 
 ## Systematic querying of the database
 
@@ -243,8 +243,13 @@ for band_gap, structure in qb.all():
     print("Band gap for {}: {:.3f} eV".format(structure.get_formula(), band_gap))
 ```
 
-With these few lines of code (essentially 8, removing the comments, the indentation, and the import line) one is able to perform a query that will return all the structures (and band gaps) that are below a 0.5 eV threshold.
-You can now execute the script by running `verdi run <script_name>`.
+With these few lines of code (essentially 8, removing the comments, the indentation, and the import line) one is able to perform a query that will return all the structures (and band gaps) that are below a 0.5 eV threshold, but still with a finite gap (remeber, for metals, the current database sets `'band_gap': None`, as we saw above).
+You can now execute the script by running
+
+```bash
+$ verdi run <script_name>
+```
+
 Here is the output you should obtain if you only have the 2D materials database in your profile.
 
 ```bash
@@ -308,7 +313,7 @@ Here a couple of examples:
 
 ## Behind the scenes
 
-As a final comment, we strongly suggest using the QueryBuilder rather than going directly into the SQL database, even if you know SQL.
+As an extra comment, we strongly suggest using the QueryBuilder rather than going directly into the SQL database, even if you know SQL.
 We have spent significant efforts in making the QueryBuilder interface easy to use, and taking care ourselves of converting this into the corresponding SQL.
 Just for reference, if you do `print(qb.as_sql())` you get the corresponding SQL statement for the query above, that should translate to the following not-so-short string:
 
@@ -320,4 +325,17 @@ WHERE CAST(db_dbnode_5.node_type AS VARCHAR) LIKE 'process.calculation.%%' AND C
 
 So unless you feel ready to tackle this, we suggest that you stick with the simpler QueryBuilder interface!
 
-Have fun with AiiDA!
+
+## Materials Cloud discover section
+
+We mentioned at the start of the post that this is a curated AiiDA database and discussed how it has an author-provided metadata file in JSON format available. However, that is not the only supplementary metadata for this AiiDA database. For a selection of AiiDA studies, the [Materials Cloud](https://www.materialscloud.org/) hosts Discover sections - curated web interfaces to browse the AiiDA data in an accessible manner. This current AiiDA database that this blog explores, contributes to the [Materials Cloud 2D crystals Discover section](https://www.materialscloud.org/discover/mc2d/).
+In this web interface, one can find materials, get access to their available calculated properties, as well to information on the provenance of such properties. Note, however, that the Discover section contains data from other AiiDA databases as well, so for exploring this specific AiiDA database, one would need to find a material that originates from it.
+
+To illustrate on how to find the band gap UUID of silver bromide (AgBr), what we were looking for earlier as well, let's access the details page of AgBr in the main interface. You can then use the Explore button (the little AiiDA icon) next to the text `Band gap [eV]: 1.3` to go to the corresponding [actual AiiDA node](https://www.materialscloud.org/explore/mc2d/details/89315c33-2f9b-41ab-b7d4-22aff0ae75f4) in the web AiiDA provenance explorer.
+This will also provide you with the same UUID as we obtained above (`89315c33-2f9b-41ab-b7d4-22aff0ae75f4`).
+Similarly, you can click on the Explore button next to the band structure plot to inspect the `BandsData` node, and so on.
+We invite you to browse the Discover and Explore sections for this database on you own, to get an idea of the features offered by the Materials Cloud interface.
+
+Thank you for reading this blog post and have fun exploring AiiDA!
+
+
