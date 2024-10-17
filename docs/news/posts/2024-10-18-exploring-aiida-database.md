@@ -21,7 +21,7 @@ Note that while this is a curated database, meaning that it has supplementary me
 
 This analysis can be run with AiiDA v2+. One possibility to quickly get started is to use the [Quantum Mobile](https://quantum-mobile.readthedocs.io/) virtual machine. Currently the latest version is 24.04.0, which has `aiida-core` v2.4.3 available.
 
-You will also need to download the AiiDA archive `two_dimensional_database.aiida` from [the corresponding Materials Cloud Archive entry](https://archive.materialscloud.org/record/2024.157), which can also be done via wget:
+In addition, you will also need to download the AiiDA archive `two_dimensional_database.aiida` from [the corresponding Materials Cloud Archive entry](https://archive.materialscloud.org/record/2024.157), which can also be done via wget:
 
 ```bash
 $ wget 'https://archive.materialscloud.org/record/file?record_id=2396&filename=two_dimensional_database.aiida' -O two_dimensional_database.aiida
