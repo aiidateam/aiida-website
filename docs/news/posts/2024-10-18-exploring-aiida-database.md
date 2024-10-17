@@ -190,7 +190,7 @@ Now, after these steps, we have a better understanding of the the structure of t
 Another useful tool to get a good idea of the connectivity is the graph generator.
 One can use `verdi node graph generate` to visualize the provenance surrounding a node.
 Limiting it to four levels up (ancestors) will be enough for this case; we will also avoid showing any descendants, since we are not interested here in calculations that used the data node as an input.
-Note that this command has to be executed outside of the verdi shell.
+Note that this command is a normal terminal command, so it has to be executed outside of the verdi shell.
 
 ```bash
 $ verdi node graph generate --process-in --process-out --ancestor-depth=4 --descendant-depth=0 138d1979-4aca-4a23-af18-38c707707585
