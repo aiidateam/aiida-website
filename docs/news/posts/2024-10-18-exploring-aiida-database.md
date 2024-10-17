@@ -34,7 +34,7 @@ In addition, you will also need to download the AiiDA archive `two_dimensional_d
 $ wget 'https://archive.materialscloud.org/record/file?record_id=2396&filename=two_dimensional_database.aiida' -O two_dimensional_database.aiida
 ```
 
-Next, we need to make the archive data available for the AiiDA environment, and there are two possibilities for this. The first and traditional way is to [set up an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/stable/installation/guide_complete.html#create-a-profile) and import the archive data with
+Next, we need to make the archive data available for the AiiDA environment, and there are two possibilities for this. The first and traditional way is to [set up an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/installation/guide_quick.html#quick-installation-guide) and import the archive data with
 
 ```bash
 $ verdi archive import two_dimensional_database.aiida
