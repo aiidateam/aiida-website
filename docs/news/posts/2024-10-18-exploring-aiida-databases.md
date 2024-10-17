@@ -7,23 +7,20 @@ date: 2024-10-18
 ---
 
 
-# Exploring an AiiDA Database You Didn't Create
+# Exploring AiiDA Databases
 
 New AiiDA users may find themselves excited to explore scientific data generated through AiiDA (in the form of an exported AiiDA database — an AiiDA archive), but might not know how to. Therefore, in this blog post, we illustrate how data can be explored systematically for an AiiDA database published on the [Materials Cloud Archive](https://archive.materialscloud.org), titled ["Two-dimensional materials from high-throughput computational exfoliation of experimentally known compounds"](https://archive.materialscloud.org/record/2024.157).
-This database contains a collection of two-dimensional materials, and, for a select subset, it includes calculated values of various properties, such as electronic band structures and their associated band gaps.
+This database contains a collection of two-dimensional materials, and, for a select subset, it includes calculated values of various properties, such as electronic band structures and their associated band gaps. [^1]
 
 To demonstrate how to start from an unfamiliar database, understand its layout, and query for a particular property, we set a goal for this blog post to filter the materials contained in the AiiDA database based on their band gaps and create a corresponding table.
 We hope this will give you guidance on how to apply and extend queries for your own needs.
 
-Note that while this is a curated database, meaning that it has supplementary metadata provided to help understand it, most of this blog post also applies to uncurated AiiDA archives.
-
 ## Setup
 
-This analysis can be run with AiiDA v2+. One possibility to quickly get started is to use the [Quantum Mobile](https://quantum-mobile.readthedocs.io/) virtual machine. Currently the latest version is 24.04.0, which has `aiida-core` v2.4.3 available. Alternatively, you can install AiiDA on your local machine by simply running:
+First, we need to have an AiiDA installation. If you don't have it, a quick way to get started is by simply installing the latest version via `pip`:
 
 ```bash
 pip install aiida-core
-verdi presto
 ```
 
 and you're good to go (check also [our recent blog post](https://aiida.net/news/posts/2024-09-20-simpler-installation.html) on the different routes to install AiiDA locally).
@@ -37,10 +34,11 @@ $ wget 'https://archive.materialscloud.org/record/file?record_id=2396&filename=t
 Next, we need to make the archive data available for the AiiDA environment, and there are two possibilities for this. The first and traditional way is to [set up an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/installation/guide_quick.html#quick-installation-guide) and import the archive data with
 
 ```bash
+$ verdi presto
 $ verdi archive import two_dimensional_database.aiida
 ```
 
-However, we can also set up a read-only profile directly from an archive file. As we just want to investigate and analyze the contents without modifying or extending the data, this is more suitable for our current use case.
+However, we can also set up a read-only profile directly from the archive file. As we just want to investigate and analyze the contents without modifying or extending the data, this is more suitable for our current use case:
 
 ```bash
 $ verdi profile setup core.sqlite_zip --filepath two_dimensional_database.aiida
@@ -49,9 +47,9 @@ $ verdi profile setup core.sqlite_zip --filepath two_dimensional_database.aiida
 It's also important to note that this profile is running on the `core.sqlite_zip` storage backend, that can have [some limitations for some queries](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/storage.html), but these don't affect the analysis of this blog post.
 
 
-## Finding band gap nodes
+## Finding AiiDA nodes containing the band gap value
 
-As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. its universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how the data is organized relative to the structure node, which will help us write the AiiDA query to collect and filter based on all band gap values for all materials. Let's first have a look in a non-programmatic way.
+As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. its universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how the data is organized relative to the structure node, which will help us write the AiiDA query to collect and filter based on all band gap values for all materials. Let's first see how to find the node in a non-programmatic way.
 
 ### Using supplementary metadata
 
@@ -70,7 +68,7 @@ When AiiDA databases are published, it is recommended that authors provide a sup
     // ...
 ]
 ```
-where we can see for the silver bromide (AgBr) the AiiDA UUIDs for the relaxed structure itself and the bands property that we want to analyse (the band gap node is a close descendent of this node). This information is enough to continue to the next section, but let's also explore alternative ways to obtain it.
+where we can see for the silver bromide (AgBr) the AiiDA UUIDs for the relaxed structure itself and the bands property that we want to analyse (the band gap node is a close descendent of this node). This information is enough to continue to the section [Manually browsing the database](#manually-browsing-the-database), but let's also explore alternative ways to obtain it.
 
 ### Direct investigation of the AiiDA archive
 
@@ -198,7 +196,7 @@ $ verdi node graph generate --process-in --process-out --ancestor-depth=4 --desc
 
 The result should look something like this:
 
-![provenance](../pics/2024-exploring-aiida-database.png)
+![provenance](../pics/2024-exploring-aiida-databases.png)
 
 ## Systematic querying of the database
 
@@ -213,19 +211,19 @@ from aiida.orm import QueryBuilder, Dict, CalculationNode, BandsData, StructureD
 # Create a new query builder object
 qb = QueryBuilder()
 
-# I want, in the end, the 'band_gap' property returned ("projected")
-# This is in the attributes of the Dict node
-# As an additional challenge, I also want to filter them and get only those where the band gap (in eV) is < 0.5
+# Query for Dict nodes that have the attributes.band_gap and it's value is < 0.5.
+# And we also want the value returned in the end, so let's 'project' it.
 qb.append(
     Dict,
-    project=['attributes.band_gap'],
     filters={'attributes.band_gap': {'<': 0.5}},
+    project=['attributes.band_gap'],
     tag='bandgap_node'
 )
 
-# This node must have been generated by a CalcFunctionNode (so, with outgoing link the node of the previously
-# part, that we tagged as `bandgap_node`, and I only want those where the
-# function name stored in the attributes is 'get_bandgap_inline'
+# The previous node (tagged 'bandgap_node') is an outgoing node of a CalcFunctionNode,
+# query also for this and tag it as 'bandgap_calc'. (As we're not projecting this, it won't
+# show up in the final result, but we can use its tag to query other nodes.)
+# Note, we also filter based on the 'function_name' we found earlier, for extra safety.
 qb.append(
     CalcFunctionNode,
     filters={'attributes.function_name': 'get_bandgap_inline'},
@@ -233,24 +231,23 @@ qb.append(
     tag='bandgap_calc'
 )
 
-# One of the inputs should be a BandsData (band structure node in AiiDA)
+# Query also for the BandsData (band structure node in AiiDA), that's an input to bandgap_calc
 qb.append(BandsData, with_outgoing='bandgap_calc', tag='band_structure')
 
-# This should have been computed by a calculation (we know it's always Quantum ESPRESSO
-# in this specific DB, so I don't add more specific filters, but I could if I wanted to)
-qb.append(CalculationNode, with_outgoing='band_structure', tag='qe')
+# The BandsData was computed by a CalculationNode, query for it as well
+qb.append(CalculationNode, with_outgoing='band_structure', tag='qe_calc')
 
-# I want to get back the input crystal structure, and I want to get back
-# the whole AiiDA node (indicated with '*') rather than just some attributes
-qb.append(StructureData, with_outgoing='qe', project='*')
+# The previous CalculationNode has the StructureData as input that we want to return in the query.
+# Project the whole AiiDA node (indicated with '*')
+qb.append(StructureData, with_outgoing='qe_calc', project='*')
 
-# So, now, summarizing, I have decided to project on two things: the band_gap and the structure node.
-# I iterate on the query results, and I will get the two values for each matching result.
+# So, summarizing, we are projecting two things: the band_gap value and the structure node.
+# Let's iterate over the query results, and print them.
 for band_gap, structure in qb.all():
     print("Band gap for {}: {:.3f} eV".format(structure.get_formula(), band_gap))
 ```
 
-With essentially just 8 lines of Python code (apart from the imports), one is able to perform a query that will return all the structures (and band gaps) that are below a 0.5 eV threshold, but still with a finite gap (remeber, for metals, the current database sets `'band_gap': None`, as we saw above).
+With essentially just 8 lines of Python code (apart from the imports), one is able to perform a query that will return all the structures (and band gaps) that are below a 0.5 eV threshold, but still with a finite gap (remember, for metals, the current database sets `'band_gap': None`, as we saw above).
 You can now execute the script by running
 
 ```bash
@@ -270,30 +267,7 @@ Band gap for CdClO: 0.217 eV
 Band gap for Cl2Er2S2: 0.252 eV
 Band gap for Cl4O2V2: 0.010 eV
 Band gap for CdClO: 0.251 eV
-Band gap for GeI2La2: 0.369 eV
-Band gap for Se2Zr: 0.497 eV
-Band gap for Cu4Te2: 0.207 eV
-Band gap for Br2Cr2S2: 0.441 eV
-Band gap for Co2H4O4: 0.014 eV
-Band gap for Cl2Er2S2: 0.252 eV
-Band gap for Br2Co: 0.039 eV
-Band gap for I2Ni: 0.295 eV
-Band gap for I2N2Ti2: 0.020 eV
-Band gap for Cl2Cu: 0.112 eV
-Band gap for Cl2O2Yb2: 0.006 eV
-Band gap for Cl2O2Yb2: 0.006 eV
-Band gap for Br2Co: 0.196 eV
-Band gap for C2: 0.000 eV
-Band gap for Cl2La2: 0.008 eV
-Band gap for Br2Nd2O2: 0.002 eV
-Band gap for I2O2Pr2: 0.030 eV
-Band gap for Cl2Co: 0.171 eV
-Band gap for Cl2Cu: 0.158 eV
-Band gap for Cl2Er2S2: 0.203 eV
-Band gap for Br2Cr2S2: 0.427 eV
-Band gap for S2Ti: 0.059 eV
-Band gap for Br2Cr2O2: 0.486 eV
-Band gap for I2Ni: 0.319 eV
+...
 ```
 
 Now that you have learnt how to create such a query, we invite you to have more fun, adding additional statements before the final call to `qb.all()`.
@@ -306,7 +280,7 @@ Here a couple of examples:
     ```
 
 - You can project back also the total running time (wall time) of the Quantum ESPRESSO calculation (it is in an output node with link label `output_parameters`).
-  For this you need to add a third element to the tuple when looping over `.all()`:
+  For this you need to add a third element to the tuple when looping over `qb.all()`:
 
     ```python
     qb.append(Dict, with_incoming='qe', edge_filters={'label':'output_parameters'}, project=['attributes.wall_time_seconds'])
@@ -344,3 +318,9 @@ Similarly, you can click on the Explore button next to the band structure plot t
 We invite you to browse the Discover and Explore sections for this database on you own, to get an idea of the features offered by the Materials Cloud interface.
 
 Thank you for reading this blog post and have fun exploring AiiDA!
+
+
+## Footnotes
+
+[^1]:
+    Note that while this is a curated database, meaning that it has supplementary metadata provided to help understand it, most of this blog post also applies to uncurated AiiDA archives.
