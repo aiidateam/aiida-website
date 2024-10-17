@@ -102,7 +102,7 @@ In [2]: list(g.nodes)[0]
 Out[2]: <Dict: uuid: 138d1979-4aca-4a23-af18-38c707707585 (pk: 273)>
 ```
 
-Finally, if the original AiiDA database author has not even provided groups, one could still write various [AiiDA queries](https://aiida.readthedocs.io/projects/aiida-core/en/stable/howto/query.html) that would allow one to find the band gap node (e.g. one could query for a specific type of Quantum Espresso calculation), but this is out of the scope of the current blog post.
+Finally, if the original AiiDA database author has not even provided groups, one could still write various custom [AiiDA queries](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/howto/query.html) that would allow one to find the band gap node (e.g. one could query for a specific type of Quantum Espresso calculation), but this is out of the scope of this blog post.
 
 
 ## Manually browsing the database
