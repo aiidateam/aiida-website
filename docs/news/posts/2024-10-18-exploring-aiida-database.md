@@ -205,7 +205,7 @@ The result should look something like this:
 Now that we have understood broadly the data layout (provenance links between nodes, their types, and some of the relevant attributes keys and values), let's now construct a query using the QueryBuilder in order to get the band structure of a set of 2D materials.
 Create a new text file and copy the content below (these are essentially python scripts, so you can use the `.py` extension).
 There are some comments which explain the purpose of each line of code, please read them carefully to understand how the query is constructed.
-If you are not familiar with the `QueryBuilder`, we refer to the [official AiiDA documentation for more details](https://aiida.readthedocs.io/projects/aiida-core/en/stable/howto/query.html).
+If you are not familiar with the `QueryBuilder`, we refer to the [official AiiDA documentation for more details](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/howto/query.html).
 
 ```python
 from aiida.orm import QueryBuilder, Dict, CalculationNode, BandsData, StructureData
