@@ -117,7 +117,7 @@ $ verdi shell
 
 We start by performing some browsing using the AiiDA API to explore the properties and connections of the selected node.
 
-1. Load the node by using its UUID (note that the integer identifiers, called PKs, will most probably be different in your DB, but the UUIDs will always be the same):
+1. Load the node by using its UUID (note that the integer identifiers, called "primary keys" (PKs), will most probably be different in your DB, but the UUIDs will always be the same):
 
     ```python
     In [1]: bandgap_node = load_node('138d1979-4aca-4a23-af18-38c707707585')
