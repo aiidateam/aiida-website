@@ -13,7 +13,7 @@ New AiiDA users may find themselves excited to explore scientific data generated
 This database contains a collection of two-dimensional materials, and, for a select subset, it includes calculated values of various properties, such as electronic band structures and their associated band gaps.
 
 To demonstrate how to start from an unfamiliar database, understand its layout, and query for a particular property, we set a goal for this blog post to filter the materials contained in the AiiDA database based on their band gaps and create a corresponding table.
-This will hopefully give you guidance on how to apply and extend queries for your own needs.
+We hope this will give you guidance on how to apply and extend queries for your own needs.
 
 Note that while this is a curated database, meaning that it has supplementary metadata provided to help understand it, most of this blog post also applies to uncurated AiiDA archives.
 
