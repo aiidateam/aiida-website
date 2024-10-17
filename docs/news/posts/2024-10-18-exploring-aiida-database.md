@@ -19,7 +19,14 @@ Note that while this is a curated database, meaning that it has supplementary me
 
 ## Setup
 
-This analysis can be run with AiiDA v2+. One possibility to quickly get started is to use the [Quantum Mobile](https://quantum-mobile.readthedocs.io/) virtual machine. Currently the latest version is 24.04.0, which has `aiida-core` v2.4.3 available.
+This analysis can be run with AiiDA v2+. One possibility to quickly get started is to use the [Quantum Mobile](https://quantum-mobile.readthedocs.io/) virtual machine. Currently the latest version is 24.04.0, which has `aiida-core` v2.4.3 available. Alternatively, you can install AiiDA on your local machine by simply running:
+
+```bash
+pip install aiida-core
+verdi presto
+```
+
+and you're good to go (check also [our recent blog post](https://aiida.net/news/posts/2024-09-20-simpler-installation.html) on the different routes to install AiiDA locally).
 
 In addition, you will also need to download the AiiDA archive `two_dimensional_database.aiida` from [the corresponding Materials Cloud Archive entry](https://archive.materialscloud.org/record/2024.157), which can also be done via wget:
 
