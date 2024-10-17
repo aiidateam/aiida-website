@@ -13,7 +13,7 @@ Although the Google Summer of Code project has ended for this year, we are proud
 
 Thank you, Sharan!
 
-For more details, see the [project report](https://github.com/aiidateam/aiida-explorer/blob/gsoc/gsoc/README.md). For a list of initially proposed projects, see [here](https://github.com/aiidateam/aiida-core/wiki/GSoC-2024-Projects). 
+For more details, see the [project report](https://github.com/aiidateam/aiida-explorer/blob/gsoc/gsoc/README.md). For a list of initially proposed projects, see [here](https://github.com/aiidateam/aiida-core/wiki/GSoC-2024-Projects).
 
 [![soc](../pics/2020-summer-of-code/gsoc-logo.png)](https://summerofcode.withgoogle.com/)
 [![NumFocus](../pics/2020-summer-of-code/NumFocus_LRG-1-300x100.png)](http://www.numfocus.org/)
