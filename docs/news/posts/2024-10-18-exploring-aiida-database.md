@@ -74,7 +74,7 @@ where we can see for the silver bromide (AgBr) the AiiDA UUIDs for the relaxed s
 
 ### Direct investigation of the AiiDA archive
 
-If there is no supplementary metadata file nor a web app available, one can also directly investigate the data layout.
+If there is no supplementary metadata file available, one can also directly investigate the data and its layout.
 
 First, check the AiiDA groups:
 
