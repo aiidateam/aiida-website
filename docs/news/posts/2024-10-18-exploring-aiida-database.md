@@ -165,7 +165,7 @@ We start by performing some browsing using the AiiDA API to explore the properti
     ```
 
     Note that we don't really need all of the intermediate node variables.
-    We did it mostly for convenience, but all of these steps can just be concatenated in a single long chain, as follows:
+    We did it mostly for demonstration, but all of these steps can just be concatenated in a single long chain, as follows:
 
     ```python
     In [11]: bandgap_node.creator.inputs.bands.creator.inputs.structure
