@@ -321,7 +321,7 @@ Here a couple of examples:
 ## Behind the scenes
 
 As an extra comment, we strongly suggest using the QueryBuilder rather than going directly into the SQL database, even if you know SQL.
-We have spent significant efforts in making the QueryBuilder interface easy to use, and taking care ourselves of converting this into the corresponding SQL.
+We have spent significant efforts in making the QueryBuilder interface as easy to use as possible, and taken care ourselves of converting this into the corresponding SQL.
 Just for reference, if you do `print(qb.as_sql())` you get the corresponding SQL statement for the query above, that should translate to the following not-so-short string:
 
 ```sql
