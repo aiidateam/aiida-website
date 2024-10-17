@@ -88,7 +88,7 @@ $ verdi group list --all-users
 ...
 ```
 
-We see we have a group containing the band gap nodes. To see these, let's first start the interactive AiiDA shell:
+We see we have a group containing the band gap nodes. How convenient! To obtain more information, we can use the interactive AiiDA shell as a quick helper:
 
 ```bash
 $ verdi shell
