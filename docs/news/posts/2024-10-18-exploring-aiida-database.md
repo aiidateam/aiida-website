@@ -296,7 +296,7 @@ Band gap for Br2Cr2O2: 0.486 eV
 Band gap for I2Ni: 0.319 eV
 ```
 
-Now that you have learnt how to create such a query, you can have more fun adding additional statements before calling `.all()`.
+Now that you have learnt how to create such a query, we invite you to have more fun, adding additional statements before the final call to `qb.all()`.
 Here a couple of examples:
 
 - You can check that the input code of the `qe` calculation was indeed a using the Quantum ESPRESSO plugin (`quantumespresso.pw`):
