@@ -250,7 +250,7 @@ for band_gap, structure in qb.all():
     print("Band gap for {}: {:.3f} eV".format(structure.get_formula(), band_gap))
 ```
 
-With these few lines of code (essentially 8, removing the comments, the indentation, and the import line) one is able to perform a query that will return all the structures (and band gaps) that are below a 0.5 eV threshold, but still with a finite gap (remeber, for metals, the current database sets `'band_gap': None`, as we saw above).
+With essentially just 8 lines of Python code (apart from the imports), one is able to perform a query that will return all the structures (and band gaps) that are below a 0.5 eV threshold, but still with a finite gap (remeber, for metals, the current database sets `'band_gap': None`, as we saw above).
 You can now execute the script by running
 
 ```bash
