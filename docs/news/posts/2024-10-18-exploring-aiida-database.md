@@ -51,7 +51,7 @@ It's also important to note that this profile is running on the `core.sqlite_zip
 
 ## Finding band gap nodes
 
-As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. its universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how it is organized relative to the structure node, which will help us write the AiiDA query to collect and filter based on all band gap values for all materials.
+As our goal is to filter materials based on their band gaps, the first step is to find at least one AiiDA node (i.e. its universally unique identifier (UUID)) that contains the band gap value. Based on this we can later see how the data is organized relative to the structure node, which will help us write the AiiDA query to collect and filter based on all band gap values for all materials. Let's first have a look in a non-programmatic way.
 
 ### Using supplementary metadata
 
