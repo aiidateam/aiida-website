@@ -40,7 +40,7 @@ Next, we need to make the archive data available for the AiiDA environment, and 
 $ verdi archive import two_dimensional_database.aiida
 ```
 
-The other way is to set up a read-only profile directly from an archive file, which is more suitable for our current use case, as we just want to investigate and analyze the contents without modifying or extending the data. In this case, we can use (Note: this was introduced in AiiDA v2.5.0 and thus is not available in the current Quantum Mobile):
+However, we can also set up a read-only profile directly from an archive file. As we just want to investigate and analyze the contents without modifying or extending the data, this is more suitable for our current use case.
 
 ```bash
 $ verdi profile setup core.sqlite_zip --filepath two_dimensional_database.aiida
