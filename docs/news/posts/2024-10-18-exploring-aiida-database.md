@@ -94,7 +94,7 @@ We see we have a group containing the band gap nodes. How convenient! To obtain 
 $ verdi shell
 ```
 
-and then load the first band gap node from the group (and note the UUID):
+and then retrieve the UUID of the first band gap node from the group via:
 
 ```python
 In [1]: g = load_group("two_dimensional_database_2D_bandgaps")
