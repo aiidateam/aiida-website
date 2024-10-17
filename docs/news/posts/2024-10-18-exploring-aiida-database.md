@@ -306,7 +306,7 @@ Here a couple of examples:
     ```
 
 - You can project back also the total running time (wall time) of the Quantum ESPRESSO calculation (it is in an output node with link label `output_parameters`).
-  For this you needs to add a third element to the tuple when looping over `.all()`:
+  For this you need to add a third element to the tuple when looping over `.all()`:
 
     ```python
     qb.append(Dict, with_incoming='qe', edge_filters={'label':'output_parameters'}, project=['attributes.wall_time_seconds'])
