@@ -174,7 +174,7 @@ We start by performing some browsing using the AiiDA API to explore the properti
 
     The advantage of the long string above is that after every dot you can use tab completion. Therefore, it can become very quick to browse advanced provenance graphs in the verdi shell and find the data you seek.
 
-    One more thing one might want to do is to check if there is a better way to distinguish the `CalcFunctionNode` that I got at `Out[5]` above (stored in `calculation_node = bandgap_node.creator`).
+    One more thing one might want to do is to check if there is a better way to distinguish the `CalcFunctionNode` obtained at `Out[5]` above (stored in `calculation_node = bandgap_node.creator`).
     Let us check its attributes:
 
     ```python
