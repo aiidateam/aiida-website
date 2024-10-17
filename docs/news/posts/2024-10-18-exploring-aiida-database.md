@@ -76,7 +76,7 @@ where we can see for the silver bromide (AgBr) the AiiDA UUIDs for the relaxed s
 
 If there is no supplementary metadata file available, one can also directly investigate the data and its layout.
 
-First, check the AiiDA groups:
+First, we can check the AiiDA groups:
 
 ```bash
 $ verdi group list --all-users
