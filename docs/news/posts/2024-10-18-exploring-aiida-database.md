@@ -9,7 +9,7 @@ date: 2024-10-18
 
 # Exploring an AiiDA Database You Didn't Create
 
-A common source of problems for new users of AiiDA often arises when they receive an exported AiiDA database (i.e. an AiiDA archive) and want to get an idea of its content but don't know how. In this blog post, we illustrate on how to do this for an AiiDA database that is published on the Materials Cloud Archive, titled  ["Two-dimensional materials from high-throughput computational exfoliation of experimentally known compounds"](https://archive.materialscloud.org/record/2024.157).
+New AiiDA users may find themselves excited to explore scientific data generated through AiiDA (in the form of an exported AiiDA database — an AiiDA archive), but might not know how to. Therefore, in this blog post, we illustrate how data can be explored systematically for an AiiDA database published on the [Materials Cloud Archive](https://archive.materialscloud.org), titled ["Two-dimensional materials from high-throughput computational exfoliation of experimentally known compounds"](https://archive.materialscloud.org/record/2024.157).
 The description of this database mentions that it contains a set of two dimensional materials, and for a subset of them, various properties are calculated, including the electronic band structures (and also the corresponding band gaps).
 
 To demonstrate how to start from an unfamiliar database, understand its layout, and query for a particular property, we set a goal for this blog post to filter the materials contained in the AiiDA database based on their band gaps and create a corresponding table.
