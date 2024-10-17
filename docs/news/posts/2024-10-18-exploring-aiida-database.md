@@ -186,7 +186,7 @@ We start by performing some browsing using the AiiDA API to explore the properti
 
     This information will be useful in the following section, and will basically allow us to perform a query by filtering by the original function name.
 
-Now, after all these steps, we have a better understanding of the the structure of the data.
+Now, after these steps, we have a better understanding of the the structure of the data.
 Another useful tool to get a good idea of the connectivity is the graph generator.
 One can use `verdi node graph generate` to visualize the provenance surrounding a node.
 Limiting it to four levels up (ancestors) will be enough for this case; we will also avoid showing any descendants, since we are not interested here in calculations that used the data node as an input.
