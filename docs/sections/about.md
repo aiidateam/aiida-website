@@ -93,5 +93,5 @@ While the AiiDA team are proponents of open source software, AiiDA plugins can c
 
 ## License note
 
-The core of the AiiDA engine (“aiida-core”) is released under the **[MIT License](http://opensource.org/licenses/MIT)**.
+The core of the AiiDA engine (“aiida-core”) is released under the **[MIT License](https://opensource.org/licenses/MIT)**.
 The MIT License (also called Expat) is an open source license that essentially grants you the right of dealing in the software without restrictions, as long as the original copyright notice and the name of the copyright holder is included in derivatives of the software. It is very similar to the [BSD Licenses](http://en.wikipedia.org/wiki/BSD_licenses#4-clause_license_.28original_.22BSD_License.22.29), the main differences being that the MIT License explicitly describes the usage permissions and does not limit the use of the copyright holder name.
