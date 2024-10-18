@@ -31,7 +31,7 @@ In addition, you will also need to download the AiiDA archive `two_dimensional_d
 $ wget 'https://archive.materialscloud.org/record/file?record_id=2396&filename=two_dimensional_database.aiida' -O two_dimensional_database.aiida
 ```
 
-Next, we need to make the archive data available for the AiiDA environment, and there are two possibilities for this. The first and traditional way is to [set up an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/installation/guide_quick.html#quick-installation-guide) and import the archive data with
+Next, we need to make the archive data available for the AiiDA environment, and there are two possibilities for this. The first and traditional way is to [set up an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/installation/guide_quick.html#quick-installation-guide) and import the archive data with:
 
 ```bash
 $ verdi presto
@@ -312,10 +312,10 @@ So unless you feel ready to tackle this, we suggest that you stick with the simp
 We mentioned at the start of the post that this is a curated AiiDA database and discussed how it has an author-provided metadata file in JSON format available. However, that is not the only supplementary metadata for this AiiDA database. For a selection of AiiDA studies, the [Materials Cloud](https://www.materialscloud.org/) hosts Discover sections - curated web interfaces to browse the AiiDA data in an accessible manner. This current AiiDA database that this blog explores, contributes to the [Materials Cloud 2D crystals Discover section](https://www.materialscloud.org/discover/mc2d/).
 In this web interface, one can find materials, get access to their available calculated properties, as well  as to information on the provenance of such properties. Note, however, that the Discover section also contains data from other AiiDA databases, so for exploring this specific AiiDA database, one would need to find a material that originates from it.
 
-As the last step on this journey, to illustrate on how to find the band gap UUID of silver bromide (AgBr) that we were looking for earlier as well, let's access the details page of AgBr in the main interface. You can then use the Explore button (the little AiiDA icon) next to the text `Band gap [eV]: 1.3` to go to the corresponding [actual AiiDA node](https://www.materialscloud.org/explore/mc2d/details/89315c33-2f9b-41ab-b7d4-22aff0ae75f4) in the web AiiDA provenance explorer.
+As the last step on this journey, to illustrate how to find the band gap UUID of silver bromide (AgBr) that we were looking for earlier as well, let's access the details page of AgBr in the main interface. You can then use the Explore button (the little AiiDA icon) next to the text `Band gap [eV]: 1.3` to go to the corresponding [actual AiiDA node](https://www.materialscloud.org/explore/mc2d/details/89315c33-2f9b-41ab-b7d4-22aff0ae75f4) in the web AiiDA provenance explorer.
 This will also provide you with the same UUID as we obtained above (`89315c33-2f9b-41ab-b7d4-22aff0ae75f4`).
 Similarly, you can click on the Explore button next to the band structure plot to inspect the `BandsData` node, and so on.
-We invite you to browse the Discover and Explore sections for this database on you own, to get an idea of the features offered by the Materials Cloud interface.
+We invite you to browse the Discover and Explore sections for this database on your own, to get an idea of the features offered by the Materials Cloud interface.
 
 Thank you for reading this blog post and have fun exploring AiiDA!
 
