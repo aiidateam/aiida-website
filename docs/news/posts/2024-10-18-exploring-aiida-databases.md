@@ -220,28 +220,27 @@ qb.append(
     tag='bandgap_node'
 )
 
-# The previous node (tagged 'bandgap_node') is an outgoing node of a CalcFunctionNode,
-# query also for this and tag it as 'bandgap_calc'. (As we're not projecting this, it won't
-# show up in the final result, but we can use its tag to query other nodes.)
-# Note, we also filter based on the 'function_name' we found earlier, for extra safety.
+# The previous node (tagged 'bandgap_node') is an output of a CalcFunctionNode.
+# Query also for this and tag it as 'bandgap_calc'. (As we're not projecting this,
+# it won't show up in the final result, but we can use it to query related nodes.)
+# Let's also filter on the 'function_name' we found earlier, for extra safety.
 qb.append(
     CalcFunctionNode,
     filters={'attributes.function_name': 'get_bandgap_inline'},
     with_outgoing='bandgap_node',
     tag='bandgap_calc'
 )
-
-# Query also for the BandsData (band structure node in AiiDA), that's an input to bandgap_calc
+# Query also for the BandsData (band structure), that's an input to bandgap_calc
 qb.append(BandsData, with_outgoing='bandgap_calc', tag='band_structure')
 
 # The BandsData was computed by a CalculationNode, query for it as well
 qb.append(CalculationNode, with_outgoing='band_structure', tag='qe_calc')
 
-# The previous CalculationNode has the StructureData as input that we want to return in the query.
-# Project the whole AiiDA node (indicated with '*')
+# The previous CalculationNode has the StructureData as input that we want to
+# return in the final query. Project the whole AiiDA node (indicated with '*')
 qb.append(StructureData, with_outgoing='qe_calc', project='*')
 
-# So, summarizing, we are projecting two things: the band_gap value and the structure node.
+# In summary, we are projecting two things: the band_gap value and the structure.
 # Let's iterate over the query results, and print them.
 for band_gap, structure in qb.all():
     print("Band gap for {}: {:.3f} eV".format(structure.get_formula(), band_gap))
