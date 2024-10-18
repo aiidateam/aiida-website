@@ -7,7 +7,7 @@ date: 2024-10-17
 
 # AiiDA at Google Summer of Code 2024
 
-We are proud to announce that AiiDA has successfully participated (under the [NumFOCUS](https://numfocus.org/) organization umbrella). 
+We are proud to announce that AiiDA has successfully participated (under the [NumFOCUS](https://numfocus.org/) organization umbrella).
 Our summer student [Sharan Poojari](https://github.com/SharanRP) built a prototype for a [next-generation web-based AiiDA provenance explorer](https://github.com/aiidateam/aiida-explorer).
 
 <img src="../pics/2024-gsoc-aiida-explorer.png" alt="2024-gsoc-aiida-explorer" height="500px">
