@@ -145,6 +145,7 @@ linkcheck_ignore = [
     r"https://www.sciencedirect.com/science/.*",
     r"http://dx.doi.org/10.5075/epfl-thesis-7179",  # EPFL blocks repeating requests
     r"http://qe2019.ijs.si/index.html",  # event page does not exist anymore
+    r"https://opensource.org/licenses/MIT",  # linkcheck failing...
 ]
 
 aiida_ignore_event_checks = [
