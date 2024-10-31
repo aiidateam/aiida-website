@@ -34,17 +34,19 @@ Make sure you have a recent version of Python installed and then install the pac
 pip install aiida-shell
 ```
 
-If the installation is successful, you can create an AiiDA profile with:
+If the installation is successful, you can [create an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/installation/guide_quick.html#quick-installation-guide) with:
 
 ```console
 verdi presto
 ```
 
 If there are no error messages, you should now be good to go to follow the rest of the examples.
+You can either add the snippets to a file, e.g. `script.py`, and run it with `verdi run script.py`.
+Or you can open an interactive shell with `verdi shell`, and run the commands interactively.
 
 ## The basic concept
 
-All that is needed to run any program with `aiida-shell` is its `launch_shell_job`` function:
+All that is needed to run any program with `aiida-shell` is its `launch_shell_job` function:
 
 ```python
 from aiida_shell import launch_shell_job
@@ -55,7 +57,7 @@ print(results['stdout'].get_content())
 In the snippet above, the [`date` program](https://www.man7.org/linux/man-pages/man1/date.1.html) is used as an example, which is a simple Linux utility that prints the current date.
 The program is simply passed as a string to the `launch_shell_job` function.
 Under the hood, `aiida-shell` will find the location of this executable and write the necessary plugins on-the-fly.
-It then runs the code as one would normally do with AiiDA, and the outputs are parsed.
+It then runs the code (on the `localhost` Computer) as one would normally do with AiiDA, and the outputs are parsed.
 The output produced by the code that was written to stdout can be retrieved from the results under the `stdout` key.
 
 This is the most basic example and it is rare that a program does not require any inputs.
@@ -70,15 +72,15 @@ results, node = launch_shell_job(
 print(results['stdout'].get_content())
 ```
 
-which should print something like ``2022-03-17``.
+which should print something like `2022-03-17`.
 There is a lot more functionality that is supported.
-If you want to learn more, the [how-to guides of the online documentation](https://aiida-shell.readthedocs.io/en/latest/howto.html) are an excellent place to get an overview of available features.
+If you want to learn more, the [how-to guides of the online documentation](https://aiida-shell.readthedocs.io/en/latest/howto.html) are an excellent place to get an overview of the available features.
 
 ## Real life scientific use case
 
 To make the usefulness and power of `aiida-shell` more concrete, let's now go through a real life use case.
 In the following, we will compute the electronic band structure of gallium arsenide using Quantum ESPRESSO.
-[Quantum ESPRESSO](https://www.quantum-espresso.org/) is a free and open-source an integrated suite of Open-Source computer codes for electronic-structure calculations and materials modeling at the nanoscale.
+[Quantum ESPRESSO](https://www.quantum-espresso.org/) is a free and Open-Source integrated suite of computer codes for electronic-structure calculations and materials modeling at the nanoscale.
 
 The workflow consists roughly of four calculations:
 
@@ -112,7 +114,7 @@ with urllib.request.urlopen(f'{url_base}/As.pbe-n-kjpaw_psl.1.0.0.UPF') as handl
 ```
 
 The next step is to launch the the self-consistent calculation.
-Below we define the input script:
+Below we define the input script using the Quantum ESPRESSO input format:
 
 ```python
 script_scf = """\
@@ -225,7 +227,7 @@ results_nscf, node_nscf = launch_shell_job(
 )
 ```
 
-With the bands computed, we need to extract them from the `output.save` directory in a format that allows them to be plotted.
+In this manner, `aiida-shell` easily allows chaining multiple simulations together, keeping provenance of the full workflow. With the bands computed, we need to extract them from the `output.save` directory in a format that allows them to be plotted.
 Quantum ESPRESSO provides the `bands.x` utility exactly for this purpose:
 
 ```python
