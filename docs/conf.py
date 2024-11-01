@@ -148,7 +148,8 @@ linkcheck_ignore = [
     r"http://opensource.org/licenses/MIT",
     r"https://opensource.org/licenses/MIT",
     r"https://www.facebook.com/.*",
-    r"https://github.com/aiidateam/aiida-core/discussions.*",  # has been archived
+    r"https://github.com/aiidateam/aiida-core/discussions",  # has been archived
+    r"https://github.com/aiidateam/aiida-core/discussions/.*",  # has been archived
 ]
 
 aiida_ignore_event_checks = [
