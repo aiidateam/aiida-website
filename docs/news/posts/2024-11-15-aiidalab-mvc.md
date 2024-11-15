@@ -6,15 +6,15 @@ author: Edan Bainglass
 date: 2024-11-15
 ---
 
-# Designing apps for AiiDAlab, an AiiDA-enabled graphical user interface
+# Design principles for AiiDAlab apps
 
-For computational scientists, AiiDA can provide such benefits as workflow automation, HPC integration, and full provenance tracking. However, performing materials simulations may not be immediately accessible to experimentalists with minimum to no knowledge of the underlying theories.
+For computational scientists, AiiDA can provide such benefits as workflow automation, HPC integration, and full provenance tracking. However, performing materials simulations may not be immediately accessible to experimentalists with little to no knowledge of the underlying theories.
 
 To remove this barrier, we've developed [AiiDAlab](https://www.aiidalab.net/), a Jupyter Notebook environment with out-of-the-box AiiDA support on which dedicated user interfaces (UIs) can be developed to abstract the complexities and facilitate the use of materials discovery through computation.
 
 ![AiiDAlab](https://aiidalab.readthedocs.io/en/latest/_static/aiidalab_logo.png)
 
-For example, a growing feature set from [Quantum ESPRESSO](https://www.quantum-espresso.org/), a popular open-source package for performing materials simulations, is made accessible through the [Quantum ESPRESSO AiiDAlab app](https://aiidalab-qe.readthedocs.io/), developed hand-in-hand with input and feedback from experimentalists. Similar apps developed along side experimentalists can be found at the [AiiDAlab application registry](https://aiidalab.github.io/aiidalab-registry/).
+For example, a growing feature set from [Quantum ESPRESSO](https://www.quantum-espresso.org/), a popular open-source package for performing materials simulations, has been made accessible through the [Quantum ESPRESSO AiiDAlab app](https://aiidalab-qe.readthedocs.io/) developed hand-in-hand with input and feedback from experimentalists. Similar apps developed along side experimentalists can be found at the [AiiDAlab application registry](https://aiidalab.github.io/aiidalab-registry/).
 
 Guides for the installation, setup, and usage of AiiDAlab can be found on the [official site](https://www.aiidalab.net/), which also includes basic guidelines for [developing AiiDAlab apps](https://aiidalab.readthedocs.io/en/latest/app_development/index.html). This blog, however, is more focused on providing tips and guidelines for designing a flexible, scalable, and extensible AiiDAlab app.
 
@@ -179,9 +179,9 @@ As apps grow, providing additional features may come with changes in core mechan
 
 ```python
 
-class Service:
-    def get_common_trait_default(self):
-        return "default"
+class AiiDAService:
+    def get_process_uuid(self):
+        return "..."
 ```
 
 ```python
@@ -189,58 +189,69 @@ class Service:
 import traitlets as tl
 
 class Model(tl.HasTraits):
-    trait = tl.Unicode(...)
+    process_uuid = tl.Unicode(...)
 
-    def __init__(self, service):
-        self._service = service
+    def __init__(self, aiida_service):
+        self._aiida = aiida_service
 
     def update(self): ...
 
     def reset(self):
-        self.trait = self._service.get_common_trait_default()
+        self.process_uuid = self._aiida.get_process_uuid()
 ```
 
-The above is a simple toy example of how common functionality could be isolated in a `Service`. Common uses of services include database and/or network interactions, logging, utilities, and more.
+The above demonstarate how common functionality such as AiiDA interactions could be encapsulated in an `AiiDAService`. When AiiDA core mechanics change, **app maintenance is reduced** to modifications of the service. Common uses of services include database and/or network interactions, logging, utilities, and more.
 
 #### Exchangable backends
 
-To further isolate common functionality, a `Service` may leverage dedicated `Backend` classes that provide tailored functionality through an abstraction layer. For example, using AiiDA, one may want to interact with the local AiiDA database instance via a `DbBackend`, or via AiiDA's (or another) REST API using a `RestBackend` instance. Each can isolate the specific implementation and inject into the app's services for different applications as needed.
+To further isolate common functionality, a `Service` could leverage dedicated `Backend` classes that provide tailored functionality through an abstraction layer. For example, using AiiDA, one may want to interact with the local AiiDA database instance via a `DbBackend`, or via AiiDA's (or another) REST API using a `RestBackend` instance. Each can isolate the specific implementation and inject into the app's services for different applications as needed.
 
 ```python
 
 import abc
 
-class Backend(abc.ABC): ...
-    def fetch_trait_default(self):
-        raise NotImplementedError()
+class Backend(abc.ABC):
+
+    @abc.abstractmethod
+    def fetch_process_uuid(self): ...
 
 class DbBackend(Backend):
-    def fetch_trait_default(self):
+    def fetch_process_uuid(self):
         from aiida import orm
 
-        return orm.QueryBuilder().append(...).first() or ""
+        return (
+            orm.QueryBuilder()
+            .append(
+                orm.ProcessNode,
+                filters=...,
+                project="uuid"
+            )
+            .first()
+         ) or ""
 
 class RestBackend(Backend):
-    def fetch_trait_default(self):
+    API = "https://..."
+
+    def fetch_process_uuid(self):
         import requests
 
-        response = requests.get(...)
-        return response.json().get("default", "")
+        response = requests.get(f"{API}/.../uuid")
+        return response.json().get("uuid", "")
 ```
 
 ```python
 
 from app.backends import Backend
 
-class Service:
+class AiiDAService:
     def __init__(self, backend: Backend):
         self._backend = backend
 
-    def get_common_trait_default(self):
-        return backend.fetch_trait_default()
+    def get_process_uuid(self):
+        return self._backend.fetch_process_uuid()
 ```
 
-In the above example, the `Service` is injected with a concrete backend depending on the needs at a given moment. However, the API of the `Service` is unaffected, reducing maintenance through logic encapsulation in the backend classes.
+In the above example, the `AiiDAService` is injected with a concrete backend depending on the needs of the app. For example, one could design an app that is seeded with (or auto-detects) information regarding the local environment. If the app is deployed on the same server as AiiDA, it could communicate with AiiDA directly by leveraging a `DbBackend`. If it is instead deployed on a server separated from the AiiDA instance, it could leverage a `RestBackend` to communicate with AiiDA over HTTP. Note that in any case, the API of the `AiiDAService` is agnostic to the concrete `Backend` instance - the service simply makes a call to `fetch_process_uuid`, which is a required method of _any_ `Backend`. Thus, maintenance of the `Service` class is reduced through logic encapsulation in the backend classes.
 
 **Tip 💡** for those interested, we encourage further reading on the above principles to better understand the pros and cons of the suggested patterns.
 
@@ -298,13 +309,13 @@ An associated `Controller` can handle the rendering of the `View` (calling `rend
 
 It will often be the case that some operations of your app will take longer than others. To reduce the impact on the experience of the user, one should consider asynchronous operations (concurrency) and/or threading and other parallelization techniques. Here we reference you to a great article about [burgers](https://tiangolo.medium.com/concurrent-burgers-understand-async-await-eeec05ae7cfe).
 
-**Warning** ⚠️ - if you do choose to leverage threading, try to avoid sharing AiiDA node instances between threads. In other words, one thread should avoid making use of a node from another thread. Often, this will lead to DB session conflicts. You can read more about it [here](https://aiida.discourse.group/t/using-thread-to-watch-workchains-status-in-aiidalab/135).
+**Warning** ⚠️ if you do choose to leverage threading, try to avoid sharing AiiDA node instances between threads. In other words, one thread should avoid making use of a node from another thread. Often, this will lead to DB session conflicts. You can read more about it [here](https://aiida.discourse.group/t/using-thread-to-watch-workchains-status-in-aiidalab/135).
 
 ## Final thoughts
 
 Plan your design! The impact early design choices will have on your app down the road are hard to measure in advance. But solid design plan leveraging standard patterns can at least provide some assurance that future changes will require minimal (isolated) maintenance. We encourage you to read more about design patterns in general. A great resource is [Refactoring.Guru](https://refactoring.guru/design-patterns), where you can find examples in many programming languages.
 
-Also, be sure to visit the [AiiDA plugin registry ](https://aiidateam.github.io/aiida-registry/) to check out the available plugins you could build apps for today! And of course, you can build your own AiiDA plugin and companion app for use in your lab and/or research. We hope you find our tools useful 🙂 And please feel free to reach out to us anytime on [Discourse](https://aiida.discourse.group/) if you have any questions.
+Also, be sure to visit the [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/) to check out the available plugins you could build apps for today! And of course, you can build your own AiiDA plugin and companion app for use in your lab and/or research. We hope you find our tools useful 🙂 And please feel free to reach out to us anytime on [Discourse](https://aiida.discourse.group/) if you have any questions.
 
 ---
 
