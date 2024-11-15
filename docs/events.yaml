@@ -127,7 +127,6 @@
   start: 2019-10-09
   duration: 2 days
   location: IIT Mandi (IN)
-  url: http://aiidaworkshop.iitmandi.ac.in/
 
 - name: VASP & AiiDA workshop
   start: 2019-09-23
