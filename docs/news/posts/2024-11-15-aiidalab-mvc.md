@@ -166,7 +166,7 @@ In the observer pattern, traits of one MVC `Model` are linked to a copy in anoth
 
 ### The Mediator pattern
 
-On can also choose to opt for more granular control. In the Mediator pattern, traits of one `MVC` pattern are observed locally by its `Controller`, with the `Controller` subsequently taking action on another `Model`. In such cases, the latter `Model` is often of a dependent MVC component, of which the `Controller` is aware.
+One can also opt for more granular control. In the Mediator pattern, traits of one `MVC` pattern are observed locally by its `Controller`, with the `Controller` subsequently taking action on another `Model`. In such cases, the latter `Model` is often of a dependent MVC component, of which the `Controller` is aware.
 
 ![Model network](./_pics/model_network.png)
 
@@ -199,9 +199,9 @@ class Model(tl.HasTraits):
         self.process_uuid = self._aiida.get_process_uuid()
 ```
 
-The above demonstarates how common functionality such as AiiDA interactions could be encapsulated in an `AiiDAService`. When AiiDA core mechanics change, **app maintenance is reduced** to modifications of the service. Common uses of services include database and/or network interactions, logging, utilities, and more.
+The above snippets demonstrate how common functionality such as AiiDA interactions could be encapsulated in an `AiiDAService`. When AiiDA core mechanics change, **app maintenance is reduced** to modifications of the service. Common uses of services include database and/or network interactions, logging, utilities, and more.
 
-### Exchangable backends
+### Exchangeable backends
 
 To further isolate common functionality, a `Service` could leverage dedicated `Backend` classes that provide tailored functionality through an abstraction layer. For example, using AiiDA, one may want to interact with the local AiiDA database instance via a `DbBackend`, or via AiiDA's (or another) REST API using a `RestBackend` instance. Each can isolate the specific implementation and inject into the app's services for different applications as needed.
 
