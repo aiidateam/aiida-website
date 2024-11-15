@@ -107,7 +107,7 @@ The observable state variables defined in the `Model` can be leveraged to synchr
 
 ### The `Controller`
 
-The purpose of the `Controller` class, the final component of the MVC design pattern, is to handle events and control the flow of information across the app. This means reacting to changes in models and/or user-driven view events, updating either according to the defined app logic. To do so, a `Controller` is typically instantiated with instances of both the `View` and the `Model`, as follows:
+The purpose of the `Controller` class, the final component of the MVC design pattern, is to handle events and control the flow of information across the app. This means reacting to changes in models and/or user-driven view events, updating either the `View` or the `Model` according to the defined app logic. To do so, a `Controller` is typically instantiated with instances of both the `View` and the `Model`, as follows:
 
 ```python
 
