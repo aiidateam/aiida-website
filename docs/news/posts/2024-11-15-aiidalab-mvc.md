@@ -107,7 +107,7 @@ The observable state variables defined in the `Model` can be leveraged to synchr
 
 ### The `Controller`
 
-The purpose of the `Controller` class, the final component of the MVC design patter, is to handle events and control the flow of information across the app. This means reacting to changes in models and/or user-driven view events, updating either according to the defined app logic. To do so, a `Controller` is typically instantiated with instances of both the `View` and the `Model`, as follows:
+The purpose of the `Controller` class, the final component of the MVC design pattern, is to handle events and control the flow of information across the app. This means reacting to changes in models and/or user-driven view events, updating either according to the defined app logic. To do so, a `Controller` is typically instantiated with instances of both the `View` and the `Model`, as follows:
 
 ```python
 
@@ -157,9 +157,12 @@ The above `Controller` class handles observations in three ways:
 
 For 1 and 3, dedicated `_on_event` methods are a good practice for readability, each encapsulating one or more operations (methods) to perform on either the `View` or the `Model`.
 
-## The model network
+## The `Model` network
 
-The models of the various MVC components form the backbone of the app. To connect the models, once can choose one or both of the following patterns.
+The models of the various MVC components form the backbone of the app. To connect the models, you can choose one or both of the following patterns:
+
+1. The **Observer** pattern
+2. The **Mediator** pattern
 
 ### The Observer pattern
 
@@ -200,9 +203,9 @@ class Model(tl.HasTraits):
         self.process_uuid = self._aiida.get_process_uuid()
 ```
 
-The above demonstarate how common functionality such as AiiDA interactions could be encapsulated in an `AiiDAService`. When AiiDA core mechanics change, **app maintenance is reduced** to modifications of the service. Common uses of services include database and/or network interactions, logging, utilities, and more.
+The above demonstarates how common functionality such as AiiDA interactions could be encapsulated in an `AiiDAService`. When AiiDA core mechanics change, **app maintenance is reduced** to modifications of the service. Common uses of services include database and/or network interactions, logging, utilities, and more.
 
-#### Exchangable backends
+### Exchangable backends
 
 To further isolate common functionality, a `Service` could leverage dedicated `Backend` classes that provide tailored functionality through an abstraction layer. For example, using AiiDA, one may want to interact with the local AiiDA database instance via a `DbBackend`, or via AiiDA's (or another) REST API using a `RestBackend` instance. Each can isolate the specific implementation and inject into the app's services for different applications as needed.
 
@@ -301,9 +304,7 @@ class View(ipw.VBox):
         self.rendered = True
 ```
 
-An associated `Controller` can handle the rendering of the `View` (calling `render()`) at the precise moment it is visited by the user, thus deferring the loading impact to a later stage of the app.
-
-**Tip 💡** to learn more, you can check out [this PR](https://github.com/aiidalab/aiidalab-qe/pull/802) implementing lazy loading in the Quantum ESPRESSO app.
+An associated `Controller` can handle the rendering of the `View` (calling `render()`) at the precise moment it is visited by the user, thus deferring the loading impact to a later stage of the app. To see this pattern in practice, you can check out [this PR](https://github.com/aiidalab/aiidalab-qe/pull/802) implementing lazy loading in the Quantum ESPRESSO app.
 
 ### Concurrency and parallelization
 
@@ -313,10 +314,10 @@ It will often be the case that some operations of your app will take longer than
 
 ## Final thoughts
 
-Plan your design! The impact early design choices will have on your app down the road are hard to measure in advance. But solid design plan leveraging standard patterns can at least provide some assurance that future changes will require minimal (isolated) maintenance. We encourage you to read more about design patterns in general. A great resource is [Refactoring.Guru](https://refactoring.guru/design-patterns), where you can find examples in many programming languages.
+Plan your design! The impact early design choices will have on your app down the road are hard to measure in advance. But a solid design plan rooted in standard patterns can at least provide some assurance that future changes will require minimal (isolated) maintenance. We encourage you to read more about design patterns in general. A great resource is [Refactoring.Guru](https://refactoring.guru/design-patterns), where you can find examples in many programming languages.
 
 Also, be sure to visit the [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/) to check out the available plugins you could build apps for today! And of course, you can build your own AiiDA plugin and companion app for use in your lab and/or research. We hope you find our tools useful 🙂 And please feel free to reach out to us anytime on [Discourse](https://aiida.discourse.group/) if you have any questions.
 
 ---
 
-And as always, happy computing 🎉
+As always, happy computing 🎉
