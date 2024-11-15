@@ -24,7 +24,7 @@ A good approach to designing any graphical user interface is to set aside the UI
 
 One approach to handle the separation of responsibility and concern is to divide the app into a network of **Model-View-Controller** (MVC) components, with interconnected models managing the business logic.
 
-![MVC](https://developer.mozilla.org/en-US/docs/Glossary/MVC/model-view-controller-light-blue.png)
+![MVC](./_pics/MVC.png)
 
 ### The `Model`
 
@@ -95,7 +95,7 @@ class View(ipw.VBox):
         )
 ```
 
-![View example]()
+![View example](./_pics/UI.png)
 
 The class represents a UI for the user to interact with the app. It typically provides an interface for the user to select and provide input for the underlying simulation software.
 
@@ -171,6 +171,8 @@ In the observer pattern, traits of one MVC `Model` are linked to a copy in anoth
 ### The Mediator pattern
 
 On can also choose to opt for more granular control. In the Mediator pattern, traits of one `MVC` pattern are observed locally by its `Controller`, with the `Controller` subsequently taking action on another `Model`. In such cases, the latter `Model` is often of a dependent MVC component, of which the `Controller` is aware.
+
+![Model network](./_pics/model_network.png)
 
 ---
 
