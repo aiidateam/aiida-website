@@ -31,7 +31,6 @@ One approach to handle the separation of responsibility and concern is to divide
 Consider the following `Model` class:
 
 ```python
-
 class Model:
     attr1 = ...
     attr2 = ...
@@ -48,7 +47,6 @@ It encapsulates the data (attributes) and logic (methods) to operate on the data
 In the MVC design pattern, the `Model` is observed by the `View` and updated by the `Controller` based on changes in the **state** of the app. To enable event-driven logic in AiiDAlab apps, we presently leverage the [traitlets](https://traitlets.readthedocs.io/en/stable/#) Python package to "upgrade" `Model` attributes to observable **traits**.
 
 ```python
-
 import traitlets as tl
 
 class Model(tl.HasTraits):
@@ -69,7 +67,6 @@ Once the logic of the app is established and tested by leveraging the model netw
 A typical view may look like the following:
 
 ```python
-
 import ipywidgets as ipw
 
 class View(ipw.VBox):
@@ -110,7 +107,6 @@ The observable state variables defined in the `Model` can be leveraged to synchr
 The purpose of the `Controller` class, the final component of the MVC design pattern, is to handle events and control the flow of information across the app. This means reacting to changes in models and/or user-driven view events, updating either the `View` or the `Model` according to the defined app logic. To do so, a `Controller` is typically instantiated with instances of both the `View` and the `Model`, as follows:
 
 ```python
-
 import traitlets as tl
 
 class Controller:
@@ -183,14 +179,12 @@ On can also choose to opt for more granular control. In the Mediator pattern, tr
 As apps grow, providing additional features may come with changes in core mechanics. In anticipation of such changes, it is often best to isolate the core mechanics of an app in one or more dedicated services, to be injected into models on demend.
 
 ```python
-
 class AiiDAService:
     def get_process_uuid(self):
         return "..."
 ```
 
 ```python
-
 import traitlets as tl
 
 class Model(tl.HasTraits):
@@ -212,7 +206,6 @@ The above demonstarates how common functionality such as AiiDA interactions coul
 To further isolate common functionality, a `Service` could leverage dedicated `Backend` classes that provide tailored functionality through an abstraction layer. For example, using AiiDA, one may want to interact with the local AiiDA database instance via a `DbBackend`, or via AiiDA's (or another) REST API using a `RestBackend` instance. Each can isolate the specific implementation and inject into the app's services for different applications as needed.
 
 ```python
-
 import abc
 
 class Backend(abc.ABC):
@@ -245,7 +238,6 @@ class RestBackend(Backend):
 ```
 
 ```python
-
 from app.backends import Backend
 
 class AiiDAService:
@@ -269,7 +261,6 @@ Lastly, it is often the case that some operations in a given AiiDAlab app may ta
 The entirety of the app is not required at any given moment. Consider implementing lazy loading techniques to limit the impact of rendering on the user. For example, a lazy-loaded view could be designed as follows:
 
 ```python
-
 class View(ipw.VBox):
 
     def __init__(self, **kwargs):
