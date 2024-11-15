@@ -62,7 +62,7 @@ Trait (state) changes can be observed and acted upon by the `Controller`, updati
 
 ### The `View`
 
-Once the logic of the app is established and tested by leveraging the model network, its time to connect it to a `View` to enable user interactions. In AiiDAlab, views are _mostly_ constructred from UI components provided by the [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) Python UI library. The library also provides means to construct [custom widgets](https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Custom.html). Alternatively, one could explore the [anywidget](https://anywidget.dev/) API for developing custom UI components.
+Once the logic of the app is established and tested by leveraging the model network, its time to connect it to a `View` to enable user interactions. In AiiDAlab, views are _mostly_ constructed from UI components provided by the [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) Python UI library. The library also provides means to construct [custom widgets](https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Custom.html). Alternatively, one could explore the [anywidget](https://anywidget.dev/) API for developing custom UI components.
 
 A typical view may look like the following:
 
@@ -100,7 +100,7 @@ The class represents a UI for the user to interact with the app. It typically pr
 
 #### `View`-`Model` synchronization
 
-The observable state variables defined in the `Model` can be leveraged to synchronize the `View` with the current state of the app. This can be done via the `traitlets` linking mechanism. This can be set up in the `Controller` class.
+The observable state variables defined in the `Model` can be leveraged to synchronize the `View` with the current state of the app. This can be done via the `traitlets` linking mechanism, which can be set up in the `Controller` class.
 
 ### The `Controller`
 
@@ -162,7 +162,7 @@ The models of the various MVC components form the backbone of the app. To connec
 
 ### The Observer pattern
 
-In the observer pattern, traits of one MVC `Model` are linked to a copy in another. When the source trait changes, the other is synchronized. The `Controller` of the latter `Model` observes the change and update its local MVC component, thus facilitating the flow of data in the app.
+In the observer pattern, traits of one MVC `Model` are linked to a copy in another. When the source trait changes, the other is synchronized. The `Controller` of the latter `Model` observes the change and updates its local MVC component, thus facilitating the flow of data in the app.
 
 ### The Mediator pattern
 
@@ -176,7 +176,7 @@ On can also choose to opt for more granular control. In the Mediator pattern, tr
 
 ## Services and backends
 
-As apps grow, providing additional features may come with changes in core mechanics. In anticipation of such changes, it is often best to isolate the core mechanics of an app in one or more dedicated services, to be injected into models on demend.
+As apps grow, providing additional features may come with changes in core mechanics. In anticipation of such changes, it is often best to isolate the core mechanics of an app in one or more dedicated services, to be injected into models on demand.
 
 ```python
 class AiiDAService:
