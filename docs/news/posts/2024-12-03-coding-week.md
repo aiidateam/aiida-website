@@ -17,7 +17,7 @@ in Leysin, Switzerland during 18-22 of November.
 ### Asynchronous transport
 
 One [significant PR](https://github.com/aiidateam/aiida-core/pull/6626) that has come out of the coding week has been to
-add a _truly_ asynchronous transport plugin.  While the AiiDA engine is, in general, written asynchronously, file upload
+add a _truly_ asynchronous transport plugin. While the AiiDA engine is, in general, written asynchronously, file upload
 and retrieve tasks were actually still executed in a blocking manner. With the new `AsyncTransport` plugin, file
 uploads/downloads won't be blocking the interpreter anymore.
 
@@ -42,12 +42,12 @@ on earlier work, which can be found in [this repository](https://github.com/chri
 Other parts of the work on `aiida-core` have actually been focused on making the life of developers easier. For example, we will
 spend less time waiting for the tests to finish by running the test suite in parallel
 ([PR 6620](https://github.com/aiidateam/aiida-core/pull/6620)) and we reduced the verbosity of the pytest output (for
-successful tests) when running via CI ([PR 6633](https://github.com/aiidateam/aiida-core/pull/6633)).  In addition, as
+successful tests) when running via CI ([PR 6633](https://github.com/aiidateam/aiida-core/pull/6633)). In addition, as
 it is now possible to set up an AiiDA profile using SQLite instead of PostgreSQL, we also have changed the default for
 running the test suite locally to use the former instead of the latter (see
-[this PR](https://github.com/aiidateam/aiida-core/pull/6625)), thus not requiring PSQL as a system service.  One can now
-explicitly specify the database backend to be used via the new flag `--db-backend=[sqlite,psql]` (rather than through
-pytest markers in the source code, as was done previously).
+[this PR](https://github.com/aiidateam/aiida-core/pull/6625)), thus not requiring PSQL as a system service. Lastly, one
+can now explicitly specify the database backend to be used via the new flag `--db-backend=[sqlite,psql]` (rather than
+through pytest markers in the source code, as was done previously).
 
 
 ## [AiiDAlab QE app](https://github.com/aiidalab/aiidalab-qe)
@@ -122,7 +122,7 @@ backward-incompatible.
 However, this gives us the opportunity to further refine and improve the relevant classes.
 In particular, lots of discussions on the design of the new `StructureData` class have been held, and the current design
 choices can be found [here](https://github.com/aiidateam/aiida-atomistic). These include adding properties stored with
-each structure, including for instance magnetization, Hubbard U and V values, etc.  During the coding week, some members
+each structure, including for instance magnetization, Hubbard U and V values, etc. During the coding week, some members
 of the AiiDA team have been working on this topic, with the issues found
 [here](https://github.com/aiidateam/aiida-atomistic/issues?q=label%3Acoding-week) on GitHub. The main result achieved is
 the development of a clear API to query `StructureData` from the AiiDA database with respect to the defined properties
