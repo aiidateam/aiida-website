@@ -14,6 +14,12 @@
 # - report: internal post reporting the event
 # - participants: number of participants
 
+- name: AiiDA coding week 2024
+  start: 2024-11-18
+  duration: 5 days
+  location: Leysin (CH)
+  report: /news/posts/2024-12-03-coding-week.md
+
 - name: AiiDA intro and demo at the Adv. Quantum ESPRESSO school
   start: 2023-08-28
   duration: 4 days
