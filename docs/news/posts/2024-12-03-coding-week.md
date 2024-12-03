@@ -8,10 +8,8 @@ date: 2024-12-03
 
 # Achievements from the AiiDA coding week 2024
 
-Dear AiiDA users,
-
-As promised, in this week's blog post we give you a rundown of the key achievements of the AiiDA coding week 2024 held
-in Leysin during 18-22 of November.
+Dear AiiDA users, as promised, in this week's blog post we give you a rundown of the key achievements of the AiiDA coding week 2024 held
+in Leysin, Switzerland during 18-22 of November.
 
 
 ## [aiida-core](https://github.com/aiidateam/aiida-core)
