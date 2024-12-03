@@ -97,7 +97,7 @@ In addition to these discussions, key bugs were identified and resolved:
 - And, lastly, a bug with the namespace input reported by a Siesta user was fixed
 ([PR #350](https://github.com/aiidateam/aiida-workgraph/pull/350))
 
-You can keep updated with the developments towards the v0.5 release through
+You can keep updated with the developments towards the stable v0.5 release through
 [this GitHub project](https://github.com/orgs/aiidateam/projects/10).
 
 
@@ -107,7 +107,7 @@ The `aiida-restapi` was [migrated to Pydantic v2](https://github.com/aiidateam/a
 with recent `aiida-core` versions (>=2.5). Additionally, various endpoints of the old REST-API were implemented.
 In line with the migration to `pydantic` for all AiiDA ORM classes (see
 [this open PR](https://github.com/aiidateam/aiida-core/pull/6255) as already linked above), work has been carried out on
-the AiiDA REST API, to prepare the repository for use of the corresponding `pydantic` ORM models.
+the AiiDA REST-API, to prepare the repository for the use of the corresponding `pydantic` ORM models in `aiida-core`.
 
 
 ## [aiida-atomistic](https://github.com/aiidateam/aiida-atomistic)
