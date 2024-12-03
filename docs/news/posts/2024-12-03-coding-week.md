@@ -91,10 +91,10 @@ separate repository: [aiida-pythonjob](https://github.com/aiidateam/aiida-python
 In addition to these discussions, key bugs were identified and resolved:
 - A bug when running `aiida-shell` via WorkGraph has been fixed in
 [this PR](https://github.com/aiidateam/aiida-workgraph/pull/351)
-- the requirement of specifying inputs/outputs/parser_outputs in the decorator signature when creating a `Task` has been lifted, allowing a
-less verbose syntax ([PR](https://github.com/aiidateam/aiida-workgraph/pull/343)).
-- A bug with the entry point was addressed ([PR #352](https://github.com/aiidateam/aiida-workgraph/pull/352)).
-- And, lastly, a bug with the namespace input reported by a Siesta user was fixed.
+- The requirement of specifying inputs/outputs/parser_outputs in the decorator signature when creating a `Task` has been
+  lifted, allowing for a less verbose syntax ([PR](https://github.com/aiidateam/aiida-workgraph/pull/343))
+- A bug with the entry point was addressed ([PR #352](https://github.com/aiidateam/aiida-workgraph/pull/352))
+- And, lastly, a bug with the namespace input reported by a Siesta user was fixed
 ([PR #350](https://github.com/aiidateam/aiida-workgraph/pull/350))
 
 You can keep updated with the developments towards the v0.5 release through
