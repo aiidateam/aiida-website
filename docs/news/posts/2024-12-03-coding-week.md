@@ -1,6 +1,6 @@
 ---
 blogpost: true
-category: Report
+category: Reports
 tags: coding-week
 author: The AiiDA team
 date: 2024-12-03
