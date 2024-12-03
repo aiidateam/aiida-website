@@ -122,7 +122,7 @@ backward-incompatible.
 However, this also gives us the opportunity to further refine and improve the relevant classes.
 In particular, lots of discussions on the design of the new `StructureData` class have been held, and the current design
 choices can be found [here](https://github.com/aiidateam/aiida-atomistic). These include adding properties stored with
-each structure, including for instance magnetization, Hubbard U and V values, etc. During the coding week, some members
+each structure, for instance magnetization, Hubbard U and V values, etc. During the coding week, some members
 of the AiiDA team have been working on this topic, with the issues found
 [here](https://github.com/aiidateam/aiida-atomistic/issues?q=label%3Acoding-week) on GitHub. The main result achieved is
 the development of a clear API to query `StructureData` from the AiiDA database with respect to the defined properties
