@@ -119,7 +119,7 @@ specific to atomistic simulations out of `aiida-core` and into the new [aiida-at
 package. These changes will only be concluded and published with the next major release, as some of them will be
 backward-incompatible.
 
-However, this gives us the opportunity to further refine and improve the relevant classes.
+However, this also gives us the opportunity to further refine and improve the relevant classes.
 In particular, lots of discussions on the design of the new `StructureData` class have been held, and the current design
 choices can be found [here](https://github.com/aiidateam/aiida-atomistic). These include adding properties stored with
 each structure, including for instance magnetization, Hubbard U and V values, etc. During the coding week, some members
