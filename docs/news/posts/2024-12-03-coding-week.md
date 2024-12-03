@@ -89,13 +89,12 @@ using WorkGraph, brainstorming various approaches and working on examples to dem
 To maintain a clean and focused repository for WorkGraph development, we decided to move the **PythonJob plugin** to a
 separate repository: [aiida-pythonjob](https://github.com/aiidateam/aiida-pythonjob).
 In addition to these discussions, key bugs were identified and resolved:
-- A bug when running `aiida-shell` via WorkGraph has been fixed in
-[this PR](https://github.com/aiidateam/aiida-workgraph/pull/351)
+- A bug when running `aiida-shell` via WorkGraph has been fixed ([PR 351](https://github.com/aiidateam/aiida-workgraph/pull/351))
 - The requirement of specifying inputs/outputs/parser_outputs in the decorator signature when creating a `Task` has been
-  lifted, allowing for a less verbose syntax ([PR](https://github.com/aiidateam/aiida-workgraph/pull/343))
-- A bug with the entry point was addressed ([PR #352](https://github.com/aiidateam/aiida-workgraph/pull/352))
+  lifted, allowing for a less verbose syntax ([PR 343](https://github.com/aiidateam/aiida-workgraph/pull/343))
+- A bug with the entry point was addressed ([PR 352](https://github.com/aiidateam/aiida-workgraph/pull/352))
 - And, lastly, a bug with the namespace input reported by a Siesta user was fixed
-([PR #350](https://github.com/aiidateam/aiida-workgraph/pull/350))
+([PR 350](https://github.com/aiidateam/aiida-workgraph/pull/350))
 
 You can keep updated with the developments towards the stable v0.5 release through
 [this GitHub project](https://github.com/orgs/aiidateam/projects/10).
