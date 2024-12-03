@@ -18,9 +18,9 @@ in Leysin, Switzerland during 18-22 of November.
 
 One [significant PR](https://github.com/aiidateam/aiida-core/pull/6626) that has come out of the coding week has been to
 add a _truly_ asynchronous transport plugin.  While the AiiDA engine is, in general, written asynchronously, file upload
-and retrieve tasks were actually still executed in a blocking manner (the more technical readers are referred to [this
-code
-blob](https://github.com/aiidateam/aiida-core/blob/c93fb4f75554802e46fdcb7cf8caf27318ad04d0/src/aiida/engine/processes/calcjobs/tasks.py#L58-L95)).
+and retrieve tasks were actually still executed in a blocking manner (the more technical readers are referred to lines
+58-95 of
+[this code blob](https://github.com/aiidateam/aiida-core/blob/c93fb4f75554802e46fdcb7cf8caf27318ad04d0/src/aiida/engine/processes/calcjobs/tasks.py)).
 
 ### `pydantic` to specify ORM entities
 
