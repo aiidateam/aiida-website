@@ -150,6 +150,7 @@ linkcheck_ignore = [
     r"https://www.facebook.com/.*",
     r"https://github.com/aiidateam/aiida-core/discussions/.*",  # has been archived
     r"https://github.com/orgs/aiidateam/discussions",  # has been archived
+    r"https://news.microsoft.com/azure-quantum-june-event",  #  Requires human-verification
 ]
 
 aiida_ignore_event_checks = [
