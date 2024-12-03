@@ -18,11 +18,11 @@ in Leysin, Switzerland during 18-22 of November.
 
 One [significant PR](https://github.com/aiidateam/aiida-core/pull/6626) that has come out of the coding week has been to
 add a _truly_ asynchronous transport plugin.  While the AiiDA engine is, in general, written asynchronously, file upload
-and retrieve tasks were actually still executed in a blocking manner.
+and retrieve tasks were actually still executed in a blocking manner. With the new `AsyncTransport` plugin, file
+uploads/downloads won't be blocking the interpreter anymore.
 
 ### `pydantic` to specify ORM entities
 
-With the new `AsyncTransport` plugin, file uploads/downloads won't be blocking the interpreter anymore.
 Another large [open PR](https://github.com/aiidateam/aiida-core/pull/6255) that we dedicated some time towards aims to
 use `pydantic` to specify schemas for all of AiiDA's object-relational mapper (ORM) entities (the AEP can be found
 [here](https://github.com/aiidateam/AEP/blob/983a645c9285ba65c7cf07fe6064c23e7e994c06/010_orm_schema/readme.md)).
