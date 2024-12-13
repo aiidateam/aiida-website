@@ -100,7 +100,7 @@ This is at a _very_ early stage of development, so handle with care, however, yo
 The `PythonJob` will eventually allow users to run _any_ Python function, _without modifications_.
 That means, no need to pass or return subclasses of AiiDA's `orm.Data` nodes, and no specific handling of those entities inside the function body.
 Just write your function, using whichever library you need, run it via `PythonJob`, and voila, you get all the AiiDA features (vide supra).
-At least that's the plan &mdash; we'll make sure to keep you posted about the developments!
+At least that's the plan &mdash; we'll make sure to keep you updated about the developments!
 
 ## Epilogue
 
@@ -108,7 +108,7 @@ As some of the plugins discussed in this post don't have official releases yet, 
 However, as many of them have been in use by developers over the past years, have since been quite stable, and we think they could benefit many users, we _do_ feel comfortable to promote them to a larger audience.
 Well, that's why we created this blog post!
 
-Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the latest documentation of AiiDA, which is also linked to from a new panel of the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/).
+Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the latest documentation of AiiDA, which is also linked to from a new panel on the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/).
 
 Happy computing,
 <br>
