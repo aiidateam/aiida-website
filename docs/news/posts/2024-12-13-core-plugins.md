@@ -108,9 +108,10 @@ As some of the plugins discussed in this post don't have official releases yet, 
 However, as many of them have been in use by developers over the past years, have since been quite stable, and we think they could benefit many users, we _do_ feel comfortable to promote them to a larger audience.
 Well, that's why we created this blog post!
 
-Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the latest documentation of AiiDA, which is also linked to from a new panel of the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/)
+Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the latest documentation of AiiDA, which is also linked to from a new panel of the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/).
 
 Happy computing,
+<br>
 The AiiDA team
 
 [^1]:
