@@ -76,6 +76,8 @@ To facilitate this process, we maintain the `aiida-code-registry`[^6] as a colle
 
 ## Miscellaneous
 
+(aiida-plugin-cutter)=
+
 ### [`aiida-plugin-cutter`](https://github.com/aiidateam/aiida-plugin-cutter/)
 
 Not only when writing papers it can be hard to start from a blank page, but so it might be as well when beginning with
