@@ -63,7 +63,7 @@ As we outlined in [another one of our recent blog posts](https://aiida.net/news/
 Still, if you find yourself juggling many different profiles on your machine, each with its own configuration, Python environment, and directory of setup files (e.g., for `Computer` and `Code` instances), it can become easy to mess things up.[^4]
 To help out with this, `aiida-project` encapsulates and automates the steps to create and switch between different projects using AiiDA, basically functioning as an _AiiDA environment manager_.
 It creates the necessary directories and Python environments for you (via `pip` or `conda`) in standardized locations, and enables easy switching between projects.
-Installation is simple via, e.g., `pipx`, and `uv` support is [coming soon](https://github.com/aiidateam/aiida-project/pull/28)!
+Installation is simple, e.g., via `pipx`, and `uv` support is [coming soon](https://github.com/aiidateam/aiida-project/pull/28)!
 
 ### [`aiida-code-registry`](https://github.com/aiidateam/aiida-code-registry/)
 
