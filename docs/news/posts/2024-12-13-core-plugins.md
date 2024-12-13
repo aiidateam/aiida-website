@@ -61,7 +61,7 @@ So if you ever need to run a lot of shorter simulations, make sure to give it a 
 
 As we outlined in [another one of our recent blog posts](https://aiida.net/news/posts/2024-09-20-simpler-installation.html), since v2.0, we have significantly simplified the creation of an AiiDA profile.
 Still, if you find yourself juggling many different profiles on your machine, each with its own configuration, Python environment, and directory of setup files (e.g., for `Computer` and `Code` instances), it can become easy to mess things up.[^4]
-To help out with this, `aiida-project` encapsulates and automates the steps to create and switch between different projects using AiiDA, basically functioning as an _AiiDA project manager_.
+To help out with this, `aiida-project` encapsulates and automates the steps to create and switch between different projects using AiiDA, basically functioning as an _AiiDA environment manager_.
 It creates the necessary directories and Python environments for you (via `pip` or `conda`) in standardized locations, and enables easy switching between projects.
 Installation is simple via `pipx`, and `uv` support is [coming soon](https://github.com/aiidateam/aiida-project/pull/28)!
 
@@ -92,13 +92,13 @@ It therefore provides you everything you need to get started to contribute to th
 
 ### [`aiida-firecrest`](https://github.com/aiidateam/aiida-firecrest/)
 
-This repository implments a `Transport` and `Scheduler` plugin for [FirecREST](https://www.cscs.ch/services/products/firecrest/), a new REST interface for accessing HPC resources developed at the Swiss National Supercomputing Centre (CSCS).
+This repository implements a `Transport` and `Scheduler` plugin for [FirecREST](https://www.cscs.ch/services/products/firecrest/), a new REST interface for accessing HPC resources developed at the Swiss National Supercomputing Centre (CSCS).
 FirecREST addresses many of the security concerns of SSH, among others, providing more fine-grained access control limited by the endpoints given by the REST interface.
 As this approach is very different from the classical HPC communication via SSH, this AiiDA plugin ensures continued seamless communication of AiiDA to the CSCS machines &mdash; in all supported ways.
 
 ### [`aiida-pythonjob`](https://github.com/aiidateam/aiida-pythonjob/)
 
-Initially, part of the `aiida-workgraph`, we recently moved this part of the code out, and into its own repository.
+Initially part of the `aiida-workgraph`, we recently moved this part of the code out, and into its own repository.
 This is at a _very_ early stage of development, so handle with care, however, you can find the AiiDA Enhancement Proposal (AEP) [here](https://github.com/superstar54/AEP/blob/pythonjob/010_pythonjob/readme.md).
 The `PythonJob` will eventually allow users to run _any_ Python function, _without modifications_.
 That means, no need to pass or return subclasses of AiiDA's `orm.Data` nodes, and no specific handling of those entities inside the function body.
@@ -107,11 +107,11 @@ At least that's the plan, and we'll keep you posted about the developments!
 
 ***
 
-As the plugins discussed in this post, don't have official releases yet, their API might still change, and we cannot promise backwards-compatibility &mdash; so use them at your own risk!
+As some of the plugins discussed in this post don't have official releases yet, their API might still change, and we cannot promise backwards-compatibility &mdash; so use them at your own risk!
 However, as many of them have been in use by developers over the past years, have since been quite stable, and we think they could benefit many users, we _do_ feel comfortable to promote them to a larger audience.
 Well, that's why created this blog post!
 
-Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the RTD page of AiiDA, which is also linked to from a new panel of the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/).
+Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the documentation of AiiDA, which is also linked to from a new panel of the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/).
 
 
 [^1]:
