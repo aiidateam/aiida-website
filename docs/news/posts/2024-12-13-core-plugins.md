@@ -37,7 +37,14 @@ If you eventually _do_ want to have a more sophisticated interface for your code
 ### [`aiida-submission-controller`](https://github.com/aiidateam/aiida-submission-controller/)
 
 Have you ever wondered how a "hero run" like the one recently conducted on the new CSCS Alps infrastructure (read more about it [here](https://nccr-marvel.ch/highlights/AiiDA-hero-run-Alps)) can be orchestrated?
-[TODO: `mbercx` complete]
+In case you want to run a certain workflow, or several connected ones, for a set of structures, it can be handy to have a tool that:
+
+1. Takes care of keeping a certain number of active workflows at any time, without needing to monitor the runs.
+2. Makes sure you don't run the same structure twice.
+
+This is exactly the goal of the `aiida-submission-controller`.
+Setting up a controller simply requires that you specify how to run the process you want to run based on the parent node, and optionally the extras you use to track which structures have been run.
+Be sure to check out the examples in the repository, and if you have any questions simply raise them on the [AiiDA Discourse](https://aiida.discourse.group/latest)!
 
 ### [`aiida-hyperqueue`](https://github.com/aiidateam/aiida-hyperqueue/)
 
