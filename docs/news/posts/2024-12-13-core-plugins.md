@@ -17,20 +17,20 @@ In today's post, we would like to give you a short introduction to some of these
 
 ### [`aiida-workgraph`](https://github.com/aiidateam/aiida-workgraph/)
 
-We've been making quite a bit of fuzz about this one in recent weeks already, as we're targeting a first, stable release for early next year (fingers crossed :crossed_fingers:).
+We've been making quite a bit of fuzz about this one in recent weeks already, as we're targeting a first, stable release for early next year (fingers crossed 🤞).
 The `aiida-workgraph` provides an alternative way to write workflows, in addition to (but not replacing) the classical `WorkChain`.
 It comes with all the typical AiiDA features, like provenance tracking, checkpointing, caching, and remote execution, but provides a simpler syntax, and allows you to write workflows more interactively.
 This can be achieved by adding graph nodes[^2] (or `Tasks`, as we call them) and links, in equivalence to how one would typically build-up a graph.
 In this way, `aiida-workgraph` makes it simpler to quickly connect existing AiiDA components (`CalcJobs`, `WorkChains`, or other `WorkGraphs`), and even allows visualizing the flow of data via the different processes before the workflow is executed (through an interactive web GUI).
 As we're currently stabilizing the API, any feedback is valuable and helps us to polish the tool as best as we can before the release!
-You can read more about it on its [RTD page](https://aiida-workgraph.readthedocs.io/en/latest/), and find example `WorkGraphs` in [this repository](https://github.com/superstar54/workgraph-collections).
+You can read more about it on its [documentation page](https://aiida-workgraph.readthedocs.io/en/latest/), and find example `WorkGraphs` in [this repository](https://github.com/superstar54/workgraph-collections).
 
 ### [`aiida-shell`](https://github.com/sphuber/aiida-shell/)
 
 Probably we don't have to talk too much about this one, as we covered it in depth in one of our recent [blog posts](https://aiida.net/news/posts/2024-11-01-aiida-shell.html).
 In a nutshell, `aiida-shell` allows you to run any executable (e.g., a shell script, Python script, compiled binary, etc.) without the need for writing an entire plugin interface for it.
-Just plug it into the `launch_shell_job` function, and you're ready to rumble!
-If you eventually _do_ want to have a more sophisticated interface for your code or script, and you can't find one on the [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/), [this later section](#aiida-plugin-cutter) of the post might be interesting for you.
+Just plug it into the `launch_shell_job` function, and you're ready to rumble (read more [here](https://aiida-shell.readthedocs.io/en/latest/))!
+If you eventually _do_ want to have a more sophisticated interface for your code or script, and you can't find one on the [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/), [this later section](#aiida-plugin-cutter) of the post might also be interesting to you.
 
 ## Enhancing high-throughput
 
@@ -48,8 +48,8 @@ Be sure to check out the examples in the repository, and if you have any questio
 
 ### [`aiida-hyperqueue`](https://github.com/aiidateam/aiida-hyperqueue/)
 
-If you've ever run simulations on a high-performance computing (HPC) infrastructure, you're likely familiar with scheduling systems such as SLURM, SGE and PBSPro (AiiDA supports all of these, by the way :wink:).
-However, you might run into issues when running many small calculations through AiiDA on these queueing systems.
+If you've ever run simulations on a high-performance computing (HPC) infrastructure, you're likely familiar with scheduling systems such as SLURM, SGE and PBSPro (AiiDA supports all of these, by the way 😉).
+However, you might have issues when running many small calculations through AiiDA on these queueing systems.
 Maybe your HPC cluster has a low limit on the number of active jobs allowed at any time, or the total queueing time for your workflow becomes prohibitively large.
 In this case, you might want to have a look at the `aiida-hyperqueue` plugin, which interfaces AiiDA with the [HyperQueue scheduler](https://github.com/It4innovations/hyperqueue).
 This allows you to run many jobs in parallel on a single node, and avoids having to requeue for each calculation in your workflow.
@@ -72,7 +72,7 @@ Let's elaborate on this further:
 If you have interactively created such entities via `verdi computer setup` and `verdi code create` by filling in the prompts you are being asked on the command line (which is the route we usually mention in the tutorials), it might be worthwhile to export their configurations from the AiiDA database into YAML files.[^5]
 From these files, new instances can then be created by passing them to the above two commands via the `--config` flag.
 This allows you to re-use the configurations, make and track changes, and follow a Configuration-as-Code (CaC) approach.
-To facilitate this process, we maintain the `aiida-code-registry`[^6] as a collection of such configuration files, which can thus serve as a great way to share existing and start setting up new resources! If you don't find the national HPC your are using in the repository, and your configuration is somewhat transferable, feel free to make a PR &mdash; you might help out others!
+To facilitate this process, we maintain the `aiida-code-registry`[^6] as a collection of such configuration files, which can thus serve as a great way to share existing and start setting up new resources! If you don't find the national HPC your are using in the repository, and your configuration is somewhat transferable, feel free to make a PR &mdash; like this, you might help others to get started!
 
 ## Miscellaneous
 
@@ -80,13 +80,9 @@ To facilitate this process, we maintain the `aiida-code-registry`[^6] as a colle
 
 ### [`aiida-plugin-cutter`](https://github.com/aiidateam/aiida-plugin-cutter/)
 
-Not only when writing papers it can be hard to start from a blank page, but so it might be as well when beginning with
-a new AiiDA plugin (or any software project, really). To help you out with this, the `aiida-plugin-cutter` provides a
-cookiecutter template for an AiiDA plugin.[^7] It contains - in the typical expected directory structure - a barebone
-`Calculation` class (derived from `CalcJob`, and implementing the two main methods `define` and
-`prepare_for_submission`),
-a minimal `Parser` class, a command-line-interface (CLI), tests, and some CI/CD, such as `pre-commit` and GitHub Actions
-setup.
+Not only when writing papers can it be hard to start from a blank page, but also when beginning with the development of a new AiiDA plugin (or any software project, really).
+To help you out with this, the `aiida-plugin-cutter` provides a cookiecutter template for an AiiDA plugin.[^7]
+It contains - in the typical expected directory structure - a barebone `Calculation` class (derived from `CalcJob`, and implementing the two main methods `define` and `prepare_for_submission`), a minimal `Parser` class, a command-line-interface (CLI), tests, and some CI/CD, such as `pre-commit` and GitHub Actions setup.
 It therefore provides you everything you need to get started to contribute to the
 [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/) yourself!
 
@@ -103,7 +99,7 @@ This is at a _very_ early stage of development, so handle with care, however, yo
 The `PythonJob` will eventually allow users to run _any_ Python function, _without modifications_.
 That means, no need to pass or return subclasses of AiiDA's `orm.Data` nodes, and no specific handling of those entities inside the function body.
 Just write your function, using whichever library you need, run it via `PythonJob`, and voila, you get all the AiiDA features (vide supra).
-At least that's the plan, and we'll keep you posted about the developments!
+At least that's the plan &mdash; We'll make sure to keep you posted about the developments!
 
 ***
 
@@ -111,7 +107,7 @@ As some of the plugins discussed in this post don't have official releases yet, 
 However, as many of them have been in use by developers over the past years, have since been quite stable, and we think they could benefit many users, we _do_ feel comfortable to promote them to a larger audience.
 Well, that's why created this blog post!
 
-Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the documentation of AiiDA, which is also linked to from a new panel of the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/).
+Finally, we also added an [overview of these plugins](https://aiida.readthedocs.io/projects/aiida-core/en/latest/reference/core_plugins.html) to the latest documentation of AiiDA, which is also linked to from a new panel of the [landing page](https://aiida.readthedocs.io/projects/aiida-core/en/latest/)
 
 
 [^1]:
