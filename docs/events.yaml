@@ -26,6 +26,12 @@
   location: Pavia (IT)
   announce: /news/posts/2023-08-28-hubbard-aiida-tutorial.md
 
+- name: AiiDA presentation at the 14th Asia Computational Materials Design (ACMD) Workshop
+  start: 2022-11-12
+  duration: 1 day
+  location: Online
+  url: https://www.c2c.eng.osaka-u.ac.jp/activitiy/document/20221108_2.pdf
+
 - name: AiiDA online demonstration and virtual tutorial
   start: 2022-10-04
   duration: 3 days
