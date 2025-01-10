@@ -105,7 +105,7 @@ relax_controller.submit_new_batch(verbose=True)
 By using the `verbose=True` setting, the submission controller will print the current status of the submissions:
 
 ```
-                               Status                                
+                               Status
 ┏━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┓
 ┃ Total ┃ Submitted ┃ Left to run ┃ Max active ┃ Active ┃ Available ┃
 ┡━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━┩
@@ -126,7 +126,7 @@ Great, our first `PwRelaxChain`s are in progress!
 Since now two work chains are already running, rerunning the command should lead to no new submissions:
 
 ```
-                               Status                                
+                               Status
 ┏━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┓
 ┃ Total ┃ Submitted ┃ Left to run ┃ Max active ┃ Active ┃ Available ┃
 ┡━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━┩
