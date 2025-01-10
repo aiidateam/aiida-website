@@ -6,6 +6,8 @@ author: Julian Geiger, Marnik Bercx
 date: 2024-12-13
 ---
 
+(post-aiida-core-plugins)=
+
 # Non research-domain specific plugins to extend core functionality
 
 Dear users, we're happy to announce that we have recently crossed the 100-plugin milestone of registered plugin packages on the [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/).
