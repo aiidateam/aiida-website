@@ -248,3 +248,6 @@ From standard Python debugging approaches (`pdb`, logging, trace tools) to more 
 While some approaches work seamlessly, others need adaptation for AiiDA's `nest-asyncio` and multi-process, RPC environment.
 
 By continuing to improve our asynchronous design, refine our logging strategies, adopting specialized debugging tools, and sharing best practices across the community, we hope can make async in AiiDA robust and traceable for everyone.
+
+Lastly, make sure to keep an eye open for the next blog post!
+It is scheduled for 2025-02-21, will continue on the topic of asynchronous programming, and give you insight into how we added an asynchronous transport plugin (via [PR #6626](https://github.com/aiidateam/aiida-core/pull/6626)) which will be released with AiiDA v2.7.0.
