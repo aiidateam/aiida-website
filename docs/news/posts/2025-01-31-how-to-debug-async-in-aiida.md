@@ -24,7 +24,7 @@ In this blog post, we will:
 ## Async Programming in AiiDA
 
 As part of its architecture, AiiDA employs [**Plumpy** (a Python workflow library maintained by the AiiDA team)](https://github.com/aiidateam/plumpy) under the hood to schedule AiiDA processes into an event loop.
-Plumpy relies on asynchronous principles and mechanisms (Futures, event loops, coroutines) for handling complex workflows with potentially long-lived tasks.
+Plumpy relies on asynchronous programming (Futures, event loops, coroutines) for handling complex workflows with potentially long-lived tasks.
 
 Most Python libraries that deal with concurrency use the `asyncio` module of the standard library.
 The typical way of using `asyncio` is by having an interpreter managing a single event loop.
@@ -119,7 +119,7 @@ Despite these complexities, there are still some regular tools for debugging asy
      # The rest of your async code...
      loop.run_until_complete(some_coroutine())
      ```
-   - This can already provide insights into where the event loop might be getting stuck and we use it inside the plumpy event loop when the `debug` logging level is set.
+   - This can already provide insights into where the event loop might be getting stuck and we use it inside the plumpy event loop when the `DEBUG` logging level is set.
 
 3. **Tracers and Profilers**:
    - Tools such as [Yappi](https://github.com/sumerc/yappi) or [PyInstrument](https://github.com/joerick/pyinstrument) can sometimes give you an overview of where the code is spending time.
@@ -164,7 +164,6 @@ pytest tests/engine/processes/test_control.py::test_kill_processes -v -s --log-c
 ```
 
 Then you can go and check the log messages if exceptions raised from the daemon.
-When debugging, double-check your `logging` setup and make sure you're either writing to `stderr` or to a file that you can monitor.
 
 ### `aiomonitor` Is A Good Friend: A Case Study
 
