@@ -9,7 +9,7 @@ date: 2025-01-31
 # Debugging Asynchronous Programming in AiiDA
 
 Asynchronous programming allows a program to scale better by switching tasks running on the CPU while waiting on I/O, network operations, or other tasks that don't require constant processing.
-However, debugging async code can be tricky especially in the context of **AiiDA**, where the event loop may be configured in uncommon ways.
+However, debugging async code can be tricky especially in the context of **AiiDA**, where the event loop may be configured in custom ways.
 
 In this blog post, we will:
 
@@ -31,7 +31,7 @@ The typical way of using `asyncio` is by having an interpreter managing a single
 
 When handling I/O-bound tasks, one can use `await` to run coroutines sequentially – one after another.
 When a coroutine encounters `await`, it pauses execution and allows the event loop to run other coroutines while waiting for I/O.
-This way, control is efficiently handed back to the event loop instead of blocking execution.
+This way, control is given back to the event loop instead of blocking execution.
 
 One can schedule a coroutine as a task using, for instance, `asyncio.create_task(...)`, which allows it to run concurrently with other tasks.
 This means the event loop interleaves execution, switching between tasks whenever they reach an `await` or an I/O operation.
@@ -67,27 +67,27 @@ Other coroutines can still be running in parallel, leading to inconsistent state
 
 ### `nest-asyncio`
 
-As mentioned above, AiiDA is using `nest-asyncio` to make the event loop started by the parent AiiDA process able to nest other event loops of child processes.
+As mentioned above, AiiDA is using [`nest-asyncio`](https://github.com/erdewit/nest_asyncio) to make the event loop started by the parent AiiDA process able to nest other event loops of child processes.
 In principle, every AiiDA process could be launched as an asyncio task, however, for historical reasons, this approach wasn't adopted.
 AiiDA processes include workchains, which are themselves processes capable of launching other AiiDA processes.
 Instead, processes are launched using `loop.run_until_complete(self.step_until_terminated())`, where `self.step_until_terminated` is an asynchronous function that steps through all `awaitable` coroutines of the process.
 
 This approach requires starting a new event loop for each newly spawned process within the parent process's event loop.
 However, after the introduction of [PEP 3156](https://peps.python.org/pep-3156/), which standardized `asyncio` as Python's asynchronous runtime, event loops became non-reentrant.
-The community also decided not to [support nested event loop](https://github.com/python/cpython/issues/66435).
+The community also decided not to [support nested event loops](https://github.com/python/cpython/issues/66435).
 Previously, AiiDA used [`tornado`](https://www.tornadoweb.org/en/stable/), a separate asynchronous runtime, before the standardization of `asyncio`.
 
-To ensure compatibility with the original design, AiiDA utilizes [`nest-asyncio`](https://github.com/erdewit/nest_asyncio), which allows re-entry into event loops.
+To ensure compatibility with the original design, as mentioned above, AiiDA relies on `nest-asyncio` to enable re-entry into event loops.
 This approach enables AiiDA to manage a single event loop per thread, allowing all processes to run asynchronously within that loop.
-Meanwhile, we recognizing that most AiiDA users come from scientific fields where asynchronous programming may be unfamiliar and challenging to work with.
-By exposing the synchronous `execute` method of AiiDA process to the users, they don't need have to struggle with any asynchronous programming concepts, which are effectively hidden away in AiiDA's (and plumpy's) `src`.
+Meanwhile, we recognize that most AiiDA users come from scientific fields, where asynchronous programming may be unfamiliar or challenging to work with.
+By exposing the synchronous `execute` method of AiiDA's process class, users don't have to deal with any asynchronous programming concepts, which are thus effectively hidden away in AiiDA's (and plumpy's) `src`.
 
 This also allows AiiDA to run asynchronous code in an interactive environment like an IPython shell.
 However, it lead to edge cases that don't arise in a purely "vanilla" `asyncio` setup.
 
 ### RPC-Like Communication
 
-Python's `asyncio` typically runs in a single thread, but AiiDA uses its daemon to spin up dedicated runners on separate threads or even kernal processes (separate python interpreters).
+Python's `asyncio` typically runs in a single thread, but AiiDA uses its daemon to spin up dedicated runners on separate threads or even kernel processes (separate Python interpreters).
 Since the main thread is not always the one directly running the event loop, standard debugging tools can be less effective.
 
 AiiDA's `verdi daemon` command or its internal runners can communicate with each other (and with the client) via remote procedure calls (RPC).
@@ -95,7 +95,7 @@ Debugging these interactions can be complicated when you have multiple processes
 
 It means when using AiiDA in production, we are facing two levels of concurrency:
 1. The AiiDA workers are run in independent interpreters which are not sharing the memory, and
-1. Each worker manages its own event loop that interleaves and jumps between for running processes.
+1. Each worker manages its own event loop that interleaves and jumps between running processes.
 
 ---
 
@@ -104,7 +104,7 @@ It means when using AiiDA in production, we are facing two levels of concurrency
 Despite these complexities, there are still some regular tools for debugging async code in Python:
 
 1. **`print` and Logging**:
-   - The simplest solution can be the most effective: insert logging statements (`logging.debug`, `logging.info`) or `print` to trace the execution flow.
+   - The simplest solution can sometimes be the most effective: insert logging statements (`logging.debug`, `logging.info`) or `print` to trace the execution flow.
    - You can set up more verbose logging or increase the logging level to capture more details about what is happening inside coroutines.
 
 2. **`asyncio` Debug Mode**:
@@ -122,8 +122,7 @@ Despite these complexities, there are still some regular tools for debugging asy
    - This can already provide insights into where the event loop might be getting stuck and we use it inside the plumpy event loop when the `DEBUG` logging level is set.
 
 3. **Tracers and Profilers**:
-   - Tools such as [Yappi](https://github.com/sumerc/yappi) or [PyInstrument](https://github.com/joerick/pyinstrument) can sometimes give you an overview of where the code is spending time.
-   - When writting this post, I found out about these tools, and deemed it worth it to give them a try in AiiDA. However, they require more standard event loop management without using `nest-asyncio`.
+   - Tools such as [Yappi](https://github.com/sumerc/yappi) or [PyInstrument](https://github.com/joerick/pyinstrument) can sometimes give you an overview of where the code is spending time (however, they can require more standard event loop management without using `nest-asyncio`).
 
 4. **`pdb`/`ipdb`**:
    - You can still use Python's `pdb` debugger (or the iPython version, `ipdb`), but you have to be mindful: hitting a breakpoint in a coroutine does not always guarantee the rest of the event loop will pause nicely.
@@ -134,7 +133,8 @@ Despite these complexities, there are still some regular tools for debugging asy
 ## A Real-World Stuck Coroutine
 
 The insights for this post were obtained while working on [PR #6701](https://github.com/aiidateam/aiida-core/pull/6701), where I was stuck on debugging a long execution time of an AiiDA unit test that checks for a memory leak.
-While the test itself was actually working fine, the long execution time originated from accessing remote resouces via AiiDA's `Transport` mechanism, which took unexpectedly long because transport operations were running in a synchronous, blocking manner, having a default SSH timeout interval of 30s for each transport communication (see plans to decrease the default value of this setting in [PR #6599](https://github.com/aiidateam/aiida-core/pull/6599) for more detail).
+While the test itself was actually working fine, the long execution time originated from accessing remote resouces via AiiDA's `Transport` mechanism.
+These took unexpectedly long because transport operations were running in a synchronous, blocking manner, having a default SSH cooldown interval of 30s for each transport communication (see plans to decrease the default value of this setting in [PR #6599](https://github.com/aiidateam/aiida-core/pull/6599)).
 Until using `aiomonitor` to check the stack trace of the asynchronous task, the actual issue was very difficult to trace back.
 
 ### Regular Tools vs. AiiDA's Setup
@@ -154,8 +154,8 @@ A key question is: *Which logger am I using, and where can I access the logs?* I
 - The user's command line (for `verdi` commands).
 
 In the first case, if the AiiDA processes are run through the daemon, the log messages generally go into the daemon log file in your AiiDA config path, typically located in `.aiida/daemon/log/` under your `$AIIDA_PATH` (which can also be printed to `stdout` via the `verdi daemon logshow` CLI command).
-However, when actually running tests via pytest, the `$AiiDA_PATH` is reset to the pytest tmp folder for the session.
-With the changes of a recent [PR #6698](https://github.com/aiidateam/aiida-core/pull/6698), now if you run pytest with setting the CLI log level to `DEBUG`, it will print where these log file is located.
+However, when actually running tests via pytest, the `$AIIDA_PATH` is reset to the pytest tmp folder for the session.
+With the changes of a recent [PR #6698](https://github.com/aiidateam/aiida-core/pull/6698), if you now run pytest with setting the CLI log level to `DEBUG`, it will also print where the log file is located.
 
 For example you can run:
 
@@ -163,11 +163,11 @@ For example you can run:
 pytest tests/engine/processes/test_control.py::test_kill_processes -v -s --log-cli-level=DEBUG
 ```
 
-Then you can go and check the log messages if exceptions raised from the daemon.
+Then you can go and check the log messages if exceptions were raised by the daemon.
 
 ### `aiomonitor` Is A Good Friend: A Case Study
 
-Another known challenge is diagnosing a situation where **Plumpy** or the AiiDA RPC communication gets "stuck."
+Another known challenge is diagnosing a situation where **Plumpy** or the AiiDA RPC communication gets "stuck".
 This often manifests as your code simply hanging, with no apparent errors or timeouts.
 Tracing this can be *extremely* frustrating without a real-time window into the event loop's state.
 
@@ -185,7 +185,7 @@ pip install aiomonitor
 ```
 
 In a typical script (or if you have direct control over the loop), you can wrap the event loop with an `aiomonitor` context manager:
-For `test_kill_processes`, luckily the event is not from the daemon but directly from the pytest threading (otherwise one would need to use the daemon log to debug the former first and decouple the execution of the AiiDA process in a dedicate event loop of pytest).
+For `test_kill_processes`, luckily the event is not from the daemon but directly from the pytest threading (otherwise one would need to use the daemon log to debug the former first and decouple the execution of the AiiDA process in a dedicated event loop of pytest).
 
 Since the event loop is started from `plumpy` `Process`'s `execute` method, it is necessary to make the change for the `execute` method as below to monitor the event loop using `aiomonitor`.
 
@@ -216,7 +216,7 @@ telnet 127.0.0.1 50101
 ```
 
 From there, you can type commands like `tasks` to see a list of running coroutines.
-It will enter a read-eval-print-loop (REPL) like `ipdb` session, where you can check the status and stack trace of a running task by finding its id and use `where` to print its traceback.
+It will enter a read-eval-print-loop (REPL)-like `ipdb` session, where you can check the status and stack trace of a running task by finding its id and use `where` to print its traceback.
 If you notice one coroutine isn't making progress, you can delve deeper into it, potentially finding out if there's a deadlock, an indefinite `await`, or some blocking I/O.
 
 ## Future Improvements for Async Programming in AiiDA
@@ -233,7 +233,7 @@ Debugging async code in AiiDA is still evolving. Some potential areas for improv
    - Sharing debugging "recipes" (e.g., how to attach an event loop debugger in a plugin vs. in the daemon) would help new developers.
 
 1. **Test Harnesses for Async**:
-   - Providing a robust local runner that can be launched in a fully controlled environment (with or without `nest-asyncio`, with or without AiiDA daemon, with or without RabbitMQ) would let developers more easily replicate issues in their own environment.
+   - Providing a robust local runner that can be launched in a fully controlled environment (with or without `nest-asyncio`, with or without the AiiDA daemon, with or without RabbitMQ) would let developers more easily replicate issues in their own environment.
 
 1. **Enhanced Timeout & Deadlock Detection**:
    - Building on top of `asyncio` debug mode, AiiDA could detect tasks that exceed certain time limits, automatically log stack traces, or even attempt to break out of deadlocks.
@@ -246,7 +246,7 @@ Asynchronous programming enables AiiDA to manage complex, distributed, and neste
 From standard Python debugging approaches (`pdb`, logging, trace tools) to more advanced techniques like `aiomonitor`, there are various ways to tackle challenges.
 While some approaches work seamlessly, others need adaptation for AiiDA's `nest-asyncio` and multi-process, RPC environment.
 
-By continuing to improve our asynchronous design, refine our logging strategies, adopting specialized debugging tools, and sharing best practices across the community, we hope can make async in AiiDA robust and traceable for everyone.
+By continuing to improve our asynchronous design, refine our logging strategies, adopting specialized debugging tools, and sharing best practices across the community, we hope we can make async in AiiDA robust and traceable for everyone.
 
 Lastly, make sure to keep an eye open for the next blog post!
-It is scheduled for 2025-02-21, will continue on the topic of asynchronous programming, and give you insight into how we added an asynchronous transport plugin (via [PR #6626](https://github.com/aiidateam/aiida-core/pull/6626)) which will be released with AiiDA v2.7.0.
+We will continue on the topic of asynchronous programming and give you insights into how we added an asynchronous transport plugin (via [PR #6626](https://github.com/aiidateam/aiida-core/pull/6626)) which will be available with AiiDA v2.7.0.
