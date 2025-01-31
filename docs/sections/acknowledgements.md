@@ -37,6 +37,10 @@ AiiDA development is supported or has been supported by:
   - [BIG-MAP](https://www.big-map.eu/)\
     *BIG-MAP Battery 2030+ initiative*
 
+* - ![logo](../pics/sponsors/psi_300*150.png)
+  - [PSI](https://www.psi.ch/en/)\
+    *Paul Scherrer Institute (Switzerland)*
+
 * - ![logo](../pics/sponsors/epfl-logo-300x150.png)
   - [EPFL](https://www.epfl.ch/en/)\
     *École Polytechnique Fédérale de Lausanne*
@@ -54,8 +58,8 @@ AiiDA development is supported or has been supported by:
     *Open and Reproducible Materials Science Research*\
     *funded by the [ETH Board](https://ethrat.ch/en/)*
 
-* - ![logo](../pics/sponsors/placeholder-logo-300x150.png)
-  - [SwissTwins](https://www.bosch.com/research/)\
+* - ![logo](../pics/sponsors/swisstwins_300*150.png)
+  - [SwissTwins](https://www.cscs.ch/about/collaborations/swisstwins)\
     *funded by the Swiss State Secretariat for Education, Research and Innovation (SERI)*
 
 :::
