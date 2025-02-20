@@ -7,7 +7,7 @@ date: 2025-02-21
 ---
 
 
-# Debugging AiiDA Daemon (a practical guide!)
+# Debugging AiiDA Daemon (a practical guide)
 
 Debugging an AiiDA daemon process can feel like chasing a ghost, especially when issues only pop up during job submission.
 But fear not! This guide will walk you through the problem and provide a step-by-step how-to.
@@ -15,11 +15,11 @@ But fear not! This guide will walk you through the problem and provide a step-by
 ## The Issue
 
 Imagine there's a bug occurring in AiiDA when you try to kill a process using `verdi process kill`.
-For instance, the daemon might appear to hang without any activity —something we noticed as a side issue while writing tests for [this PR](https://github.com/aiidateam/aiida-core/pull/6575).
+For instance, the daemon might appear to hang without any activity—something we noticed as a side issue while writing tests for [this PR](https://github.com/aiidateam/aiida-core/pull/6575).
 Naturally, you start debugging the easiest way possible: writing a dummy process (probably just a `sleep` command with a lot of seconds), running it, and killing it over and over.
 Each time, you gather clues and adjust your breakpoints accordingly, probably focusing on the module responsible for handling `verdi process kill`.
 
-But wait—everything seems to work fine! No bug, no errors.
+But wait— everything seems to work fine! No bug, no errors.
 The bug only rears its head when you **submit** the process to the daemon.
 Uh-oh. That's when you realize you have a problem: all those carefully placed breakpoints? Completely unreachable.
 
@@ -67,7 +67,7 @@ Perfect—now we can inspect what's happening.
 verdi daemon worker
 ```
 
-This step is crucial because now, instead of running in the background, the worker operates in the foreground.
+This is important because now, instead of running in the background, the worker operates in the foreground.
 This means you can finally see what's going on and interact with debugging tools like `pdb`.
 
 ## Example: Debugging with `verdi process kill`
@@ -112,5 +112,5 @@ Your debugging steps should look something like this:
 
   This will give you a clear picture of execution steps, helping you pinpoint the issue faster.
 
-Now, you can debug AiiDA daemon-managed processes and understand what's going wrong during tasks submission to daemon.
+Now, you can debug AiiDA daemon-managed processes and understand what's going wrong when you submit tasks.
 Good luck! 😉
