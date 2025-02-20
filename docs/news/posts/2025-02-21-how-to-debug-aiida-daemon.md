@@ -7,7 +7,7 @@ date: 2025-02-21
 ---
 
 
-# Debugging the AiiDA Daemon (a practical guide!)
+# Debugging AiiDA Daemon (a practical guide!)
 
 Debugging an AiiDA daemon process can feel like chasing a ghost, especially when issues only pop up during job submission.
 But fear not! This guide will walk you through the problem and provide a step-by-step how-to.
