@@ -19,7 +19,5 @@ For interested applicants, scientific research challenges can also be incorporat
 
 For best consideration, applications should be submitted by Oct 31st, 2021; the positions will remain open until suitable candidates have been found.
 
-All details at this link: <http://theossrv1.epfl.ch/uploads/Main/Openings/2021_10_MaterialsCloudSoftwareEngineer.pdf>
-
 Best,
 Giovanni Pizzi
