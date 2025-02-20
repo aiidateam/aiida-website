@@ -18,5 +18,3 @@ The candidates will work together with a team of 10+ PhD students, postdocs, and
 For interested applicants, scientific research challenges can also be incorporated in the effort (but this is not a requirement).
 
 For best consideration, applications should be submitted by March 20th, 2022; the positions will remain open until suitable candidates have been found.
-
-All details at this link: <http://theossrv1.epfl.ch/uploads/Main/Openings/2022_02_BIGMAP_MARVEL_PostDocSoftwareEngineers.pdf>
