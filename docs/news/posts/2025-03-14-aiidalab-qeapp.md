@@ -16,10 +16,10 @@ The [AiiDAlab-QE app](https://aiidalab-qe.readthedocs.io/) is a web-based applic
 
 ## Why AiiDAlab-QE?
 
-1. **User-friendly interface** – A straightforward GUI eliminates the need to manually write input files.  
-2. **Powered by AiiDA** – All calculations are managed by AiiDA, ensuring reproducibility by tracking workflows, inputs, and outputs.  
-3. **Broad functionality** – Supports basic geometry optimizations, band structure calculations, and more advanced materials property calculations.  
-4. **Modular and pluggable** – Developers can integrate extra functionalities (e.g., post-processing or advanced workflows) without changing interfaces.  
+1. **User-friendly interface** – A straightforward GUI eliminates the need to manually write input files.
+2. **Powered by AiiDA** – All calculations are managed by AiiDA, ensuring reproducibility by tracking workflows, inputs, and outputs.
+3. **Broad functionality** – Supports basic geometry optimizations, band structure calculations, and more advanced materials property calculations.
+4. **Modular and pluggable** – Developers can integrate extra functionalities (e.g., post-processing or advanced workflows) without changing interfaces.
 5. **Easy access** – Compatible with local and cloud-based installations, accommodating diverse user needs.
 
 ## Getting Started
@@ -83,9 +83,9 @@ Below is a detailed walkthrough of each step.
 
 In the first step, choose a structure from one of several sources:
 
-- **Upload file** – Upload a structure file from your computer.  
-- **OPTIMADE** – Search for structures in the OPTIMADE database.  
-- **AiiDA database** – Search for structures in your local AiiDA database.  
+- **Upload file** – Upload a structure file from your computer.
+- **OPTIMADE** – Search for structures in the OPTIMADE database.
+- **AiiDA database** – Search for structures in your local AiiDA database.
 - **From Examples** – Pick from a curated list of example structures.
 
 For this tutorial, select **From Examples** and then choose **Bulk silicon** from the dropdown menu:
@@ -94,7 +94,7 @@ For this tutorial, select **From Examples** and then choose **Bulk silicon** fro
 
 Click **Confirm** to finalize your selection.
 
-> **Tip:**  
+> **Tip:**
 > The app supports a variety of sources for importing structures. For more details, see the [How-To guide](https://aiidalab-qe.readthedocs.io/howto/import_structure.html).
 
 ---
@@ -103,12 +103,12 @@ Click **Confirm** to finalize your selection.
 
 Next, define the tasks for the workflow (e.g., geometry optimization or property calculations) and select calculation parameters. For this tutorial, choose **Full geometry** optimization. Then select which properties to compute:
 
-- **Band structure**  
-- **Projected density of states (PDOS)**  
+- **Band structure**
+- **Projected density of states (PDOS)**
 
 (We’ll select both here.)
 
-> **Tip:**  
+> **Tip:**
 > Additional property calculations are available through plugins. If the required plugin is not installed, install it from the Plugin store to enable that functionality.
 
 ### Customize Calculation Parameters
@@ -130,15 +130,15 @@ When ready, click **Confirm**.
 
 In this step, define the computational resources for the calculations. By default, a local machine (`localhost`) is configured alongside the following Quantum ESPRESSO codes:
 
-- `pw-7.0@localhost`  
-- `dos-7.0@localhost`  
-- `projwfc-7.0@localhost`  
+- `pw-7.0@localhost`
+- `dos-7.0@localhost`
+- `projwfc-7.0@localhost`
 
 For our example, we’ll stick with these defaults, using four CPUs. Click **Submit** to launch the calculation.
 
 ![Select computational resources](./_pics/qeapp_step_3_computational_resources.png)
 
-> **Note:**  
+> **Note:**
 > For more substantial calculations, you can set up a remote computer (cluster, HPC, etc.), see the [How-To guide](https://aiidalab-qe.readthedocs.io/howto/setup_computer_code.html) for instructions on configuring remote machines.
 
 ---
