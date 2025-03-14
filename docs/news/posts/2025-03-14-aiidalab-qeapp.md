@@ -12,7 +12,9 @@ date: 2025-03-14
 
 ## Introduction
 
-The [AiiDAlab-QE app](https://aiidalab-qe.readthedocs.io/) is a web-based application that leverages the power of the [AiiDA](https://aiida.net/) workflow engine, making computational materials science more accessible through intuitive graphical interfaces. It provides a convenient way to set up, launch, and manage Quantum ESPRESSO calculations directly in your web browser. This post highlights the app’s key features, walks you through a typical calculation setup, and showcases some of the available plugins.
+The [AiiDAlab-QE app](https://aiidalab-qe.readthedocs.io/) is a web-based application that leverages the power of the [AiiDA](https://aiida.net/) workflow engine, making computational materials science more accessible through intuitive graphical interfaces.
+It provides a convenient way to set up, launch, and manage Quantum ESPRESSO calculations directly in your web browser.
+This post highlights the app’s key features, walks you through a typical calculation setup, and showcases some of the available plugins.
 
 ## Why AiiDAlab-QE?
 
@@ -26,7 +28,8 @@ The [AiiDAlab-QE app](https://aiidalab-qe.readthedocs.io/) is a web-based applic
 
 ### Step 1: Access the App
 
-In this post, we focus on a local installation using the `aiidalab-launch` tool. A convenient Docker image containing the app, a pre-configured AiiDA environment, QE executables, and commonly used pseudopotentials is also available.
+In this post, we focus on a local installation using the `aiidalab-launch` tool.
+A convenient Docker image containing the app, a pre-configured AiiDA environment, QE executables, and commonly used pseudopotentials is also available.
 
 #### 1. Install AiiDAlab Launch
 
@@ -62,7 +65,8 @@ aiidalab-launch start -p QE
 
 #### 4. Open AiiDAlab in Your Browser
 
-Follow the URL that appears on your screen to open AiiDAlab in your browser. You will see a start page similar to this:
+Follow the URL that appears on your screen to open AiiDAlab in your browser.
+You will see a start page similar to this:
 
 ![Start page](./_pics/qeapp_start_page.png)
 
@@ -95,13 +99,15 @@ For this tutorial, select **From Examples** and then choose **Bulk silicon** fro
 Click **Confirm** to finalize your selection.
 
 > **Tip:**
-> The app supports a variety of sources for importing structures. For more details, see the [How-To guide](https://aiidalab-qe.readthedocs.io/howto/import_structure.html).
+> The app supports a variety of sources for importing structures.
+> For more details, see the [How-To guide](https://aiidalab-qe.readthedocs.io/howto/import_structure.html).
 
 ---
 
 ## Step 2: Configure the Workflow
 
-Next, define the tasks for the workflow (e.g., geometry optimization or property calculations) and select calculation parameters. For this tutorial, choose **Full geometry** optimization. Then select which properties to compute:
+Next, define the tasks for the workflow (e.g., geometry optimization or property calculations) and select calculation parameters.
+For this tutorial, choose **Full geometry** optimization. Then select which properties to compute:
 
 - **Band structure**
 - **Projected density of states (PDOS)**
@@ -109,7 +115,8 @@ Next, define the tasks for the workflow (e.g., geometry optimization or property
 (We’ll select both here.)
 
 > **Tip:**
-> Additional property calculations are available through plugins. If the required plugin is not installed, install it from the Plugin store to enable that functionality.
+> Additional property calculations are available through plugins.
+> If the required plugin is not installed, install it from the Plugin store to enable that functionality.
 
 ### Customize Calculation Parameters
 You can refine multiple settings:
@@ -118,7 +125,8 @@ You can refine multiple settings:
 - **Advanced settings** – fine-tune the calculations
 - **Plugin settings** – Specific options for plugin-based calculations like band structure or PDOS.
 
-A convenient way to set most parameters at once is to select a **protocol** (e.g., “fast,” “moderate,” or “precise”). For a quick run, choose **fast** and set the **Electronic type** to `Insulator`.
+A convenient way to set most parameters at once is to select a **protocol** (e.g., “fast,” “moderate,” or “precise”).
+For a quick run, choose **fast** and set the **Electronic type** to `Insulator`.
 
 When ready, click **Confirm**.
 
@@ -128,7 +136,8 @@ When ready, click **Confirm**.
 
 ## Step 3: Choose Computational Resources
 
-In this step, define the computational resources for the calculations. By default, a local machine (`localhost`) is configured alongside the following Quantum ESPRESSO codes:
+In this step, define the computational resources for the calculations.
+By default, a local machine (`localhost`) is configured alongside the following Quantum ESPRESSO codes:
 
 - `pw-7.0@localhost`
 - `dos-7.0@localhost`
@@ -145,7 +154,9 @@ For our example, we’ll stick with these defaults, using four CPUs. Click **Sub
 
 ## Step 4: Monitor the Calculation and View Results
 
-Finally, track the calculation in real time and check the results when it finishes. A summary of calculation parameters is also shown. You can download the raw input and output files upon completion, as well as an AiiDA archive containing full provenance data.
+Finally, track the calculation in real time and check the results when it finishes.
+A summary of calculation parameters is also shown.
+You can download the raw input and output files upon completion, as well as an AiiDA archive containing full provenance data.
 
 This example calculation take around **3 minutes** to complete.
 
@@ -159,7 +170,9 @@ When the calculation completes, switch to the **Results** panel for a summary of
 
 ## Available Plugins
 
-One of the key strengths of the AiiDAlab-QE app is its modularity and extensibility. Developers and researchers can enhance functionality by integrating plugins, enabling advanced workflows tailored to specific computational tasks. Below are some of the available plugins:
+One of the key strengths of the AiiDAlab-QE app is its modularity and extensibility.
+Developers and researchers can enhance functionality by integrating plugins, enabling advanced workflows tailored to specific computational tasks.
+Below are some of the available plugins:
 
 - **Phonons and IR/Raman**
 - **Muon Spectroscopy**
@@ -176,6 +189,7 @@ These plugins significantly extend the capabilities of the app, allowing users t
 
 ## Conclusion
 
-The AiiDAlab-QE app simplifies the setup and execution of Quantum ESPRESSO calculations by combining AiiDA’s powerful provenance tracking with an intuitive user interface. Whether you’re a domain scientist or an expert in computational materials, AiiDAlab-QE helps streamline your workflows, saving time and reducing errors often associated with manual setup.
+The AiiDAlab-QE app simplifies the setup and execution of Quantum ESPRESSO calculations by combining AiiDA’s powerful provenance tracking with an intuitive user interface.
+Whether you’re a domain scientist or an expert in computational materials, AiiDAlab-QE helps streamline your workflows, saving time and reducing errors often associated with manual setup.
 
 For more information, visit the [AiiDAlab-QE Documentation](https://aiidalab-qe.readthedocs.io/) and the [GitHub repository](https://github.com/aiidalab/aiidalab-qe).
