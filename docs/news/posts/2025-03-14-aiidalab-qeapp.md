@@ -14,7 +14,7 @@ date: 2025-03-14
 
 The [AiiDAlab-QE app](https://aiidalab-qe.readthedocs.io/) is a web-based application that leverages the power of the [AiiDA](https://aiida.net/) workflow engine, making computational materials science more accessible through intuitive graphical interfaces.
 It provides a convenient way to set up, launch, and manage Quantum ESPRESSO calculations directly in your web browser.
-This post highlights the app’s key features, walks you through a typical calculation setup, and showcases some of the available plugins.
+This post highlights the app's key features, walks you through a typical calculation setup, and showcases some of the available plugins.
 
 ## Why AiiDAlab-QE?
 
@@ -112,7 +112,7 @@ For this tutorial, choose **Full geometry** optimization. Then select which prop
 - **Band structure**
 - **Projected density of states (PDOS)**
 
-(We’ll select both here.)
+(We'll select both here.)
 
 > **Tip:**
 > Additional property calculations are available through plugins.
@@ -143,7 +143,7 @@ By default, a local machine (`localhost`) is configured alongside the following 
 - `dos-7.0@localhost`
 - `projwfc-7.0@localhost`
 
-For our example, we’ll stick with these defaults, using four CPUs. Click **Submit** to launch the calculation.
+For our example, we'll stick with these defaults, using four CPUs. Click **Submit** to launch the calculation.
 
 ![Select computational resources](./_pics/qeapp_step_3_computational_resources.png)
 
@@ -189,7 +189,7 @@ These plugins significantly extend the capabilities of the app, allowing users t
 
 ## Conclusion
 
-The AiiDAlab-QE app simplifies the setup and execution of Quantum ESPRESSO calculations by combining AiiDA’s powerful provenance tracking with an intuitive user interface.
-Whether you’re a domain scientist or an expert in computational materials, AiiDAlab-QE helps streamline your workflows, saving time and reducing errors often associated with manual setup.
+The AiiDAlab-QE app simplifies the setup and execution of Quantum ESPRESSO calculations by combining AiiDA's powerful provenance tracking with an intuitive user interface.
+Whether you're a domain scientist or an expert in computational materials, AiiDAlab-QE helps streamline your workflows, saving time and reducing errors often associated with manual setup.
 
 For more information, visit the [AiiDAlab-QE Documentation](https://aiidalab-qe.readthedocs.io/) and the [GitHub repository](https://github.com/aiidalab/aiidalab-qe).
