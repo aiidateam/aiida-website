@@ -190,6 +190,6 @@ These plugins significantly extend the capabilities of the app, allowing users t
 ## Conclusion
 
 The AiiDAlab-QE app simplifies the setup and execution of Quantum ESPRESSO calculations by combining AiiDA's powerful provenance tracking with an intuitive user interface.
-Whether you're a domain scientist or an expert in computational materials, AiiDAlab-QE helps streamline your workflows, saving time and reducing errors often associated with manual setup.
+Whether you're a domain scientist or an expert in computational materials, AiiDAlab-QE helps streamline your workflows, saving time and reducing errors often associated with a manual setup.
 
 For more information, visit the [AiiDAlab-QE Documentation](https://aiidalab-qe.readthedocs.io/) and the [GitHub repository](https://github.com/aiidalab/aiidalab-qe).
