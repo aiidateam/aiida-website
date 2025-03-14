@@ -30,7 +30,7 @@ In this post, we focus on a local installation using the `aiidalab-launch` tool.
 
 #### 1. Install AiiDAlab Launch
 
-Use [`pipx`](https://pypa.github.io/pipx/installation/) (recommended):
+Use [`pipx`](https://pipx.pypa.io/stable/installation/) (recommended):
 
 ```sh
 pipx install aiidalab-launch
