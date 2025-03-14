@@ -12,7 +12,7 @@ date: 2025-03-14
 
 ## Introduction
 
-The [AiiDAlab-QE app](https://aiidalab-qe.readthedocs.io/) is a web-based application that leverages the power of the [AiiDA](https://aiida.net/) workflow engine, making computational materials science more accessible through intuitive graphical interfaces.
+The [AiiDAlab-QE app](https://aiidalab-qe.readthedocs.io/) is a web-based application that leverages the power of AiiDA, making computational materials science more accessible through an intuitive graphical interface.
 It provides a convenient way to set up, launch, and manage Quantum ESPRESSO calculations directly in your web browser.
 This post highlights the app's key features, walks you through a typical calculation setup, and showcases some of the available plugins.
 
