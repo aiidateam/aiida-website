@@ -55,6 +55,9 @@ aiidalab-launch profile add --image ghcr.io/aiidalab/qe:v25.03.0 QE
 
 When prompted, enter `n` to skip editing the profile settings.
 
+> **Note:** `ghcr.io` stands for **GitHub Container Registry**, which hosts container images.
+
+
 #### 3. Start AiiDAlab
 
 Use the newly added `QE` profile:
