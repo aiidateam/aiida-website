@@ -28,8 +28,7 @@ This post highlights the app's key features, walks you through a typical calcula
 
 ### Step 1: Access the App
 
-In this post, we focus on a local installation using the `aiidalab-launch` tool.
-A convenient Docker image containing the app, a pre-configured AiiDA environment, QE executables, and commonly used pseudopotentials is also available.
+In this post, we focus on a local installation using the aiidalab-launch tool, which is a lightweight command-line utility that orchestrates AiiDAlab instances using Docker.
 
 #### 1. Install AiiDAlab Launch
 
@@ -47,20 +46,20 @@ pip install aiidalab-launch
 
 #### 2. Add a `QE` Profile
 
-Run the following command to add a new `QE` profile:
+Once `aiidalab-launch` is installed, you can create a new profile for running the AiiDAlab-QE app inside a Docker container:
 
 ```sh
-aiidalab-launch profile add --image ghcr.io/aiidalab/qe:v25.03.0 QE
+aiidalab-launch profile add --image ghcr.io/aiidalab/qe:edge QE
 ```
 
 When prompted, enter `n` to skip editing the profile settings.
 
-> **Note:** `ghcr.io` stands for **GitHub Container Registry**, which hosts container images.
+> **Note:** `ghcr.io` stands for **GitHub Container Registry**, which hosts container images. The `ghcr.io/aiidalab/qe:edge` is a Docker image containing the app, a pre-configured AiiDA environment, QE executables, and commonly used pseudopotentials.
 
 
 #### 3. Start AiiDAlab
 
-Use the newly added `QE` profile:
+Once the profile is set up, launching the app is as simple as running:
 
 ```sh
 aiidalab-launch start -p QE
@@ -142,9 +141,9 @@ When ready, click **Confirm**.
 In this step, define the computational resources for the calculations.
 By default, a local machine (`localhost`) is configured alongside the following Quantum ESPRESSO codes:
 
-- `pw-7.0@localhost`
-- `dos-7.0@localhost`
-- `projwfc-7.0@localhost`
+- `pw-7.4@localhost`
+- `dos-7.4@localhost`
+- `projwfc-7.4@localhost`
 
 For our example, we'll stick with these defaults, using four CPUs. Click **Submit** to launch the calculation.
 
