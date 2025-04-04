@@ -151,6 +151,7 @@ linkcheck_ignore = [
     r"https://github.com/aiidateam/aiida-core/discussions/.*",  # has been archived
     r"https://github.com/orgs/aiidateam/discussions",  # has been archived
     r"https://news.microsoft.com/azure-quantum-june-event",  #  Requires human-verification
+    r"https://scholar.google.com/scholar?cites=10268089832296963062&as_sdt=2005&sciodt=0,5&hl=en",  # Also stopped working
 ]
 
 aiida_ignore_event_checks = [
