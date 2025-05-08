@@ -14,6 +14,11 @@
 # - report: internal post reporting the event
 # - participants: number of participants
 
+- name: Introduction to AiiDA as part of the "High-performance computing for materials simulations" course
+  start: 2025-05-07
+  location: SISSA, Trieste (IT)
+  url: https://cm.sissa.it/phd/courses/high-performance-computing-materials-simulations
+
 - name: AiiDA coding week 2024
   start: 2024-11-18
   duration: 4 days
@@ -160,14 +165,14 @@
 - name: Writing reproducible workflows for computational materials science, using AiiDA 1.0
   start: 2019-05-21
   duration: 3 days
-  location: EPF Lausanne (CH)
+  location: EPFL Lausanne (CH)
   announce: /news/posts/2019-01-19-tutorial-reproducible-workflows.md
   participants: ">50"
 
 - name: AiiDA plugins migration workshop
   start: 2019-03-25
   duration: 4 days
-  location: EPF Lausanne (CH)
+  location: EPFL Lausanne (CH)
   announce: /news/posts/2019-01-11-aiida-plugins-migration-workshop.md
   description: To support existing plugins in migrating to python 2+3 and the new AiiDA 1.0 release.
   participants: ~25
@@ -198,7 +203,7 @@
 - name: Second edition of the MARVEL/Psi-k/MaX AiiDA tutorial
   start: 2017-05-29
   duration: 2 days
-  location: EPF Lausanne (CH)
+  location: EPFL Lausanne (CH)
   urls:
   - http://nccr-marvel.ch/en/events/aiida-tutorial-may-2017
   - http://psi-k.net/report-on-the-high-throughput-tutorial-using-aiida-2017/
@@ -211,7 +216,7 @@
 - name: MARVEL/MaX advanced AiiDA tutorial
   start: 2017-03-06
   duration: 1 day
-  location: EPF Lausanne (CH)
+  location: EPFL Lausanne (CH)
   url: http://nccr-marvel.ch/en/events/marvel-max-meeting-march-2017
   description: Aimed at encouraging collaborations and at discussing about integration of workflows, plugins and curated data within AiiDA and Materials cloud.
   participants: ~20
@@ -242,7 +247,7 @@
 - name: First edition of the MARVEL/MaX/Psi-k AiiDA tutorial
   start: 2016-06-22
   duration: 2 days
-  location: EPF Lausanne (CH)
+  location: EPFL Lausanne (CH)
   url: http://nccr-marvel.ch/en/events/aiida-tutorial-june-2016
   report: /news/posts/2017-01-19-report-of-the-aiida.md
   participants: ~50
@@ -269,7 +274,7 @@
 - name: AiiDA tutorial for users and developers
   start: 2015-11-02
   duration: 4 days
-  location: EPF Lausanne (CH)
+  location: EPFL Lausanne (CH)
   url: http://nccr-marvel.ch/en/events/aiida-tutorial-coding-days
   participants: ~40
   description: |
