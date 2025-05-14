@@ -12,18 +12,18 @@ date: 2025-05-14
 
 ## Introduction
 
-Ab initio many-body perturbation theory (MBPT), including methods like GW and BSE, is the state-of-the-art approach for accurate predictions of band structures and excitonic properties. 
-However, MBPT is significantly more challenging than standard density functional theory (DFT): it requires convergence tests over a space of interdependent parameters, calculations are computationally much more demanding than DFT, and several chained calculations need to be performed in order to obtain the final result. 
+Ab initio many-body perturbation theory (MBPT), including methods like GW and BSE, is the state-of-the-art approach for accurate predictions of band structures and excitonic properties.
+However, MBPT is significantly more challenging than standard density functional theory (DFT): it requires convergence tests over a space of interdependent parameters, calculations are computationally much more demanding than DFT, and several chained calculations need to be performed in order to obtain the final result.
 Running reliable MBPT calculations—and automating them—represents a technically demanding task that has traditionally been limited to expert users.
 The integration of the [Yambo code](https://iopscience.iop.org/article/10.1088/1361-648X/ab15d0/meta) with AiiDA through the `aiida-yambo` plugin addresses these challenges by automating MBPT workflows, ensuring data provenance, and paving the way for high-throughput GW and BSE computations.
 
-> **Note:** For a detailed explanation of the plugin's design, implementation, and use cases, please refer to the dedicated publication associated with this plugin: [Bonacci et. al, npj Computational Materials, 9, 74, 2023](https://www.nature.com/articles/s41524-023-01027-2). 
+> **Note:** For a detailed explanation of the plugin's design, implementation, and use cases, please refer to the dedicated publication associated with this plugin: [Bonacci et. al, npj Computational Materials, 9, 74, 2023](https://www.nature.com/articles/s41524-023-01027-2).
 A [set of tutorials](https://aiida-yambo.readthedocs.io/en/documentation/user_guide/index.html) is also provided in the documentation of the plugin.
 
 ## Why Combine AiiDA and Yambo?
 
-Yambo is among the most used codes for performing MBPT calculations, including GW and BSE. 
-AiiDA, on the other hand, provides a robust infrastructure for managing complex computational workflows with full data provenance. 
+Yambo is among the most used codes for performing MBPT calculations, including GW and BSE.
+AiiDA, on the other hand, provides a robust infrastructure for managing complex computational workflows with full data provenance.
 By combining these tools, researchers can:
 
 - Automate the setup, error handling and execution of MBPT calculations/workflows;
@@ -45,8 +45,8 @@ Starting from the input set (on the left of the figure), we then perform several
 
 Before showing the plugin and a taste of its usage, we show here some of the applications which were made possible thanks to the `aiida-yambo` plugin.
 
-One of the first studies performed within the plugin was the calculation of excitonic effects in the 2D C3N ([Bonacci et al., Phys. Rev. Materials, 6:034009, 2022](https://journals.aps.org/prmaterials/abstract/10.1103/PhysRevMaterials.6.034009)), a material particularly promising for optoelectronic application. 
-The authors used the plugin to perfom complex GW calculations (particularly tricky for 2D materials, as explained [here](https://wiki.yambo-code.eu/wiki/index.php?title=How_to_treat_low_dimensional_systems)). 
+One of the first studies performed within the plugin was the calculation of excitonic effects in the 2D C3N ([Bonacci et al., Phys. Rev. Materials, 6:034009, 2022](https://journals.aps.org/prmaterials/abstract/10.1103/PhysRevMaterials.6.034009)), a material particularly promising for optoelectronic application.
+The authors used the plugin to perfom complex GW calculations (particularly tricky for 2D materials, as explained [here](https://wiki.yambo-code.eu/wiki/index.php?title=How_to_treat_low_dimensional_systems)).
 Thanks to AiiDA, it was possible to perform very accurate BSE characterization and understanding of the lowest energy excitons in C3N, shown in Figure 2.
 
 ```{image} ../pics/c3n.png
@@ -61,7 +61,7 @@ Thanks to AiiDA, it was possible to perform very accurate BSE characterization a
 The `aiida-yambo` plugin has been instrumental in several other studies:
 
 - [Marrazzo et al., "Relative Abundance of Z2 Topological Order in Exfoliable Two-Dimensional Insulators", Nano Letters, 19:8431-8440 (2019)](https://pubs.acs.org/doi/abs/10.1021/acs.nanolett.9b02689);
-- [Atambo et al., "Electronic and optical properties of doped TiO2 by many-body perturbation theory", Phys. Rev. Materials 3, 045401 (2019)](https://doi.org/10.1103/PhysRevMaterials.3.045401);  
+- [Atambo et al., "Electronic and optical properties of doped TiO2 by many-body perturbation theory", Phys. Rev. Materials 3, 045401 (2019)](https://doi.org/10.1103/PhysRevMaterials.3.045401);
 - [Betti et al., “Gap opening in double-sided highly hydrogenated free-standing graphene", Nano Letters, 22(7):2971–2977 (2022)](https://pubs.acs.org/doi/full/10.1021/acs.nanolett.2c00162);
 - [Betti et al., “Dielectric response and excitations of free-standing graphane”, Carbon Trends 12, 100274 (2023)](https://doi.org/10.1016/j.cartre.2023.100274);
 - [Bonacci et al., "Benchmarking the GW100 dataset with the Yambo code by means of G0W0 approximation, Materials Cloud Archive 2023.54 (2023)"](https://doi.org/10.24435/materialscloud:ce-82).
@@ -72,7 +72,7 @@ The `YamboWorkflow` is the core workchain of the `aiida-yambo` plugin. Here belo
 
 > **Note:** Running automated BSE@GW and several other type of simulations, e.g. convergences, are also supported and are covered in the dedicated [set of tutorials](https://aiida-yambo.readthedocs.io/en/documentation/user_guide/index.html).
 
-The workflow orchestrates all steps involved in a typical GW calculation: from initial DFT preprocessing to the final GW calculation, ensuring smooth integration between **Quantum ESPRESSO** and **Yambo** codes.  
+The workflow orchestrates all steps involved in a typical GW calculation: from initial DFT preprocessing to the final GW calculation, ensuring smooth integration between **Quantum ESPRESSO** and **Yambo** codes.
 
 Depending on the input provided, the workflow will:
 
@@ -80,10 +80,10 @@ Depending on the input provided, the workflow will:
 - Run the GW step using `YamboRestart` (automatic error handling)
 - Skip already-computed steps if valid parent input is provided, leveraging data provenance
 
-The execution is dynamic: users don’t need to explicitly define each intermediate step unless they want to. 
+The execution is dynamic: users don’t need to explicitly define each intermediate step unless they want to.
 If any underlying process fails (e.g., due to memory errors), the workflow exits cleanly and transparently thanks to the robust restart mechanisms inherited from `BaseRestartWorkChain`.
 
-The only required inputs are: 
+The only required inputs are:
 
 - the codes we are going to use during the simulation: pw.x, p2y and yambo (as AiiDA `Code` nodes);
 - the input structure (as AiiDA `StructureData` node).
@@ -113,7 +113,7 @@ builder = YamboWorkflow.get_builder_from_protocol(
 run = submit(builder)
 ```
 
-it is possible to ask the workflow to parse specific quantities, like gaps or single quasiparticle levels. 
+it is possible to ask the workflow to parse specific quantities, like gaps or single quasiparticle levels.
 To do that, we can provide an additional input to our builder. For example, to ask for the minimum gap, the direct gap at Gamma and the HOMO and LUMO:
 
 ```python
@@ -139,5 +139,5 @@ At the end of the calculation we obtain an output node, called `output_ywfl_para
 
 ## Conclusions
 
-The integration of Yambo with AiiDA through the aiida-yambo plugin has significantly streamlined MBPT simulations, making them more accessible and reproducible. 
+The integration of Yambo with AiiDA through the aiida-yambo plugin has significantly streamlined MBPT simulations, making them more accessible and reproducible.
 As computational materials science continues to evolve, tools like these will be essential in driving forward research and discovery.
