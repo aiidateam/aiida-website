@@ -45,7 +45,7 @@ Starting from the input set (on the left of the figure), we perform several inte
 
 Before showing the plugin and a taste of its usage, we start with some of the applications that were made possible thanks to the `aiida-yambo` plugin.  
 
-One of the first studies performed with the plugin was the calculation of excitonic effects in the 2D C3N (2D polyaniline), a material particularly promising for optoelectronic application ([Bonacci et al., Phys. Rev. Materials, 6:034009, 2022](https://journals.aps.org/prmaterials/abstract/10.1103/PhysRevMaterials.6.034009)).  
+One of the first studies performed with the plugin was the calculation of excitonic effects in the 2D C3N (2D polyaniline), a material particularly promising for optoelectronic application ([Bonacci et al., Phys. Rev. Materials, 6:034009, 2022](https://doi.org/10.1103/PhysRevMaterials.6.034009)).  
 The authors used the plugin to perfom complex GW calculations (particularly tricky for 2D materials, as explained [here](https://wiki.yambo-code.eu/wiki/index.php?title=How_to_treat_low_dimensional_systems)). 
 Thanks to AiiDA, it was possible to perform very accurate BSE characterization of the lowest energy excitons in C3N, shown in Figure 2.
 
