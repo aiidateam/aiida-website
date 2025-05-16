@@ -12,9 +12,9 @@ date: 2025-05-15
 
 ## Introduction
 
-Ab initio many-body perturbation theory (MBPT), including methods like GW and BSE, is the state-of-the-art approach for accurate predictions of band structures and excitonic properties. 
-However, MBPT is significantly more challenging than standard density functional theory (DFT): it requires convergence tests over a space of interdependent parameters, calculations are computationally much more demanding than DFT, and several chained calculations need to be performed in order to obtain the final result. 
-Running reliable MBPT calculations in an automated fashion represents a technically demanding task that has traditionally been accessible only to expert users.  
+Ab initio many-body perturbation theory (MBPT), including methods like GW and BSE, is the state-of-the-art approach for accurate predictions of band structures and excitonic properties.
+However, MBPT is significantly more challenging than standard density functional theory (DFT): it requires convergence tests over a space of interdependent parameters, calculations are computationally much more demanding than DFT, and several chained calculations need to be performed in order to obtain the final result.
+Running reliable MBPT calculations in an automated fashion represents a technically demanding task that has traditionally been accessible only to expert users.
 The integration of the [Yambo code](https://iopscience.iop.org/article/10.1088/1361-648X/ab15d0/meta) with AiiDA through the `aiida-yambo` plugin addresses these challenges by automating MBPT workflows, ensuring data provenance, and paving the way for high-throughput GW and BSE computations.
 
 > **Note:** For a detailed explanation of the plugin's design, implementation, and use cases, please refer to the dedicated publication associated with this plugin: [Bonacci et. al, npj Computational Materials, 9, 74, 2023](https://www.nature.com/articles/s41524-023-01027-2).
@@ -43,10 +43,10 @@ Starting from the input set (on the left of the figure), we perform several inte
 
 ## Case studies
 
-Before showing the plugin and a taste of its usage, we start with some of the applications that were made possible thanks to the `aiida-yambo` plugin.  
+Before showing the plugin and a taste of its usage, we start with some of the applications that were made possible thanks to the `aiida-yambo` plugin.
 
-One of the first studies performed with the plugin was the calculation of excitonic effects in the 2D C3N (2D polyaniline), a material particularly promising for optoelectronic application ([Bonacci et al., Phys. Rev. Materials, 6:034009, 2022](https://doi.org/10.1103/PhysRevMaterials.6.034009)).  
-The authors used the plugin to perfom complex GW calculations (particularly tricky for 2D materials, as explained [here](https://wiki.yambo-code.eu/wiki/index.php?title=How_to_treat_low_dimensional_systems)). 
+One of the first studies performed with the plugin was the calculation of excitonic effects in the 2D C3N (2D polyaniline), a material particularly promising for optoelectronic application ([Bonacci et al., Phys. Rev. Materials, 6:034009, 2022](https://doi.org/10.1103/PhysRevMaterials.6.034009)).
+The authors used the plugin to perfom complex GW calculations (particularly tricky for 2D materials, as explained [here](https://wiki.yambo-code.eu/wiki/index.php?title=How_to_treat_low_dimensional_systems)).
 Thanks to AiiDA, it was possible to perform very accurate BSE characterization of the lowest energy excitons in C3N, shown in Figure 2.
 
 ```{image} ../pics/c3n.png
@@ -56,7 +56,7 @@ Thanks to AiiDA, it was possible to perform very accurate BSE characterization o
 :align: center
 ```
 
-*Figure 2: Visualization in both real and reciprocal space of the lowest energy excitons in 2D C3N, obtained using the `aiida-yambo` plugin. The accurate GW and BSE calculations enabled by the plugin provided detailed insights into excitonic effects in this material.*  
+*Figure 2: Visualization in both real and reciprocal space of the lowest energy excitons in 2D C3N, obtained using the `aiida-yambo` plugin. The accurate GW and BSE calculations enabled by the plugin provided detailed insights into excitonic effects in this material.*
 
 The `aiida-yambo` plugin has been instrumental in several other studies:
 
@@ -68,19 +68,19 @@ The `aiida-yambo` plugin has been instrumental in several other studies:
 
 ## How to Run a simple GW Calculation with `aiida-yambo`
 
-The `YamboWorkflow` is the core workchain of the `aiida-yambo` plugin. Below, we consider the case of a single GW calculation.  
+The `YamboWorkflow` is the core workchain of the `aiida-yambo` plugin. Below, we consider the case of a single GW calculation.
 
-> **Note:** Running automated BSE@GW and several other types of simulations, e.g. convergence studies, are also supported and are covered in the dedicated [set of tutorials](https://aiida-yambo.readthedocs.io/en/documentation/user_guide/index.html).  
+> **Note:** Running automated BSE@GW and several other types of simulations, e.g. convergence studies, are also supported and are covered in the dedicated [set of tutorials](https://aiida-yambo.readthedocs.io/en/documentation/user_guide/index.html).
 
-The workflow orchestrates all steps involved in a typical GW calculation: from initial DFT preprocessing to the final GW calculation, ensuring smooth integration between the **Quantum ESPRESSO** and **Yambo** codes.  
+The workflow orchestrates all steps involved in a typical GW calculation: from initial DFT preprocessing to the final GW calculation, ensuring smooth integration between the **Quantum ESPRESSO** and **Yambo** codes.
 
 Depending on the input provided, the workflow will:
 
 - Launch SCF and NSCF DFT calculations using the `PwBaseWorkChain` (from the `aiida-quantumespresso` plugin)
 - Run the GW step using the `YamboRestart` workchain (providing automatic error handling)
-- Skip already computed steps if valid parent input is provided, leveraging data provenance 
+- Skip already computed steps if valid parent input is provided, leveraging data provenance
 
-The execution is dynamic: users don’t need to explicitly define each intermediate step unless they want to. 
+The execution is dynamic: users don’t need to explicitly define each intermediate step unless they want to.
 If any underlying process fails (e.g., due to memory errors) and cannot be restarted successfully, the workflow exits cleanly and transparently thanks to the robust restart mechanisms inherited from `BaseRestartWorkChain`.
 
 The only required inputs are:
@@ -114,8 +114,8 @@ builder = YamboWorkflow.get_builder_from_protocol(
 run = submit(builder)
 ```
 
-it is possible to ask the workflow to parse specific quantities, like gaps or single quasiparticle levels. 
-To do that, we can provide an additional input to our builder. For example, to ask for the minimum gap, that is, the direct gap at Gamma and the HOMO and LUMO:  
+it is possible to ask the workflow to parse specific quantities, like gaps or single quasiparticle levels.
+To do that, we can provide an additional input to our builder. For example, to ask for the minimum gap, that is, the direct gap at Gamma and the HOMO and LUMO:
 
 ```python
 builder.additional_parsing = orm.List(list=['gap_','gap_GG','homo','lumo'])
@@ -142,5 +142,5 @@ At the end of the calculation we obtain an output node, called `output_ywfl_para
 
 ## Conclusions
 
-The integration of Yambo with AiiDA through the aiida-yambo plugin provides highly streamlined MBPT simulations, making them more accessible and reproducible.  
+The integration of Yambo with AiiDA through the aiida-yambo plugin provides highly streamlined MBPT simulations, making them more accessible and reproducible.
 As computational materials science continues to evolve, tools like these will be essential in driving forward research and discovery.
