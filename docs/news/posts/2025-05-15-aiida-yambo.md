@@ -8,7 +8,7 @@ date: 2025-05-15
 
 # AiiDA success stories: band structures and excitons with aiida-yambo
 
-*An example on how AiiDA is used to advance science.*
+*An example of how AiiDA is used to advance science.*
 
 ## Introduction
 
