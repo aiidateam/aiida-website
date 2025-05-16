@@ -17,13 +17,13 @@ However, MBPT is significantly more challenging than standard density functional
 Running reliable MBPT calculations in an automated fashion represents a technically demanding task that has traditionally been accessible only to expert users.  
 The integration of the [Yambo code](https://iopscience.iop.org/article/10.1088/1361-648X/ab15d0/meta) with AiiDA through the `aiida-yambo` plugin addresses these challenges by automating MBPT workflows, ensuring data provenance, and paving the way for high-throughput GW and BSE computations.
 
-> **Note:** For a detailed explanation of the plugin's design, implementation, and use cases, please refer to the dedicated publication associated with this plugin: [Bonacci et. al, npj Computational Materials, 9, 74, 2023](https://www.nature.com/articles/s41524-023-01027-2). 
+> **Note:** For a detailed explanation of the plugin's design, implementation, and use cases, please refer to the dedicated publication associated with this plugin: [Bonacci et. al, npj Computational Materials, 9, 74, 2023](https://www.nature.com/articles/s41524-023-01027-2).
 A [set of tutorials](https://aiida-yambo.readthedocs.io/en/documentation/user_guide/index.html) is also provided in the documentation of the plugin.
 
 ## Why Combine AiiDA and Yambo?
 
-Yambo is among the most used codes for performing MBPT calculations, including GW and BSE. 
-AiiDA, on the other hand, provides a robust infrastructure for managing complex computational workflows with full data provenance. 
+Yambo is among the most used codes for performing MBPT calculations, including GW and BSE.
+AiiDA, on the other hand, provides a robust infrastructure for managing complex computational workflows with full data provenance.
 By combining these tools, researchers can:
 
 - Automate the setup, error handling and execution of MBPT calculations/workflows
@@ -61,7 +61,7 @@ Thanks to AiiDA, it was possible to perform very accurate BSE characterization o
 The `aiida-yambo` plugin has been instrumental in several other studies:
 
 - [Marrazzo et al., "Relative Abundance of Z2 Topological Order in Exfoliable Two-Dimensional Insulators", Nano Letters, 19:8431-8440 (2019)](https://pubs.acs.org/doi/abs/10.1021/acs.nanolett.9b02689);
-- [Atambo et al., "Electronic and optical properties of doped TiO2 by many-body perturbation theory", Phys. Rev. Materials 3, 045401 (2019)](https://doi.org/10.1103/PhysRevMaterials.3.045401);  
+- [Atambo et al., "Electronic and optical properties of doped TiO2 by many-body perturbation theory", Phys. Rev. Materials 3, 045401 (2019)](https://doi.org/10.1103/PhysRevMaterials.3.045401);
 - [Betti et al., “Gap opening in double-sided highly hydrogenated free-standing graphene", Nano Letters, 22(7):2971–2977 (2022)](https://pubs.acs.org/doi/full/10.1021/acs.nanolett.2c00162);
 - [Betti et al., “Dielectric response and excitations of free-standing graphane”, Carbon Trends 12, 100274 (2023)](https://doi.org/10.1016/j.cartre.2023.100274);
 - [Bonacci et al., "Benchmarking the GW100 dataset with the Yambo code by means of G0W0 approximation, Materials Cloud Archive 2023.54 (2023)"](https://doi.org/10.24435/materialscloud:ce-82).
@@ -83,7 +83,7 @@ Depending on the input provided, the workflow will:
 The execution is dynamic: users don’t need to explicitly define each intermediate step unless they want to. 
 If any underlying process fails (e.g., due to memory errors) and cannot be restarted successfully, the workflow exits cleanly and transparently thanks to the robust restart mechanisms inherited from `BaseRestartWorkChain`.
 
-The only required inputs are: 
+The only required inputs are:
 
 - the codes we are going to use during the simulation: pw.x, p2y and yambo (as AiiDA `Code` nodes)
 - the input structure (as AiiDA `StructureData` node).
