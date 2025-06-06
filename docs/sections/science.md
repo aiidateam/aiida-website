@@ -10,7 +10,8 @@ The AiiDA team conducts an **annual survey** on the [AiiDA mailing list](./maili
 ## AiiDA-powered publications
 
 :::{figure} ../pics/publication-chart.png
-A histogram of publications containing calculations powered by AiiDA, selected from the [citations of the AiiDA paper](https://scholar.google.com/scholar?cites=10268089832296963062&as_sdt=2005&sciodt=0,5&hl=en).
+A histogram of publications containing calculations powered by AiiDA, selected from the
+[citations of the AiiDA paper](https://scholar.google.com/scholar?cites=10268089832296963062&as_sdt=2005&sciodt=0,5&hl=en).
 :::
 
 If you use AiiDA in your research and your paper is not listed on this page, feel free to send us an [email](mailto:developers@aiida.net) with the DOI of your paper.
