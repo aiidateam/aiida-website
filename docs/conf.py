@@ -155,6 +155,7 @@ linkcheck_ignore = [
     r"http://hdl.handle.net/2262/91467",
     r"https://www.tara.tcd.ie/handle/2262/91467",
     r"https://juser.fz-juelich.de/record/873744",
+    r"https://openbis.ch",  # Not accessibla as of 06-06-2025. Might come back
 ]
 
 aiida_ignore_event_checks = [
