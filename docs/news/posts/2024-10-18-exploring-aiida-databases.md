@@ -28,7 +28,7 @@ and you're good to go (check also [our recent blog post](https://aiida.net/news/
 In addition, you will also need to download the AiiDA archive `two_dimensional_database.aiida` from [the corresponding Materials Cloud Archive entry](https://archive.materialscloud.org/record/2024.157), which can also be done via wget:
 
 ```bash
-$ wget 'https://archive.materialscloud.org/record/file?record_id=2396&filename=two_dimensional_database.aiida' -O two_dimensional_database.aiida
+$ wget 'https://archive.materialscloud.org/api/records/rbqe0-q3717/files/two_dimensional_database.aiida/content' -O two_dimensional_database.aiida
 ```
 
 Next, we need to make the archive data available for the AiiDA environment, and there are two possibilities for this. The first and traditional way is to [set up an AiiDA profile](https://aiida.readthedocs.io/projects/aiida-core/en/v2.6.2/installation/guide_quick.html#quick-installation-guide) and import the archive data with:
