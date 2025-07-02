@@ -2,19 +2,15 @@
 
 ## AiiDA-powered research projects
 
-The AiiDA team conducts an **annual survey** on the [AiiDA mailing list](./mailing_list.md) to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](https://aiidateam.github.io/aiida-registry/) used, and further database indicators that inform future development choices.
+The AiiDA team conducts periodically a **survey** in parallel with each development milestone, formerly on the [AiiDA mailing list](./mailing_list.md) and now on [Discourse](https://aiida.discourse.group/), to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](https://aiidateam.github.io/aiida-registry/) used, and further database indicators that inform future development choices.
 
-- **2020**: [results](../pics/aiida-powered-research-projects-2020.pdf)
+- **2024**: [results](../pics/Questionnaire_results_2024.pdf)
+- **2020**: [results](../pics/aiida-powered-research-projects-2020_Updated.pdf)
 - **2019**: [results](http://bit.ly/2HRjTWo)
 
 ## AiiDA-powered publications
 
-:::{figure} ../pics/publication-chart.png
-A histogram of publications containing calculations powered by AiiDA, selected from the
-[citations of the AiiDA paper](https://scholar.google.com/scholar?cites=10268089832296963062&as_sdt=2005&sciodt=0,5&hl=en).
-:::
-
-If you use AiiDA in your research and your paper is not listed on this page, feel free to send us an [email](mailto:developers@aiida.net) with the DOI of your paper.
+If you use AiiDA in your research and your paper is not listed on this page, feel free to contact us via [Discourse](https://aiida.discourse.group/) with the DOI of your paper.
 
 
 ### Publications<sup>*</sup> from 2024 (up to March)
