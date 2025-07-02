@@ -156,6 +156,7 @@ linkcheck_ignore = [
     r"https://www.tara.tcd.ie/handle/2262/91467",
     r"https://juser.fz-juelich.de/record/873744",
     r"https://openbis.ch",  # Not accessibla as of 06-06-2025. Might come back
+    r"https://www.eosc-hub.eu/",  # Privacy warning when accessing manually
 ]
 
 aiida_ignore_event_checks = [
