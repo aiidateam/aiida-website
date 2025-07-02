@@ -14,7 +14,7 @@ AiiDA is built to support and streamline the four core pillars of the [ADES mode
 - **Advanced queries**: AiiDA’s query language enables fast graph queries on millions of nodes.
 - **Plugin interface**: AiiDA can support via plugins any computational code and data analytics tool, data type, scheduler, connection mode, etc. (see [public plugin repository](https://aiidateam.github.io/aiida-registry/))
 - **HPC interface**: AiiDA can seamlessly deal with heterogeneous and remote computing resources; it works with many schedulers out of the box (SLURM, PBS Pro, torque, SGE or LSF).
-- **Open science**: AiiDA allows to export both full databases and selected subsets, to be shared with collaborators or made available and browsable online on the [Archive](https://archive.materialscloud.org/) and [Explore](https://www.materialscloud.org/explore) sections of [Materials Cloud](https://www.materialscloud.org/).
+- **Open science**: AiiDA allows to export both full databases and selected subsets, to be shared with collaborators or made available and browsable online on the [Archive](https://archive.materialscloud.org/) and [Explore](https://www.materialscloud.org/explore/menu) sections of [Materials Cloud](https://www.materialscloud.org/).
 - **Open source**: AiiDA is released under the MIT open-source license.
 
 ## Features
