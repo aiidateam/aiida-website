@@ -85,7 +85,6 @@
 - name: AiiDA tutorial at the BIG-MAP workshop
   start: 2020-12-02
   location: Online
-  url: https://multiscale-modelling.eu/BigMapWorkshop2020
   participants: ~80
 
 - name: Materials Science Q&A @ SciPy 2020

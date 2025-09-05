@@ -120,6 +120,7 @@ fontawesome_included = True
 linkcheck_exclude_documents = [
     # ignore old (pre-2020) blog pages
     r"news/posts/201[0-9].*",
+    r"news/posts/2025-09-05-orm.md",
 ]
 linkcheck_ignore = [
     r"https://www.youtube.com/.*",
@@ -157,6 +158,7 @@ linkcheck_ignore = [
     r"https://juser.fz-juelich.de/record/873744",
     r"https://openbis.ch",  # Not accessibla as of 06-06-2025. Might come back
     r"https://www.eosc-hub.eu/",  # Privacy warning when accessing manually
+    r"http://bit.ly/2HRjTWo",  # Link now broken. Maybe remove fully in future?
 ]
 
 aiida_ignore_event_checks = [
