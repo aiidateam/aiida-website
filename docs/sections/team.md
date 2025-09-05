@@ -122,6 +122,6 @@ Then you might be a candidate for the AiiDA team!
 
 
 We advertise openings for positions on [discourse](https://aiida.discourse.group/c/announcements/) and the [news section](https://aiida.net/news/index/tag/positions.html), when they become available. But excellent candidates are encouraged to apply throughout the year (you can get contact via our emails).
-(you can also check open positions on [PSI website](https://www.psi.ch/en/hr/job-opportunities), [THEOS](https://theos-wiki.epfl.ch/) and [psi-k mailing list](https://psi-k.net/list/)).
+(you can also check open positions on [PSI website](https://www.psi.ch/en/hr/job-opportunities), [THEOS](https://theos-wiki.epfl.ch/) and [psi-k](https://psi-k.net) mailing list).
 
 **Use a 1-page cover letter to explain what motivates you and why you would fit into the team** – please note that we don’t consider blanket applications.

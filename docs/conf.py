@@ -158,6 +158,7 @@ linkcheck_ignore = [
     r"https://juser.fz-juelich.de/record/873744",
     r"https://openbis.ch",  # Not accessibla as of 06-06-2025. Might come back
     r"https://www.eosc-hub.eu/",  # Privacy warning when accessing manually
+    r"http://bit.ly/2HRjTWo",  # Link now broken. Maybe remove fully in future?
 ]
 
 aiida_ignore_event_checks = [
