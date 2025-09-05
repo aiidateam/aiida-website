@@ -120,7 +120,7 @@ fontawesome_included = True
 linkcheck_exclude_documents = [
     # ignore old (pre-2020) blog pages
     r"news/posts/201[0-9].*",
-    r"news/posts/2025-09-05-orm.md"
+    r"news/posts/2025-09-05-orm.md",
 ]
 linkcheck_ignore = [
     r"https://www.youtube.com/.*",
