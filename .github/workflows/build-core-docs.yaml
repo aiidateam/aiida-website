@@ -1,0 +1,39 @@
+name: Build Documentation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -e external/aiida-core[docs]
+
+      - name: Build aiida-core docs
+        run: |
+          cd external/aiida-core
+          make -C docs html
+
+      - name: Copy aiida-core docs
+        run: |
+          rm -rf docs/docs-static
+          cp -r external/aiida-core/docs/build/html docs/docs-static
+
+      - name: Build website
+        run: |
+          sphinx-build -nW --keep-going -b html docs/ docs/_build/html
