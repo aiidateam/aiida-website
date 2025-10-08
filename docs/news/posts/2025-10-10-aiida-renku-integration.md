@@ -28,7 +28,7 @@ Both platforms share a Swiss origin, as well as a commitment to provenance track
 While AiiDA automatically tracks data provenance during computational simulation workflows through directed acyclic graphs (DAGs) for computational materials science workflows, Renku captures provenance and lineage of research objects in a knowledge graph.
 
 The integration allows researchers to click the Renku logo next to any AiiDA archive on MCA and be automatically launched into a fully configured environment with their selected data ready for exploration, eliminating the need for local installation and configuration:
-![](./_pics/renku-blog-images/1-renku-logo-mca.png)
+![](./_pics/renku-blog-images/03-renku-logo-mca.png)
 (corresponding MCA record [here](https://archive.materialscloud.org/record/2023.81))
 
 <!-- The first version of the Renku integration was established five years ago and has continuously evolved.
@@ -85,7 +85,8 @@ This would further reduce the startup time and it would also circumvent storage 
 
 One technical challenge currently still prevents the use of data connectors:
 many MCA archives were created with older AiiDA versions and require data migration to work with current versions of AiiDA.
-Since mounted filesystems via data connectors are read-only, AiiDA's current approach of in-place migration doesn't work[^5].
+Since mounted filesystems via data connectors are read-only, AiiDA's current approach of in-place migration doesn't work.
+<!-- [^5] TODO: mention PRs that were motivated by this -->
 Potential solutions include periodic, automatic migrations of MCA-hosted archives to the latest version of AiiDA, or creation of the migrated file on the Renku project's actual filesystem (though this sacrifices one of the main advantages of data connectors, instant access without the need for downloading the whole file).
 
 ### Expanding the AiiDAlab App Ecosystem
@@ -123,6 +124,3 @@ For researchers interested in exploring AiiDA archives on the Materials Cloud Ar
 
 [^4]:
     Materials Cloud Archive recently converted their storage backend to InvenioRDM.
-
-[^x]:
-    Before the `sqlite_zip` storage backend was added
