@@ -15,7 +15,7 @@ By doing so, you make your data available to the research community at large, of
 
 Sounds great, now, where's the catch?
 While uploading the data to MCA makes it, in principle, available to the world,  exported AiiDA archives are not directly human-readable.
-This is because they are _not_ just a classical directory (and file) trees, but a compressed file with a specific format that was designed for performance[^1].
+This is because they are _not_ just classical directory (and file) trees, but compressed files with a specific format that was designed for performance[^1].
 Therefore, exploring the data is not straightforward, and typically required users to install AiiDA locally, including complex system dependencies like PostgreSQL and RabbitMQ[^2], download the archive, and use AiiDA's API and CLI to explore the computational data.
 
 This barrier meant that the data hosted on MCA was effectively locked in to users already familiar with AiiDA or willing to invest the necessary time to learn it.
@@ -77,7 +77,7 @@ Below the text, we provide you with screenshots of the full journey from an MCA 
 
 In the development team, we are already exploring several enhancements using Renku v2's new capabilities:
 
-### Data Connectors
+__Data Connectors__
 
 Renku v2 provides "data connectors" that can mount data from supported providers directly in a project's filesystem.
 Since MCA uses the InvenioRDM platform, which Renku v2 supports, creating an MCA data connector could allow mounting AiiDA archives directly without having to download them at all.
@@ -89,9 +89,9 @@ Since mounted filesystems via data connectors are read-only, AiiDA's current app
 <!-- [^5] TODO: mention PRs that were motivated by this -->
 Potential solutions include periodic, automatic migrations of MCA-hosted archives to the latest version of AiiDA, or creation of the migrated file on the Renku project's actual filesystem (though this sacrifices one of the main advantages of data connectors, instant access without the need for downloading the whole file).
 
-### Expanding the AiiDAlab App Ecosystem
+__Expanding the AiiDAlab App Ecosystem__
 
-Renku v2's support for arbitrary Docker images opens possibilities for integrating other AiiDA applications.
+RenkuLab v2's support for arbitrary Docker images opens possibilities for integrating other AiiDA applications.
 Work has already been carried out to make the [AiiDAlab Quantum ESPRESSO (aiidalab-qe) app compatible with Renku](https://github.com/aiidalab/aiidalab-qe/pull/1105), potentially providing the same GUI and user experience as the standalone app.
 Other candidates include the [`aiida-archive-inspect` app](https://github.com/superstar54/aiida-archive-inspect), which could display information about all available AiiDA archives for an MCA page and enable interactive selection.
 
