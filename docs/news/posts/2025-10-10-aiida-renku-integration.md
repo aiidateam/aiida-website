@@ -29,7 +29,8 @@ While AiiDA tracks computational workflow provenance through directed acyclic gr
 
 The integration allows researchers to click the Renku logo next to any AiiDA archive on MCA and be automatically launched into a fully configured environment with AiiDA installed and their selected data ready for exploration, eliminating the need for local installation and configuration:
 ![](./_pics/renku-blog-images/03-renku-logo-mca.png)
-(corresponding MCA record [here](https://archive.materialscloud.org/record/2023.81))
+
+<img src="./_pics/renku-blog-images/03-renku-logo-mca.png" alt="Renku logo on MCA" width="70%" style="box-shadow: 0 4px 8px rgba(0,0,0,0.3); border-radius: 8px;">
 
 The first version of the integration with RenkuLab was established six years ago and has been operational ever since.
 While we recently also launched the [AiiDAlab demo server](https://demo.aiidalab.io/) geared towards the AiiDAlab graphical user interface, this development is very recent and still being actively adapted.
@@ -112,7 +113,7 @@ For researchers interested in exploring AiiDA archives on the Materials Cloud Ar
 Below, we show the full journey from an MCA archive to the working Renku project, going through the startup notebook, and finally exporting the AiiDA data to a directory tree.
 Please note that some parts of the original recording were cut out to shorten the video (e.g., session startup on Renku typically took approx. 1 minute):
 
-![From MCA to RenkuLab project](./_gifs/renku-journey.gif)
+<img src="./_gifs/renku-journey.gif" alt="From MCA to RenkuLab project" width="70%" style="box-shadow: 0 4px 8px rgba(0,0,0,0.3); border-radius: 8px;">
 
 [^1]:
     For the full specification of AiiDA's export format, the reader is referred to the corresponding [AEP](https://aiida-aep.readthedocs.io/en/latest/005_exportformat/readme.html).
