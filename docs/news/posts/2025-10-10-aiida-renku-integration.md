@@ -113,16 +113,10 @@ Below, we show the full journey from an MCA archive to a Renku project, going th
 
 ```{raw} html
 <video width="100%" controls>
-  <source src="_vids/renku-journey.mp4" type="video/mp4">
+  <source src="_static/videos/renku-journey.mp4" type="video/mp4">
+  Your browser does not support the video tag.
 </video>
 ```
-
-<!-- <p align="center"> -->
-<!-- <video width="80%" controls> -->
-<!--   <source src="_vids/renku-journey.mp4" type="video/mp4"> -->
-<!--   <!-- Your browser does not support the video tag. --> -->
-<!-- </video> -->
-<!-- </p> -->
 
 [^1]:
     For the full specification of AiiDA's export format, the reader is referred to the corresponding [AEP](https://aiida-aep.readthedocs.io/en/latest/005_exportformat/readme.html).
