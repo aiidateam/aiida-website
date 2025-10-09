@@ -16,25 +16,24 @@ By doing so, you make your data available to the research community at large, of
 Sounds great, now, where's the catch?
 While uploading the data to MCA makes it, in principle, available to the world,  exported AiiDA archives are not directly human-readable.
 This is because they are _not_ just classical directory (and file) trees, but compressed files with a specific format that was designed for performance[^1].
-Therefore, exploring the data is not straightforward, and typically required users to install AiiDA locally, including complex system dependencies like PostgreSQL and RabbitMQ[^2], download the archive, and use AiiDA's API and CLI to explore the computational data.
+Therefore, exploring the data is not straightforward, and typically required users to install AiiDA locally (including complex system dependencies like PostgreSQL and RabbitMQ[^2]), download the archive, and then use AiiDA's API and CLI to explore the computational data.
 
-This barrier meant that the data hosted on MCA was effectively locked in to users already familiar with AiiDA or willing to invest the necessary time to learn it.
-And, still, even experienced users had to manually download archives and configure their local environments before exploring the data---time that could have been spent on research instead.
+This barrier meant that the data hosted on MCA was effectively only available to users already familiar with AiiDA or willing to invest the necessary time to learn it.
+And, still, even experienced users had to manually download the archives and configure their local environments before exploring the data---time that could have been spent on research instead.
 
 ## The Solution: Integration with RenkuLab
 
 Hence, in 2019, the AiiDA development team decided to partner with [RenkuLab](https://renkulab.io/), a platform developed at the Swiss Data Science Center (SDSC) for reproducible and collaborative data science, to address these challenges.
 Both platforms share a Swiss origin and a strong commitment to reproducibility in science, making them natural partners.
 
-The integration allows researchers to click the Renku logo next to any AiiDA archive on MCA and be automatically launched into a fully configured environment with AiiDA installed and their selected data ready for exploration, eliminating the need for local installation and configuration:
+The achieved integration allows researchers to click the Renku logo next to any AiiDA archive on MCA and be automatically launched into a fully configured environment with AiiDA installed and their selected data ready for exploration, eliminating the need for local installation and configuration:
 <!-- ![](./_pics/renku-blog-images/03-renku-logo-mca.png) -->
 <!-- <img src="./_pics/renku-blog-images/03-renku-logo-mca.png" alt="Renku logo on MCA" width="70%" style="box-shadow: 0 4px 8px rgba(0,0,0,0.3); border-radius: 8px;"> -->
 <img src="./_pics/renku-blog-images/03-renku-logo-mca.png" alt="Renku logo on MCA" class="img-shadow">
 
 The first version of the integration with RenkuLab was established six years ago and has been operational ever since.
-While we recently also launched the [AiiDAlab demo server](https://demo.aiidalab.io/) geared towards the AiiDAlab graphical user interface, this development is very recent and still being actively adapted.
+We recently also launched the [AiiDAlab demo server](https://demo.aiidalab.io/), and plan to add an integration with MCA, this development is very recent and still actively being worked on.
 
-<!-- read here -->
 ## Initial Implementation (Renku v1)
 
 The first implementation was built as a [contributed Renku template](https://github.com/SwissDataScienceCenter/contributed-project-templates/tree/main/aiida) ([PR](https://github.com/SwissDataScienceCenter/contributed-project-templates/pull/1) opened in 2019) and was based the Renku Docker image, with the AiiDA installation baked into the image creation process.
