@@ -21,7 +21,7 @@ extensions = [
 ]
 
 # see https://myst-parser.readthedocs.io
-myst_enable_extensions = ["colon_fence"]
+myst_enable_extensions = ["colon_fence", "html_image"]
 myst_substitutions = {"aiida": "AiiDA"}
 
 html_theme = "pydata_sphinx_theme"
