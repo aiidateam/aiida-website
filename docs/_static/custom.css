@@ -67,3 +67,13 @@ div.sbar-aiida div.cite {
 #navbar-icon-links i.fa-square-twitter::before {
     color: #646464;
 }
+
+/* Styled images with shadow */
+img.img-shadow {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    max-width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
