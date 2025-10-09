@@ -9,11 +9,11 @@ date: 2025-10-10
 # One-click exploration of AiiDA archives via RenkuLab
 
 Did you know that when you conduct research using AiiDA, you can host the generated data for free on the [Materials Cloud Archive (MCA)](https://archive.materialscloud.org/)?
-By doing so, you make your data available to the research community at large, offload the worry about data persistence, and allow users to explore it with MCA's built-in provenance explorer.
+By doing so, you make your data available to the research community at large, offload the worry about long-term data storage, and allow users to explore it with MCA's built-in provenance explorer.
 
 ## The Problem: No data access without local setup
 
-Sounds great, now, what's the catch?
+Sounds great, now, where's the catch?
 While uploading the data to MCA makes it, in principle, available to the world,  exported AiiDA archives are not directly human-readable.
 That is, they are _not_ just a classical directory and file tree, but a compressed file, designed for performance[^1], and, therefore, exploring the data is not straightforward.
 This process typically required users to install AiiDA locally, including complex system dependencies like PostgreSQL and RabbitMQ[^2], download the archive, and use AiiDA's API and CLI to explore the computational data effectively.
