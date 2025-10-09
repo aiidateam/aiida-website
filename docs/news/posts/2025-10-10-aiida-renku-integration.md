@@ -111,12 +111,18 @@ For researchers interested in exploring AiiDA archives on the Materials Cloud Ar
 
 Below, we show the full journey from an MCA archive to a Renku project, going through the startup notebook, and finally exporting the AiiDA data to a directory tree:
 
-<p align="center">
-<video width="80%" controls>
+```{raw} html
+<video width="100%" controls>
   <source src="_vids/renku-journey.mp4" type="video/mp4">
-  <!-- Your browser does not support the video tag. -->
 </video>
-</p>
+```
+
+<!-- <p align="center"> -->
+<!-- <video width="80%" controls> -->
+<!--   <source src="_vids/renku-journey.mp4" type="video/mp4"> -->
+<!--   <!-- Your browser does not support the video tag. --> -->
+<!-- </video> -->
+<!-- </p> -->
 
 [^1]:
     For the full specification of AiiDA's export format, the reader is referred to the corresponding [AEP](https://aiida-aep.readthedocs.io/en/latest/005_exportformat/readme.html).
