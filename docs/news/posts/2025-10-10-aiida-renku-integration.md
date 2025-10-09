@@ -46,13 +46,13 @@ On the MCA side, the integration was achieved by building a Renku project launch
 This link is accessible via the Renku logo displayed next to each AiiDA archive on MCA record pages (see image above).
 The initial implementation still required user interaction with Renku's GUI during the project creation process, though all data was prefilled based on the data contained in the URL.
 
-## Current Implementation (Renku v2)
+## Current Implementation (Renku 2.0)
 
-With the upgrade to Renku v2, the [current implementation](https://github.com/aiidateam/renku2-aiida-integration) retained its core technical foundations, but introduces several key improvements:
+With the upgrade to Renku 2.0, the [current implementation](https://github.com/aiidateam/renku2-aiida-integration) retained its core technical foundations, but introduces several key improvements:
 For one, the GUI-based project creation step required in Renku v1 is bypassed through the use of a [pre-created project](https://renkulab.io/p/aiida/materials-cloud-archive), enabling genuine one-click AiiDA archive access from MCA.
 In addition, the archive download (and AiiDA profile creation) has been deferred to manual execution of notebook cells by the user, rather than being done at session startup.
 This drastically reduces startup time, as downloads of multi-gb archives could previously take minutes during session startup.
-Further, in Renku v2, the archive URL that points to the MCA record from which the session was launched is available as an environment variable and is used to fetch relevant metadata via the InvenioRDM API[^4].
+Further, in Renku 2.0, the archive URL that points to the MCA record from which the session was launched is available as an environment variable and is used to fetch relevant metadata via the InvenioRDM API[^4].
 This allowed for a more customized startup notebook with the set of displayed cells adapted based on the MCA entry.
 The startup notebook now also contains additional code snippets showcasing AiiDA's API for archive exploration, while internal backend code (e.g., archive download and AiiDA profile setup) is hidden in auto-folded cells.
 Finally, the Docker image now includes the latest released aiida-core version, 2.7.1, with all its recent improvements.
@@ -76,12 +76,12 @@ Below the text, we provide you with screenshots of the full journey from an MCA 
 
 ## Future Directions
 
-In the development team, we are already exploring several enhancements using Renku v2's new capabilities:
+In the development team, we are already exploring several enhancements using Renku 2.0's new capabilities:
 
 __Data Connectors__
 
-Renku v2 provides "data connectors" that can mount data from supported providers directly in a project's filesystem.
-Since MCA uses the InvenioRDM platform, which Renku v2 supports, creating an MCA data connector could allow mounting AiiDA archives directly without having to download them at all.
+Renku 2.0 provides "data connectors" that can mount data from supported providers directly in a project's filesystem.
+Since MCA uses the InvenioRDM platform, which Renku 2.0 supports, creating an MCA data connector could allow mounting AiiDA archives directly without having to download them at all.
 This would further reduce the startup time and it would also circumvent storage limitations typically applied by Renku (every project comes, by default, with 10GB of disk space).
 
 One technical challenge currently still prevents the use of data connectors:
