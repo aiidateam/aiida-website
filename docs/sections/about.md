@@ -69,7 +69,7 @@ AiiDA users can export their provenance graph and share it with others. When upl
 
 On the [AiiDA registry](https://aiidateam.github.io/aiida-registry/), users can share self-documenting AiiDA workflows, along with plugins for new simulation codes, data types, schedulers and more.
 
-The [AiiDA lab](https://aiidalab.materialscloud.org/) allows users to wrap AiiDA workflows in interactive web applications. Using jupyter notebooks, computational researchers can share intuitive turn-key solutions with their experimental peers, researchers from companies and the scientific community at large.
+The [AiiDA lab](https://www.aiidalab.net/) allows users to wrap AiiDA workflows in interactive web applications. Using jupyter notebooks, computational researchers can share intuitive turn-key solutions with their experimental peers, researchers from companies and the scientific community at large.
 
 (feat-open-source)=
 

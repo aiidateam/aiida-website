@@ -21,7 +21,7 @@ extensions = [
 ]
 
 # see https://myst-parser.readthedocs.io
-myst_enable_extensions = ["colon_fence"]
+myst_enable_extensions = ["colon_fence", "html_image"]
 myst_substitutions = {"aiida": "AiiDA"}
 
 html_theme = "pydata_sphinx_theme"
@@ -159,6 +159,7 @@ linkcheck_ignore = [
     r"https://openbis.ch",  # Not accessibla as of 06-06-2025. Might come back
     r"https://www.eosc-hub.eu/",  # Privacy warning when accessing manually
     r"http://bit.ly/2HRjTWo",  # Link now broken. Maybe remove fully in future?
+    r"https://blog.renkulab.io/aiida-success-story/",  # non-existent at the time of writing
 ]
 
 aiida_ignore_event_checks = [
