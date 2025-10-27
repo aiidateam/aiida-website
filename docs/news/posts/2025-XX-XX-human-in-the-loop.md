@@ -10,7 +10,10 @@ date: 2025-XX-XX
 
 Posted on 2025-10-22 by Giovanni Pizzi and Carlo Pignedoli
 
-In many scientific workflows it can be useful—or even necessary—to pause execution and get human feedback before continuing. Maybe a supercomputer went down and you want to resume your calculations once it's back online. Or perhaps you want to inspect the first step of a long workflow before committing to the rest. Sometimes, you might even want to make a manual decision: choose which next step to take based on the results so far.
+In many scientific workflows it can be useful—or even necessary—to pause execution and get human feedback before continuing.
+Maybe a supercomputer went down and you want to resume your calculations once it's back online.
+Or perhaps you want to inspect the first step of a long workflow before committing to the rest.
+Sometimes, you might even want to make a manual decision: choose which next step to take based on the results so far.
 
 In this post, we'll explore how to design AiiDA WorkChains that wait for human feedback — that is, workflows where you get to interactively guide the process.
 
@@ -19,19 +22,22 @@ In this post, we'll explore how to design AiiDA WorkChains that wait for human f
 
 The simplest way to get a human “in the loop” is to pause a workflow, and then manually replay it once you're ready to continue.
 
-For example, a workflow can be designed to pause if a remote node fails. After the issue is fixed you can simply run:
+For example, a workflow can be designed to pause if a remote node fails.
+After the issue is fixed you can simply run:
 ```
 verdi process play <PK>
 ```
 and the workflow will resume from where it left off.
 The [AiiDA documentation](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/processes/usage.html?utm_source=chatgpt.com#verdi-process-pause-play-kill) includes the commands for manipulating live processes: `verdi process pause`, `verdi process play`, `verdi process kill`.
 
-This already gives you a way to handle real-world situations gracefully without restarting from scratch. But sometimes you may want to go further—not just resume, but provide actual feedback to the workflow logic.
+This already gives you a way to handle real-world situations gracefully without restarting from scratch.
+But sometimes you may want to go further—not just resume, but provide actual feedback to the workflow logic.
 
 
 ## Communicating with the Workflow via Extras
 
-AiiDA allows WorkChains to store metadata and messages in extras on the process node. One possible way to communicate between workflow and user is to use these extras to send questions from the workflow to the user, and receive answers back.
+AiiDA allows WorkChains to store metadata and messages in extras on the process node.
+One possible way to communicate between workflow and user is to use these extras to send questions from the workflow to the user, and receive answers back.
 
 The workflow can set an extra, for example:
 ```python
@@ -44,7 +50,10 @@ This pattern enables a full “human-in-the-loop” control flow—while keeping
 
 ## A Simple Example: Guess the Number!
 
-Let's make this concrete with a small toy example. For simplicity, we will not even submit jobs. We'll just implement a WorkChain that secretly picks a random number between 1 and 100, then repeatedly pauses while waiting for your guess. You reply by setting an extra (answer), replay the workflow, and it tells you whether the target number is higher or lower—until you guess correctly or reach a maximum number of attempts.
+Let's make this concrete with a small toy example.
+For simplicity, we will not even submit jobs.
+We'll just implement a WorkChain that secretly picks a random number between 1 and 100, then repeatedly pauses while waiting for your guess.
+You reply by setting an extra (answer), replay the workflow, and it tells you whether the target number is higher or lower—until you guess correctly or reach a maximum number of attempts.
 
 We'll create a minimal package called aiida-humaninloop.
 
@@ -200,7 +209,8 @@ Need user input via "answer" extra before replaying!
 
 ## Playing the Game
 
-Let's play, now! Inspect the question with:
+Let's play, now!
+Inspect the question with:
 ```
 verdi node extras <PK>
 ```
@@ -262,7 +272,8 @@ Then run with `verdi run auto-guess.py <PK>`.
 
 ## Outlook
 
-This simple demo shows how AiiDA workflows can easily be extended to include human feedback loops. Such patterns can be extremely useful in production cases, for instance:
+This simple demo shows how AiiDA workflows can easily be extended to include human feedback loops.
+Such patterns can be extremely useful in production cases, for instance:
 
 - Pausing when an unexpected node failure occurs, allowing the user to replay once the cluster is stable.
 
@@ -287,4 +298,7 @@ We'd love to hear your thoughts and use cases — join the discussion on the Aii
 
 ## 🧠 A Note on Provenance
 
-If your workflow simply pauses and resumes after failures, no special provenance tracking is needed. However, if user input influences subsequent calculations, it may be important to record what decisions were made. In most cases, since workflows generate new inputs for calculations, these will already appear in the provenance graph. But if you have more complex or interactive use-cases, we're interested in hearing your ideas on how to best record such feedback.
+If your workflow simply pauses and resumes after failures, no special provenance tracking is needed.
+However, if user input influences subsequent calculations, it may be important to record what decisions were made.
+In most cases, since workflows generate new inputs for calculations, these will already appear in the provenance graph.
+But if you have more complex or interactive use-cases, we're interested in hearing your ideas on how to best record such feedback.
