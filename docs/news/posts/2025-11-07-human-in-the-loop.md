@@ -2,13 +2,11 @@
 blogpost: true
 category: Blog
 tags: idea
-author: Giovanni Pizzi
-date: 2025-XX-XX
+author: Giovanni Pizzi, Carlo Pignedoli
+date: 2025-11-07
 ---
 
-# Putting a Human Back in the Loop: Interactive Workflows with AiiDA
-
-Posted on 2025-10-22 by Giovanni Pizzi and Carlo Pignedoli
+# Putting the Human Back in the Loop: Interactive Workflows with AiiDA
 
 In many scientific workflows it can be useful—or even necessary—to pause execution and get human feedback before continuing.
 Maybe a supercomputer went down and you want to resume your calculations once it's back online.
@@ -20,7 +18,7 @@ In this post, we'll explore how to design AiiDA WorkChains that wait for human f
 
 ## Self-Pausing a Workflow
 
-The simplest way to get a human “in the loop” is to pause a workflow, and then manually replay it once you're ready to continue.
+The simplest way to get a human "in the loop" is to pause a workflow, and then manually replay it once you're ready to continue.
 
 For example, a workflow can be designed to pause if a remote node fails.
 After the issue is fixed you can simply run:
