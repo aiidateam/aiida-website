@@ -16,7 +16,7 @@ Sometimes, you might even want to make a manual decision: choose which next step
 In this post, we'll explore how to design AiiDA WorkChains that wait for human feedback — that is, workflows where you get to interactively guide the process.
 
 
-## Self-Pausing a Workflow
+## Pausing Workflows
 
 The simplest way to get a human "in the loop" is to pause a workflow, and then manually replay it once you're ready to continue.
 
@@ -27,14 +27,15 @@ verdi process play <PK>
 ```
 and the workflow will resume from where it left off.
 The [AiiDA documentation](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/processes/usage.html?utm_source=chatgpt.com#verdi-process-pause-play-kill) includes the commands for manipulating live processes: `verdi process pause`, `verdi process play`, `verdi process kill`.
+<!-- note: what about `repair` -->
 
 This already gives you a way to handle real-world situations gracefully without restarting from scratch.
 But sometimes you may want to go further—not just resume, but provide actual feedback to the workflow logic.
 
 
-## Communicating with the Workflow via Extras
+## Communicating with the Workflow via the `extras`
 
-AiiDA allows WorkChains to store metadata and messages in extras on the process node.
+AiiDA allows WorkChains to store metadata and messages in the `extras` field on the process node.
 One possible way to communicate between workflow and user is to use these extras to send questions from the workflow to the user, and receive answers back.
 
 The workflow can set an extra, for example:
@@ -43,7 +44,7 @@ node.base.extras.set('question', "What should I do next?")
 ```
 
 You then inspect the node, set a corresponding extra (for example `'answer' = "..."`), and replay the workflow.
-This pattern enables a full “human-in-the-loop” control flow—while keeping everything inside the AiiDA provenance graph.
+This pattern enables a full "human-in-the-loop" control flow—while keeping everything inside the AiiDA provenance graph.
 
 
 ## A Simple Example: Guess the Number!
@@ -53,7 +54,7 @@ For simplicity, we will not even submit jobs.
 We'll just implement a WorkChain that secretly picks a random number between 1 and 100, then repeatedly pauses while waiting for your guess.
 You reply by setting an extra (answer), replay the workflow, and it tells you whether the target number is higher or lower—until you guess correctly or reach a maximum number of attempts.
 
-We'll create a minimal package called aiida-humaninloop.
+For this, we'll create a minimal package called aiida-humaninloop.
 
 In your working folder, set up the following structure:
 ```
@@ -221,7 +222,7 @@ wf.base.extras.set('answer', 50)
 
 Finally replay the workflow with `verdi process play <PK>`.
 
-The workflow will check your answer, tell you whether the number is higher or lower, and pause again — waiting for your next guess!
+The workflow will check your answer, tell you whether the number is higher or lower, clear the `answer` exatr, and pause again — waiting for your next guess!
 You can now iterate the points above to provide further guesses: how quickly will you find the target?
 
 You can also check the full WorkChain report using `verdi process report <PK>` that contains the full history of what has been going on until now.
@@ -274,9 +275,7 @@ This simple demo shows how AiiDA workflows can easily be extended to include hum
 Such patterns can be extremely useful in production cases, for instance:
 
 - Pausing when an unexpected node failure occurs, allowing the user to replay once the cluster is stable.
-
 - Checking intermediate outputs before launching long or expensive calculations.
-
 - Manually deciding the next step of an adaptive workflow.
 
 
@@ -285,13 +284,11 @@ We're exploring ways to bring this approach into production workflows—for exam
 Do you think AiiDA should have native support for human feedback loops?
 For example:
 
-- a standardised way to exchange “questions” and “answers” with workflows,
-
+- a standardised way to exchange "questions" and "answers" with workflows,
 - clearer visualisation of paused processes that are waiting for input,
-
 - or even a CLI command like `verdi workchain reply-and-restart <PK>`?
 
-We'd love to hear your thoughts and use cases — join the discussion on the AiiDA Discourse forum!
+We'd love to hear your thoughts and use cases—join the discussion on the AiiDA Discourse forum!
 
 
 ## 🧠 A Note on Provenance
