@@ -222,7 +222,7 @@ wf.base.extras.set('answer', 50)
 
 Finally replay the workflow with `verdi process play <PK>`.
 
-The workflow will check your answer, tell you whether the number is higher or lower, clear the `answer` exatr, and pause again — waiting for your next guess!
+The workflow will check your answer, tell you whether the number is higher or lower, clear the `answer` extra, and pause again — waiting for your next guess!
 You can now iterate the points above to provide further guesses: how quickly will you find the target?
 
 You can also check the full WorkChain report using `verdi process report <PK>` that contains the full history of what has been going on until now.
