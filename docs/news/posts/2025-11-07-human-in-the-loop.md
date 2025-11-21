@@ -2,23 +2,22 @@
 blogpost: true
 category: Blog
 tags: idea
-author: Giovanni Pizzi, Carlo Pignedoli
-date: 2025-11-07
+author: Giovanni Pizzi, Carlo Pignedoli, Julian Geiger
+date: 2025-11-18
 ---
 
-# Putting the Human Back in the Loop: Interactive Workflows with AiiDA
+# Putting the human back in the loop: Interactive workflows with AiiDA
 
-In many scientific workflows it can be useful—or even necessary—to pause execution and get human feedback before continuing.
-Maybe a supercomputer went down and you want to resume your calculations once it's back online.
-Or perhaps you want to inspect the first step of a long workflow before committing to the rest.
-Sometimes, you might even want to make a manual decision: choose which next step to take based on the results so far.
+In this post, we'll explore how to design AiiDA WorkChains that wait for human feedback, workflows where you get to interactively guide the process.
 
-In this post, we'll explore how to design AiiDA WorkChains that wait for human feedback — that is, workflows where you get to interactively guide the process.
+Such interactive workflows have many practical applications in scientific computing, where it can be useful (or even necessary) to pause execution and get human feedback before continuing.
+Maybe a supercomputer went down and you want to resume your calculations once it's back online, or perhaps you want to inspect the first step of a long workflow before committing to the rest.
+Sometimes, you might even want to make a manual decision to choose which next step to take based on the results so far.
 
 
-## Pausing Workflows
+## Pausing workflows
 
-The simplest way to get a human "in the loop" is to pause a workflow, and then manually replay it once you're ready to continue.
+The simplest way to get the human back "in the loop" is to pause a workflow, and then manually replay it once you're ready to continue.
 
 For example, a workflow can be designed to pause if a remote node fails.
 After the issue is fixed you can simply run:
@@ -26,17 +25,17 @@ After the issue is fixed you can simply run:
 verdi process play <PK>
 ```
 and the workflow will resume from where it left off.
-The [AiiDA documentation](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/processes/usage.html?utm_source=chatgpt.com#verdi-process-pause-play-kill) includes the commands for manipulating live processes: `verdi process pause`, `verdi process play`, `verdi process kill`.
-<!-- note: what about `repair` -->
+The [AiiDA documentation](https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/processes/usage.html#verdi-process-pause-play-kill) includes the commands for manipulating live processes: `verdi process pause`, `verdi process play`, `verdi process kill`.
 
 This already gives you a way to handle real-world situations gracefully without restarting from scratch.
-But sometimes you may want to go further—not just resume, but provide actual feedback to the workflow logic.
+But sometimes you may want to go further and not just resume, but provide actual feedback to the workflow logic.
 
 
-## Communicating with the Workflow via the `extras`
+## Communicating with the workflow via `extras`
 
 AiiDA allows WorkChains to store metadata and messages in the `extras` field on the process node.
-One possible way to communicate between workflow and user is to use these extras to send questions from the workflow to the user, and receive answers back.
+Importantly, the `extras` always remain mutable, unlike the `attributes`.
+Thus, one possible way to communicate between workflow and user is to use the `extras` to send questions from the workflow to the user, and receive answers back.
 
 The workflow can set an extra, for example:
 ```python
@@ -44,28 +43,29 @@ node.base.extras.set('question', "What should I do next?")
 ```
 
 You then inspect the node, set a corresponding extra (for example `'answer' = "..."`), and replay the workflow.
-This pattern enables a full "human-in-the-loop" control flow—while keeping everything inside the AiiDA provenance graph.
+This pattern enables a full "human-in-the-loop" control flow, while keeping everything inside the AiiDA provenance graph.
 
 
-## A Simple Example: Guess the Number!
+## A simple example: Guess the number!
 
 Let's make this concrete with a small toy example.
 For simplicity, we will not even submit jobs.
 We'll just implement a WorkChain that secretly picks a random number between 1 and 100, then repeatedly pauses while waiting for your guess.
 You reply by setting an extra (answer), replay the workflow, and it tells you whether the target number is higher or lower—until you guess correctly or reach a maximum number of attempts.
 
-For this, we'll create a minimal package called aiida-humaninloop.
-
+For this, we'll create a minimal package called `aiida-human-in-the-loop`.
 In your working folder, set up the following structure:
 ```
-aiida-humaninloop/
+aiida-human-in-the-loop/
 ├── pyproject.toml
 └── src/
-    └── aiida_humaninloop/
+    └── aiida_humanintheloop/
         └── __init__.py
 ```
 
-### The WorkChain Definition
+Alternatively, you can also find the ready-to-use package on [GitHub](https://github.com/GeigerJ2/aiida-human-in-the-loop) for your convenience to just `git clone`, `pip install -e`, and follow along.
+
+### The WorkChain definition
 ```python
 import random
 from typing import Optional
@@ -166,7 +166,7 @@ class HumanLoopWorkChain(WorkChain):
             self.out('result', Dict({"message": f"Failed after {self.ctx.attempts} attempts", "history": self.ctx.history}).store())
 ```
 
-## Installing and Running
+## Installing and running
 
 In the top-level folder, add this pyproject.toml:
 ```toml
@@ -175,21 +175,21 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "aiida-humaninloop"
+name = "aiida-human-in-the-loop"
 version = "0.1.0"
 description = "Example AiiDA workflow that waits for human feedback before continuing"
 authors = [{ name = "AiiDA Team" }]
 dependencies = ["aiida-core>=2.5"]
 
 [project.entry-points.'aiida.workflows']
-"humaninloop.humanloop" = "aiida_humaninloop:HumanLoopWorkChain"
+"humanintheloop.humanloop" = "aiida_humanintheloop:HumanLoopWorkChain"
 ```
 
 Then install it with `pip install -e .`.
 
 Now submit the workflow (e.g. using this code in a python script and running with `verdi run`, or in a Jupyter notebook cell):
 ```python
-from aiida_humaninloop import HumanLoopWorkChain
+from aiida_humanintheloop import HumanLoopWorkChain
 from aiida.orm import Int
 from aiida.engine import submit
 
@@ -206,9 +206,9 @@ You should see it paused with a message like:
 Need user input via "answer" extra before replaying!
 ```
 
-## Playing the Game
+## Playing the game
 
-Let's play, now!
+Now, let's play!
 Inspect the question with:
 ```
 verdi node extras <PK>
@@ -220,7 +220,7 @@ wf = load_node(<PK>)
 wf.base.extras.set('answer', 50)
 ```
 
-Finally replay the workflow with `verdi process play <PK>`.
+Finally, replay the workflow with `verdi process play <PK>`.
 
 The workflow will check your answer, tell you whether the number is higher or lower, clear the `answer` extra, and pause again — waiting for your next guess!
 You can now iterate the points above to provide further guesses: how quickly will you find the target?
@@ -228,9 +228,9 @@ You can now iterate the points above to provide further guesses: how quickly wil
 You can also check the full WorkChain report using `verdi process report <PK>` that contains the full history of what has been going on until now.
 To make this smoother, you can even automate the interaction with a helper script, as we show below.
 
-### A Small Interactive Script
+### A small interactive script
 
-Save the following as auto-guess.py:
+Save the following as `auto-guess.py`:
 ```python
 from aiida.orm import load_node
 import sys
@@ -279,7 +279,7 @@ Such patterns can be extremely useful in production cases, for instance:
 - Manually deciding the next step of an adaptive workflow.
 
 
-We're exploring ways to bring this approach into production workflows—for example, in the AiiDA-Quantum ESPRESSO plugin, where we could pause and resume jobs after cluster-side issues.
+We're currently exploring ways to bring this approach into production workflows, for example, in the AiiDA-Quantum ESPRESSO plugin, where we could pause and resume jobs after cluster-side issues.
 
 Do you think AiiDA should have native support for human feedback loops?
 For example:
@@ -288,12 +288,14 @@ For example:
 - clearer visualisation of paused processes that are waiting for input,
 - or even a CLI command like `verdi workchain reply-and-restart <PK>`?
 
-We'd love to hear your thoughts and use cases—join the discussion on the AiiDA Discourse forum!
+We'd love to hear your thoughts!
 
 
-## 🧠 A Note on Provenance
+### A final note on provenance
 
 If your workflow simply pauses and resumes after failures, no special provenance tracking is needed.
 However, if user input influences subsequent calculations, it may be important to record what decisions were made.
 In most cases, since workflows generate new inputs for calculations, these will already appear in the provenance graph.
-But if you have more complex or interactive use-cases, we're interested in hearing your ideas on how to best record such feedback.
+But if you have more complex or interactive use-cases, we'd be curious to hear your ideas on how to best record such feedback loops.
+
+As always, happy computing!
