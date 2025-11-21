@@ -301,7 +301,7 @@ An associated `Controller` can handle the rendering of the `View` (calling `rend
 
 ### Concurrency and parallelization
 
-It will often be the case that some operations of your app will take longer than others. To reduce the impact on the experience of the user, one should consider asynchronous operations (concurrency) and/or threading and other parallelization techniques. Here we reference you to a great article about [burgers](https://tiangolo.medium.com/concurrent-burgers-understand-async-await-eeec05ae7cfe).
+It will often be the case that some operations of your app will take longer than others. To reduce the impact on the experience of the user, one should consider asynchronous operations (concurrency) and/or threading and other parallelization techniques. Here we reference you to a great article about [burgers](https://github.com/tiangolo/blog-posts/blob/master/concurrent-burgers-understand-async-await/README.md).
 
 **Warning** ⚠️ if you do choose to leverage threading, try to avoid sharing AiiDA node instances between threads. In other words, one thread should avoid making use of a node from another thread. Often, this will lead to DB session conflicts. You can read more about it [here](https://aiida.discourse.group/t/using-thread-to-watch-workchains-status-in-aiidalab/135).
 
