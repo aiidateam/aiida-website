@@ -288,6 +288,8 @@ For example:
 - clearer visualisation of paused processes that are waiting for input,
 - or even a CLI command like `verdi workchain reply-and-restart <PK>`?
 
+You can follow the discussion on how to bring interactive re-playing for unhandled failures into the `BaseRestartWorkChain` in [this PR](https://github.com/aiidateam/aiida-core/pull/7069).
+
 We'd love to hear your thoughts!
 
 
