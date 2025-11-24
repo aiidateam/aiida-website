@@ -45,6 +45,10 @@ Besides the AiiDA development team listed below, we thank our [numerous external
   - **Ali Khosravi**\
     *PostDoc Research Scientist, Materials Software and Data Group, PSI*
 
+* - ![Portrait](../pics/team/liu_zisen.png)
+  - **Zisen Liu**\
+    *Master Student, University of Zurich (UZH)*
+
 * - ![Portrait](../pics/team/nicola.png)
   - **Nicola Marzari**\
     *Chair, Theory and Simulation of Materials, EPFL*\
