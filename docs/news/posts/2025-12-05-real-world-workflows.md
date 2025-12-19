@@ -189,7 +189,7 @@ Make working with `verdi` easier by enabling tab completion:
 # For bash
 eval "$(_VERDI_COMPLETE=bash_source verdi)"
 
-# For zsh  
+# For zsh
 eval "$(_VERDI_COMPLETE=zsh_source verdi)"
 ```
 
