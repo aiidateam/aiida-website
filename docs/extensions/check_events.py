@@ -1,4 +1,5 @@
 """Check events.yaml and blog posts are consistent."""
+
 from __future__ import annotations
 
 from pathlib import Path

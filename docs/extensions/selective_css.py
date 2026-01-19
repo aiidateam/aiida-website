@@ -1,4 +1,5 @@
 """Add CSS selectively to pages"""
+
 from sphinx.application import Sphinx
 
 
