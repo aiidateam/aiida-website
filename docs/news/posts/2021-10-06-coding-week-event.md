@@ -182,7 +182,7 @@ We are very grateful to our sponsors for helping to make this event possible:
 - The [MarketPlace](https://www.the-marketplace-project.eu/) project for funding
 - The [DOME](https://dome40.eu/) project for funding
 - The [Open-Model project](https://www.open-model.eu/) funding
-- The [INTERSECT](https://intersect-project.eu/) project funding
+- The INTERSECT project funding
 
 :::{list-table}
 :widths: 30 30 30

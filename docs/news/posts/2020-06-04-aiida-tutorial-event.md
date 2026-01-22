@@ -58,7 +58,7 @@ The tutorial text can be found on [this page of the AiiDA Tutorials website](htt
 
 We are very grateful to our sponsors for helping to make this event possible:
 
-The [MaX European Centre of Excellence,](http://www.max-centre.eu/) the [swissuniversities P-5 project “Materials Cloud”](https://www.materialscloud.org/swissuniversities), the [MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/), the [H2020 MARKETPLACE project](https://www.the-marketplace-project.eu/), the [H2020 INTERSECT project](http://intersect-project.eu/) and the [PASC project](https://www.pasc-ch.org/) for funding.
+The [MaX European Centre of Excellence,](http://www.max-centre.eu/) the [swissuniversities P-5 project “Materials Cloud”](https://www.materialscloud.org/swissuniversities), the [MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/), the [H2020 MARKETPLACE project](https://www.the-marketplace-project.eu/), the H2020 INTERSECT project the [PASC project](https://www.pasc-ch.org/) for funding.
 
 :::{subfigure} 2
 :layout-sm: 1

@@ -129,7 +129,7 @@ We are very grateful to our sponsors for helping to make this event possible:
 * The [NCCR MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/) for funding
 * The [MaX European Centre of Excellence](http://www.max-centre.eu/) for funding
 * The [swissuniversities P-5 project "Materials Cloud"](https://www.materialscloud.org/swissuniversities) for funding
-* The [INTERSECT](http://intersect-project.eu/) project for funding
+* The INTERSECT project for funding
 
 [![](../pics/legacy/psi-k-crystal_low.png)](http://psi-k.net)
 
@@ -141,4 +141,4 @@ We are very grateful to our sponsors for helping to make this event possible:
 
 [![](../pics/legacy/894d22ec.swissuniversities.png)](https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/)
 
-[![](../pics/legacy/74b6a401.intersect.png)](http://intersect-project.eu/)
+![](../pics/legacy/74b6a401.intersect.png)
