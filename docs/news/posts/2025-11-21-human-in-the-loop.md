@@ -3,7 +3,7 @@ blogpost: true
 category: Blog
 tags: idea
 author: Giovanni Pizzi, Carlo Pignedoli, Julian Geiger
-date: 2025-11-18
+date: 2025-11-21
 ---
 
 # Putting the human back in the loop: Interactive workflows with AiiDA
@@ -53,17 +53,18 @@ For simplicity, we will not even submit jobs.
 We'll just implement a WorkChain that secretly picks a random number between 1 and 100, then repeatedly pauses while waiting for your guess.
 You reply by setting an extra (answer), replay the workflow, and it tells you whether the target number is higher or lower—until you guess correctly or reach a maximum number of attempts.
 
-For this, we'll create a minimal package called `aiida-human-in-the-loop`.
+For this, we'll create a minimal package inside `aiida-blog-snippets/human-in-the-loop` (package name `aiida-human-in-the-loop`).
 In your working folder, set up the following structure:
 ```
-aiida-human-in-the-loop/
-├── pyproject.toml
-└── src/
-    └── aiida_humanintheloop/
-        └── __init__.py
+aiida-blog-snippets/
+└── human-in-the-loop/
+    ├── pyproject.toml
+    └── src/
+        └── aiida_humanintheloop/
+            └── __init__.py
 ```
 
-Alternatively, you can also find the ready-to-use package on [GitHub](https://github.com/GeigerJ2/aiida-human-in-the-loop) for your convenience to just `git clone`, `pip install -e`, and follow along.
+Alternatively, you can also find the ready-to-use package in `aiida-blog-snippets/human-in-the-loop` for your convenience to just `pip install -e` and follow along.
 
 ### The WorkChain definition
 ```python
@@ -168,7 +169,7 @@ class HumanLoopWorkChain(WorkChain):
 
 ## Installing and running
 
-In the top-level folder, add this pyproject.toml:
+In `aiida-blog-snippets/human-in-the-loop`, add this pyproject.toml:
 ```toml
 [build-system]
 requires = ["setuptools>=61.0"]
