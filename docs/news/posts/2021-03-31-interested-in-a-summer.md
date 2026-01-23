@@ -23,7 +23,7 @@ Accepted students are paired with a mentor and start planning their projects and
 
 If you're interested in working on aiida-core as a student, please say hi in the [dedicated discussion thread](https://github.com/aiidateam/aiida-core/discussions/4702) and ask any questions you may have.
 
-See also the [NumFOCUS guide for GSOC students](https://github.com/numfocus/gsoc/blob/master/CONTRIBUTING-students.md).
+See also the [NumFOCUS guide for GSOC students](https://github.com/numfocus/gsoc/blob/489877ef2fab23ca7e8ff4a9b973bcfaffa4dc2f/CONTRIBUTING-contributors.md).
 
 The GSOC 2021 mentors
 
