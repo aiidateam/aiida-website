@@ -55,7 +55,7 @@ Below is a tentative schedule for the event (click to zoom).
 
 We are very grateful to our sponsors for helping to make this event possible:
 
-[Vilnius University](https://www.vu.lt/) for hosting the event and for providing administrative support; the [MaX European Centre of Excellence,](http://www.max-centre.eu/) [Centre Européen de Calcul Atomique et Moléculaire (CECAM)](https://www.cecam.org/), the [swissuniversities P-5 project "Materials Cloud"](https://www.materialscloud.org/swissuniversities), the [MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/), the [H2020 MARKETPLACE project](https://www.the-marketplace-project.eu/), the [H2020 INTERSECT project](http://intersect-project.eu/) and the [PASC project](https://www.pasc-ch.org/) for funding.
+[Vilnius University](https://www.vu.lt/) for hosting the event and for providing administrative support; the [MaX European Centre of Excellence,](http://www.max-centre.eu/) [Centre Européen de Calcul Atomique et Moléculaire (CECAM)](https://www.cecam.org/), the [swissuniversities P-5 project "Materials Cloud"](https://www.materialscloud.org/swissuniversities), the [MARVEL National Centre of Competence in Research](http://nccr-marvel.ch/), the [H2020 MARKETPLACE project](https://www.the-marketplace-project.eu/), the H2020 INTERSECT project and the [PASC project](https://www.pasc-ch.org/) for funding.
 
 :::{subfigure} 2
 :layout-sm: 1
