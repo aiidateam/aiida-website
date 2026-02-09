@@ -61,11 +61,11 @@ Our system introduces a **microservice architecture** with three core components
 3. **Endpoint Service**: Deployed on AiiDA machines, enabling secure communication with HPC systems.
 
 ```bash
-# [User's Local Machine]       [Materys Platform]          [AiiDA Machines]  
-#     │                              │                           │  
-#     ▼                              ▼                           ▼  
-# [SSH Agent] ←→ [Forwarder] ←→ [Platform] ←→ [Endpoint #1] ←→ [SSH client] ←→ [HPC System]  
-#                                           ←→ [Endpoint #2] ←→ [SSH client] ←→ [HPC System]  
+# [User's Local Machine]       [Materys Platform]          [AiiDA Machines]
+#     │                              │                           │
+#     ▼                              ▼                           ▼
+# [SSH Agent] ←→ [Forwarder] ←→ [Platform] ←→ [Endpoint #1] ←→ [SSH client] ←→ [HPC System]
+#                                           ←→ [Endpoint #2] ←→ [SSH client] ←→ [HPC System]
 ```
 
 ### Authentication Flow
@@ -115,7 +115,7 @@ SshAgentRequestWhitelist = map[AgentMsgType]string{
 The agent-forwarder enables seamless integration with:
 
 * **YubiKey** (OpenPGP/PIV).
-* **OpenPGP Cards**.  
+* **OpenPGP Cards**.
 * **GnuPG Agent** for smart card support.
 
 ### 2. Private Key Isolation
@@ -140,7 +140,7 @@ The agent-forwarder enables seamless integration with:
 
 Among all the protocol message types, only two operations need to be performed to implement an authentication only system:
 
-1. **Key Listing**: `SSH_AGENTC_REQUEST_IDENTITIES` → `SSH_AGENT_IDENTITIES_ANSWER`  
+1. **Key Listing**: `SSH_AGENTC_REQUEST_IDENTITIES` → `SSH_AGENT_IDENTITIES_ANSWER`
 2. **Signing Request**: `SSH_AGENTC_SIGN_REQUEST` → `SSH_AGENT_SIGN_RESPONSE`
 
 All ssh agent message that are forwarded with our system are:
@@ -168,24 +168,24 @@ openssl req -x509 -newkey rsa:4096 -keyout platform.key -out platform.crt \
     -days 365 -nodes -subj "/CN=localhost"
 
 # 4. Start platform
-REDIS_ADDRESS=localhost:6379 \  
-CERT_PATH=platform.crt \  
-KEY=platform.key \  
-PLATFORM_URL=localhost:4242 \  
+REDIS_ADDRESS=localhost:6379 \
+CERT_PATH=platform.crt \
+KEY=platform.key \
+PLATFORM_URL=localhost:4242 \
 go run ../cmd/ssh-platform/main.go > platform.log 2>&1 &
 
 # 5. Start forwarder
-KEY_OWNER_UUID=test-uuid-1234 \  
-SSH_AGENT_TOKEN=test-token-1234 \  
-PLATFORM_URL=localhost:4242 \  
-CERT_PATH=platform.crt \  
+KEY_OWNER_UUID=test-uuid-1234 \
+SSH_AGENT_TOKEN=test-token-1234 \
+PLATFORM_URL=localhost:4242 \
+CERT_PATH=platform.crt \
 go run ../cmd/ssh-agent-forwarder/main.go > forwarder.log 2>&1 &
 
 # 6. Start endpoint
-KEY_OWNER_UUID=test-uuid-1234 \  
-SSH_AGENT_TOKEN=test-token-1234 \  
-PLATFORM_URL=localhost:4242 \  
-CERT_PATH=platform.crt \  
+KEY_OWNER_UUID=test-uuid-1234 \
+SSH_AGENT_TOKEN=test-token-1234 \
+PLATFORM_URL=localhost:4242 \
+CERT_PATH=platform.crt \
 go run ../cmd/ssh-agent-endpoint/main.go > endpoint.log 2>&1 &
 
 # 7. Test connection
@@ -217,7 +217,7 @@ fi
 * Use **short-lived tokens** (e.g., 24 hours).
 * Prefer **hardware tokens** (YubiKey/OpenPGP).
 * Restrict **platform service access**.
-* Monitor **authentication attempts**.  
+* Monitor **authentication attempts**.
 * Rotate **TLS certificates** regularly.
 
 ---
@@ -245,9 +245,9 @@ This approach is a **game-changer** for research environments, combining computa
 
 ### Further Reading
 
-* [Agent-Forwarder GitHub Repository](https://github.com/Materys/agent-forwarder)  
-* [QUIC Protocol Specification](https://datatracker.ietf.org/doc/html/rfc9000)  
-* [SSH Agent Protocol Documentation](https://datatracker.ietf.org/doc/html/draft-miller-ssh-agent-00)  
+* [Agent-Forwarder GitHub Repository](https://github.com/Materys/agent-forwarder)
+* [QUIC Protocol Specification](https://datatracker.ietf.org/doc/html/rfc9000)
+* [SSH Agent Protocol Documentation](https://datatracker.ietf.org/doc/html/draft-miller-ssh-agent-00)
 * [OpenSSH PROTOCOL.agent](https://github.com/openssh/openssh-portable/blob/master/PROTOCOL.agent)
 
 ---
