@@ -24,7 +24,11 @@ def check_events(app: Sphinx, env: BuildEnvironment):
         for post in posts:
             if post["docname"] in env.config.aiida_ignore_event_checks:
                 continue
-            category: set[str] = post["category"]
+            # Handle both list (ablog 0.11+) and set (ablog 0.10) formats
+            category_raw = post["category"]
+            category: set[str] = (
+                set(category_raw) if isinstance(category_raw, list) else category_raw
+            )
             if not category.intersection(
                 ("Reports", "News", "Events", "Releases", "Blog")
             ):
