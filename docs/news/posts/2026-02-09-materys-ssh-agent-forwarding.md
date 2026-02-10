@@ -245,7 +245,7 @@ This approach is a **game-changer** for research environments, combining computa
 
 ### Further Reading
 
-* [Agent-Forwarder GitHub Repository](https://github.com/Materys/agent-forwarder)
+* [Agent-Forwarder GitHub Repository](https://github.com/Materys/ssh-agent-forwarder)
 * [QUIC Protocol Specification](https://datatracker.ietf.org/doc/html/rfc9000)
 * [SSH Agent Protocol Documentation](https://datatracker.ietf.org/doc/html/draft-miller-ssh-agent-00)
 * [OpenSSH PROTOCOL.agent](https://github.com/openssh/openssh-portable/blob/master/PROTOCOL.agent)
