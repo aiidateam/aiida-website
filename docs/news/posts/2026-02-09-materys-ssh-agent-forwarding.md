@@ -10,7 +10,7 @@ date: 2026-02-09
 
 ## Introduction
 
-At **Materys SRL**, a SISSA startup, our mission is to democratize access to numerical simulations.
+At **[Materys SRL](https://materys.com/)**, a SISSA startup, our mission is to democratize access to numerical simulations.
 We believe the greatest barrier to broader adoption isn't the science itself—whether chemistry, physics, or materials—but the **technical complexities** of running simulations on HPC systems.
 Users often struggle with low-level numerical parameters, implementation details, and the intricacies of authentication and data management, rather than the scientific questions they aim to answer.
 
@@ -75,6 +75,12 @@ Our system introduces a **microservice architecture** with three core components
 3. **Forwarder Setup**: The user's `ssh-agent` socket (`$SSH_AUTH_SOCK`) is exposed to the forwarder.
 4. **Endpoint Deployment**: The platform deploys endpoints in AiiDA pods.
 5. **Secure Communication**: All components communicate over **QUIC**, with mutual TLS ensuring end-to-end encryption.
+
+### Open Source
+
+We decided to open-source the agent-forwarder to allow the community to truly trust it and help us grow this powerful system.
+
+The repository is available at: https://github.com/Materys/ssh-agent-forwarder
 
 ---
 
@@ -242,6 +248,17 @@ By **eliminating private key distribution**, it enables:
 * **Flexible access control** via tokens.
 
 This approach is a **game-changer** for research environments, combining computational power with robust security.
+
+---
+
+### Reach out
+
+You can find us out on:
+- [materys.com](https://materys.com/)
+- [LinkedIn](https://linkedin.com/company/materys/)
+- [GitHub](https://github.com/Materys/)
+
+---
 
 ### Further Reading
 
