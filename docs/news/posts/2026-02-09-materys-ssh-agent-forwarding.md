@@ -3,7 +3,7 @@ blogpost: true
 category: Blog
 tags: ssh, security, authentication, cloud, hpc
 author: Riccardo Bertossa
-date: 2026-02-09
+date: 2026-02-18
 ---
 
 # Under the Hood of the Materys Platform: Secure SSH Agent Forwarding for AiiDA
@@ -38,12 +38,14 @@ SSH authentication relies on **public-key cryptography**:
 3. **Authentication**: The server challenges the client to sign a message with the private key.
 4. **Verification**: The server validates the signature using the public key.
 
-While effective, this model presents significant challenges in distributed environments:
+This works for direct connections in which only the **public key** is copied to remote servers, while the **private key** remains secure on the user's machine.
 
-* **Key Distribution**: Private keys must be copied to remote machines, increasing exposure.
-* **Security Risks**: Storing private keys on multiple systems expands the attack surface.
-* **Hardware Tokens**: Devices like YubiKey or OpenPGP cards cannot be easily integrated without physical access.
-* **Key Management**: Rotating or revoking keys across distributed systems is complex and error-prone.
+However, in **multi-hop distributed environments**—where AiiDA runs on cloud infrastructure and must authenticate to HPC systems on behalf of users—the traditional approach breaks down. The intermediate AiiDA machines would need access to private keys to authenticate onwards to HPC systems, introducing severe security challenges:
+
+* **Private Key Exposure**: Unlike standard SSH, users would need to copy their **private keys** to intermediate AiiDA machines, dramatically increasing exposure.
+* **Expanded Attack Surface**: Storing private keys on multiple cloud systems creates additional points of vulnerability.
+* **Hardware Token Incompatibility**: Physical security devices like YubiKey or OpenPGP cards cannot be used without direct physical access to the intermediate machines.
+* **Key Management Complexity**: Rotating or revoking keys across distributed systems becomes complex and error-prone.
 
 For Materys, these limitations were unacceptable.
 We needed a solution that preserved security while enabling seamless, hardware-backed authentication.
@@ -70,11 +72,13 @@ Our system introduces a **microservice architecture** with three core components
 
 ### Authentication Flow
 
+The authentication process involves five key steps:
+
 1. **Token Generation**: The platform generates a cryptographic token, stored in Redis.
 2. **Configuration**: Users download a YAML config with the platform URL, token, UUID, and certificates.
 3. **Forwarder Setup**: The user's `ssh-agent` socket (`$SSH_AUTH_SOCK`) is exposed to the forwarder.
 4. **Endpoint Deployment**: The platform deploys endpoints in AiiDA pods.
-5. **Secure Communication**: All components communicate over **QUIC**, with mutual TLS ensuring end-to-end encryption.
+5. **Secure Communication**: All components communicate over **QUIC** (a modern, encrypted transport protocol), with mutual TLS ensuring end-to-end encryption.
 
 ### Open Source
 
@@ -90,17 +94,21 @@ The repository is available at: https://github.com/Materys/ssh-agent-forwarder
 
 The system uses a **custom binary protocol** with three message types:
 
-* **Hello (Type 1)**: Initial handshake, including UUID, role, nonce, and HMAC.
+* **Hello (Type 1)**: Initial handshake, including UUID ("Universally Unique Identifier"), role, nonce ("number used once"), and HMAC ("Hash-based Message Authentication Code").
 * **Ack (Type 2)**: Handshake acknowledgment.
 * **Agent Packet (Type 3)**: SSH agent protocol messages, wrapped and HMAC-signed.
 
 ### Security Features
+
+The system implements multiple layers of security:
 
 * **Mutual TLS**: All QUIC connections are encrypted.
 * **HMAC Protection**: Every message is signed with HMAC-SHA256.
 * **Nonce Validation**: Prevents replay attacks.
 * **Token-Based Authentication**: UUID/token pairs are stored in Redis, with configurable expiration.
 * **Message Whitelisting**: Only safe operations are permitted.
+
+The following code illustrates how the whitelist restricts the SSH agent protocol to authentication-only operations, blocking any attempts to add, remove, or modify keys:
 
 ```go
 // SECURITY: Only minimal safe operations are allowed
@@ -133,6 +141,8 @@ The agent-forwarder enables seamless integration with:
 
 ### 3. Enhanced Security Posture
 
+This architecture provides several security benefits:
+
 * **Reduced Attack Surface**: Keys remain on trusted devices.
 * **Token Revocation**: Access is revoked by removing the token.
 * **Temporary Access**: Tokens can expire after a set period.
@@ -144,14 +154,14 @@ The agent-forwarder enables seamless integration with:
 
 ### SSH Agent Protocol Flow
 
-Among all the protocol message types, only two operations need to be performed to implement an authentication only system:
+Among all the protocol message types, only two operations need to be performed to implement an authentication-only system (message types are defined in the SSH agent protocol specification):
 
 1. **Key Listing**: `SSH_AGENTC_REQUEST_IDENTITIES` → `SSH_AGENT_IDENTITIES_ANSWER`
 2. **Signing Request**: `SSH_AGENTC_SIGN_REQUEST` → `SSH_AGENT_SIGN_RESPONSE`
 
-All ssh agent message that are forwarded with our system are:
+All SSH agent messages that are forwarded with our system are:
 
-* Wrapped in `ProtocolMessage` (Type 3).
+* Wrapped in an Agent Packet (`ProtocolMessage` Type 3, as defined above).
 * HMAC-signed.
 * Protected with a cryptographic nonce.
 * Validated against the whitelist.
@@ -161,7 +171,7 @@ All ssh agent message that are forwarded with our system are:
 ## Practical Deployment
 
 ### End-to-End Testing
-
+The following script demonstrates how to set up and test all three components locally. Run these commands from the `ssh-agent-forwarder` repository root and with a running SSH agent (`eval $(ssh-agent)`):
 ```bash
 # 1. Start Redis
 docker run --name agent-forwarder-redis -p 6379:6379 -d redis:7-alpine
@@ -178,21 +188,21 @@ REDIS_ADDRESS=localhost:6379 \
 CERT_PATH=platform.crt \
 KEY=platform.key \
 PLATFORM_URL=localhost:4242 \
-go run ../cmd/ssh-platform/main.go > platform.log 2>&1 &
+go run ./cmd/ssh-platform/main.go > platform.log 2>&1 &
 
 # 5. Start forwarder
 KEY_OWNER_UUID=test-uuid-1234 \
 SSH_AGENT_TOKEN=test-token-1234 \
 PLATFORM_URL=localhost:4242 \
 CERT_PATH=platform.crt \
-go run ../cmd/ssh-agent-forwarder/main.go > forwarder.log 2>&1 &
+go run ./cmd/ssh-agent-forwarder/main.go > forwarder.log 2>&1 &
 
 # 6. Start endpoint
 KEY_OWNER_UUID=test-uuid-1234 \
 SSH_AGENT_TOKEN=test-token-1234 \
 PLATFORM_URL=localhost:4242 \
 CERT_PATH=platform.crt \
-go run ../cmd/ssh-agent-endpoint/main.go > endpoint.log 2>&1 &
+go run ./cmd/ssh-agent-endpoint/main.go > endpoint.log 2>&1 &
 
 # 7. Test connection
 sleep 2
@@ -211,6 +221,8 @@ fi
 
 ### Threat Model Mitigation
 
+The following table compares how common threats are handled in traditional SSH setups versus the agent-forwarder approach:
+
 | Threat | Traditional Approach | Agent-Forwarder Approach |
 | ----- | ----- | ----- |
 | Private key theft | Keys on multiple machines | Keys only on user's machine |
@@ -219,6 +231,8 @@ fi
 | Man-in-middle | Possible | Prevented by mutual TLS |
 
 ### Best Practices
+
+To maximize security when deploying this system:
 
 * Use **short-lived tokens** (e.g., 24 hours).
 * Prefer **hardware tokens** (YubiKey/OpenPGP).
@@ -229,6 +243,8 @@ fi
 ---
 
 ## Performance
+
+The system is designed for efficiency:
 
 * **Latency**: QUIC minimizes connection overhead.
 * **Throughput**: Efficient binary protocol.
@@ -253,7 +269,7 @@ This approach is a **game-changer** for research environments, combining computa
 
 ### Reach out
 
-You can find us out on:
+You can find us on:
 - [materys.com](https://materys.com/)
 - [LinkedIn](https://linkedin.com/company/materys/)
 - [GitHub](https://github.com/Materys/)
@@ -261,6 +277,8 @@ You can find us out on:
 ---
 
 ### Further Reading
+
+For more details on the technologies used:
 
 * [Agent-Forwarder GitHub Repository](https://github.com/Materys/ssh-agent-forwarder)
 * [QUIC Protocol Specification](https://datatracker.ietf.org/doc/html/rfc9000)
