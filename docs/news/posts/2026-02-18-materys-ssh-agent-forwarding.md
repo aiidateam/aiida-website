@@ -62,12 +62,12 @@ Our system introduces a **microservice architecture** with three core components
 2. **Forwarder Client**: Runs on the user's local machine, interfacing with their SSH agent.
 3. **Endpoint Service**: Deployed on AiiDA machines, enabling secure communication with HPC systems.
 
-```bash
-# [User's Local Machine]       [Materys Platform]          [AiiDA Machines]
-#     │                              │                           │
-#     ▼                              ▼                           ▼
-# [SSH Agent] ←→ [Forwarder] ←→ [Platform] ←→ [Endpoint #1] ←→ [SSH client] ←→ [HPC System]
-#                                           ←→ [Endpoint #2] ←→ [SSH client] ←→ [HPC System]
+```
+[User's Local Machine]       [Materys Platform]          [AiiDA Machines]
+    │                              │                           │
+    ▼                              ▼                           ▼
+[SSH Agent] ←→ [Forwarder] ←→ [Platform] ←→ [Endpoint #1] ←→ [SSH client] ←→ [HPC System]
+                                         ←→ [Endpoint #2] ←→ [SSH client] ←→ [HPC System]
 ```
 
 ### Authentication Flow
