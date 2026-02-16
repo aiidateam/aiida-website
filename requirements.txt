@@ -2,7 +2,7 @@ setuptools<70
 sphinx~=8.0.0
 myst-parser~=4.0.0
 pydata-sphinx-theme~=0.15.4
-ablog~=0.10.25
+ablog~=0.11.0
 sphinx-design~=0.6.1
 sphinx_subfigure~=0.2.4
 sphinx-notfound-page~=1.0.4
