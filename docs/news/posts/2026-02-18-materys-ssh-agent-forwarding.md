@@ -83,8 +83,7 @@ The authentication process involves five key steps:
 ### Open Source
 
 We decided to open-source the agent-forwarder to allow the community to truly trust it and help us grow this powerful system.
-
-The repository is available at: https://github.com/Materys/ssh-agent-forwarder
+The repository is [available on GitHub](https://github.com/Materys/ssh-agent-forwarder).
 
 ---
 
