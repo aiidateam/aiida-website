@@ -33,8 +33,7 @@ sections/acknowledgements.md
 :child-align: justify
 :class: sd-fs-3 sd-text-center
 
-Automated workflows \
-for computational science.
+Automated Interactive Infrastructure and Database for Computational Science
 
 ```{button-ref} sections/download
 :ref-type: doc
