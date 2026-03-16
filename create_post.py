@@ -7,7 +7,6 @@ from pathlib import Path
 import sys
 from textwrap import dedent
 
-
 CATS = {
     "news": "News",
     "event": "Events",
@@ -51,8 +50,7 @@ def main(args=None):
         print(f"error: Events require a start date e.g.: -s/--start {post_date}")
         sys.exit(1)
 
-    content = dedent(
-        f"""\
+    content = dedent(f"""\
         ---
         blogpost: true
         category: {post_category}
@@ -65,8 +63,7 @@ def main(args=None):
         Now you can fill in your content here.
 
         Write in [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html).
-        """
-    )
+        """)
 
     # create file name from date and title (max 20 chars)
     post_title = args.title.lower().replace(" ", "-")
@@ -91,16 +88,12 @@ def main(args=None):
         events_path = Path(__file__).parent / "docs" / "events.yaml"
         with events_path.open("a", encoding="utf8") as handle:
             handle.write("\n")
-            handle.write(
-                dedent(
-                    f"""\
+            handle.write(dedent(f"""\
             - name: {args.title}
               start: {args.start}
               location: unknown
               announce: /{post_rel_path}
-            """
-                )
-            )
+            """))
         print(f"Updated events file: {events_path}")
 
 
