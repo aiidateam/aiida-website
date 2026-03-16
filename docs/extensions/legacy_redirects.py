@@ -3,6 +3,7 @@
 The logic works similar to sphinx.rediraffe, but handles adding index.html
 for end-points.
 """
+
 import json
 from os.path import relpath
 from pathlib import Path
