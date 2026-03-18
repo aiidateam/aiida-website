@@ -160,6 +160,7 @@ linkcheck_ignore = [
     r"https://www.eosc-hub.eu/",  # Privacy warning when accessing manually
     r"http://bit.ly/2HRjTWo",  # Link now broken. Maybe remove fully in future?
     r"https://blog.renkulab.io/aiida-success-story/",  # non-existent at the time of writing
+    r"https://zenodo.org/",  # returns 403 to bots
 ]
 
 aiida_ignore_event_checks = [
