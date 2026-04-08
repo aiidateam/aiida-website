@@ -74,7 +74,6 @@ export default function Navbar() {
               <li><a href={`${base}/science`}>Science</a></li>
               <li><a href={`${base}/gallery`}>Graph Gallery</a></li>
               <li><a href={`${base}/acknowledgements`}>Acknowledgements</a></li>
-              <li><a href="https://github.com/aiidateam/aiida-core/wiki/AiiDA-roadmap" target="_blank" rel="noopener noreferrer">Roadmap <ExtIcon /></a></li>
             </ul>
           )}
         </li>
