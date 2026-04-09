@@ -1,0 +1,117 @@
+---
+import '../styles/pages.css';
+import Layout from '../layouts/Layout.astro';
+import yaml from 'js-yaml';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const testimonialsFile = path.resolve('./src/data/testimonials.yaml');
+const rawTestimonials = yaml.load(fs.readFileSync(testimonialsFile, 'utf-8')) as any[];
+
+interface UserTestimonial {
+  type: 'user';
+  name: string;
+  role: string;
+  quote: string;
+  url?: string;
+  affiliation_url?: string;
+}
+
+interface LiteratureTestimonial {
+  type: 'literature';
+  citation: string;
+  quote: string;
+  url?: string;
+}
+
+type TestimonialItem = UserTestimonial | LiteratureTestimonial;
+
+const items = rawTestimonials as TestimonialItem[];
+const users = items.filter((t): t is UserTestimonial => t.type === 'user');
+const literature = items.filter((t): t is LiteratureTestimonial => t.type === 'literature');
+
+// Tiny inline-markdown renderer:
+//  - [text](url)  → <a href="url">text</a>
+//  - escapes HTML in untouched text
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderInline(s: string): string {
+  if (!s) return '';
+  // collapse YAML folded-block whitespace
+  const text = s.replace(/\s+/g, ' ').trim();
+  let out = '';
+  let i = 0;
+  const re = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(text)) !== null) {
+    out += escapeHtml(text.slice(i, m.index));
+    out += `<a href="${escapeHtml(m[2])}" target="_blank" rel="noopener noreferrer">${escapeHtml(m[1])}</a>`;
+    i = m.index + m[0].length;
+  }
+  out += escapeHtml(text.slice(i));
+  return out;
+}
+---
+
+<Layout title="Testimonials — AiiDA" description="What researchers say about AiiDA: testimonials and literature references.">
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Testimonials</h1>
+      <p class="section-header-sub">
+        Just a few voices from the AiiDA community — short success stories
+        and reflections from researchers who use AiiDA in their everyday work.
+        For the full list of scientific papers powered by AiiDA, see the
+        <a href={`${import.meta.env.BASE_URL?.replace(/\/$/, '') || ''}/science`}>publications page</a>.
+      </p>
+    </header>
+
+    <div class="testimonials-section">
+      <div class="testimonials-grid">
+        {users.map(t => (
+          <figure class="testimonial-quote">
+            <blockquote>
+              <p set:html={renderInline(t.quote)} />
+            </blockquote>
+            <figcaption>
+              <div class="testimonial-name">
+                {t.url
+                  ? <a href={t.url} target="_blank" rel="noopener noreferrer">{t.name}</a>
+                  : t.name}
+              </div>
+              <div class="testimonial-role" set:html={renderInline(t.role)} />
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+
+    {literature.length > 0 && (
+      <div class="testimonials-section">
+        <h2>Literature references</h2>
+        <p class="testimonials-section-note">
+          Excerpts from peer-reviewed papers and theses that highlight AiiDA.
+        </p>
+        <ul class="lit-list">
+          {literature.map(l => (
+            <li class="lit-item">
+              <div class="lit-citation">
+                {l.url
+                  ? <a href={l.url} target="_blank" rel="noopener noreferrer" set:html={renderInline(l.citation)} />
+                  : <span set:html={renderInline(l.citation)} />}
+              </div>
+              <blockquote class="lit-quote">
+                <p set:html={renderInline(l.quote)} />
+              </blockquote>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </main>
+</Layout>

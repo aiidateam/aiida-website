@@ -314,6 +314,146 @@
   line-height: 1.4;
 }
 
+/* ===== TESTIMONIALS PAGE ===== */
+
+.testimonials-section {
+  margin-bottom: 3rem;
+}
+
+.testimonials-section h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.testimonials-section-note {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0 0 1.5rem;
+}
+
+.testimonials-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.testimonial-quote {
+  margin: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border-accent);
+  border-radius: 12px;
+  background: var(--color-bg-surface);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px var(--color-shadow-accent);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.testimonial-quote:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--color-shadow-accent);
+}
+
+.testimonial-quote blockquote {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-primary);
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.testimonial-quote blockquote p {
+  margin: 0;
+}
+
+.testimonial-quote figcaption {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.testimonial-quote .testimonial-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.testimonial-quote .testimonial-name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.testimonial-quote .testimonial-name a:hover {
+  color: var(--color-primary);
+}
+
+.testimonial-quote .testimonial-role {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.testimonial-quote .testimonial-role a {
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border-accent);
+}
+
+.testimonial-quote .testimonial-role a:hover {
+  color: var(--color-primary);
+}
+
+.lit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.lit-item {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-border-light);
+  border-radius: 10px;
+  background: var(--color-bg-surface);
+}
+
+.lit-citation {
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  line-height: 1.5;
+}
+
+.lit-citation a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-primary);
+}
+
+.lit-citation a:hover {
+  color: var(--color-primary);
+}
+
+.lit-quote {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-border-accent);
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.lit-quote p {
+  margin: 0;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 600px) {
