@@ -444,47 +444,65 @@ interface GraphNode {
   type: 'data' | 'calc' | 'workflow';
   x: number;
   y: number;
-  sublabel?: string;
   pk: number;
-  status?: 'ok' | 'wrong';
 }
+
+type LinkStyle = 'solid' | 'dashed' | 'dotted';
 
 interface GraphLink {
   from: string;
   to: string;
   label?: string;
+  bow?: number;               // perpendicular offset for Q-curve
+  cp1?: [number, number];     // first control point for C-curve
+  cp2?: [number, number];     // second control point for C-curve
+  style?: LinkStyle;          // solid (default), dashed, dotted
 }
 
-// Generic provenance DAG: inputs → workflow → calcs → outputs
-// Two branches: one converged (ok), one with wrong parameters (wrong)
+// Provenance DAG layout mirroring the AiiDA docs "delexp_example02" figure.
+//   data nodes (D)   → green circles
+//   workchains (W)   → orange diamonds
+//   calcjobs  (C)    → tomato squares
+// Solid  arrows: data provenance  (INPUT_CALC, CREATE)
+// Dashed arrows: logical links    (INPUT_WORK, RETURN)
+// Dotted arrows: call hierarchy   (CALL_WORK, CALL_CALC)
 const provenanceNodes: GraphNode[] = [
-  // Inputs
-  {id: 'int1', label: 'Int', sublabel: 'pk=1', pk: 1, type: 'data', x: 80, y: 100},
-  {id: 'dict1', label: 'Dict', sublabel: 'pk=2', pk: 2, type: 'data', x: 80, y: 250},
-  // Workflow
-  {id: 'wc', label: 'WorkChain', sublabel: 'pk=3', pk: 3, type: 'workflow', x: 290, y: 175},
-  // CalcJobs
-  {id: 'calc1', label: 'CalcJob', sublabel: 'pk=4', pk: 4, type: 'calc', x: 520, y: 90, status: 'ok'},
-  {id: 'calc2', label: 'CalcJob', sublabel: 'pk=5', pk: 5, type: 'calc', x: 520, y: 260, status: 'wrong'},
-  // Outputs from calc1 (ok)
-  {id: 'dict2', label: 'Dict', sublabel: 'pk=6', pk: 6, type: 'data', x: 760, y: 55, status: 'ok'},
-  {id: 'remote1', label: 'RemoteData', sublabel: 'pk=7', pk: 7, type: 'data', x: 760, y: 125, status: 'ok'},
-  // Outputs from calc2 (wrong)
-  {id: 'dict3', label: 'Dict', sublabel: 'pk=8', pk: 8, type: 'data', x: 760, y: 215, status: 'wrong'},
-  {id: 'remote2', label: 'RemoteData', sublabel: 'pk=9', pk: 9, type: 'data', x: 760, y: 280, status: 'wrong'},
-  {id: 'float1', label: 'Float', sublabel: 'pk=10', pk: 10, type: 'data', x: 760, y: 340, status: 'wrong'},
+  // Outer columns (D1, C1 on the left; D2, C2 on the right)
+  {id: 'd1', label: 'D\u2081', pk: 1, type: 'data',     x: 120, y: 75},
+  {id: 'd2', label: 'D\u2082', pk: 2, type: 'data',     x: 780, y: 75},
+  {id: 'c1', label: 'C\u2081', pk: 6, type: 'calc',     x: 120, y: 385},
+  {id: 'c2', label: 'C\u2082', pk: 7, type: 'calc',     x: 780, y: 385},
+  // Inner columns (W1, D3 on the left; W2, D4 on the right)
+  {id: 'w1', label: 'W\u2081', pk: 4, type: 'workflow', x: 335, y: 260},
+  {id: 'w2', label: 'W\u2082', pk: 5, type: 'workflow', x: 565, y: 260},
+  {id: 'd3', label: 'D\u2083', pk: 8, type: 'data',     x: 335, y: 520},
+  {id: 'd4', label: 'D\u2084', pk: 9, type: 'data',     x: 565, y: 520},
+  // Center column (top-level workchain)
+  {id: 'w0', label: 'W\u2080', pk: 3, type: 'workflow', x: 450, y: 145},
 ];
 
 const provenanceLinks: GraphLink[] = [
-  {from: 'int1', to: 'wc', label: 'INPUT_WORK'},
-  {from: 'dict1', to: 'wc', label: 'INPUT_WORK'},
-  {from: 'wc', to: 'calc1', label: 'CALL_CALC'},
-  {from: 'wc', to: 'calc2', label: 'CALL_CALC'},
-  {from: 'calc1', to: 'dict2', label: 'CREATE'},
-  {from: 'calc1', to: 'remote1', label: 'CREATE'},
-  {from: 'calc2', to: 'dict3', label: 'CREATE'},
-  {from: 'calc2', to: 'remote2', label: 'CREATE'},
-  {from: 'calc2', to: 'float1', label: 'CREATE'},
+  // --- Solid: data provenance (INPUT_CALC, CREATE) ---
+  {from: 'd1', to: 'c1', label: 'INPUT_CALC', bow: -70},
+  {from: 'd2', to: 'c2', label: 'INPUT_CALC', bow: 70},
+  {from: 'c1', to: 'd3', label: 'CREATE',     bow: -25},
+  {from: 'c2', to: 'd4', label: 'CREATE',     bow: 25},
+  // --- Dashed: logical workchain links (INPUT_WORK, RETURN) ---
+  {from: 'd1', to: 'w0', label: 'INPUT_WORK', bow: -45, style: 'dashed'},
+  {from: 'd2', to: 'w0', label: 'INPUT_WORK', bow: 45,  style: 'dashed'},
+  {from: 'd1', to: 'w1', label: 'INPUT_WORK', bow: -30, style: 'dashed'},
+  {from: 'd2', to: 'w2', label: 'INPUT_WORK', bow: 30,  style: 'dashed'},
+  {from: 'w1', to: 'd3', label: 'RETURN',     bow: -40, style: 'dashed'},
+  {from: 'w2', to: 'd4', label: 'RETURN',     bow: 40,  style: 'dashed'},
+  // Long arcs from W0 sweeping around the inner workchain columns down to
+  // the output data nodes (passes left of W1, right of W2).
+  {from: 'w0', to: 'd3', label: 'RETURN', style: 'dashed', cp1: [280, 180], cp2: [180, 420]},
+  {from: 'w0', to: 'd4', label: 'RETURN', style: 'dashed', cp1: [620, 180], cp2: [720, 420]},
+  // --- Dotted: call hierarchy (CALL_WORK, CALL_CALC) ---
+  {from: 'w0', to: 'w1', label: 'CALL_WORK', style: 'dotted'},
+  {from: 'w0', to: 'w2', label: 'CALL_WORK', style: 'dotted'},
+  {from: 'w1', to: 'c1', label: 'CALL_CALC', style: 'dotted'},
+  {from: 'w2', to: 'c2', label: 'CALL_CALC', style: 'dotted'},
 ];
 
 function getDescendants(nodeId: string): Set<string> {
@@ -502,28 +520,88 @@ function getDescendants(nodeId: string): Set<string> {
   return desc;
 }
 
+// Half-extent of each shape (used both for trimming arrow endpoints and for
+// rendering the shapes themselves). Diamond is described by half-diagonal,
+// square by half-side, circle by radius.
+const NODE_HALF = {data: 28, workflow: 38, calc: 28} as const;
+
+// Distance from a node's center to its boundary along the unit direction
+// (ux, uy). Lets arrow endpoints land on the shape edge instead of inside.
+function shapeBoundary(type: GraphNode['type'], ux: number, uy: number): number {
+  const h = NODE_HALF[type];
+  if (type === 'data') return h;                              // circle
+  if (type === 'workflow') return h / (Math.abs(ux) + Math.abs(uy)); // diamond (rhombus)
+  return h / Math.max(Math.abs(ux), Math.abs(uy));            // square
+}
+
+// Trim a path endpoint by the shape's boundary along the given direction.
+function trimEndpoint(
+  node: GraphNode,
+  dirX: number,
+  dirY: number,
+  inward: boolean, // true = trim toward node (use for the FROM end)
+): [number, number] {
+  const len = Math.sqrt(dirX * dirX + dirY * dirY) || 1;
+  const ux = dirX / len;
+  const uy = dirY / len;
+  const r = shapeBoundary(node.type, ux, uy);
+  const sign = inward ? 1 : -1;
+  return [node.x + sign * ux * r, node.y + sign * uy * r];
+}
+
 function ProvenanceGraph(): ReactNode {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const nodeById = Object.fromEntries(provenanceNodes.map(n => [n.id, n]));
   const activeNodes = hoveredNode ? getDescendants(hoveredNode) : null;
-  const hoveredStatus = hoveredNode ? nodeById[hoveredNode]?.status : undefined;
 
   const isActive = (id: string) => !activeNodes || activeNodes.has(id);
   const isLinkActive = (from: string, to: string) =>
     !activeNodes || (activeNodes.has(from) && activeNodes.has(to));
 
-  const linkPath = (from: GraphNode, to: GraphNode) => {
+  // Build a path string for a link, trimming endpoints to the shape boundary
+  // so arrowheads sit on the edge of each node rather than buried inside it.
+  const linkPath = (from: GraphNode, to: GraphNode, link: GraphLink): string => {
+    if (link.cp1 && link.cp2) {
+      const [c1x, c1y] = link.cp1;
+      const [c2x, c2y] = link.cp2;
+      const [sx, sy] = trimEndpoint(from, c1x - from.x, c1y - from.y, true);
+      const [ex, ey] = trimEndpoint(to, to.x - c2x, to.y - c2y, false);
+      return `M${sx},${sy} C${c1x},${c1y} ${c2x},${c2y} ${ex},${ey}`;
+    }
+    if (link.bow !== undefined) {
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const len = Math.sqrt(dx * dx + dy * dy) || 1;
+      // Right-hand perpendicular of from→to direction
+      const px = dy / len;
+      const py = -dx / len;
+      const mx = (from.x + to.x) / 2 + px * link.bow;
+      const my = (from.y + to.y) / 2 + py * link.bow;
+      const [sx, sy] = trimEndpoint(from, mx - from.x, my - from.y, true);
+      const [ex, ey] = trimEndpoint(to, to.x - mx, to.y - my, false);
+      return `M${sx},${sy} Q${mx},${my} ${ex},${ey}`;
+    }
+    // Straight line
     const dx = to.x - from.x;
-    return `M${from.x},${from.y} C${from.x + dx * 0.4},${from.y} ${to.x - dx * 0.4},${to.y} ${to.x},${to.y}`;
+    const dy = to.y - from.y;
+    const [sx, sy] = trimEndpoint(from, dx, dy, true);
+    const [ex, ey] = trimEndpoint(to, dx, dy, false);
+    return `M${sx},${sy} L${ex},${ey}`;
   };
 
-  const accentColor = hoveredStatus === 'wrong' ? '#dc2626' : hoveredStatus === 'ok' ? '#16a34a' : '#0096de';
+  const diamondPoints = (cx: number, cy: number, half: number) =>
+    `${cx},${cy - half} ${cx + half},${cy} ${cx},${cy + half} ${cx - half},${cy}`;
 
-  const getNodeFilter = (nodeId: string): string | undefined => {
-    if (!activeNodes || !activeNodes.has(nodeId)) return undefined;
-    if (hoveredStatus === 'wrong') return 'drop-shadow(0 0 6px rgba(220, 38, 38, 0.4))';
-    if (hoveredStatus === 'ok') return 'drop-shadow(0 0 6px rgba(22, 163, 74, 0.4))';
-    return undefined;
+  const colorMap: Record<string, string> = {
+    data: '#30b808',     // green
+    workflow: '#ff7d17', // orange
+    calc: '#ff6347',     // tomato
+  };
+
+  const styleAttrs = (style: LinkStyle | undefined) => {
+    if (style === 'dashed') return {strokeDasharray: '7 5', strokeLinecap: 'butt' as const};
+    if (style === 'dotted') return {strokeDasharray: '0 6', strokeLinecap: 'round' as const};
+    return {strokeLinecap: 'butt' as const};
   };
 
   const getInfoMessage = () => {
@@ -532,40 +610,15 @@ function ProvenanceGraph(): ReactNode {
     const descendants = getDescendants(hoveredNode);
     descendants.delete(hoveredNode);
     const count = descendants.size;
-
-    if (node.status === 'wrong') {
-      if (count === 0) {
-        return {
-          type: 'wrong' as const,
-          command: `verdi node delete ${node.pk}`,
-          text: 'No downstream dependencies \u2014 safe to delete',
-        };
-      }
-      const downstreamPks = Array.from(descendants).map(id => nodeById[id].pk).sort((a, b) => a - b);
-      return {
-        type: 'wrong' as const,
-        command: `verdi node delete ${node.pk}`,
-        text: `Removes this and ${count} created output${count !== 1 ? 's' : ''} (pk=${downstreamPks.join(', ')})`,
-      };
-    } else if (node.status === 'ok') {
-      return {
-        type: 'ok' as const,
-        command: `load_node(${node.pk})`,
-        text: count > 0
-          ? `Reuse this result \u2014 ${count} output${count !== 1 ? 's' : ''} downstream`
-          : 'Feed this into your next calculation',
-      };
-    } else {
-      return {
-        type: 'neutral' as const,
-        command: `verdi node show ${node.pk}`,
-        text: `${count} node${count !== 1 ? 's' : ''} downstream`,
-      };
-    }
+    return {
+      command: `verdi node show ${node.pk}`,
+      text: count > 0
+        ? `${node.label} (pk=${node.pk}) — ${count} node${count !== 1 ? 's' : ''} downstream`
+        : `${node.label} (pk=${node.pk}) — leaf node, no downstream dependencies`,
+    };
   };
 
   const info = getInfoMessage();
-  const markerSuffix = hoveredStatus === 'wrong' ? 'wrong' : hoveredStatus === 'ok' ? 'ok' : 'neutral';
 
   return (
     <section className="provenance-section" data-reveal>
@@ -575,22 +628,14 @@ function ProvenanceGraph(): ReactNode {
         Hover a node to see what depends on it &mdash; then clean up mistakes or reuse successful results.
       </p>
       <div className="provenance-graph-wrapper">
-        <svg viewBox="0 0 900 400" className="provenance-graph">
+        <svg viewBox="0 0 900 620" className="provenance-graph">
           <defs>
-            <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5"
-              markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,3.5 L0,7 Z" fill="#666" opacity="0.5" />
+            <marker id="arrow" viewBox="0 0 10 7" refX="9" refY="3.5"
+              markerWidth="6" markerHeight="5" orient="auto-start-reverse">
+              <path d="M0,0 L10,3.5 L0,7 Z" fill="#666" opacity="0.75" />
             </marker>
-            <marker id="arrow-active-ok" viewBox="0 0 10 7" refX="10" refY="3.5"
-              markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,3.5 L0,7 Z" fill="#16a34a" />
-            </marker>
-            <marker id="arrow-active-wrong" viewBox="0 0 10 7" refX="10" refY="3.5"
-              markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-              <path d="M0,0 L10,3.5 L0,7 Z" fill="#dc2626" />
-            </marker>
-            <marker id="arrow-active-neutral" viewBox="0 0 10 7" refX="10" refY="3.5"
-              markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+            <marker id="arrow-active" viewBox="0 0 10 7" refX="9" refY="3.5"
+              markerWidth="6" markerHeight="5" orient="auto-start-reverse">
               <path d="M0,0 L10,3.5 L0,7 Z" fill="#0096de" />
             </marker>
           </defs>
@@ -600,17 +645,18 @@ function ProvenanceGraph(): ReactNode {
             const from = nodeById[link.from];
             const to = nodeById[link.to];
             const active = isLinkActive(link.from, link.to);
-            const colorMap: Record<string, string> = {data: '#30b808', calc: '#e85d04', workflow: '#0096de'};
-            const linkColor = active && activeNodes ? accentColor : colorMap[from.type];
+            const linkColor = active && activeNodes ? '#0096de' : '#666';
+            const dim = link.style === 'dotted' ? 0.55 : link.style === 'dashed' ? 0.55 : 0.75;
             return (
               <path key={i}
-                d={linkPath(from, to)}
+                d={linkPath(from, to, link)}
                 stroke={linkColor}
-                strokeWidth={active && activeNodes ? 2.5 : 1.5}
+                strokeWidth={active && activeNodes ? 2.4 : 1.5}
                 fill="none"
-                opacity={active ? (activeNodes ? 0.8 : 0.3) : 0.08}
-                markerEnd={active && activeNodes ? `url(#arrow-active-${markerSuffix})` : 'url(#arrow)'}
+                opacity={active ? (activeNodes ? 0.9 : dim) : 0.08}
+                markerEnd={active && activeNodes ? 'url(#arrow-active)' : 'url(#arrow)'}
                 className="provenance-link"
+                {...styleAttrs(link.style)}
               />
             );
           })}
@@ -619,53 +665,42 @@ function ProvenanceGraph(): ReactNode {
           {provenanceNodes.map((node) => {
             const active = isActive(node.id);
             const hovered = hoveredNode === node.id;
-            const filter = getNodeFilter(node.id);
-            const r = node.type === 'workflow' ? 38 : node.type === 'calc' ? 30 : 22;
-            const bx = node.x + r * 0.7;
-            const by = node.y - r * 0.7;
+            const grow = hovered ? 3 : 0;
             return (
               <g key={node.id}
                 className={`provenance-node provenance-node--${node.type}`}
-                opacity={active ? 1 : 0.15}
+                opacity={active ? 1 : 0.2}
                 onMouseEnter={() => setHoveredNode(node.id)}
                 onMouseLeave={() => setHoveredNode(null)}
-                style={{cursor: 'pointer', filter: filter || 'none'}}>
-                <circle cx={node.x} cy={node.y}
-                    r={node.type === 'workflow' ? (hovered ? 42 : 38) : node.type === 'calc' ? (hovered ? 34 : 30) : (hovered ? 26 : 22)}
-                    className={`provenance-node-shape provenance-node-${node.type}`} />
-                {/* Status badge */}
-                {node.status === 'ok' && (
-                  <g>
-                    <circle cx={bx} cy={by} r="8" fill="#16a34a" />
-                    <path d={`M${bx - 3.5},${by} L${bx - 0.5},${by + 3} L${bx + 4},${by - 2.5}`}
-                      stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                  </g>
+                style={{cursor: 'pointer'}}>
+                {node.type === 'data' && (
+                  <circle cx={node.x} cy={node.y} r={NODE_HALF.data + grow}
+                    className="provenance-node-shape provenance-node-data" />
                 )}
-                {node.status === 'wrong' && (
-                  <g>
-                    <circle cx={bx} cy={by} r="8" fill="#dc2626" />
-                    <path d={`M${bx - 3},${by - 3} L${bx + 3},${by + 3} M${bx + 3},${by - 3} L${bx - 3},${by + 3}`}
-                      stroke="white" strokeWidth="2" fill="none" strokeLinecap="round" />
-                  </g>
+                {node.type === 'workflow' && (
+                  <polygon points={diamondPoints(node.x, node.y, NODE_HALF.workflow + grow)}
+                    className="provenance-node-shape provenance-node-workflow" />
                 )}
-                {/* Labels */}
-                <text x={node.x} y={node.sublabel ? node.y - 4 : node.y + 4}
+                {node.type === 'calc' && (
+                  <rect
+                    x={node.x - (NODE_HALF.calc + grow)}
+                    y={node.y - (NODE_HALF.calc + grow)}
+                    width={(NODE_HALF.calc + grow) * 2}
+                    height={(NODE_HALF.calc + grow) * 2}
+                    rx={3}
+                    className="provenance-node-shape provenance-node-calc" />
+                )}
+                <text x={node.x} y={node.y + 8}
                   className="provenance-node-label" textAnchor="middle">
                   {node.label}
                 </text>
-                {node.sublabel && (
-                  <text x={node.x} y={node.y + 12}
-                    className="provenance-node-sublabel" textAnchor="middle">
-                    {node.sublabel}
-                  </text>
-                )}
               </g>
             );
           })}
         </svg>
 
-        {/* Info bar — shows contextual verdi commands */}
-        <div className={`provenance-info-bar${info ? ` provenance-info-bar--${info.type}` : ''}`}>
+        {/* Info bar — shows contextual verdi command */}
+        <div className="provenance-info-bar">
           {info ? (
             <>
               <code className="provenance-info-command">{info.command}</code>
@@ -683,12 +718,28 @@ function ProvenanceGraph(): ReactNode {
             <span className="provenance-legend-shape provenance-legend-data" /> Data
           </span>
           <span className="provenance-legend-item">
-            <span className="provenance-legend-shape provenance-legend-calc" /> Calculation
+            <span className="provenance-legend-shape provenance-legend-workflow" /> WorkChain
           </span>
           <span className="provenance-legend-item">
-            <span className="provenance-legend-shape provenance-legend-workflow" /> Workflow
+            <span className="provenance-legend-shape provenance-legend-calc" /> CalcJob
+          </span>
+          <span className="provenance-legend-divider" />
+          <span className="provenance-legend-item">
+            <span className="provenance-legend-edge provenance-legend-edge-solid" /> data
+          </span>
+          <span className="provenance-legend-item">
+            <span className="provenance-legend-edge provenance-legend-edge-dashed" /> logical
+          </span>
+          <span className="provenance-legend-item">
+            <span className="provenance-legend-edge provenance-legend-edge-dotted" /> call
           </span>
         </div>
+
+        <a className="provenance-docs-link"
+          href="https://aiida.readthedocs.io/projects/aiida-core/en/stable/topics/provenance/index.html"
+          target="_blank" rel="noopener noreferrer">
+          Learn more about AiiDA provenance &rarr;
+        </a>
       </div>
     </section>
   );
