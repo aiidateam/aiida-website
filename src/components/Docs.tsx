@@ -15,26 +15,16 @@ interface DocEntry {
   desc: string;
   url: string;
   color: string;
-  category: 'core' | 'plugins' | 'workflow' | 'learning';
+  category: 'plugins' | 'workflow' | 'learning';
 }
 
 const CATEGORIES: Record<string, { label: string; color: string }> = {
-  core: { label: 'Core', color: '#0096de' },
   plugins: { label: 'Plugins', color: '#2d6a4f' },
   workflow: { label: 'Workflow tools', color: '#7209b7' },
   learning: { label: 'Learning', color: '#c1121f' },
 };
 
 const DOCS: DocEntry[] = [
-  {
-    id: 'aiida-core',
-    name: 'AiiDA Core',
-    tagline: 'The main framework documentation',
-    desc: 'Complete reference for the AiiDA framework: installation, configuration, workflows, the ORM, the verdi CLI, the plugin system, and the REST API.',
-    url: 'https://aiida.readthedocs.io',
-    color: '#0096de',
-    category: 'core',
-  },
   {
     id: 'aiida-workgraph',
     name: 'aiida-workgraph',
@@ -127,7 +117,7 @@ export default function Docs(): ReactNode {
 
       {/* All docs grid */}
       <section className="docs-catalog">
-        <h2>All documentation</h2>
+        <h2>Popular documentation</h2>
         <div className="docs-grid">
           {DOCS.map(doc => (
             <a
