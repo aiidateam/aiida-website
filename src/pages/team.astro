@@ -31,7 +31,7 @@ const formerMembers = [
   'Rico Häuselmann (EPFL, 2016–2018)',
   'Conrad Johnston (EPFL, 2018–2019)',
   'Leonid Kahle (EPFL, 2015–2020)',
-  'Boris Kozinsky (Bosch, pre-AiiDA & 2012–2018)',
+  'Boris Kozinsky (Bosch, first pre-AiiDA prototypes before 2012, and 2012-2018)',
   'Snehal Kumbhar (EPFL, 2015–2020)',
   'Andrius Merkys (EPFL, 2014–2015)',
   'Nicolas Mounet (EPFL, 2015–2018)',
@@ -49,14 +49,10 @@ const formerMembers = [
   <main class="section-page">
     <header class="section-header">
       <h1>Team</h1>
-      <p class="section-header-sub">
-        AiiDA is a joint effort of the <a href="https://www.psi.ch/en/lms/msd-group">Materials Software and Data group</a> at <a href="https://www.psi.ch/">PSI</a>,
-        <a href="http://theossrv1.epfl.ch/">THEOS</a> at EPFL, and <a href="https://www.bosch.us/">Bosch RTC</a>.
-        Its development is supported by <a href="https://nccr-marvel.ch/">NCCR MARVEL</a>.
-      </p>
+      <p class="section-header-sub">Meet the people behind AiiDA.</p>
     </header>
 
-    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem;">The AiiDA Development Team</h2>
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem;">The AiiDA Development Team (alphabetical order)</h2>
     <div class="team-grid">
       {team.map(m => (
         <div class="team-card">
@@ -68,7 +64,7 @@ const formerMembers = [
     </div>
 
     <div class="former-members">
-      <h2>Former Members</h2>
+      <h2>Former Members (alphabetical order)</h2>
       <ul class="former-list">
         {formerMembers.map(m => (
           <li>{m}</li>
@@ -76,14 +72,41 @@ const formerMembers = [
       </ul>
     </div>
 
+
+    <div class="team-intro">
+      <h2>Credits</h2>
+      <p>
+        AiiDA is a joint effort of the
+        <a href="https://www.psi.ch/en/lms/msd-group">Materials Software and Data group</a>
+        (part of the <a href="https://www.psi.ch/en/lms">LMS</a> laboratory at
+        <a href="https://www.psi.ch/">PSI</a>, Switzerland),
+        <a href="http://theossrv1.epfl.ch/">THEOS</a> laboratory at EPFL (Switzerland),
+        and <a href="https://www.bosch.us/">Bosch RTC</a> in Cambridge MA (USA).
+        Its development is supported by
+        <a href="https://nccr-marvel.ch/">NCCR MARVEL</a> and
+        <a href={`${base}/acknowledgements`}>a number of additional supporting partners and institutions</a>.
+        Data generated with AiiDA are disseminated through
+        <a href="http://materialscloud.org/">materialscloud.org</a>.
+      </p>
+
+      <h2>External contributors</h2>
+      <p>
+        Besides the AiiDA development team listed below, we thank our
+        <a href="https://raw.githubusercontent.com/aiidateam/aiida_core/develop/AUTHORS.txt">numerous external code contributors</a>
+        as well as <a href="https://aiidateam.github.io/aiida-registry/">all plugin developers</a>
+        for making the AiiDA ecosystem what it is today.
+      </p>
+    </div>
+
     <div class="contact-section">
       <h2>Contact Us</h2>
       <h3>General questions</h3>
       <p>Please ask on <a href="https://aiida.discourse.group/">Discourse</a>.</p>
       <h3>Bug reports</h3>
-      <p>Check the <a href="https://github.com/aiidateam/aiida_core/issues">GitHub issue tracker</a> or open a new issue.</p>
+      <p>Check our <a href="https://github.com/aiidateam/aiida_core/issues">GitHub issue tracker</a> whether the bug is already known. If not, please open a new issue.</p>
       <h3>Feedback</h3>
-      <p>The AiiDA core developers greatly appreciate <a href="https://aiida.discourse.group/">feedback on the AiiDA user experience</a>.</p>
+      <p>The AiiDA core developers greatly appreciate feedback on the AiiDA user experience. Your comments and suggestions influence where we focus our development efforts.</p>
+      <p><a href="https://aiida.discourse.group/">Let us know!</a></p>
     </div>
 
     <div class="contact-section">
