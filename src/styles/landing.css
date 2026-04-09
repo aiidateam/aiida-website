@@ -724,7 +724,7 @@ main > section > h2::after {
 .provenance-graph {
   width: 100%;
   min-width: 700px;
-  min-height: 350px;
+  min-height: 480px;
   height: auto;
 }
 
@@ -745,54 +745,38 @@ main > section > h2::after {
 }
 
 .provenance-node-data {
-  fill: #30b808;
-  fill-opacity: 0.5;
-  stroke: #30b808;
+  fill: #8bc34a;
+  fill-opacity: 0.85;
+  stroke: #4f8a2e;
   stroke-width: 2;
 }
 
 .provenance-node-calc {
-  fill: #e85d04;
-  fill-opacity: 0.15;
-  stroke: #e85d04;
+  fill: #d9635f;
+  fill-opacity: 0.85;
+  stroke: #8d3633;
   stroke-width: 2;
+  stroke-linejoin: round;
 }
 
 .provenance-node-workflow {
-  fill: #0096de;
-  fill-opacity: 0.15;
-  stroke: #0096de;
+  fill: #ed8e3c;
+  fill-opacity: 0.9;
+  stroke: #a35313;
   stroke-width: 2;
+  stroke-linejoin: round;
 }
 
-.provenance-node:hover .provenance-node-data {
-  fill-opacity: 0.7;
-  stroke-width: 3;
-}
-
-.provenance-node:hover .provenance-node-calc {
-  fill: rgba(232, 93, 4, 0.1);
-  stroke-width: 3;
-}
-
-.provenance-node:hover .provenance-node-workflow {
-  fill: rgba(0, 150, 222, 0.1);
+.provenance-node:hover .provenance-node-shape {
   stroke-width: 3;
 }
 
 /* Node text */
 .provenance-node-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  fill: var(--color-text);
-  pointer-events: none;
-}
-
-.provenance-node-sublabel {
   font-family: var(--font-base);
-  font-size: 8.5px;
-  fill: #777;
+  font-size: 22px;
+  font-weight: 800;
+  fill: #1a1a1a;
   pointer-events: none;
 }
 
@@ -800,7 +784,8 @@ main > section > h2::after {
 .provenance-legend {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  align-items: center;
+  gap: 1.1rem;
   margin-top: 1.5rem;
   flex-wrap: wrap;
 }
@@ -817,24 +802,58 @@ main > section > h2::after {
   display: inline-block;
   width: 14px;
   height: 14px;
-  border-radius: 50%;
-  border-width: 2px;
-  border-style: solid;
+  flex-shrink: 0;
 }
 
 .provenance-legend-data {
-  border-color: #30b808;
-  background: rgba(48, 184, 8, 0.5);
+  border-radius: 50%;
+  border: 2px solid #4f8a2e;
+  background: #8bc34a;
 }
 
+/* Square (CalcJob) */
 .provenance-legend-calc {
-  border-color: #e85d04;
-  background: rgba(232, 93, 4, 0.15);
+  border: 2px solid #8d3633;
+  background: #d9635f;
+  border-radius: 2px;
 }
 
+/* Diamond (WorkChain) — a square rotated 45° */
 .provenance-legend-workflow {
-  border-color: #0096de;
-  background: rgba(0, 150, 222, 0.15);
+  width: 11px;
+  height: 11px;
+  margin: 0 1.5px;
+  transform: rotate(45deg);
+  border: 2px solid #a35313;
+  background: #ed8e3c;
+}
+
+.provenance-legend-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--color-border);
+  margin: 0 0.25rem;
+}
+
+.provenance-legend-edge {
+  display: inline-block;
+  width: 26px;
+  height: 0;
+  border-top: 2px solid #666;
+  flex-shrink: 0;
+}
+
+.provenance-legend-edge-solid {
+  border-top-style: solid;
+}
+
+.provenance-legend-edge-dashed {
+  border-top-style: dashed;
+}
+
+.provenance-legend-edge-dotted {
+  border-top-style: dotted;
+  border-top-width: 2.5px;
 }
 
 /* Info bar */
@@ -855,21 +874,6 @@ main > section > h2::after {
     background 0.2s;
 }
 
-.provenance-info-bar--wrong {
-  border-color: rgba(220, 38, 38, 0.3);
-  background: rgba(220, 38, 38, 0.06);
-}
-
-.provenance-info-bar--ok {
-  border-color: rgba(22, 163, 74, 0.3);
-  background: rgba(22, 163, 74, 0.06);
-}
-
-.provenance-info-bar--neutral {
-  border-color: rgba(0, 150, 222, 0.3);
-  background: rgba(0, 150, 222, 0.06);
-}
-
 .provenance-info-command {
   font-family: var(--font-mono);
   font-size: 0.82rem;
@@ -886,6 +890,22 @@ main > section > h2::after {
 
 .provenance-info-default {
   font-style: italic;
+}
+
+.provenance-docs-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ed8e3c;
+  text-decoration: none;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.provenance-docs-link:hover {
+  color: #a35313;
+  transform: translateX(2px);
 }
 
 @media (max-width: 768px) {
