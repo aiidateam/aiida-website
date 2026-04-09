@@ -1,0 +1,74 @@
+---
+import '../styles/pages.css';
+import Layout from './Layout.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Science & Publications</h1>
+      <p class="section-header-sub">
+        Research papers powered by AiiDA. If your paper is not listed,
+        contact us via <a href="https://aiida.discourse.group/">Discourse</a> with the DOI.
+      </p>
+    </header>
+
+    <div class="science-md">
+      <slot />
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .science-md > h1 {
+    /* The Layout header already supplies the page title; hide a stray top-level h1 if present. */
+    display: none;
+  }
+
+  .science-md h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1rem;
+  }
+
+  .science-md h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  .science-md p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0.5rem 0 1rem;
+  }
+
+  .science-md ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+
+  .science-md li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+  }
+
+  .science-md a {
+    color: var(--color-primary);
+  }
+</style>
