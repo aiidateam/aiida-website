@@ -2764,6 +2764,10 @@ function Testimonials(): ReactNode {
         {testimonials.map((t, i) => (
           <TestimonialCard t={t} key={i} />
         ))}
+        <a className="testimonial-card testimonial-card--more" href={`${base}/testimonials/`}>
+          <span className="news-more-label">All testimonials</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="news-more-arrow"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+        </a>
       </div>
       <div className={`news-fade news-fade--left${canScrollLeft ? ' news-fade--visible' : ''}`} />
       <div className={`news-fade news-fade--right${canScrollRight ? ' news-fade--visible' : ''}`} />
