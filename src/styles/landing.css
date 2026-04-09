@@ -2105,6 +2105,40 @@ main > section > h2::after {
   color: var(--color-text-muted);
 }
 
+/* "All testimonials" final card — mirrors .news-card--more */
+.testimonial-card--more {
+  width: 180px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-style: dashed;
+  background: transparent;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.testimonial-card--more:hover {
+  background: var(--color-bg-surface);
+  transform: none;
+}
+
+.testimonial-card--more .news-more-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.testimonial-card--more .news-more-arrow {
+  width: 22px;
+  height: 22px;
+  color: var(--color-primary);
+  transition: transform 0.2s;
+}
+
+.testimonial-card--more:hover .news-more-arrow {
+  transform: translateX(4px);
+}
+
 /* ===== CTA ===== */
 .cta-section {
   padding: 3rem 2rem;
