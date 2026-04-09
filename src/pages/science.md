@@ -4,6 +4,34 @@ title: "Science & Publications — AiiDA"
 description: "Research publications powered by AiiDA."
 ---
 
+### If you use AiiDA please cite:
+<div class="cite">
+<p>
+    <br />
+    <strong>AiiDA 1.x</strong><br />
+    <emph>Main paper:</emph>
+    <a href="https://doi.org/10.1038/s41597-020-00638-4" target="_blank"
+    >S.P. Huber et al., Scientific Data 7, 300 (2020)</a
+    >
+    <br />
+    <emph>AiiDA engine:</emph>
+    <a href="https://doi.org/10.1016/j.commatsci.2020.110086" target="_blank"
+    >M. Uhrin et al., Comp. Mat. Sci. 187 (2021)</a
+    >
+    <br /><br />
+    <strong>AiiDA 0.x</strong><br />
+    <emph>First paper, ADES model: </emph
+    ><a
+    href="http://dx.doi.org/10.1016/j.commatsci.2015.09.013"
+    target="_blank"
+    >G. Pizzi et al. Comp. Mat. Sci. 111, 218-230 (2016)</a
+    >
+    (<a href="https://arxiv.org/abs/1504.01163" target="_blank"
+    >open access version</a
+    >)
+</p>
+</div>
+
 ## AiiDA-powered research surveys
 
 The AiiDA team conducts periodically a **survey** in parallel with each development milestone, formerly on the AiiDA mailing list and now on [Discourse](https://aiida.discourse.group/), to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](https://aiidateam.github.io/aiida-registry/) used, and further database indicators that inform future development choices.
