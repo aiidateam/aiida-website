@@ -2176,14 +2176,11 @@ function HighThroughputCombined(): ReactNode {
       ) : (
         <InteractiveTutorial
           onPhaseChange={handlePhaseChange}
-          renderLayout={({ editor, terminal, instructions, expanded, editorExpanded }) => (
+          renderLayout={({ terminal, instructions }) => (
             <>
               <div className="tp-row">
                 {laptopFrame(
-                  <>
-                    {!expanded && <div className="tp-screen-panel tp-screen-panel--try">{editor}</div>}
-                    {!editorExpanded && <div className="tp-screen-panel tp-screen-panel--try">{terminal}</div>}
-                  </>
+                  <div className="tp-screen-panel tp-screen-panel--try">{terminal}</div>
                 )}
                 <div className="tp-right-group">
                   {flowBridge}
@@ -3397,7 +3394,7 @@ function highlightCode(code: string, filename: string): ReactNode[] {
   return result;
 }
 
-function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedded?: boolean; onPhaseChange?: (phase: number, running: boolean) => void; renderLayout?: (parts: { editor: ReactNode; terminal: ReactNode; instructions: ReactNode; expanded: boolean; editorExpanded: boolean }) => ReactNode }): ReactNode {
+function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: (phase: number, running: boolean) => void; renderLayout?: (parts: { terminal: ReactNode; instructions: ReactNode }) => ReactNode }): ReactNode {
   const [step, setStep] = useState(0);
   const [maxStepReached, setMaxStepReached] = useState(0);
   const [tutorialComplete, setTutorialComplete] = useState(false);
@@ -3424,15 +3421,13 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
   computersRef.current = computers;
   const [promptAnswers, setPromptAnswers] = useState<Record<string, string>>({});
 
-  // Expand states
-  const [expanded, setExpanded] = useState(false);       // terminal
-  const [editorExpanded, setEditorExpanded] = useState(false); // editor
-
-  // Tab-based editor state
-  const [openTabs, setOpenTabs] = useState<{name: string; code: string}[]>([
-    {name: 'overview', code: '# Welcome to AiiDA!\n# Follow the instructions on the right\n# to submit your first calculation.\n\n# The code editor will show relevant\n# files at each step.'},
-  ]);
-  const [activeTab, setActiveTab] = useState(0);
+  // Tabs in the terminal: activeTab=null shows the live console; otherwise the
+  // file tab named by `activeTab`. New file tabs are added as the user advances
+  // through the tutorial; switching is opt-in (user clicks the tab).
+  const [openTabs, setOpenTabs] = useState<{name: string; code: string}[]>([]);
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+  // Name of a tab to briefly highlight after it first appears (or null).
+  const [tabCallout, setTabCallout] = useState<string | null>(null);
 
   // Interactive prompt mode (for verdi computer setup, configure, code create)
   const [promptMode, setPromptMode] = useState<{
@@ -3446,17 +3441,23 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
 
   // Track whether input should be disabled (during auto-play / auto-fill)
   const inputDisabled = phaseRunning || autoFill || busy;
+  // The input row is fully hidden only when the prompt label changes underneath
+  // it (interactive prompts, watch loop). During plain `busy` waits we keep it
+  // visible so the placeholder ("try: …") stays anchored at the bottom.
+  const inputRowHidden = phaseRunning || autoFill;
 
-  // Keep focus trapped in terminal area.
-  // preventScroll avoids the browser auto-scrolling the container
-  // horizontally when long `pre`-formatted output makes it scrollable.
+  // Keep focus trapped in the terminal area, but only when the live console
+  // tab is showing — focusing the input while a file tab is open would scroll
+  // the file out of view. preventScroll avoids the browser auto-scrolling the
+  // container horizontally when long `pre`-formatted output is wider than it.
   useEffect(() => {
+    if (activeTab !== null) return;
     if (inputDisabled) {
       termContainerRef.current?.focus({ preventScroll: true });
     } else {
       inRef.current?.focus({ preventScroll: true });
     }
-  }, [inputDisabled]);
+  }, [inputDisabled, activeTab]);
 
   // Accumulate tabs + reset prompt on step change
   useEffect(() => {
@@ -3466,30 +3467,34 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
     setMaxStepReached(prev => Math.max(prev, step));
     const s = TUTORIAL_STEPS[step];
     const tabName = s.file || (s.code ? 'aiida.out' : null);
+    if (!tabName) return;
     const tabCode = s.code || '';
-    if (!tabName) {
-      setActiveTab(0);
-      return;
-    }
     setOpenTabs(prev => {
-      const existing = prev.findIndex(t => t.name === tabName);
-      if (existing >= 0) {
-        setActiveTab(existing);
-        return prev;
-      }
-      const newTabs = [...prev, {name: tabName, code: tabCode}];
-      setActiveTab(newTabs.length - 1);
-      return newTabs;
+      if (prev.some(t => t.name === tabName)) return prev;
+      // First time this file appears — flash its tab so the user notices it.
+      setTabCallout(tabName);
+      return [...prev, {name: tabName, code: tabCode}];
     });
   }, [step]);
 
+  // Pin the live console to the bottom whenever new output arrives or the
+  // user switches back to the terminal tab (the scroll container is
+  // remounted on tab change, so it would otherwise reset to the top).
   useEffect(() => {
+    if (activeTab !== null) return;
     if (outRef.current) {
       outRef.current.scrollTop = outRef.current.scrollHeight;
       // Pin to the left edge so wide output never pushes the $ prompt out of view.
       outRef.current.scrollLeft = 0;
     }
-  }, [hist]);
+  }, [hist, activeTab]);
+
+  // Auto-clear the new-tab callout a few seconds after it's triggered.
+  useEffect(() => {
+    if (!tabCallout) return;
+    const t = setTimeout(() => setTabCallout(null), 5500);
+    return () => clearTimeout(t);
+  }, [tabCallout]);
 
   // Auto-fill interactive prompts when button is clicked
   const promptIdx = promptMode?.current ?? -1;
@@ -3773,6 +3778,40 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
 
   function runHint() {
     if (inputDisabled) return;
+    // "Soft landing": when the user can't currently see the prompt — either
+    // because they're on a file tab or because they've scrolled the live
+    // console up — switch/scroll into view, hold for 1s so they can read
+    // the placeholder, then paste & execute.
+    const onFileTab = activeTab !== null;
+    const scrolledUp = !onFileTab && outRef.current
+      ? outRef.current.scrollHeight - outRef.current.scrollTop - outRef.current.clientHeight > 10
+      : false;
+    if (!onFileTab && !scrolledUp) {
+      runHintImpl();
+      return;
+    }
+    if (onFileTab) setActiveTab(null);
+    setBusy(true);
+    // Scroll attempt #1 — works when the terminal is already mounted (the
+    // scrolled-up case). For the tab-switch case, outRef is still null until
+    // after the re-render; the [hist, activeTab] effect pins it then.
+    if (outRef.current) {
+      outRef.current.scrollTop = outRef.current.scrollHeight;
+      outRef.current.scrollLeft = 0;
+    }
+    setTimeout(() => {
+      // Scroll attempt #2 — re-pin right before execution in case any
+      // layout shifted during the pause.
+      if (outRef.current) {
+        outRef.current.scrollTop = outRef.current.scrollHeight;
+        outRef.current.scrollLeft = 0;
+      }
+      setBusy(false);
+      runHintImpl();
+    }, 1000);
+  }
+
+  function runHintImpl() {
     const compLabel = computers[0]?.label || 'My_HPC';
     const lastPk = submittedJobs.length > 0 ? submittedJobs[submittedJobs.length - 1] : nextPk - 1;
     let hint = step === TUTORIAL_STEPS.length - 1 ? `verdi calcjob res ${lastPk}` : TUTORIAL_STEPS[step].hint;
@@ -3803,121 +3842,106 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
   }
 
   // ─── Shared sub-elements ───
-  const editorEl = (
-    <div className={`tut-editor ${editorExpanded ? 'tut-editor-expanded' : ''}`} style={editorExpanded ? {order: 0} : expanded ? {order: 1} : undefined}>
-      <div className="tut-editor-tab">
-        <span className="tut-editor-dots">
-          <span className="terminal-proto-dot terminal-proto-dot--red" />
-          <span className="terminal-proto-dot terminal-proto-dot--yellow" />
-          <span
-            className="terminal-proto-dot terminal-proto-dot--green tut-terminal-fullscreen-dot"
-            onClick={e => { e.stopPropagation(); setEditorExpanded(!editorExpanded); }}
-            title={editorExpanded ? 'Exit full screen' : 'Enter full screen'}
-          >
-            <svg viewBox="0 0 12 12" className="tut-dot-icon">
-              {editorExpanded ? (
-                <>
-                  <polyline points="4 2 4 4 2 4" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                  <polyline points="8 10 8 8 10 8" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                </>
-              ) : (
-                <>
-                  <polyline points="2 4 2 2 4 2" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                  <polyline points="10 8 10 10 8 10" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                </>
-              )}
-            </svg>
-          </span>
-        </span>
-        {openTabs.map((tab, i) => (
-          <span
-            key={tab.name}
-            className={`tut-editor-filename ${i === activeTab ? 'active' : ''}`}
-            onClick={() => setActiveTab(i)}
-            title={tab.name}
-          >
-            {tab.name}
-          </span>
-        ))}
-      </div>
-      <pre className="tut-editor-code">
-        {highlightCode(openTabs[activeTab]?.code || '', openTabs[activeTab]?.name || '')}
-      </pre>
-    </div>
-  );
+  const activeFile = activeTab !== null ? openTabs.find(t => t.name === activeTab) : null;
 
   const terminalEl = (
-    <div ref={termContainerRef} className={`tut-terminal ${expanded ? 'tut-terminal-expanded' : ''}`} tabIndex={-1} style={expanded ? {order: 0} : undefined} onClick={() => { if (!window.getSelection()?.toString()) inRef.current?.focus({ preventScroll: true }); }} onKeyDown={e => { if (e.key === 'Tab') e.preventDefault(); }}>
+    <div
+      ref={termContainerRef}
+      className="tut-terminal"
+      tabIndex={-1}
+      onClick={() => {
+        if (activeTab !== null) return;
+        if (!window.getSelection()?.toString()) inRef.current?.focus({ preventScroll: true });
+      }}
+      onKeyDown={e => { if (e.key === 'Tab') e.preventDefault(); }}
+    >
       <div className="verdi-console-titlebar">
         <span className="terminal-proto-dot terminal-proto-dot--red" />
         <span className="terminal-proto-dot terminal-proto-dot--yellow" />
-        <span
-          className="terminal-proto-dot terminal-proto-dot--green tut-terminal-fullscreen-dot"
-          onClick={e => { e.stopPropagation(); setExpanded(!expanded); }}
-          title={expanded ? 'Exit full screen' : 'Enter full screen'}
-        >
-          <svg viewBox="0 0 12 12" className="tut-dot-icon">
-            {expanded ? (
-              <>
-                <polyline points="4 2 4 4 2 4" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                <polyline points="8 10 8 8 10 8" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              </>
-            ) : (
-              <>
-                <polyline points="2 4 2 2 4 2" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                <polyline points="10 8 10 10 8 10" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              </>
-            )}
-          </svg>
-        </span>
-        <span className="verdi-console-titlebar-text">terminal</span>
-      </div>
-      <div className="tut-terminal-scroll" ref={outRef}>
-        {hist.map((entry, i) => (
-          <div key={i} className={entry.type === 'cmd' ? 'verdi-line-cmd' : 'verdi-line-out'}>
-            {entry.text.split('\n').map((line, j) => (
-              <div key={j}>{line || '\u00A0'}</div>
-            ))}
-          </div>
-        ))}
-        <div className="verdi-console-input-row" style={inputDisabled ? {display: 'none'} : undefined}>
-          <span className="verdi-console-prompt" style={promptMode ? {color: '#f9e2af'} : undefined}>
-            {promptMode ? `${promptMode.prompts[promptMode.current].label}: ` : '$ '}
-          </span>
-          <input
-            ref={inRef}
-            type="text"
-            value={input}
-            onChange={e => !inputDisabled && setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="verdi-console-input"
-            spellCheck={false}
-            autoCapitalize="off"
-            autoCorrect="off"
-            disabled={inputDisabled}
-            placeholder={promptMode
-              ? (promptMode.prompts[promptMode.current].hint || '(press Enter for default)')
-              : (currentHint ? `try: ${currentHint}` : '')}
-            aria-label="Tutorial terminal input"
-          />
+        <span className="terminal-proto-dot terminal-proto-dot--green" />
+        <div className="tut-tabs">
+          <button
+            type="button"
+            className={`tut-tab${activeTab === null ? ' active' : ''}`}
+            onClick={e => { e.stopPropagation(); setActiveTab(null); }}
+          >
+            terminal
+          </button>
+          {openTabs.map(tab => (
+            <button
+              key={tab.name}
+              type="button"
+              className={`tut-tab${activeTab === tab.name ? ' active' : ''}${tabCallout === tab.name ? ' tut-tab-flash' : ''}`}
+              onClick={e => { e.stopPropagation(); setActiveTab(tab.name); setTabCallout(null); }}
+              title={tab.name}
+            >
+              {tab.name}
+            </button>
+          ))}
         </div>
+        {tabCallout && (
+          <div className="tut-tab-callout" aria-hidden="true">
+            file opened in a new tab
+          </div>
+        )}
       </div>
+      {activeTab === null ? (
+        <div className="tut-terminal-scroll" ref={outRef}>
+          {hist.map((entry, i) => (
+            <div key={i} className={entry.type === 'cmd' ? 'verdi-line-cmd' : 'verdi-line-out'}>
+              {entry.text.split('\n').map((line, j) => (
+                <div key={j}>{line || '\u00A0'}</div>
+              ))}
+            </div>
+          ))}
+          <div className="verdi-console-input-row" style={inputRowHidden ? {display: 'none'} : undefined}>
+            <span className="verdi-console-prompt" style={promptMode ? {color: '#f9e2af'} : undefined}>
+              {promptMode ? `${promptMode.prompts[promptMode.current].label}: ` : '$ '}
+            </span>
+            <input
+              ref={inRef}
+              type="text"
+              value={input}
+              onChange={e => !inputDisabled && setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="verdi-console-input"
+              spellCheck={false}
+              autoCapitalize="off"
+              autoCorrect="off"
+              disabled={inputDisabled}
+              placeholder={promptMode
+                ? (promptMode.prompts[promptMode.current].hint || '(press Enter for default)')
+                : tutorialComplete && step === TUTORIAL_STEPS.length - 1
+                  ? 'explore the verdi cli (verdi --help ) | e.g. verdi computer list'
+                  : (currentHint ? `try: ${currentHint}` : '')}
+              aria-label="Tutorial terminal input"
+            />
+          </div>
+        </div>
+      ) : (
+        <pre className="tut-tab-code">
+          {highlightCode(activeFile?.code || '', activeFile?.name || '')}
+        </pre>
+      )}
     </div>
   );
 
   const instructionsEl = (
-    <div className="tut-instructions" style={expanded ? {order: 2} : undefined}>
+    <div className="tut-instructions">
       <div className="tut-step-tabs" role="tablist" aria-label="Tutorial steps">
         {TUTORIAL_STEPS.map((stp, i) => {
           const isActive = i === step;
           const isVisited = i <= maxStepReached;
+          // A step is "done" once we've moved past it, or — for the very last
+          // step — once the user has clicked through the final command.
+          const isDone = i < step || (tutorialComplete && i === TUTORIAL_STEPS.length - 1);
           return (
             <button
               key={i}
               type="button"
               role="tab"
               aria-selected={isActive}
-              className={`tut-step-tab${isActive ? ' active' : ''}${!isActive && isVisited ? ' visited' : ''}`}
+              className={`tut-step-tab${isActive ? ' active' : ''}${!isActive && isVisited ? ' visited' : ''}${isDone ? ' done' : ''}`}
               onClick={() => { if (isVisited) setStep(i); }}
               disabled={!isVisited}
               title={stp.title}
@@ -3955,7 +3979,7 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
                   disabled={runDisabled}
                   style={runDisabled ? {opacity: 0.4, cursor: 'not-allowed'} : undefined}
                 >
-                  {isFinalDone ? `Done ${'\u2713'}` : (currentHint ? 'Run' : `Next ${'\u2192'}`)}
+                  {isFinalDone ? `Done ${'\u2713'}` : (currentHint ? 'Paste & Run' : `Next ${'\u2192'}`)}
                 </button>
               );
             })()}
@@ -3976,20 +4000,7 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
 
   // ─── Render-layout mode: parent controls where each piece goes ───
   if (renderLayout) {
-    return renderLayout({ editor: editorEl, terminal: terminalEl, instructions: instructionsEl, expanded, editorExpanded });
-  }
-
-  // ─── Embedded mode: return separate pieces for parent CSS Grid ───
-  if (embedded) {
-    return (
-      <>
-        <div className="throughput-try-instructions">{instructionsEl}</div>
-        <div className="throughput-try-terminals">
-          {!expanded && editorEl}
-          {!editorExpanded && terminalEl}
-        </div>
-      </>
-    );
+    return renderLayout({ terminal: terminalEl, instructions: instructionsEl });
   }
 
   return null;
