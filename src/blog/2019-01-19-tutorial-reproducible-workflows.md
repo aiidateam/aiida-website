@@ -24,7 +24,7 @@ tags: [tutorial]
 | 09:00 - 09:30 | Registration                                | Highlight talk M. Govoni          | AiiDA Q&A                      |                 |
 | 09:30 - 10:00 | AiiDA intro (R)                             | Highlight talk F. Mohammed (R)    | Highlight talkG. Petretto (R)  |                 |
 | 10:00 - 10:30 | Highlight talk S. Cottenier                 |                                   |                                |                 |
-| 10:30 - 11:00 | 1. Getting set up                           | AiiDA lab (R)                     | Materials Cloud                |                 |
+| 10:30 - 11:00 | 1. Getting set up                           | AiiDAlab (R)                     | Materials Cloud                |                 |
 | 11:00 - 11:30 | Coffee break                                | Group photo                       | Coffee break                   | Coffee break    |
 | 11:30 - 12:00 | 2. verdi CLI                                | Workflows intro (R)               | AiiDA plugins (R)              | Feedback forms  |
 | 12:00 - 12:30 | 6. Workflows                                | Open Mic round+ split into groups | Group work                     |                 |
@@ -65,7 +65,7 @@ Our tool of choice is the AiiDA framework for workflow management and provenance
     - includes: How to write an AiiDA plugin
 
   - **Wrapping a workflow in a web application** (S. Yakutovich, C. Andersen):
-    - includes: Getting started with the AiiDA lab
+    - includes: Getting started with the AiiDAlab
 
 - Throughout the tutorial, lectures by the organizers and core developers of AiiDA are complemented by talks by the invited speakers highlighting the use of the workflows in computational materials science.
   - **NEW**: [Your answers to Stefaan's questions](/aiida-website/blog-img/legacy/questions-by-stefaan.pdf) & [Stefaan's answers to your questions](/aiida-website/blog-img/legacy/questions-by-participants.pdf)
