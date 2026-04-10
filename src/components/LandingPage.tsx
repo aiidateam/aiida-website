@@ -1,4 +1,4 @@
-import {type ReactNode, useState, useRef, useEffect, useCallback} from 'react';
+import {type ReactNode, type CSSProperties, useState, useRef, useEffect, useCallback} from 'react';
 import verdiCliData from '../data/verdi-cli.json';
 import pypiStats from '../data/pypi-stats.json';
 
@@ -1221,17 +1221,13 @@ function GanttPrototype(): ReactNode {
                         y={barY}
                         width={phase.width}
                         height={barH}
-                        rx={pi === 0 ? barR : 0}
-                        ry={pi === 0 ? barR : 0}
+                        rx={pi === 0 || pi === job.phases.length - 1 ? barR : 0}
+                        ry={pi === 0 || pi === job.phases.length - 1 ? barR : 0}
                         fill={phase.color}
                         className={`gantt-bar gantt-bar--${phase.label}`}
                         style={{
                           '--gantt-bar-delay': `${job.animDelay + phaseFrac * 2.5}s`,
-                          // Round right corners on last phase
-                          ...(pi === job.phases.length - 1
-                            ? { rx: barR, ry: barR }
-                            : {}),
-                        } as Record<string, string>}
+                        } as CSSProperties}
                       />
                     );
                   })}
@@ -2206,7 +2202,7 @@ function HighThroughputCombined(): ReactNode {
       <div className="throughput-try-toggle">
         {!tryMode ? (
           <button className="button button--primary throughput-try-btn" onClick={() => setTryMode(true)}>
-            Try it out yourself {'\u2192'}
+            Try out a demo {'\u2192'}
           </button>
         ) : (
           <button className="tut-btn tut-btn-back throughput-try-btn" onClick={() => { setTryMode(false); setSyncPhase(-1); setSyncRunning(false); }}>
@@ -3403,6 +3399,8 @@ function highlightCode(code: string, filename: string): ReactNode[] {
 
 function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedded?: boolean; onPhaseChange?: (phase: number, running: boolean) => void; renderLayout?: (parts: { editor: ReactNode; terminal: ReactNode; instructions: ReactNode; expanded: boolean; editorExpanded: boolean }) => ReactNode }): ReactNode {
   const [step, setStep] = useState(0);
+  const [maxStepReached, setMaxStepReached] = useState(0);
+  const [tutorialComplete, setTutorialComplete] = useState(false);
   const [hist, setHist] = useState<{type: 'cmd' | 'out'; text: string}[]>([]);
   const [input, setInput] = useState('');
   const [phase, setPhase] = useState(-1);
@@ -3449,12 +3447,14 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
   // Track whether input should be disabled (during auto-play / auto-fill)
   const inputDisabled = phaseRunning || autoFill || busy;
 
-  // Keep focus trapped in terminal area
+  // Keep focus trapped in terminal area.
+  // preventScroll avoids the browser auto-scrolling the container
+  // horizontally when long `pre`-formatted output makes it scrollable.
   useEffect(() => {
     if (inputDisabled) {
-      termContainerRef.current?.focus();
+      termContainerRef.current?.focus({ preventScroll: true });
     } else {
-      inRef.current?.focus();
+      inRef.current?.focus({ preventScroll: true });
     }
   }, [inputDisabled]);
 
@@ -3463,6 +3463,7 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
     setPromptMode(null);
     setAutoFill(false);
     setBusy(false);
+    setMaxStepReached(prev => Math.max(prev, step));
     const s = TUTORIAL_STEPS[step];
     const tabName = s.file || (s.code ? 'aiida.out' : null);
     const tabCode = s.code || '';
@@ -3483,7 +3484,11 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
   }, [step]);
 
   useEffect(() => {
-    if (outRef.current) outRef.current.scrollTop = outRef.current.scrollHeight;
+    if (outRef.current) {
+      outRef.current.scrollTop = outRef.current.scrollHeight;
+      // Pin to the left edge so wide output never pushes the $ prompt out of view.
+      outRef.current.scrollLeft = 0;
+    }
   }, [hist]);
 
   // Auto-fill interactive prompts when button is clicked
@@ -3783,6 +3788,7 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
         || hint?.startsWith('verdi computer configure ');
       exec(hint);
       if (isInteractive) setAutoFill(true);
+      if (step === TUTORIAL_STEPS.length - 1) setTutorialComplete(true);
     } else {
       setStep(step + 1);
     }
@@ -3841,7 +3847,7 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
   );
 
   const terminalEl = (
-    <div ref={termContainerRef} className={`tut-terminal ${expanded ? 'tut-terminal-expanded' : ''}`} tabIndex={-1} style={expanded ? {order: 0} : undefined} onClick={() => { if (!window.getSelection()?.toString()) inRef.current?.focus(); }} onKeyDown={e => { if (e.key === 'Tab') e.preventDefault(); }}>
+    <div ref={termContainerRef} className={`tut-terminal ${expanded ? 'tut-terminal-expanded' : ''}`} tabIndex={-1} style={expanded ? {order: 0} : undefined} onClick={() => { if (!window.getSelection()?.toString()) inRef.current?.focus({ preventScroll: true }); }} onKeyDown={e => { if (e.key === 'Tab') e.preventDefault(); }}>
       <div className="verdi-console-titlebar">
         <span className="terminal-proto-dot terminal-proto-dot--red" />
         <span className="terminal-proto-dot terminal-proto-dot--yellow" />
@@ -3901,39 +3907,69 @@ function InteractiveTutorial({ embedded, onPhaseChange, renderLayout }: { embedd
 
   const instructionsEl = (
     <div className="tut-instructions" style={expanded ? {order: 2} : undefined}>
-      <div className="tut-step-indicator">
-        {TUTORIAL_STEPS.map((_, i) => (
-          <span key={i} className={`tut-step-dot ${i === step ? 'active' : ''} ${i < step ? 'done' : ''}`} />
-        ))}
+      <div className="tut-step-tabs" role="tablist" aria-label="Tutorial steps">
+        {TUTORIAL_STEPS.map((stp, i) => {
+          const isActive = i === step;
+          const isVisited = i <= maxStepReached;
+          return (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`tut-step-tab${isActive ? ' active' : ''}${!isActive && isVisited ? ' visited' : ''}`}
+              onClick={() => { if (isVisited) setStep(i); }}
+              disabled={!isVisited}
+              title={stp.title}
+            >
+              <span className="tut-step-tab-num">{i + 1}</span>
+              <span className="tut-step-tab-label">{stp.title.replace(/^\d+\.\s*/, '')}</span>
+            </button>
+          );
+        })}
       </div>
-      {step >= 4 && (
-        <p className="tut-step-desc" style={{color: '#30b808', fontWeight: 600, margin: '0 0 4px'}}>
-          {'\u2713'} One-time setup complete!
-        </p>
-      )}
-      <h3 className="tut-step-title">{s.title}</h3>
-      <p className="tut-step-desc">{s.desc}</p>
-      {currentHint && (
-        <div className="tut-hint">
-          <code>{currentHint}</code>
+      <div className="tut-instructions-body">
+        <div className="tut-instructions-row">
+          <div className="tut-step-text">
+            {step >= 4 && (
+              <p className="tut-setup-complete">
+                {'\u2713'} One-time setup complete!
+              </p>
+            )}
+            <h3 className="tut-step-title">{s.title}</h3>
+            <p className="tut-step-desc">{s.desc}</p>
+          </div>
+          <div className="tut-nav">
+            {step > 0 && (
+              <button className="tut-btn tut-btn-back" onClick={() => setStep(step - 1)}>
+                {'\u2190'} Back
+              </button>
+            )}
+            {(currentHint || step < TUTORIAL_STEPS.length - 1) && (() => {
+              const isFinalDone = tutorialComplete && step === TUTORIAL_STEPS.length - 1;
+              const runDisabled = inputDisabled || isFinalDone;
+              return (
+                <button
+                  className="tut-btn tut-btn-run"
+                  onClick={runHint}
+                  disabled={runDisabled}
+                  style={runDisabled ? {opacity: 0.4, cursor: 'not-allowed'} : undefined}
+                >
+                  {isFinalDone ? `Done ${'\u2713'}` : (currentHint ? 'Run' : `Next ${'\u2192'}`)}
+                </button>
+              );
+            })()}
+          </div>
         </div>
-      )}
-      <div className="tut-nav">
-        {step > 0 && (
-          <button className="tut-btn tut-btn-back" onClick={() => setStep(step - 1)}>
-            {'\u2190'} Back
-          </button>
-        )}
-        {(currentHint || step < TUTORIAL_STEPS.length - 1) && (
-          <button
-            className="tut-btn tut-btn-run"
-            onClick={runHint}
-            disabled={inputDisabled}
-            style={inputDisabled ? {opacity: 0.4, cursor: 'not-allowed'} : undefined}
-          >
-            {currentHint ? 'Run' : `Next ${'\u2192'}`}
-          </button>
-        )}
+        {tutorialComplete && step === TUTORIAL_STEPS.length - 1 ? (
+          <div className="tut-complete-note">
+            Easy, right? Keep poking at the verdi CLI above — heads up, it's a preview, so not every command is wired up.
+          </div>
+        ) : currentHint ? (
+          <div className="tut-hint">
+            <code>{currentHint}</code>
+          </div>
+        ) : null}
       </div>
     </div>
   );
