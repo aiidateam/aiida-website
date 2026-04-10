@@ -16,11 +16,11 @@
   role: Deputy Group Leader Atomistic Simulations, nanotech@surfaces Laboratory, Empa, Switzerland
   affiliation_url: http://surfaces.ch/
   quote: >-
-    AiiDA and the AiiDA lab have considerably reduced the human time spent on
+    AiiDA and the AiiDAlab have considerably reduced the human time spent on
     routine computational workflows in our lab,
     [resulting in two subsequent annual bonuses for high productivity](https://nccr-marvel.ch/highlights/2020-04AiiDAtestimonial).
     Experimental PhDs and Postdocs now submit workflows based on Quantum
-    ESPRESSO through the AiiDA lab to compute the electronic properties of
+    ESPRESSO through the AiiDAlab to compute the electronic properties of
     graphene nanoribbons, and monitor/visualize the results of more advanced
     workflows (e.g. NEB with CP2K, geometry optimizations, STM, STS and AFM
     simulations of molecules adsorbed on surfaces) submitted by their
