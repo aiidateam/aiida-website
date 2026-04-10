@@ -990,86 +990,7 @@ main > section > h2::after {
 
 /* === Interactive Tutorial === */
 
-/* Editor panel (left) */
-.tut-editor {
-  flex: 1;
-  background: #1e1e2e;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.tut-editor-tab {
-  background: #181825;
-  padding: clamp(4px, 0.7vw, 8px) clamp(8px, 1.3vw, 16px) 0;
-  display: flex;
-  align-items: center;
-  gap: clamp(2px, 0.35vw, 4px);
-  border-bottom: 1px solid #313244;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.tut-editor-tab::-webkit-scrollbar {
-  display: none;
-}
-
-.tut-editor-dots {
-  display: flex;
-  align-items: center;
-  gap: clamp(3px, 0.5vw, 6px);
-  margin-right: clamp(5px, 0.85vw, 10px);
-  flex-shrink: 0;
-}
-
-.tut-editor-filename {
-  font-size: clamp(9px, 1vw, 12px);
-  font-family: var(--font-mono);
-  color: #6c7086;
-  background: #181825;
-  padding: clamp(3px, 0.5vw, 6px) clamp(7px, 1.15vw, 14px);
-  border-radius: clamp(2px, 0.35vw, 4px) clamp(2px, 0.35vw, 4px) 0 0;
-  border: 1px solid transparent;
-  border-bottom: 1px solid #313244;
-  margin-bottom: -1px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    color 0.15s,
-    background 0.15s;
-  user-select: none;
-}
-
-.tut-editor-filename:hover {
-  color: #a6adc8;
-}
-
-.tut-editor-filename.active {
-  color: #cdd6f4;
-  background: #1e1e2e;
-  border: 1px solid #313244;
-  border-bottom: 1px solid #1e1e2e;
-}
-
-.tut-editor-code {
-  flex: 1;
-  margin: 0;
-  padding: clamp(8px, 1.3vw, 16px);
-  color: #cdd6f4;
-  font-family: var(--font-mono);
-  font-size: clamp(9px, 1.05vw, 12.5px);
-  line-height: 1.65;
-  white-space: pre;
-  overflow: auto;
-  min-height: 360px;
-  max-height: 460px;
-  scrollbar-width: thin;
-  scrollbar-color: #45475a #1e1e2e;
-}
-
-/* Terminal panel (center) */
+/* Terminal panel — hosts the live console and the file tabs */
 .tut-terminal {
   flex: 1;
   background: #1e1e2e;
@@ -1080,7 +1001,6 @@ main > section > h2::after {
   flex-direction: column;
   cursor: text;
   min-width: 0;
-  transition: flex 0.3s ease;
 }
 
 .tut-terminal-scroll {
@@ -1089,6 +1009,9 @@ main > section > h2::after {
     clamp(4px, 0.7vw, 8px);
   max-height: 460px;
   overflow-y: auto;
+  /* Trap wheel scroll inside the terminal — when the user hits the top or
+     bottom, don't chain the scroll up to the page. */
+  overscroll-behavior: contain;
   font-size: clamp(9px, 1.1vw, 13px);
   line-height: 1.6;
   scrollbar-width: thin;
@@ -1099,22 +1022,22 @@ main > section > h2::after {
   padding: 4px 0 12px;
 }
 
-.tut-terminal-expanded {
-  flex: 1 1 100% !important;
-  transition: flex 0.3s ease;
-}
-
-.tut-terminal-expanded .tut-terminal-scroll {
-  max-height: 600px;
-}
-
-.tut-editor-expanded {
-  flex: 1 1 100% !important;
-  transition: flex 0.3s ease;
-}
-
-.tut-editor-expanded .tut-editor-code {
-  max-height: 600px;
+/* File-tab content view (rendered when a non-terminal tab is active) */
+.tut-tab-code {
+  flex: 1;
+  margin: 0;
+  padding: clamp(8px, 1.3vw, 16px);
+  color: #cdd6f4;
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 1.05vw, 12.5px);
+  line-height: 1.65;
+  white-space: pre;
+  overflow: auto;
+  /* Trap wheel scroll inside the file viewer — same as the terminal. */
+  overscroll-behavior: contain;
+  max-height: 460px;
+  scrollbar-width: thin;
+  scrollbar-color: #45475a #1e1e2e;
 }
 
 /* Instructions panel (right) */
@@ -1197,6 +1120,13 @@ main > section > h2::after {
 .tut-step-tab.active .tut-step-tab-num {
   border-color: var(--color-primary);
   color: var(--color-primary);
+}
+
+/* Done state overrides .active so the final tab turns green once the
+   tutorial is complete (placed after .active for tied-specificity priority). */
+.tut-step-tab.done .tut-step-tab-num {
+  border-color: var(--color-accent-green);
+  color: var(--color-accent-green);
 }
 
 .tut-step-tab-label {
@@ -1282,7 +1212,7 @@ main > section > h2::after {
 }
 
 @media (max-width: 1100px) {
-  .tut-editor-code,
+  .tut-tab-code,
   .tut-terminal-scroll {
     max-height: 320px;
   }
@@ -1308,6 +1238,7 @@ main > section > h2::after {
   align-items: center;
   gap: clamp(4px, 0.7vw, 8px);
   user-select: none;
+  position: relative;
 }
 
 .verdi-console-dot {
@@ -1316,29 +1247,46 @@ main > section > h2::after {
   border-radius: 50%;
 }
 
-.verdi-console-titlebar-text {
+/* Tabs inside the terminal titlebar (live console + opened files) */
+.tut-tabs {
+  display: flex;
+  align-items: center;
+  gap: clamp(2px, 0.35vw, 4px);
+  margin-left: clamp(4px, 0.7vw, 10px);
   flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tut-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tut-tab {
+  font-family: var(--font-mono);
   font-size: clamp(9px, 1vw, 12px);
   color: #6c7086;
-}
-
-.tut-terminal-fullscreen-dot {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: clamp(2px, 0.35vw, 4px) clamp(6px, 1vw, 12px);
+  border-radius: clamp(2px, 0.35vw, 4px);
   cursor: pointer;
-  position: relative;
+  white-space: nowrap;
+  max-width: clamp(80px, 12vw, 140px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
 
-.tut-dot-icon {
-  position: absolute;
-  inset: 1px;
-  width: 10px;
-  height: 10px;
-  color: transparent;
-  transition: color 0.15s;
+.tut-tab:hover {
+  color: #a6adc8;
 }
 
-.verdi-console-titlebar:hover .tut-dot-icon,
-.tut-editor-tab:hover .tut-dot-icon {
-  color: rgba(0, 0, 0, 0.7);
+.tut-tab.active {
+  color: #cdd6f4;
+  background: #1e1e2e;
+  border-color: #313244;
 }
 
 .verdi-console-output {
@@ -3574,75 +3522,6 @@ main > section > h2::after {
   box-shadow: 0 6px 20px rgba(0, 150, 222, 0.25);
 }
 
-/* Try-mode grid layout: diagram + instructions top, terminals bottom */
-.throughput-try-mode {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  grid-template-rows: 320px auto;
-  gap: 12px;
-}
-
-.throughput-try-mode .flow-proto-wrapper {
-  grid-column: 1;
-  grid-row: 1;
-  overflow: hidden;
-}
-
-.throughput-try-mode .flow-proto-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.throughput-try-instructions {
-  grid-column: 2;
-  grid-row: 1;
-  overflow-y: auto;
-}
-
-.throughput-try-instructions .tut-instructions {
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 1.25rem;
-}
-
-.throughput-try-terminals {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  display: flex;
-  gap: 12px;
-}
-
-.throughput-try-terminals .tut-editor {
-  flex: 1;
-  background: #1e1e2e;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
-}
-
-.throughput-try-terminals .tut-terminal {
-  flex: 1.5;
-  min-height: 300px;
-}
-
-@media (max-width: 900px) {
-  .throughput-try-mode {
-    grid-template-columns: 1fr;
-  }
-  .throughput-try-instructions {
-    grid-column: 1;
-    grid-row: 2;
-  }
-  .throughput-try-terminals {
-    grid-column: 1;
-    grid-row: 3;
-    flex-direction: column;
-  }
-}
-
 /* ===== THROUGHPUT LAPTOP PANEL ===== */
 
 /* Row: laptop + right group (flow + server) */
@@ -3750,31 +3629,80 @@ main > section > h2::after {
   flex: 1;
 }
 
-/* Try-mode panels: embed tut-editor / tut-terminal inside */
+/* Try-mode panel: hosts the tut-terminal inside the laptop lid */
 .tp-screen-panel--try {
   overflow: hidden;
+  animation: tp-panel-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.tp-screen-panel--try .tut-editor {
-  border-radius: 0;
-  height: 100%;
-  min-height: 0;
-  max-height: 100%;
+@keyframes tp-panel-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.tp-screen-panel--try .tut-editor .tut-editor-tab {
-  border-radius: 0;
-  flex-wrap: nowrap;
+/* ─── New-tab callout (fires when a file tab first appears) ─── */
+.tut-tab.tut-tab-flash {
+  animation: tut-tab-flash 1.4s ease-out 4;
+  position: relative;
+  z-index: 1;
 }
 
-.tp-screen-panel--try .tut-editor .tut-editor-filename {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex-shrink: 1;
-  padding: clamp(3px, 0.5vw, 6px) clamp(4px, 0.7vw, 8px);
-  max-width: clamp(60px, 10vw, 110px);
-  font-size: clamp(9px, 0.95vw, 12px);
+@keyframes tut-tab-flash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(48, 184, 8, 0.7);
+    border-color: #30b808;
+  }
+  60% {
+    box-shadow: 0 0 0 6px rgba(48, 184, 8, 0);
+    border-color: #30b808;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(48, 184, 8, 0);
+  }
+}
+
+.tut-tab-callout {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 12px;
+  background: #30b808;
+  color: #fff;
+  font-family: var(--font-base);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 4px 9px;
+  border-radius: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(48, 184, 8, 0.35);
+  z-index: 5;
+  animation: tut-callout-fade 5.5s ease-in-out both;
+}
+
+@keyframes tut-callout-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  88% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 }
 
 .tp-screen-panel--try .tut-terminal {
@@ -3784,14 +3712,8 @@ main > section > h2::after {
   max-height: 100%;
 }
 
-.tp-screen-panel--try .tut-editor-code {
-  min-height: 0;
-  max-height: none;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.tp-screen-panel--try .tut-terminal-scroll {
+.tp-screen-panel--try .tut-terminal-scroll,
+.tp-screen-panel--try .tut-tab-code {
   max-height: none;
   flex: 1;
 }
@@ -3980,12 +3902,11 @@ main > section > h2::after {
 
 /* ─── Try-it-out mode: keep usable on mobile ─── */
 @media (max-width: 768px) {
-  .tp-screen-panel--try .tut-editor,
   .tp-screen-panel--try .tut-terminal {
     min-height: 180px;
   }
 
-  .tp-screen-panel--try .tut-editor-code {
+  .tp-screen-panel--try .tut-tab-code {
     font-size: clamp(9px, 1vw, 12px);
   }
 }
