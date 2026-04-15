@@ -900,7 +900,9 @@ main > section > h2::after {
   font-weight: 600;
   color: #ed8e3c;
   text-decoration: none;
-  transition: color 0.15s, transform 0.15s;
+  transition:
+    color 0.15s,
+    transform 0.15s;
 }
 
 .provenance-docs-link:hover {
@@ -1076,7 +1078,9 @@ main > section > h2::after {
   color: var(--color-text-muted);
   text-align: left;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .tut-step-tab:hover:not(:disabled) {
@@ -1276,7 +1280,10 @@ main > section > h2::after {
   max-width: clamp(80px, 12vw, 140px);
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s,
+    border-color 0.15s;
 }
 
 .tut-tab:hover {

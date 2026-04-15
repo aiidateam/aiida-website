@@ -1,0 +1,60 @@
+name: Link check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install
+
+      - run: npm run build
+
+      # Stage the build under a directory that mirrors the site's base path
+      # so that root-relative links like /aiida-website/foo resolve to real
+      # files when lychee is given --root-dir.
+      - name: Stage built site under base path
+        run: |
+          mkdir -p serve-root
+          mv dist serve-root/aiida-website
+
+      - name: Check links in built site
+        uses: lycheeverse/lychee-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >-
+            --no-progress
+            --config .github/lychee.toml
+            --root-dir ${{ github.workspace }}/serve-root
+            './serve-root/aiida-website/**/*.html'
+          format: json
+          output: ${{ github.workspace }}/lychee-report.json
+          # Don't let the action itself fail the job — the next step decides.
+          fail: false
+
+      # Fail only on real errors (404, connection refused, ...). Timeouts
+      # from slow third-party hosts are flaky on GitHub's runners and must
+      # not block merges.
+      - name: Fail on non-timeout link errors
+        run: |
+          report="${{ github.workspace }}/lychee-report.json"
+          errors=$(jq '.errors' "$report")
+          timeouts=$(jq '.timeouts' "$report")
+          echo "Errors: $errors"
+          echo "Timeouts (ignored): $timeouts"
+          if [ "$errors" -gt 0 ]; then
+            echo "::error::lychee reported $errors broken link(s)"
+            jq -r '.error_map | to_entries[] | "\n### \(.key)\n" + (.value | map("- [\(.status.code // .status.text)] \(.url)") | join("\n"))' "$report"
+            exit 1
+          fi

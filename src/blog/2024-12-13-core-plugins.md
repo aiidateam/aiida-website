@@ -6,8 +6,6 @@ tags: [plugins, usability, high-throughput]
 author: "Julian Geiger, Marnik Bercx"
 ---
 
-(post-aiida-core-plugins)=
-
 Dear users, we're happy to announce that we have recently crossed the 100-plugin milestone of registered plugin packages on the [AiiDA plugin registry](https://aiidateam.github.io/aiida-registry/).
 Among those are classics like [`aiida-quantumespresso`](https://github.com/aiidateam/aiida-quantumespresso/) and [`aiida-vasp`](https://github.com/aiidateam/aiida-vasp/), which support the electronic structure codes we all know and love.
 However, did you know that there are various non research-domain specific plugins that AiiDA developers have created over the years, which can extend AiiDA's core functionality?

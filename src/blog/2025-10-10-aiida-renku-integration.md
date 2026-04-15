@@ -31,7 +31,7 @@ The first version of an integration between the two platform was established as 
 
 It allows researchers to click the Renku logo next to any AiiDA archive on MCA and be automatically launched into a fully configured RenkuLab project with AiiDA pre-installed and the data ready for exploration, thus eliminating the need for any local installation or configuration:
 
-<img src="/blog-img/_pics/renku-logo-mca.png" class="img-shadow" alt="Renku logo on Materials Cloud Archive">
+<img src="/aiida-website/blog-img/renku-logo-mca.png" class="img-shadow" alt="Renku logo on Materials Cloud Archive">
 
 :::{seealso}
 Before diving into the technical details of the integration, note that the Renku team has also written about this collaboration from their perspective in a [blog post on their website](https://blog.renkulab.io/aiida-success-story/).

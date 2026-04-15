@@ -5,4 +5,4 @@ category: News
 tags: []
 ---
 
-An AiiDA mailing list for users is available now! Please visit [this page](/sections/mailing_list.md "Mailing list") for more information on how to subscribe.
+An AiiDA mailing list for users is available now! Please visit [this page](https://aiida.discourse.group/ "Mailing list") for more information on how to subscribe.
