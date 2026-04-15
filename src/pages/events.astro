@@ -1,0 +1,67 @@
+---
+import '../styles/pages.css';
+import Layout from '../layouts/Layout.astro';
+import yaml from 'js-yaml';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const eventsFile = path.resolve('./src/data/events.yaml');
+const rawEvents = yaml.load(fs.readFileSync(eventsFile, 'utf-8')) as any[];
+
+interface EventItem {
+  name: string;
+  start: string;
+  year: number;
+  location: string;
+  duration?: string;
+  description?: string;
+  url?: string;
+  urls?: string[];
+  participants?: string;
+}
+
+const events: EventItem[] = rawEvents.map(e => {
+  const d = new Date(e.start);
+  return {
+    ...e,
+    start: d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    year: d.getFullYear(),
+  };
+});
+
+const years = [...new Set(events.map(e => e.year))].sort((a, b) => b - a);
+---
+
+<Layout title="Events — AiiDA" description="Tutorials, workshops, coding weeks and other AiiDA events.">
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Events</h1>
+      <p class="section-header-sub">Tutorials, workshops, coding weeks and other AiiDA community events</p>
+    </header>
+
+    <div class="events-timeline">
+      {years.map(year => (
+        <div>
+          <h2 class="event-year-heading">{year}</h2>
+          {events.filter(e => e.year === year).map(e => (
+            <div class="event-item">
+              <div class="event-date">{e.start}{e.duration ? ` · ${e.duration}` : ''}{e.participants ? ` · ${e.participants} participants` : ''}</div>
+              <div class="event-name">
+                {e.url ? <a href={e.url}>{e.name}</a> : e.name}
+              </div>
+              <div class="event-location">{e.location}</div>
+              {e.description && <div class="event-desc">{e.description}</div>}
+              {e.urls && e.urls.length > 0 && (
+                <div class="event-links">
+                  {e.urls.map((u: string, i: number) => (
+                    <a href={u}>Link {i + 1}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>

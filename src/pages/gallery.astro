@@ -1,0 +1,56 @@
+---
+import '../styles/pages.css';
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
+const graphs = [
+  {
+    title: 'Covalent Organic Frameworks',
+    img: `${base}/img/graphs/curated_cofs.jpeg`,
+    desc: 'A database of 324 Covalent Organic Frameworks for computational modelling was prepared and evaluated in silico for carbon capture and storage.',
+    authors: 'D. Ongari, L. Talirz, A. V. Yakutovich and B. Smit.',
+    doi: 'doi:10.1021/acscentsci.9b00619',
+    url: 'https://doi.org/10.1021/acscentsci.9b00619',
+  },
+  {
+    title: 'Automated high-throughput Wannier functions',
+    img: `${base}/img/graphs/automated-wannier-functions.jpg`,
+    desc: 'A database of workflows performing the automated computation of maximally-localised Wannier functions in a high-throughput unsupervised fashion.',
+    authors: 'Giovanni Pizzi, V. Vitale, G. Pizzi, A. Marrazzo, J. R. Yates, N. Marzari, A. A. Mostofi.',
+    doi: 'npj Comp. Mater. 6, 66 (2020)',
+    url: 'https://dx.doi.org/10.1038/s41524-020-0312-y',
+  },
+  {
+    title: 'All-electron ab initio data with AiiDA-FLEUR',
+    img: `${base}/img/graphs/fleur.png`,
+    desc: '~1000 FLEUR calculations with >100K nodes. Every black dot is a node, clustering around the nodes represents the FLEUR code and its input generator on different machines and versions.',
+    authors: 'Jens Bröder, Daniel Wortmann, Stefan Blügel.',
+    doi: 'IAS Series 40, p 43-48 (2019)',
+    url: 'https://juser.fz-juelich.de/record/873744',
+  },
+];
+---
+
+<Layout title="Graph Gallery — AiiDA" description="Gallery of AiiDA provenance graphs from real research projects.">
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Graph Gallery</h1>
+      <p class="section-header-sub">Provenance graphs from real AiiDA-powered research projects</p>
+    </header>
+
+    <div class="gallery-grid">
+      {graphs.map(g => (
+        <div class="gallery-card">
+          <img src={g.img} alt={g.title} loading="lazy" />
+          <div class="gallery-card-body">
+            <h3>{g.title}</h3>
+            <p>{g.desc}</p>
+            <p style="font-size:0.78rem;color:var(--color-text-muted);">{g.authors}</p>
+            <a href={g.url}>{g.doi}</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>

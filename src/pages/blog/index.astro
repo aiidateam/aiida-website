@@ -1,0 +1,75 @@
+---
+import '../../styles/blog.css';
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))] as string[];
+
+const catColors: Record<string, string> = {
+  Blog: '#0096de',
+  Releases: '#30b808',
+  News: '#e85d04',
+  Events: '#8b5cf6',
+  Reports: '#ec4899',
+};
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+---
+
+<Layout title="News & Updates — AiiDA" description="News, releases, tutorials and community updates from the AiiDA project.">
+  <main class="blog-page">
+    <header class="blog-header">
+      <h1>News & Updates</h1>
+      <p class="blog-header-sub">Releases, tutorials, events and community updates from the AiiDA project</p>
+    </header>
+
+    <div class="blog-filters" id="blog-filters">
+      <button class="blog-filter-btn blog-filter-btn--active" data-cat="all">All</button>
+      {categories.map(cat => (
+        <button
+          class="blog-filter-btn"
+          data-cat={cat}
+          style={`--filter-color: ${catColors[cat] || '#0096de'}`}
+        >{cat}</button>
+      ))}
+    </div>
+
+    <div class="blog-list" id="blog-list">
+      {posts.map(post => {
+        const date = post.data.date;
+        const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        const cc = catColors[post.data.category || ''] || '#0096de';
+        return (
+          <a href={`${base}/blog/${post.id}/`} class="blog-card" data-category={post.data.category || ''} style={`--card-cat-color: ${cc}`}>
+            <div class="blog-card-meta">
+              <time datetime={date.toISOString().slice(0,10)}>{dateStr}</time>
+              {post.data.category && <span class="blog-card-cat">{post.data.category}</span>}
+            </div>
+            <h2 class="blog-card-title">{post.data.title}</h2>
+            {post.data.author && <span class="blog-card-author">by {post.data.author}</span>}
+          </a>
+        );
+      })}
+    </div>
+  </main>
+
+  <script is:inline>
+    document.getElementById('blog-filters')?.addEventListener('click', function(e) {
+      const btn = e.target.closest('.blog-filter-btn');
+      if (!btn) return;
+      const cat = btn.dataset.cat;
+      this.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('blog-filter-btn--active'));
+      btn.classList.add('blog-filter-btn--active');
+      document.querySelectorAll('.blog-card').forEach(card => {
+        if (cat === 'all' || card.dataset.category === cat) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</Layout>

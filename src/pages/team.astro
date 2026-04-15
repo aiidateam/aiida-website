@@ -1,0 +1,95 @@
+---
+import '../styles/pages.css';
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
+const team = [
+  { name: 'Edan Bainglass', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/bainglass_edan.png` },
+  { name: 'Marnik Bercx', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/marnik.jpg` },
+  { name: 'Miki Bonacci', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/bonacci_miki.png` },
+  { name: 'Kristjan Eimre', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/eimre_kristjan.png` },
+  { name: 'Julian Geiger', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/geiger_julian.png` },
+  { name: 'Alexander Goscinski', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/alexander_goscinski.png` },
+  { name: 'Sebastiaan P. Huber', role: 'Former PostDoc Research Scientist, Theory and Simulation of Materials, EPFL', img: `${base}/img/team/huber.png` },
+  { name: 'Ali Khosravi', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/khosravi_ali.png` },
+  { name: 'Zisen Liu', role: 'Master Student, University of Zurich (UZH)', img: `${base}/img/team/liu_zisen.png` },
+  { name: 'Nicola Marzari', role: 'Chair, Theory and Simulation of Materials, EPFL · Director, NCCR MARVEL · Head of LMS, PSI', img: `${base}/img/team/nicola.png` },
+  { name: 'Giovanni Pizzi', role: 'Group Leader, Materials Software and Data Group, PSI', img: `${base}/img/team/gio.png` },
+  { name: 'Timo Reents', role: 'PhD student, Materials Software and Data Group, PSI', img: `${base}/img/team/reents_timo.png` },
+  { name: 'Xing Wang', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/wang_xing.png` },
+  { name: 'Aliaksandr Yakutovich', role: 'Research Software engineer, Empa', img: `${base}/img/team/Yakutovich.jpg` },
+  { name: 'Jusong Yu', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/JusongYu.jpg` },
+];
+
+const formerMembers = [
+  'Simon Adorf (EPFL, 2019–2022)',
+  'Casper W. Andersen (EPFL, 2018–2021)',
+  'Andrea Cepellotti (EPFL, 2011–2016)',
+  'Flaviano Dos Santos (EPFL, 2020–2022)',
+  'Fernando Gargiulo (EPFL, 2015–2017)',
+  'Rico Häuselmann (EPFL, 2016–2018)',
+  'Conrad Johnston (EPFL, 2018–2019)',
+  'Leonid Kahle (EPFL, 2015–2020)',
+  'Boris Kozinsky (Bosch, pre-AiiDA & 2012–2018)',
+  'Snehal Kumbhar (EPFL, 2015–2020)',
+  'Andrius Merkys (EPFL, 2014–2015)',
+  'Nicolas Mounet (EPFL, 2015–2018)',
+  'Elsa Passaro (EPFL, 2017–2021)',
+  'Francisco F. Ramirez (EPFL, 2019–2023)',
+  'Riccardo Sabatini (EPFL, 2013–2015)',
+  'Christopher Sewell (EPFL, 2020–2023)',
+  'Leopold Talirz (EPFL, 2017–2024)',
+  'Martin Uhrin (EPFL, 2015–2019)',
+  'Spyros Zoupanos (EPFL, 2015–2019)',
+];
+---
+
+<Layout title="Team — AiiDA" description="Meet the AiiDA development team and contributors.">
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Team</h1>
+      <p class="section-header-sub">
+        AiiDA is a joint effort of the <a href="https://www.psi.ch/en/lms/msd-group">Materials Software and Data group</a> at <a href="https://www.psi.ch/">PSI</a>,
+        <a href="http://theossrv1.epfl.ch/">THEOS</a> at EPFL, and <a href="https://www.bosch.us/">Bosch RTC</a>.
+        Its development is supported by <a href="https://nccr-marvel.ch/">NCCR MARVEL</a>.
+      </p>
+    </header>
+
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem;">The AiiDA Development Team</h2>
+    <div class="team-grid">
+      {team.map(m => (
+        <div class="team-card">
+          <img src={m.img} alt={m.name} loading="lazy" />
+          <p class="team-card-name">{m.name}</p>
+          <p class="team-card-role">{m.role}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="former-members">
+      <h2>Former Members</h2>
+      <ul class="former-list">
+        {formerMembers.map(m => (
+          <li>{m}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="contact-section">
+      <h2>Contact Us</h2>
+      <h3>General questions</h3>
+      <p>Please ask on <a href="https://aiida.discourse.group/">Discourse</a>.</p>
+      <h3>Bug reports</h3>
+      <p>Check the <a href="https://github.com/aiidateam/aiida_core/issues">GitHub issue tracker</a> or open a new issue.</p>
+      <h3>Feedback</h3>
+      <p>The AiiDA core developers greatly appreciate <a href="https://aiida.discourse.group/">feedback on the AiiDA user experience</a>.</p>
+    </div>
+
+    <div class="contact-section">
+      <h2>Join Us</h2>
+      <p>Interested in the intersection of software and computational science? We advertise openings on <a href="https://aiida.discourse.group/c/announcements/">Discourse</a> and the <a href={`${import.meta.env.BASE_URL}blog/`}>News section</a>. Excellent candidates are encouraged to apply throughout the year.</p>
+      <p>Check open positions on the <a href="https://www.psi.ch/en/hr/job-opportunities">PSI website</a>, <a href="https://theos-wiki.epfl.ch/">THEOS</a>, and the <a href="https://psi-k.net">psi-k</a> mailing list.</p>
+    </div>
+  </main>
+</Layout>
