@@ -1,0 +1,20 @@
+---
+import '../styles/landing.css';
+import Layout from '../layouts/Layout.astro';
+import LandingPage from '../components/LandingPage';
+import { getCollection } from 'astro:content';
+
+const latestPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 6)
+  .map(p => ({
+    title: p.data.title,
+    date: p.data.date.toISOString(),
+    category: p.data.category ?? null,
+    slug: p.id,
+  }));
+---
+
+<Layout title="AiiDA — Computational Science Workflow Manager" description="AiiDA: an open-source Python framework for automating, managing, persisting, sharing and reproducing computational science workflows with full data provenance.">
+  <LandingPage client:load news={latestPosts} />
+</Layout>
