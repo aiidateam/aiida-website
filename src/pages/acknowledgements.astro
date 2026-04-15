@@ -1,0 +1,47 @@
+---
+import '../styles/pages.css';
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
+const sponsors = [
+  { name: 'NCCR MARVEL', desc: 'National Centre for Competence in Research, funded by SNSF', url: 'https://nccr-marvel.ch/', img: `${base}/img/sponsors/marvel-logo-300x150.png` },
+  { name: 'MaX CoE', desc: 'European Centre of Excellence for materials design at the exascale', url: 'http://www.max-centre.eu/', img: `${base}/img/sponsors/max-logo-300x150.png` },
+  { name: 'MarketPlace', desc: 'European H2020 MarketPlace project', url: 'https://www.the-marketplace-project.eu/', img: `${base}/img/sponsors/marketplace-logo-300x150.png` },
+  { name: 'INTERSECT', desc: 'European H2020 INTERSECT project', url: null, img: `${base}/img/sponsors/intersect-logo-300x150.png` },
+  { name: 'PASC', desc: 'Swiss Platform for Advanced Scientific Computing', url: 'https://www.pasc-ch.org/', img: `${base}/img/sponsors/pasc-logo-300x150.png` },
+  { name: 'swissuniversities', desc: 'P-5 project "Materials Cloud"', url: 'https://www.materialscloud.org/swissuniversities', img: `${base}/img/sponsors/swissuniversities-logo-300x150.png` },
+  { name: 'NFFA', desc: 'European H2020 NFFA project', url: 'https://www.nffa.eu/', img: `${base}/img/sponsors/nffa-logo-300x150.png` },
+  { name: 'BIG-MAP', desc: 'Battery 2030+ initiative', url: 'https://www.big-map.eu/', img: `${base}/img/sponsors/big-map-logo.png` },
+  { name: 'PSI', desc: 'Paul Scherrer Institute (Switzerland)', url: 'https://www.psi.ch/en/', img: `${base}/img/sponsors/psi_300*150.png` },
+  { name: 'EPFL', desc: 'École Polytechnique Fédérale de Lausanne', url: 'https://www.epfl.ch/en/', img: `${base}/img/sponsors/epfl-logo-300x150.png` },
+  { name: 'Harvard University', desc: 'Harvard University (USA)', url: 'https://www.harvard.edu/', img: `${base}/img/sponsors/harvard-logo-300x150.png` },
+  { name: 'Bosch', desc: 'Bosch Research and Technology Center (USA)', url: 'https://www.bosch.com/research/', img: `${base}/img/sponsors/bosch-logo-300x150.png` },
+  { name: 'ORD-PREMISE', desc: 'Open and Reproducible Materials Science Research, funded by ETH Board', url: 'https://www.ord-premise.org/', img: `${base}/img/sponsors/premise-logo-300x150.png` },
+  { name: 'SwissTwins', desc: 'Funded by Swiss State Secretariat for Education, Research and Innovation (SERI)', url: 'https://www.cscs.ch/about/collaborations/swisstwins', img: `${base}/img/sponsors/swisstwins_300*150.png` },
+];
+---
+
+<Layout title="Acknowledgements — AiiDA" description="Organizations and projects that support AiiDA development.">
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Acknowledgements</h1>
+      <p class="section-header-sub">AiiDA development is supported by these organizations and funding agencies</p>
+    </header>
+
+    <div class="sponsors-grid">
+      {sponsors.map(s => {
+        const Tag = s.url ? 'a' : 'div';
+        return (
+          <Tag class="sponsor-card" href={s.url || undefined} target={s.url ? '_blank' : undefined} rel={s.url ? 'noopener noreferrer' : undefined}>
+            <img src={s.img} alt={s.name} loading="lazy" />
+            <div class="sponsor-card-info">
+              <div class="sponsor-card-name">{s.name}</div>
+              <div class="sponsor-card-desc">{s.desc}</div>
+            </div>
+          </Tag>
+        );
+      })}
+    </div>
+  </main>
+</Layout>

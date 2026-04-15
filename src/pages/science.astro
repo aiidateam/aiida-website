@@ -1,0 +1,125 @@
+---
+import '../styles/pages.css';
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
+const sections = [
+  {
+    heading: 'Publications from 2024 (up to March)',
+    note: 'Incomplete list extracted from citations of the Main and Engine papers.',
+    pubs: [
+      { text: 'Y. Wang et al., Universal materials model of deep-learning density functional theory Hamiltonian', url: 'https://doi.org/10.1016/j.scib.2024.06.011', journal: 'Science Bulletin (2024)' },
+      { text: 'H. Saßnick et al., Impact of Ligand Substitution and Metal Node Exchange in Scandium Terephthalate Frameworks', url: 'https://doi.org/10.1021/acs.inorgchem.3c03945', journal: 'Inorganic Chemistry 63, 2098-2108 (2024)' },
+      { text: 'A. Tellez-Mora et al., Systematic determination of a material\'s magnetic ground state from first principles', url: 'https://doi.org/10.1038/s41524-024-01202-z', journal: 'npj Computational Materials 10, 20 (2024)' },
+      { text: 'D. Grassano et al., High-throughput screening of Weyl semimetals', url: 'https://doi.org/10.1103/physrevmaterials.8.024201', journal: 'Physical Review Materials 8, 024201 (2024)' },
+      { text: 'H. Saßnick & C. Cocchi, Automated analysis of surface facets: the example of cesium telluride', url: 'https://doi.org/10.1038/s41524-024-01224-7', journal: 'npj Computational Materials 10, 38 (2024)' },
+    ],
+  },
+  {
+    heading: 'Publications from 2023',
+    note: 'Incomplete list extracted from citations of the Main and Engine papers.',
+    pubs: [
+      { text: 'K. Jablonka et al., An Ecosystem for Digital Reticular Chemistry', url: 'https://doi.org/10.1021/acscentsci.2c01177', journal: 'ACS Central Science 9, 563-581 (2023)' },
+      { text: 'F. dos Santos & N. Marzari, Fermi energy determination for advanced smearing techniques', url: 'https://doi.org/10.1103/physrevb.107.195122', journal: 'Physical Review B 107, 195122 (2023)' },
+      { text: 'M. Bonacci et al., Towards high-throughput many-body perturbation theory', url: 'https://doi.org/10.1038/s41524-023-01027-2', journal: 'npj Computational Materials 9, 74 (2023)' },
+      { text: 'B. Mourino et al., In Search of COF Photocatalysts: A DFT-Based Screening Approach', url: 'https://doi.org/10.1002/adfm.202301594', journal: 'Advanced Functional Materials 33 (2023)' },
+      { text: 'S. Muy et al., AiiDA-defects: automated workflow for defect chemistry characterization', url: 'https://doi.org/10.1088/2516-1075/ace014', journal: 'Electronic Structure 5, 024009 (2023)' },
+      { text: 'D. Campi et al., Expansion of the Materials Cloud 2D Database', url: 'https://doi.org/10.1021/acsnano.2c11510', journal: 'ACS Nano 17, 11268-11278 (2023)' },
+      { text: 'J. Železný et al., High-throughput study of the anomalous Hall effect', url: 'https://doi.org/10.1038/s41524-023-01113-5', journal: 'npj Computational Materials 9, 151 (2023)' },
+      { text: 'D. Grassano et al., Complementary screening for quantum spin Hall insulators', url: 'https://doi.org/10.1103/physrevmaterials.7.094202', journal: 'Physical Review Materials 7, 094202 (2023)' },
+      { text: 'E. Bosoni et al., How to verify the precision of DFT implementations via reproducible workflows', url: 'https://doi.org/10.1038/s42254-023-00655-3', journal: 'Nature Reviews Physics 6, 45-58 (2023)' },
+      { text: 'J. Qiao et al., Automated mixing of maximally localized Wannier functions', url: 'https://doi.org/10.1038/s41524-023-01147-9', journal: 'npj Computational Materials 9, 206 (2023)' },
+      { text: 'M. Vogler et al., Brokering between tenants for an international materials acceleration platform', url: 'https://doi.org/10.1016/j.matt.2023.07.016', journal: 'Matter 6, 2647-2665 (2023)' },
+      { text: 'L. Ghiringhelli et al., Shared metadata for data-centric materials science', url: 'https://doi.org/10.1038/s41597-023-02501-8', journal: 'Scientific Data 10, 626 (2023)' },
+    ],
+  },
+  {
+    heading: 'Publications from 2022',
+    note: 'Incomplete list extracted from citations of the Main and Engine papers.',
+    pubs: [
+      { text: 'M. Schmitt et al., Skyrmionic spin structures in layered Fe5GeTe2 up to room temperature', url: 'https://doi.org/10.1038/s42005-022-01031-w', journal: 'Communications Physics 5, 254 (2022)' },
+      { text: 'L. Gigli et al., Thermodynamics and dielectric response of BaTiO3 by data-driven modeling', url: 'https://doi.org/10.1038/s41524-022-00845-0', journal: 'npj Computational Materials 8, 209 (2022)' },
+      { text: 'W. Xu et al., Predicting binding motifs of complex adsorbates using machine learning', url: 'https://doi.org/10.1038/s43588-022-00280-7', journal: 'Nature Computational Science 2, 443-450 (2022)' },
+      { text: 'D. Marchand & W. Curtin, Machine learning for metallurgy IV: Al-Cu-Mg neural network potential', url: 'https://doi.org/10.1103/physrevmaterials.6.053803', journal: 'Physical Review Materials 6, 053803 (2022)' },
+      { text: 'M. Kotiuga et al., Microscopic picture of paraelectric perovskites from structural prototypes', url: 'https://doi.org/10.1103/physrevresearch.4.l012042', journal: 'Physical Review Research 4, L012042 (2022)' },
+      { text: 'Y. Wang et al., Cation disorder engineering yields AgBiS2 nanocrystals for solar cells', url: 'https://doi.org/10.1038/s41566-021-00950-4', journal: 'Nature Photonics 16, 235-241 (2022)' },
+      { text: 'B. Zhu & D. Scanlon, Predicting Lithium Iron Oxysulfides for Battery Cathodes', url: 'https://doi.org/10.1021/acsaem.1c03094', journal: 'ACS Applied Energy Materials 5, 575-584 (2022)' },
+    ],
+  },
+  {
+    heading: 'Publications from 2021',
+    note: '',
+    pubs: [
+      { text: 'R. Goodall et al., Materials Informatics Reveals Unexplored Structure Space in Cuprate Superconductors', url: 'https://doi.org/10.1002/adfm.202104696', journal: 'Advanced Functional Materials 31 (2021)' },
+      { text: 'A. Jain et al., Machine learning for metallurgy III: Al-Mg-Si neural network potential', url: 'https://doi.org/10.1103/physrevmaterials.5.053805', journal: 'Physical Review Materials 5, 053805 (2021)' },
+      { text: 'T. Sohier et al., Remote free-carrier screening to boost 2D semiconductor mobility', url: 'https://doi.org/10.1103/physrevmaterials.5.024004', journal: 'Physical Review Materials 5, 024004 (2021)' },
+    ],
+  },
+  {
+    heading: 'Publications from 2020',
+    note: '',
+    pubs: [
+      { text: 'S. P. Huber et al., AiiDA 1.0, a scalable computational infrastructure for automated reproducible workflows', url: 'https://doi.org/10.1038/s41597-020-00638-4', journal: 'Scientific Data 7, 300 (2020)' },
+      { text: 'V. Vitale et al., Automated high-throughput Wannierisation', url: 'https://doi.org/10.1038/s41524-020-0312-y', journal: 'npj Computational Materials 6, 66 (2020)' },
+      { text: 'N. Mounet et al., Two-dimensional materials from high-throughput computational exfoliation', url: 'https://doi.org/10.1038/s41565-017-0035-5', journal: 'Nature Nanotechnology 13, 246-252 (2018)' },
+      { text: 'G. Pizzi et al., Wannier90 as a community code: new features and applications', url: 'https://doi.org/10.1088/1361-648X/ab51ff', journal: 'Journal of Physics: Condensed Matter 32, 165902 (2020)' },
+      { text: 'L. Kahle et al., High-throughput computational screening for solid-state Li-ion conductors', url: 'https://doi.org/10.1039/c9ee02457c', journal: 'Energy & Environmental Science 13, 928-948 (2020)' },
+      { text: 'A. Yakutovich et al., AiiDAlab — an ecosystem for developing, executing, and sharing scientific workflows', url: 'https://doi.org/10.1016/j.commatsci.2020.110165', journal: 'Computational Materials Science 188, 110165 (2021)' },
+      { text: 'D. Ongari et al., Too Many Materials and Too Many Applications', url: 'https://doi.org/10.1021/acscentsci.0c00988', journal: 'ACS Central Science 6, 1890-1900 (2020)' },
+    ],
+  },
+  {
+    heading: 'Publications from 2019 and earlier',
+    note: '',
+    pubs: [
+      { text: 'T. Sohier et al., Valley-Engineering Mobilities in Two-Dimensional Materials', url: 'https://doi.org/10.1021/acs.nanolett.9b00865', journal: 'Nano Letters 19, 3723-3729 (2019)' },
+      { text: 'D. Ongari et al., Building a Consistent Database for Adsorption Evaluation in COFs', url: 'https://doi.org/10.1021/acscentsci.9b00619', journal: 'ACS Central Science 5, 1663-1675 (2019)' },
+      { text: 'G. Prandini et al., Photorealistic modelling of metals from first principles', url: 'https://doi.org/10.1038/s41524-019-0266-0', journal: 'npj Computational Materials 5 (2019)' },
+      { text: 'G. Prandini et al., Precision and efficiency in solid-state pseudopotential calculations', url: 'https://doi.org/10.1038/s41524-018-0127-2', journal: 'npj Computational Materials 4 (2018)' },
+      { text: 'O. Gröning et al., Engineering of robust topological quantum phases in graphene nanoribbons', url: 'https://doi.org/10.1038/s41586-018-0375-9', journal: 'Nature 560, 209-213 (2018)' },
+      { text: 'G. Pizzi et al., Performance of arsenene and antimonene double-gate MOSFETs', url: 'https://doi.org/10.1038/ncomms12585', journal: 'Nature Communications 7 (2016)' },
+      { text: 'M. Gibertini et al., Engineering polar discontinuities in honeycomb lattices', url: 'https://doi.org/10.1038/ncomms6157', journal: 'Nature Communications 5 (2014)' },
+    ],
+  },
+];
+---
+
+<Layout title="Science & Publications — AiiDA" description="Research publications powered by AiiDA.">
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Science & Publications</h1>
+      <p class="section-header-sub">
+        Research papers powered by AiiDA. If your paper is not listed,
+        contact us via <a href="https://aiida.discourse.group/">Discourse</a> with the DOI.
+      </p>
+    </header>
+
+    <div class="science-section">
+      <h2>AiiDA-powered research surveys</h2>
+      <ul class="pub-list">
+        <li><strong>2024</strong>: <a href={`${base}/pics/Questionnaire_results_2024.pdf`}>Survey results</a></li>
+        <li><strong>2020</strong>: <a href={`${base}/pics/aiida-powered-research-projects-2020_Updated.pdf`}>Survey results</a></li>
+        <li><strong>2019</strong>: <a href="http://bit.ly/2HRjTWo">Survey results</a></li>
+      </ul>
+    </div>
+
+    {sections.map(s => (
+      <div class="science-section">
+        <h2>{s.heading}</h2>
+        {s.note && <p style="font-size:0.82rem;color:var(--color-text-muted);margin-bottom:1rem;font-style:italic;">{s.note}</p>}
+        <ul class="pub-list">
+          {s.pubs.map(p => (
+            <li>
+              <a href={p.url}>{p.text}</a>, <em>{p.journal}</em>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <p style="font-size:0.82rem;color:var(--color-text-muted);margin-top:2rem;text-align:center;">
+      Last updated: March 2024
+    </p>
+  </main>
+</Layout>
