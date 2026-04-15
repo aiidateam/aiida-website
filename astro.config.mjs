@@ -18,18 +18,18 @@ export default defineConfig({
   // MUST include the base prefix manually — Astro does not rewrite them.
   redirects: {
     // Old /sections/* layout
-    "/sections/about":            `${base}/`,
-    "/sections/download":         `${base}/`,
-    "/sections/team":             `${base}/team`,
-    "/sections/events":           `${base}/events`,
-    "/sections/science":          `${base}/science`,
-    "/sections/testimonials":     `${base}/testimonials`,
+    "/sections/about": `${base}/`,
+    "/sections/download": `${base}/`,
+    "/sections/team": `${base}/team`,
+    "/sections/events": `${base}/events`,
+    "/sections/science": `${base}/science`,
+    "/sections/testimonials": `${base}/testimonials`,
     "/sections/acknowledgements": `${base}/acknowledgements`,
-    "/sections/graph_gallery":    `${base}/graph_gallery`,
-    "/sections/mailing_list":     "https://aiida.discourse.group/",
+    "/sections/graph_gallery": `${base}/graph_gallery`,
+    "/sections/mailing_list": "https://aiida.discourse.group/",
 
     // Old /news index (the legacy blog landing page)
-    "/news":                      `${base}/blog`,
+    "/news": `${base}/blog`,
 
     // NOTE: legacy per-post URLs (/news/posts/<slug> → /blog/<slug>) are
     // the one exception to the centralization rule. They are emitted by

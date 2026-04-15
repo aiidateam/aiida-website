@@ -5,4 +5,4 @@ category: Releases
 tags: [aiida-core]
 ---
 
-An updated version of AiiDA (version 0.4.1) is available now for [download page](/sections/download.md)!
+An updated version of AiiDA (version 0.4.1) is available now for [download page](../../)!
