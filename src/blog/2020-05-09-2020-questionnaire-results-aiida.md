@@ -9,6 +9,6 @@ tags: []
 The results of the annual questionnaire on AiiDA-powered research projects are out!
 ```
 
-Find them on the new [science](/sections/science/) page where we plan to collect future survey results and keep track of publications using AiiDA.
+Find them on the new [science](../../science/) page where we plan to collect future survey results and keep track of publications using AiiDA.
 
-We've also asked AiiDA users what they use AiiDA for and how it benefits their day-to-day research. Find their take in the [testimonials](/sections/testimonials/).
+We've also asked AiiDA users what they use AiiDA for and how it benefits their day-to-day research. Find their take in the [testimonials](../../testimonials/).

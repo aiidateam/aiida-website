@@ -13,4 +13,4 @@ Exascale", and to the [NCCR MARVEL](http://nccr-marvel.ch/) community.
 
 You can see some pictures on our [Facebook page](https://www.facebook.com/media/set/?set=a.423304691210391.1073741830.254260741448121&type=3).
 
-Past events/tutorials can be found on the [Updates](../../sections/events.md) page.
+Past events/tutorials can be found on the [Updates](../../events/) page.

@@ -15,7 +15,7 @@ tags: [tutorial]
 
 (as of April 15th 2019, **the workshop is fully booked**. You may still register if you would like to be added to the waiting list)
 
-**Materials** [Hands-on instructions](https://aiida-tutorials.readthedocs.io/en/latest/pages/2019_MARVEL_Psik_MaX/index.html)
+**Materials** [Hands-on instructions](https://aiida-tutorials.readthedocs.io/en/latest/)
 
 ## Schedule
 
@@ -24,7 +24,7 @@ tags: [tutorial]
 | 09:00 - 09:30 | Registration                                | Highlight talk M. Govoni          | AiiDA Q&A                      |                 |
 | 09:30 - 10:00 | AiiDA intro (R)                             | Highlight talk F. Mohammed (R)    | Highlight talkG. Petretto (R)  |                 |
 | 10:00 - 10:30 | Highlight talk S. Cottenier                 |                                   |                                |                 |
-| 10:30 - 11:00 | 1. Getting set up                           | AiiDAlab (R)                     | Materials Cloud                |                 |
+| 10:30 - 11:00 | 1. Getting set up                           | AiiDAlab (R)                      | Materials Cloud                |                 |
 | 11:00 - 11:30 | Coffee break                                | Group photo                       | Coffee break                   | Coffee break    |
 | 11:30 - 12:00 | 2. verdi CLI                                | Workflows intro (R)               | AiiDA plugins (R)              | Feedback forms  |
 | 12:00 - 12:30 | 6. Workflows                                | Open Mic round+ split into groups | Group work                     |                 |

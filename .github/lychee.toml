@@ -1,0 +1,38 @@
+# Publisher/DOI hosts (Wiley, ACS, Nature, doi.org, ...) frequently return
+# 403/429 to anonymous bots even though the URLs resolve in a real browser,
+# so we treat those statuses as successes in addition to the usual 2xx range.
+accept = "200..=299,403,429"
+
+max_retries = 2
+timeout = 30
+# Some DOI / publisher redirect chains (Springer, Nature) hop through more
+# than the default 5 redirects before landing on the final page.
+max_redirects = 15
+
+exclude = [
+  # Hosts whose certificate chains fail in CI's trust store.
+  "^https?://events\\.prace-ri\\.eu/",
+  "^https?://dome40\\.eu/",
+  "^https?://aiidalab\\.materialscloud\\.org/",
+
+  # Legacy third-party URLs referenced from old (2017–2020) blog posts that
+  # have since gone 404 / 503 / away, and which we don't plan to rewrite in
+  # the archive. Scoped to the specific paths so we still catch new breakage
+  # on the same hosts.
+  "^https?://www\\.max-centre\\.eu/2017/07/18/prize/",
+  "^https?://www\\.eurekalert\\.org/pub_releases/",
+  "^https?://www\\.swissuniversities\\.ch/en/organisation/projects-and-programmes/p-5/",
+  "^https?://www\\.cecam\\.org/wp-content/uploads/2019/",
+  "^https?://developers\\.google\\.com/season-of-docs/",
+  "^https?://pcoss\\.xmu\\.edu\\.cn/",
+  "^https?://morty\\.tech/",
+  "^https?://www\\.ord-premise\\.org/",
+  "^https?://bit\\.ly/",
+  "^https?://www\\.nature\\.com/sdata/publish/",
+  # Hosts that are consistently slow from GitHub's runners and time out even
+  # with a generous budget. ICTP event and visitor pages respond far slower
+  # than the HTTP timeout from CI; juser.fz-juelich.de hosts a Jülich thesis
+  # record with the same problem.
+  "^https?://(www|indico)\\.ictp\\.it/",
+  "^https?://juser\\.fz-juelich\\.de/",
+]

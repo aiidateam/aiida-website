@@ -5,7 +5,7 @@ category: Releases
 tags: [aiida-core]
 ---
 
-A new AiiDA release v1.2.0 is available! You can find more information at our [download page](/sections/download.md). It can be installed through pip as:
+A new AiiDA release v1.2.0 is available! You can find more information at our [download page](../../). It can be installed through pip as:
 
 ```bash
 pip install aiida-core==1.2.0
