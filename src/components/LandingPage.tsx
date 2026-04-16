@@ -517,7 +517,6 @@ interface GraphNode {
   type: 'data' | 'calc' | 'workflow';
   x: number;
   y: number;
-  pk: number;
 }
 
 type LinkStyle = 'solid' | 'dashed' | 'dotted';
@@ -541,17 +540,17 @@ interface GraphLink {
 // Dotted arrows: call hierarchy   (CALL_WORK, CALL_CALC)
 const provenanceNodes: GraphNode[] = [
   // Outer columns (D1, C1 on the left; D2, C2 on the right)
-  {id: 'd1', label: 'D\u2081', pk: 1, type: 'data',     x: 120, y: 75},
-  {id: 'd2', label: 'D\u2082', pk: 2, type: 'data',     x: 780, y: 75},
-  {id: 'c1', label: 'C\u2081', pk: 6, type: 'calc',     x: 120, y: 385},
-  {id: 'c2', label: 'C\u2082', pk: 7, type: 'calc',     x: 780, y: 385},
+  {id: 'd1', label: 'D\u2081', type: 'data',     x: 120, y: 75},
+  {id: 'd2', label: 'D\u2082', type: 'data',     x: 780, y: 75},
+  {id: 'c1', label: 'C\u2081', type: 'calc',     x: 120, y: 385},
+  {id: 'c2', label: 'C\u2082', type: 'calc',     x: 780, y: 385},
   // Inner columns (W1, D3 on the left; W2, D4 on the right)
-  {id: 'w1', label: 'W\u2081', pk: 4, type: 'workflow', x: 335, y: 260},
-  {id: 'w2', label: 'W\u2082', pk: 5, type: 'workflow', x: 565, y: 260},
-  {id: 'd3', label: 'D\u2083', pk: 8, type: 'data',     x: 335, y: 520},
-  {id: 'd4', label: 'D\u2084', pk: 9, type: 'data',     x: 565, y: 520},
+  {id: 'w1', label: 'W\u2081', type: 'workflow', x: 335, y: 260},
+  {id: 'w2', label: 'W\u2082', type: 'workflow', x: 565, y: 260},
+  {id: 'd3', label: 'D\u2083', type: 'data',     x: 335, y: 520},
+  {id: 'd4', label: 'D\u2084', type: 'data',     x: 565, y: 520},
   // Center column (top-level workchain)
-  {id: 'w0', label: 'W\u2080', pk: 3, type: 'workflow', x: 450, y: 145},
+  {id: 'w0', label: 'W\u2080', type: 'workflow', x: 450, y: 145},
 ];
 
 const provenanceLinks: GraphLink[] = [
@@ -683,12 +682,9 @@ function ProvenanceGraph(): ReactNode {
     const descendants = getDescendants(hoveredNode);
     descendants.delete(hoveredNode);
     const count = descendants.size;
-    return {
-      command: `verdi node show ${node.pk}`,
-      text: count > 0
-        ? `${node.label} (pk=${node.pk}) — ${count} node${count !== 1 ? 's' : ''} downstream`
-        : `${node.label} (pk=${node.pk}) — leaf node, no downstream dependencies`,
-    };
+    return count > 0
+      ? `${node.label} — ${count} node${count !== 1 ? 's' : ''} downstream`
+      : `${node.label} — leaf node, no downstream dependencies`;
   };
 
   const info = getInfoMessage();
@@ -772,13 +768,10 @@ function ProvenanceGraph(): ReactNode {
           })}
         </svg>
 
-        {/* Info bar — shows contextual verdi command */}
+        {/* Info bar — shows downstream dependency count for the hovered node */}
         <div className="provenance-info-bar">
           {info ? (
-            <>
-              <code className="provenance-info-command">{info.command}</code>
-              <span className="provenance-info-text">{info.text}</span>
-            </>
+            <span className="provenance-info-text">{info}</span>
           ) : (
             <span className="provenance-info-text provenance-info-default">
               Hover any node to see what depends on it
