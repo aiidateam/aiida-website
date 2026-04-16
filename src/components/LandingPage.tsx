@@ -4026,7 +4026,6 @@ function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: 
                 {'\u2713'} One-time setup complete!
               </p>
             )}
-            <h3 className="tut-step-title">{s.title}</h3>
             <p className="tut-step-desc">{s.desc}</p>
           </div>
           <div className="tut-nav">
