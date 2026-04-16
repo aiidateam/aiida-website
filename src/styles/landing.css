@@ -876,16 +876,6 @@ main > section > h2::after {
     background 0.2s;
 }
 
-.provenance-info-command {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  padding: 0.2rem 0.5rem;
-  background: var(--color-bg-alt);
-  border-radius: 4px;
-  white-space: nowrap;
-  color: var(--color-text);
-}
-
 .provenance-info-text {
   color: var(--color-text-secondary);
 }
