@@ -176,8 +176,8 @@ export default function Ecosystem(): ReactNode {
         {/* Centre: AiiDA Core — large and prominent */}
         <div className="eco-layer eco-layer--core">
           <a className="eco-core-block" href="https://github.com/aiidateam/aiida-core" target="_blank" rel="noopener noreferrer">
-            <img src={`${base}/img/aiida-logo-light.svg`} alt="AiiDA" className="eco-core-logo eco-core-logo--dark" />
-            <img src={`${base}/img/aiida-logo-dark.svg`} alt="AiiDA" className="eco-core-logo eco-core-logo--light" />
+            <img src={`${base}/img/aiida-logo-dark.svg`} alt="AiiDA" className="eco-core-logo eco-core-logo--dark" />
+            <img src={`${base}/img/aiida-logo-light.svg`} alt="AiiDA" className="eco-core-logo eco-core-logo--light" />
             <span className="eco-core-sub">Workflow engine &middot; Provenance &middot; Plugin system &middot; ORM</span>
           </a>
         </div>
