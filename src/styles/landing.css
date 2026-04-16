@@ -1065,7 +1065,7 @@ main > section > h2::after {
   border-bottom: 1px solid transparent;
   margin-bottom: -1px;
   font-family: var(--font-base);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--color-text-muted);
   text-align: left;
@@ -1129,13 +1129,6 @@ main > section > h2::after {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.tut-step-title {
-  font-size: clamp(0.9rem, 1.2vw, 1.15rem);
-  font-weight: 700;
-  color: var(--color-text);
-  margin: 0;
 }
 
 .tut-step-desc {
