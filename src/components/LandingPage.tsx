@@ -264,7 +264,7 @@ const componentExplanations: Record<string, string> = {
   WorkChain: 'Orchestrates multi-step workflows with checkpoints. Survives restarts — picks up exactly where it left off.',
   CalcJob: 'Wraps a single computation on a remote machine. Handles file staging, submission, and retrieval automatically.',
   Parser: 'Extracts structured data from raw calculation outputs into queryable AiiDA nodes.',
-  Function: 'Lightweight Python function decorated as a workflow step. No remote submission — runs locally.',
+  Function: 'Python helper that submits a CalcJob under the hood.',
 };
 
 const plugins = [
