@@ -218,7 +218,7 @@ main > section > h2::after {
 .server-label {
   font-family: var(--font-base);
   font-size: clamp(8px, 0.95vw, 11px);
-  fill: #cdd6f4;
+  fill: var(--device-screen-text);
   font-weight: 500;
 }
 
@@ -987,7 +987,7 @@ main > section > h2::after {
 /* Terminal panel — hosts the live console and the file tabs */
 .tut-terminal {
   flex: 1;
-  background: #1e1e2e;
+  background: var(--screen-bg);
   border-radius: 10px;
   outline: none;
   overflow: hidden;
@@ -1009,7 +1009,7 @@ main > section > h2::after {
   font-size: clamp(9px, 1.1vw, 13px);
   line-height: 1.6;
   scrollbar-width: thin;
-  scrollbar-color: #45475a #1e1e2e;
+  scrollbar-color: var(--screen-scrollbar-thumb) var(--screen-bg);
 }
 
 .tut-terminal-scroll .verdi-console-input-row {
@@ -1021,7 +1021,7 @@ main > section > h2::after {
   flex: 1;
   margin: 0;
   padding: clamp(8px, 1.3vw, 16px);
-  color: #cdd6f4;
+  color: var(--screen-text);
   font-family: var(--font-mono);
   font-size: clamp(9px, 1.05vw, 12.5px);
   line-height: 1.65;
@@ -1031,7 +1031,7 @@ main > section > h2::after {
   overscroll-behavior: contain;
   max-height: 460px;
   scrollbar-width: thin;
-  scrollbar-color: #45475a #1e1e2e;
+  scrollbar-color: var(--screen-scrollbar-thumb) var(--screen-bg);
 }
 
 /* Instructions panel (right) */
@@ -1209,7 +1209,7 @@ main > section > h2::after {
 
 /* === Interactive Verdi Terminal === */
 .verdi-console {
-  background: #1e1e2e;
+  background: var(--screen-bg);
   border-radius: 12px;
   overflow: hidden;
   max-width: 960px;
@@ -1221,7 +1221,7 @@ main > section > h2::after {
 }
 
 .verdi-console-titlebar {
-  background: #181825;
+  background: var(--screen-bg-alt);
   padding: clamp(5px, 0.85vw, 10px) clamp(8px, 1.3vw, 16px);
   display: flex;
   align-items: center;
@@ -1255,7 +1255,7 @@ main > section > h2::after {
 .tut-tab {
   font-family: var(--font-mono);
   font-size: clamp(9px, 1vw, 12px);
-  color: #6c7086;
+  color: var(--screen-text-muted);
   background: transparent;
   border: 1px solid transparent;
   padding: clamp(2px, 0.35vw, 4px) clamp(6px, 1vw, 12px);
@@ -1272,13 +1272,13 @@ main > section > h2::after {
 }
 
 .tut-tab:hover {
-  color: #a6adc8;
+  color: var(--screen-tab-hover-color);
 }
 
 .tut-tab.active {
-  color: #cdd6f4;
-  background: #1e1e2e;
-  border-color: #313244;
+  color: var(--screen-text);
+  background: var(--screen-tab-active-bg);
+  border-color: var(--screen-tab-active-border);
 }
 
 .verdi-console-output {
@@ -1290,7 +1290,7 @@ main > section > h2::after {
   font-size: clamp(10px, 1.15vw, 14px);
   line-height: 1.6;
   scrollbar-width: thin;
-  scrollbar-color: #45475a #1e1e2e;
+  scrollbar-color: var(--screen-scrollbar-thumb) var(--screen-bg);
 }
 
 .verdi-console-output::-webkit-scrollbar {
@@ -1298,21 +1298,21 @@ main > section > h2::after {
 }
 
 .verdi-console-output::-webkit-scrollbar-track {
-  background: #1e1e2e;
+  background: var(--screen-bg);
 }
 
 .verdi-console-output::-webkit-scrollbar-thumb {
-  background: #45475a;
+  background: var(--screen-scrollbar-thumb);
   border-radius: 3px;
 }
 
 .verdi-line-cmd {
-  color: #a6e3a1;
+  color: var(--screen-prompt);
   white-space: pre;
 }
 
 .verdi-line-out {
-  color: #cdd6f4;
+  color: var(--screen-text);
   white-space: pre;
   opacity: 0.9;
 }
@@ -1326,7 +1326,7 @@ main > section > h2::after {
 }
 
 .verdi-console-prompt {
-  color: #a6e3a1;
+  color: var(--screen-prompt);
   user-select: none;
   flex-shrink: 0;
 }
@@ -1334,12 +1334,12 @@ main > section > h2::after {
 .verdi-console-input {
   background: transparent;
   border: none;
-  color: #a6e3a1;
+  color: var(--screen-prompt);
   font-family: var(--font-mono);
   font-size: clamp(10px, 1.15vw, 14px);
   outline: none;
   flex: 1;
-  caret-color: #a6e3a1;
+  caret-color: var(--screen-prompt);
   padding: 0;
   margin: 0 0 0 clamp(2px, 0.35vw, 4px);
 }
@@ -2747,23 +2747,23 @@ main > section > h2::after {
 
 /* --- Terminal window chrome --- */
 .terminal-proto-window {
-  background: #1a1b2e;
+  background: var(--screen-bg);
   border-radius: clamp(6px, 1vw, 12px);
   overflow: hidden;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.28),
     0 2px 8px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--screen-border);
 }
 
 .terminal-proto-titlebar {
-  background: #14152a;
+  background: var(--screen-bg-alt);
   padding: clamp(5px, 0.9vw, 11px) clamp(8px, 1.3vw, 16px);
   display: flex;
   align-items: center;
   gap: clamp(4px, 0.7vw, 8px);
   user-select: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--screen-border);
 }
 
 .terminal-proto-dot {
@@ -2788,7 +2788,7 @@ main > section > h2::after {
   text-align: center;
   font-size: clamp(9px, 1vw, 12px);
   font-family: var(--font-mono);
-  color: #6c7086;
+  color: var(--screen-text-muted);
   letter-spacing: 0.02em;
 }
 
@@ -2804,46 +2804,46 @@ main > section > h2::after {
   font-family: var(--font-mono);
   font-size: clamp(9px, 1.1vw, 13px);
   line-height: 1.7;
-  color: #cdd6f4;
+  color: var(--screen-text);
   overflow-x: auto;
 }
 
 .terminal-proto-panel--left {
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid var(--screen-border);
 }
 
 /* --- Prompt and output styling --- */
 .terminal-proto-prompt {
-  color: #a6e3a1;
+  color: var(--screen-prompt);
   white-space: pre;
   display: block;
   margin-bottom: 4px;
 }
 
 .terminal-proto-output {
-  color: #bac2de;
+  color: var(--screen-text);
   white-space: pre;
   display: block;
 }
 
 .terminal-proto-label {
-  color: #6c7086;
+  color: var(--screen-text-muted);
 }
 
 .terminal-proto-value {
-  color: #cdd6f4;
+  color: var(--screen-text);
 }
 
 .terminal-proto-value--highlight {
-  color: #a6e3a1;
+  color: var(--screen-prompt);
 }
 
 .terminal-proto-pid {
-  color: #89b4fa;
+  color: var(--color-primary);
 }
 
 .terminal-proto-since {
-  color: #6c7086;
+  color: var(--screen-text-muted);
 }
 
 /* --- Process table --- */
@@ -2860,9 +2860,9 @@ main > section > h2::after {
   display: flex;
   gap: 0;
   padding: 0 0 clamp(3px, 0.5vw, 6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--screen-border);
   margin-bottom: 2px;
-  color: #6c7086;
+  color: var(--screen-text-muted);
   font-size: clamp(8px, 0.95vw, 11.5px);
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -2870,7 +2870,7 @@ main > section > h2::after {
 
 .terminal-proto-table-divider {
   display: block;
-  color: #45475a;
+  color: var(--screen-scrollbar-thumb);
   font-size: 11.5px;
   padding: 2px 0;
   user-select: none;
@@ -2903,19 +2903,19 @@ main > section > h2::after {
   flex-shrink: 0;
   text-align: right;
   padding-right: clamp(5px, 0.85vw, 10px);
-  color: #89b4fa;
+  color: var(--color-primary);
 }
 
 .terminal-proto-col-created {
   width: clamp(50px, 6vw, 72px);
   flex-shrink: 0;
-  color: #6c7086;
+  color: var(--screen-text-muted);
 }
 
 .terminal-proto-col-process {
   width: clamp(70px, 9vw, 108px);
   flex-shrink: 0;
-  color: #cdd6f4;
+  color: var(--screen-text);
 }
 
 .terminal-proto-col-state {
@@ -2926,7 +2926,7 @@ main > section > h2::after {
 .terminal-proto-col-computer {
   flex: 1;
   min-width: 0;
-  color: #a6adc8;
+  color: var(--screen-text);
 }
 
 /* --- State badges --- */
@@ -2939,7 +2939,7 @@ main > section > h2::after {
 }
 
 .terminal-proto-state--created {
-  color: #6c7086;
+  color: var(--screen-text-muted);
 }
 
 .terminal-proto-state--running {
@@ -2967,7 +2967,7 @@ main > section > h2::after {
 
 /* Watch header */
 .terminal-proto-watch-header {
-  color: #6c7086;
+  color: var(--screen-text-muted);
   font-size: 10px;
   margin: 4px 0 8px;
   font-family: var(--font-mono);
@@ -3563,15 +3563,14 @@ main > section > h2::after {
   width: clamp(3px, 0.5vw, 6px);
   height: clamp(3px, 0.5vw, 6px);
   border-radius: 50%;
-  background: var(--device-border);
+  background: rgba(0, 0, 0, 0.75);
   margin: 0 auto clamp(2px, 0.4vw, 5px);
-  opacity: 0.5;
 }
 
 .tp-laptop-screen {
   display: flex;
   gap: 1px;
-  background: #15161e;
+  background: var(--screen-bg-alt);
   border-radius: clamp(2px, 0.35vw, 4px);
   overflow: hidden;
   aspect-ratio: 16 / 10;
@@ -3590,7 +3589,7 @@ main > section > h2::after {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e2e;
+  background: var(--screen-bg);
   min-width: 0;
   overflow: hidden;
 }
@@ -3600,15 +3599,15 @@ main > section > h2::after {
   align-items: center;
   gap: clamp(3px, 0.5vw, 6px);
   padding: clamp(4px, 0.6vw, 7px) clamp(6px, 1vw, 12px);
-  background: #181825;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--screen-bg-alt);
+  border-bottom: 1px solid var(--screen-border);
   flex-shrink: 0;
 }
 
 .tp-panel-title {
   font-family: var(--font-mono);
   font-size: clamp(8px, 0.95vw, 11px);
-  color: #6c7086;
+  color: var(--screen-text-muted);
   margin-left: clamp(2px, 0.35vw, 4px);
 }
 
@@ -3616,7 +3615,7 @@ main > section > h2::after {
   padding: clamp(6px, 1vw, 12px) clamp(8px, 1.3vw, 16px);
   font-family: var(--font-mono);
   font-size: clamp(9px, 1vw, 12px);
-  color: #cdd6f4;
+  color: var(--screen-text);
   overflow-y: auto;
   flex: 1;
 }

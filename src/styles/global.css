@@ -35,9 +35,22 @@ html {
   --ifm-color-emphasis-300: var(--color-border);
   --ifm-background-surface-color: var(--color-bg-surface);
   --ifm-font-color-base: var(--color-text);
-  --device-bg: #e4e6ec;
-  --device-border: #c0c4d0;
-  --device-screen-bg: #1e1e2e;
+  /* Device chrome (laptop frame, server rack) — physically dark; sky-blue tint in day mode */
+  --device-bg: #3e4a7a;
+  --device-border: #525e91;
+  /* Screen surfaces (laptop screen, scheduler cards, terminal) — follow page theme */
+  --device-screen-bg: var(--color-bg-alt);
+  --device-screen-text: var(--color-text);
+  --screen-bg: var(--color-bg-alt);
+  --screen-bg-alt: var(--color-bg-surface);
+  --screen-text: var(--color-text);
+  --screen-text-muted: var(--color-text-muted);
+  --screen-border: var(--color-border-light);
+  --screen-prompt: var(--color-accent-green);
+  --screen-tab-active-bg: var(--color-bg);
+  --screen-tab-active-border: var(--color-border);
+  --screen-tab-hover-color: var(--color-text-secondary);
+  --screen-scrollbar-thumb: var(--color-border);
   /* Design system — all three AiiDA brand colors */
   --color-accent-orange: #e06800;
   --color-accent-green: #28a006;
@@ -65,9 +78,8 @@ html {
   --color-primary-light: #38b4f0;
   --color-primary-lighter: #5cc3f5;
   --color-primary-lightest: #7dd1f8;
-  --device-bg: #121420;
-  --device-border: #252840;
-  --device-screen-bg: #1e1e2e;
+  --device-bg: #2e3440;
+  --device-border: #434c5e;
   --color-accent-orange: #ff7d17;
   --color-accent-green: #30b808;
   --color-bg-tinted: #121428;
