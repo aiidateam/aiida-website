@@ -2641,8 +2641,8 @@ function Numbers(): ReactNode {
   return (
     <section className="numbers-section">
       <div className="numbers-grid" data-reveal="stagger">
-        <a className="number-item number-item--link" href="https://scholar.google.com/scholar?cites=14531473867479919759" target="_blank" rel="noopener noreferrer">
-          <span className="number-value">500+</span>
+        <a className="number-item number-item--link" href="https://scholar.google.com/scholar?cites=10268089832296963062,3079536079745645446,17326635165939460790" target="_blank" rel="noopener noreferrer">
+          <span className="number-value">1000+</span>
           <span className="number-label">Publications</span>
         </a>
         <div className="number-item">
