@@ -2217,7 +2217,7 @@ function HighThroughputCombined(): ReactNode {
           <span className="hero-accent hero-accent--blue">A</span>utomated{' '}
           <span className="hero-accent hero-accent--green">I</span>nteractive{' '}
           <span className="hero-accent hero-accent--green">I</span>nfrastructure and{' '}
-          <span className="hero-accent hero-accent--orange">D</span><span className="hero-accent hero-accent--blue">A</span>tabase
+          <span className="hero-accent hero-accent--orange">D</span><span className="hero-accent hero-accent--orange">A</span>tabase
           <br />
           for Computational Science
         </p>
