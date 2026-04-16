@@ -47,6 +47,7 @@ html {
   --screen-text-muted: var(--color-text-muted);
   --screen-border: var(--color-border-light);
   --screen-prompt: var(--color-accent-green);
+  --screen-prompt-interactive: #a65b00;
   --screen-tab-active-bg: var(--color-bg);
   --screen-tab-active-border: var(--color-border);
   --screen-tab-hover-color: var(--color-text-secondary);
@@ -91,6 +92,7 @@ html {
   --color-border-accent-orange: rgba(255, 125, 23, 0.12);
   --color-shadow-accent: rgba(0, 150, 222, 0.08);
   --color-heading-accent: #4ab8f0;
+  --screen-prompt-interactive: #f9e2af;
   color-scheme: dark;
 }
 

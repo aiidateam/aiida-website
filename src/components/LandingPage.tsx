@@ -3961,7 +3961,7 @@ function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: 
             </div>
           ))}
           <div className="verdi-console-input-row" style={inputRowHidden ? {display: 'none'} : undefined}>
-            <span className="verdi-console-prompt" style={promptMode ? {color: '#f9e2af'} : undefined}>
+            <span className="verdi-console-prompt" style={promptMode ? {color: 'var(--screen-prompt-interactive)'} : undefined}>
               {promptMode ? `${promptMode.prompts[promptMode.current].label}: ` : '$ '}
             </span>
             <input
