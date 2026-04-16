@@ -269,19 +269,6 @@ const componentExplanations: Record<string, string> = {
 
 const plugins = [
   {
-    name: 'aiida-shell',
-    code: 'Any executable',
-    color: '#0096de',
-    install: 'pip install aiida-shell',
-    url: 'https://aiida-shell.readthedocs.io',
-    desc: 'Run any command-line tool as an AiiDA process. No plugin code needed — the fastest way to get started.',
-    components: [
-      {type: 'Function', items: ['launch_shell_job']},
-      {type: 'CalcJob', items: ['ShellJob']},
-      {type: 'Parser', items: ['ShellParser']},
-    ],
-  },
-  {
     name: 'aiida-quantumespresso',
     code: 'Quantum ESPRESSO',
     color: '#e85d04',
@@ -292,6 +279,19 @@ const plugins = [
       {type: 'WorkChain', items: ['PwBaseWorkChain', 'PwRelaxWorkChain', 'PwBandsWorkChain']},
       {type: 'CalcJob', items: ['PwCalculation', 'PhCalculation', 'PpCalculation']},
       {type: 'Parser', items: ['PwParser', 'PhParser', 'PpParser']},
+    ],
+  },
+  {
+    name: 'aiida-shell',
+    code: 'Any executable',
+    color: '#0096de',
+    install: 'pip install aiida-shell',
+    url: 'https://aiida-shell.readthedocs.io',
+    desc: 'Run any command-line tool as an AiiDA process. No plugin code needed — the fastest way to get started.',
+    components: [
+      {type: 'Function', items: ['launch_shell_job']},
+      {type: 'CalcJob', items: ['ShellJob']},
+      {type: 'Parser', items: ['ShellParser']},
     ],
   },
   {
@@ -327,6 +327,75 @@ function PluginShowcase(): ReactNode {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const active = plugins[activeIdx];
 
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const coreBoxRef = useRef<HTMLDivElement | null>(null);
+  const itemRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const detailSvgRef = useRef<SVGSVGElement | null>(null);
+  const componentRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [geom, setGeom] = useState<{w: number; h: number; startY: number; ys: number[]}>(
+    {w: 40, h: 200, startY: 100, ys: plugins.map((_, i) => 25 + i * 50)}
+  );
+  const [detailGeom, setDetailGeom] = useState<{w: number; h: number; startY: number; ys: number[]}>(
+    {w: 30, h: 180, startY: 90, ys: [30, 95, 160]}
+  );
+
+  useEffect(() => {
+    const measure = () => {
+      // Left trunk: from aiida-core box center → each plugin item center
+      const svg = svgRef.current;
+      const core = coreBoxRef.current;
+      if (svg && core) {
+        const cs = window.getComputedStyle(svg);
+        // Skip when SVG is transformed (rotated on mobile); keep fallback geometry.
+        if (!cs.transform || cs.transform === 'none') {
+          const svgRect = svg.getBoundingClientRect();
+          const coreRect = core.getBoundingClientRect();
+          if (svgRect.width && svgRect.height) {
+            const startY = coreRect.top + coreRect.height / 2 - svgRect.top;
+            const ys = itemRefs.current.map((el) => {
+              if (!el) return 0;
+              const r = el.getBoundingClientRect();
+              return r.top + r.height / 2 - svgRect.top;
+            });
+            setGeom({w: svgRect.width, h: svgRect.height, startY, ys});
+          }
+        }
+      }
+
+      // Right branches: from active plugin item center → each component group center
+      const dSvg = detailSvgRef.current;
+      if (dSvg) {
+        const ds = window.getComputedStyle(dSvg);
+        if (ds.display !== 'none') {
+          const dRect = dSvg.getBoundingClientRect();
+          const activeEl = itemRefs.current[activeIdx];
+          if (dRect.width && dRect.height && activeEl) {
+            const aRect = activeEl.getBoundingClientRect();
+            const startY = aRect.top + aRect.height / 2 - dRect.top;
+            const ys = componentRefs.current.map((el) => {
+              if (!el) return 0;
+              const r = el.getBoundingClientRect();
+              return r.top + r.height / 2 - dRect.top;
+            });
+            setDetailGeom({w: dRect.width, h: dRect.height, startY, ys});
+          }
+        }
+      }
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (svgRef.current) ro.observe(svgRef.current);
+    if (detailSvgRef.current) ro.observe(detailSvgRef.current);
+    window.addEventListener('resize', measure);
+    const t = setTimeout(measure, 100);
+    if (document.fonts?.ready) document.fonts.ready.then(measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', measure);
+      clearTimeout(t);
+    };
+  }, [activeIdx]);
+
   return (
     <section className="plugin-section" data-reveal>
       <h2>Plugin ecosystem</h2>
@@ -338,16 +407,17 @@ function PluginShowcase(): ReactNode {
         {/* Left: aiida-core + lines + plugin list — fixed width */}
         <div className="plugin-left">
           <div className="plugin-core">
-            <div className="plugin-core-box">
+            <div ref={coreBoxRef} className="plugin-core-box">
               <div className="plugin-core-label">aiida-core</div>
               <div className="plugin-core-sub">pip install aiida-core</div>
             </div>
-            <svg className="plugin-core-lines" viewBox="0 0 40 200" preserveAspectRatio="none">
+            <svg ref={svgRef} className="plugin-core-lines" viewBox={`0 0 ${geom.w} ${geom.h}`} preserveAspectRatio="none">
               {plugins.map((p, i) => {
-                const y = 25 + i * 50;
+                const y = geom.ys[i] ?? 25 + i * 50;
+                const cx = geom.w / 2;
                 return (
                   <path key={i}
-                    d={`M0,100 C20,100 20,${y} 40,${y}`}
+                    d={`M0,${geom.startY} C${cx},${geom.startY} ${cx},${y} ${geom.w},${y}`}
                     stroke={activeIdx === i ? p.color : 'var(--color-border)'}
                     strokeWidth={activeIdx === i ? 2.5 : 1.5}
                     fill="none"
@@ -361,6 +431,7 @@ function PluginShowcase(): ReactNode {
           <div className="plugin-list">
             {plugins.map((p, i) => (
               <div
+                ref={(el) => { itemRefs.current[i] = el; }}
                 key={i}
                 className={`plugin-item ${activeIdx === i ? 'plugin-item--active' : ''}`}
                 style={activeIdx === i ? {'--plugin-color': p.color} as React.CSSProperties : {}}
@@ -380,12 +451,13 @@ function PluginShowcase(): ReactNode {
 
         {/* Right: component groups + explanation panel — expands rightward */}
         <div className="plugin-right">
-          <svg className="plugin-detail-lines" viewBox="0 0 30 180" preserveAspectRatio="none">
+          <svg ref={detailSvgRef} className="plugin-detail-lines" viewBox={`0 0 ${detailGeom.w} ${detailGeom.h}`} preserveAspectRatio="none">
             {active.components.map((_, i) => {
-              const y = 30 + i * 65;
+              const y = detailGeom.ys[i] ?? 30 + i * 65;
+              const cx = detailGeom.w / 2;
               return (
                 <path key={i}
-                  d={`M0,90 C15,90 15,${y} 30,${y}`}
+                  d={`M0,${detailGeom.startY} C${cx},${detailGeom.startY} ${cx},${y} ${detailGeom.w},${y}`}
                   stroke={active.color}
                   strokeWidth="2"
                   fill="none"
@@ -397,6 +469,7 @@ function PluginShowcase(): ReactNode {
           <div className="plugin-components">
             {active.components.map((comp, i) => (
               <div key={i}
+                ref={(el) => { componentRefs.current[i] = el; }}
                 className={`plugin-component-group ${selectedType === comp.type ? 'plugin-component-group--active' : ''}`}
                 style={{'--comp-color': active.color} as React.CSSProperties}
                 onMouseEnter={() => setSelectedType(comp.type)}>
