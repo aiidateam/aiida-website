@@ -2645,22 +2645,22 @@ function Numbers(): ReactNode {
           <span className="number-value">1000+</span>
           <span className="number-label">Publications</span>
         </a>
-        <div className="number-item">
+        <a className="number-item number-item--link" href="https://aiidateam.github.io/aiida-registry/" target="_blank" rel="noopener noreferrer">
           <span className="number-value">100+</span>
           <span className="number-label">Plugins</span>
-        </div>
+        </a>
         <a className="number-item number-item--link" href="https://github.com/aiidateam/aiida-core/graphs/contributors" target="_blank" rel="noopener noreferrer">
-          <span className="number-value">50+</span>
+          <span className="number-value">100+</span>
           <span className="number-label">Contributors</span>
         </a>
         <a className="number-item number-item--link" href="https://pypistats.org/packages/aiida-core" target="_blank" rel="noopener noreferrer">
           <span className="number-value">{pypiStats.monthly_display}</span>
           <span className="number-label">Downloads / month</span>
         </a>
-        <div className="number-item">
+        <a className="number-item number-item--link" href="https://github.com/aiidateam/aiida-core/blob/main/LICENSE.txt" target="_blank" rel="noopener noreferrer">
           <span className="number-value">MIT</span>
           <span className="number-label">Licensed</span>
-        </div>
+        </a>
       </div>
     </section>
   );
