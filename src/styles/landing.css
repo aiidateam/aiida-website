@@ -995,6 +995,7 @@ main > section > h2::after {
   flex-direction: column;
   cursor: text;
   min-width: 0;
+  font-family: var(--font-mono);
 }
 
 .tut-terminal-scroll {
@@ -1342,6 +1343,12 @@ main > section > h2::after {
   caret-color: var(--screen-prompt);
   padding: 0;
   margin: 0 0 0 clamp(2px, 0.35vw, 4px);
+}
+
+.verdi-console-input::placeholder {
+  font-family: var(--font-mono);
+  color: var(--screen-text-muted);
+  opacity: 0.8;
 }
 
 /* Stream lines */
