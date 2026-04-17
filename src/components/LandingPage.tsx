@@ -3549,15 +3549,15 @@ function highlightCode(code: string, filename: string): ReactNode[] {
           if (m[1]) {
             const rest = line.slice(m.index + m[0].length).trimStart();
             const isKey = rest.startsWith(':');
-            result.push(<span key={k++} style={{color: isKey ? '#89b4fa' : '#a6e3a1'}}>{m[0]}</span>);
+            result.push(<span key={k++} style={{color: isKey ? 'var(--syntax-json-key)' : 'var(--syntax-string)'}}>{m[0]}</span>);
           } else {
-            result.push(<span key={k++} style={{color: '#fab387'}}>{m[0]}</span>);
+            result.push(<span key={k++} style={{color: 'var(--syntax-number)'}}>{m[0]}</span>);
           }
         } else {
-          if (m[1]) result.push(<span key={k++} style={{color: '#6c7086'}}>{m[0]}</span>);
-          else if (m[2]) result.push(<span key={k++} style={{color: '#a6e3a1'}}>{m[0]}</span>);
-          else if (m[3]) result.push(<span key={k++} style={{color: '#cba6f7'}}>{m[0]}</span>);
-          else if (m[4]) result.push(<span key={k++} style={{color: '#fab387'}}>{m[0]}</span>);
+          if (m[1]) result.push(<span key={k++} style={{color: 'var(--syntax-comment)'}}>{m[0]}</span>);
+          else if (m[2]) result.push(<span key={k++} style={{color: 'var(--syntax-string)'}}>{m[0]}</span>);
+          else if (m[3]) result.push(<span key={k++} style={{color: 'var(--syntax-keyword)'}}>{m[0]}</span>);
+          else if (m[4]) result.push(<span key={k++} style={{color: 'var(--syntax-number)'}}>{m[0]}</span>);
         }
         pos = m.index + m[0].length;
       }
