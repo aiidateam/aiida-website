@@ -3947,6 +3947,29 @@ main > section > h2::after {
     justify-content: center;
     padding: 8px 6px;
   }
+
+  /* Scale the whole transport gate uniformly — same pattern as the HPC
+     server SVG, which scales all its internals together via viewBox. */
+  .transport-gate-inner {
+    transform: translate(-50%, -50%) scale(0.55);
+    transform-origin: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .transport-gate-inner {
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+}
+
+/* Between the 1400px full-layout cap and the 768px mobile tier, the
+   bridge column shrinks but the gate cards stay full-size and start
+   overlapping the laptop/server. Intermediate scale step. */
+@media (min-width: 769px) and (max-width: 1220px) {
+  .transport-gate-inner {
+    transform: translate(-50%, -50%) scale(0.75);
+    transform-origin: center;
+  }
 }
 
 /* ─── Try-it-out mode: keep usable on mobile ─── */
