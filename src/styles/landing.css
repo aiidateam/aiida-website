@@ -1937,12 +1937,22 @@ main > section > h2::after {
   display: flex;
   align-items: center;
   gap: 5rem;
-  width: max-content;
-  animation: marquee-scroll 60s linear infinite;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
 }
 
-.supporters-track:hover {
-  animation-play-state: paused;
+.supporters-track.is-dragging {
+  cursor: grabbing;
+}
+
+.supporters-track::-webkit-scrollbar {
+  display: none;
 }
 
 .supporter-item {
@@ -1961,15 +1971,6 @@ main > section > h2::after {
   width: auto;
   display: block;
   object-fit: contain;
-}
-
-@keyframes marquee-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 /* ===== TESTIMONIALS ===== */
