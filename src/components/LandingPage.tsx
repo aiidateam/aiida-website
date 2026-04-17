@@ -3909,14 +3909,34 @@ function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: 
   function runHint() {
     if (inputDisabled) return;
     // "Soft landing": when the user can't currently see the prompt — either
-    // because they're on a file tab or because they've scrolled the live
-    // console up — switch/scroll into view, hold for 1s so they can read
-    // the placeholder, then paste & execute.
+    // because they're on a file tab, they've scrolled the live console up,
+    // or the whole panel is off-viewport (common on small screens where the
+    // button sits below the terminal) — switch/scroll into view, hold for 1s
+    // so they can read the placeholder, then paste & execute.
     const onFileTab = activeTab !== null;
     const scrolledUp = !onFileTab && outRef.current
       ? outRef.current.scrollHeight - outRef.current.scrollTop - outRef.current.clientHeight > 10
       : false;
-    if (!onFileTab && !scrolledUp) {
+    let panelOffscreen = false;
+    if (termContainerRef.current) {
+      const r = termContainerRef.current.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      // Offscreen when the terminal's top edge isn't comfortably inside the
+      // viewport: either scrolled past above (top < -20) or pushed below the
+      // fold (top > vh - 100).
+      panelOffscreen = r.top < -20 || r.top > vh - 100;
+      if (panelOffscreen) {
+        const offset = Math.max(20, vh * 0.15);
+        const target = Math.max(0, window.scrollY + r.top - offset);
+        // Defer: running scrollTo synchronously inside the React click handler
+        // is a no-op on this page (React's post-event work cancels it). Wait
+        // one frame so the scroll fires after React settles.
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: target, behavior: 'smooth' });
+        });
+      }
+    }
+    if (!onFileTab && !scrolledUp && !panelOffscreen) {
       runHintImpl();
       return;
     }
