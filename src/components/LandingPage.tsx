@@ -3451,7 +3451,7 @@ const SSH_CONFIGURE_PROMPTS: PromptDef[] = [
 const TUTORIAL_STEPS = [
   {
     title: '1. Set up AiiDA',
-    desc: 'Create a profile with a single command. This sets up the database, repository, and a localhost computer.',
+    desc: "Say you have a simple remote code \u2014 an arithmetic adder \u2014 and you'd like to automate running it. Let's do that with AiiDA. First, create a profile with a single command: this sets up the database, repository, and a localhost computer.",
     file: null as string | null,
     code: null as string | null,
     hint: 'verdi presto',
@@ -3472,7 +3472,7 @@ const TUTORIAL_STEPS = [
   },
   {
     title: '4. Register a code',
-    desc: 'Tell AiiDA where the executable lives on the remote machine so it can build the submission script.',
+    desc: "Tell AiiDA where the `add` executable (our arithmetic adder on the remote HPC) lives so it can build the submission script.",
     file: null as string | null,
     code: null as string | null,
     hint: 'verdi code create core.code.installed --label add --computer=My_HPC --default-calc-job-plugin core.arithmetic.add --filepath-executable=/usr/bin/add -n',
