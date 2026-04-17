@@ -2684,19 +2684,83 @@ const supporterLogos = [
 ];
 
 function Supporters(): ReactNode {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
+  const dragRef = useRef<{startX: number; startScroll: number; moved: boolean} | null>(null);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let raf = 0;
+    const tick = () => {
+      if (!pausedRef.current && el.scrollWidth > el.clientWidth) {
+        el.scrollLeft += 0.5;
+        const half = el.scrollWidth / 2;
+        if (el.scrollLeft >= half) el.scrollLeft -= half;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = trackRef.current;
+    if (!el) return;
+    pausedRef.current = true;
+    dragRef.current = {startX: e.clientX, startScroll: el.scrollLeft, moved: false};
+    el.setPointerCapture(e.pointerId);
+    el.classList.add('is-dragging');
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = trackRef.current;
+    const d = dragRef.current;
+    if (!el || !d) return;
+    const dx = e.clientX - d.startX;
+    if (Math.abs(dx) > 3) d.moved = true;
+    el.scrollLeft = d.startScroll - dx;
+    const half = el.scrollWidth / 2;
+    if (el.scrollLeft >= half) el.scrollLeft -= half;
+    else if (el.scrollLeft < 0) el.scrollLeft += half;
+  };
+
+  const onPointerEnd = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = trackRef.current;
+    if (!el || !dragRef.current) return;
+    el.releasePointerCapture(e.pointerId);
+    dragRef.current = null;
+    el.classList.remove('is-dragging');
+    if (e.pointerType !== 'mouse') pausedRef.current = false;
+  };
+
+  const onClickCapture = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (dragRef.current?.moved) { e.preventDefault(); e.stopPropagation(); }
+  };
+
   return (
     <section className="supporters-section" data-reveal>
       <h2>Supported by</h2>
       <div className="supporters-marquee">
-        <div className="supporters-track">
+        <div
+          className="supporters-track"
+          ref={trackRef}
+          onMouseEnter={() => { pausedRef.current = true; }}
+          onMouseLeave={() => { pausedRef.current = false; }}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerEnd}
+          onPointerCancel={onPointerEnd}
+          onClickCapture={onClickCapture}
+        >
           {supporterLogos.map((s, i) => (
             <a className="supporter-item" key={`a-${i}`} href={s.url} target="_blank" rel="noopener noreferrer" title={s.name}>
-              <img src={s.img} alt={s.name} loading="lazy" />
+              <img src={s.img} alt={s.name} loading="lazy" draggable={false} />
             </a>
           ))}
           {supporterLogos.map((s, i) => (
             <a className="supporter-item" key={`b-${i}`} href={s.url} target="_blank" rel="noopener noreferrer" title={s.name}>
-              <img src={s.img} alt={s.name} loading="lazy" />
+              <img src={s.img} alt={s.name} loading="lazy" draggable={false} />
             </a>
           ))}
         </div>
