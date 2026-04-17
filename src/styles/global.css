@@ -64,6 +64,13 @@ html {
   --color-border-accent-orange: rgba(255, 125, 23, 0.15);
   --color-shadow-accent: rgba(0, 150, 222, 0.08);
   --color-heading-accent: #0077b3;
+  /* Syntax highlighting (light mode — darker variants for contrast on
+     --screen-bg = #f5f6f8). Dark mode keeps Catppuccin Mocha originals. */
+  --syntax-comment: #6c7086;
+  --syntax-string: #1f7a10;
+  --syntax-keyword: #6f3aad;
+  --syntax-number: #b55b00;
+  --syntax-json-key: #0077b3;
   color-scheme: light;
 }
 
@@ -93,6 +100,13 @@ html {
   --color-shadow-accent: rgba(0, 150, 222, 0.08);
   --color-heading-accent: #4ab8f0;
   --screen-prompt-interactive: #f9e2af;
+  /* Syntax highlighting — Catppuccin Mocha (unchanged from prior hard-coded
+     values; kept explicit here so the light-mode vars don't cascade in). */
+  --syntax-comment: #6c7086;
+  --syntax-string: #a6e3a1;
+  --syntax-keyword: #cba6f7;
+  --syntax-number: #fab387;
+  --syntax-json-key: #89b4fa;
   color-scheme: dark;
 }
 
