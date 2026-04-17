@@ -1465,7 +1465,7 @@ function TerminalPrototype(): ReactNode {
 
             {/* Panel 2: process list */}
             <div className="terminal-proto-panel terminal-proto-panel--right">
-              <span className="terminal-proto-prompt">$ verdi process list -a -p1</span>
+              <span className="terminal-proto-prompt">$ verdi process list --all -p1</span>
 
               {/* Table header */}
               <div className="terminal-proto-table-header">
@@ -2061,9 +2061,9 @@ function HighThroughputCombined(): ReactNode {
           <span className="tp-panel-title">verdi process list</span>
         </div>
         <div className="tp-panel-content">
-          <span className="terminal-proto-prompt">$ watch verdi process list -a</span>
+          <span className="terminal-proto-prompt">$ watch verdi process list --all</span>
           <div className="terminal-proto-watch-header">
-            Every 1.0s: verdi process list -a
+            Every 1.0s: verdi process list --all
           </div>
           <div className="terminal-proto-table-header">
             <span className="terminal-proto-col-pk">PK</span>
@@ -3178,18 +3178,19 @@ type DynHandler = (cmd: string, parts: string[], ctx: MockContext) => string | n
 
 const MOCK_DYNAMIC: {test: (cmd: string, parts: string[]) => boolean; handler: DynHandler}[] = [
   {
-    test: (cmd) => cmd === 'verdi process list' || cmd === 'verdi process list -a',
-    handler: (_cmd, _parts, ctx) => {
+    test: (_cmd, parts) => parts[0] === 'verdi' && parts[1] === 'process' && parts[2] === 'list',
+    handler: (_cmd, parts, ctx) => {
+      const showAll = parts.includes('--all') || parts.includes('-a');
+      const jobs = showAll ? ctx.submittedJobs : [];
       const lines = [
         '  PK  Created    Process label         Process State    Process status',
         '----  ---------  --------------------  ---------------  ----------------',
       ];
-      const jobs = ctx.submittedJobs;
       for (let i = 0; i < jobs.length; i++) {
         lines.push(`${String(jobs[i]).padStart(4)}  ${(jobs.length - i) * 2}m ago    ArithmeticAddCalc     \u23f9 Finished [0]`);
       }
       lines.push('', `Total results: ${jobs.length}`);
-      if (jobs.length === 0) lines.push('Info: use `verdi process list -a` to see all processes.');
+      if (!showAll) lines.push('Info: use `verdi process list --all` to see all processes.');
       return lines.join('\n');
     },
   },
@@ -3489,7 +3490,7 @@ const TUTORIAL_STEPS = [
     desc: "AiiDA automatically:\n\u2022 Generates a Slurm script\n\u2022 Uploads files via SSH\n\u2022 Submits the job\n\u2022 Monitors the scheduler\n\u2022 Retrieves results when done",
     file: '_aiiida_submit_script.sh',
     code: SLURM_SCRIPT,
-    hint: 'watch verdi process list',
+    hint: 'watch verdi process list --all',
   },
   {
     title: '7. Inspect results',
@@ -3797,13 +3798,13 @@ function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: 
       newHist.push({type: 'out', text: `Submitted CalcJob <${pk}>`});
       setHist(newHist);
       if (step === 4) { setBusy(true); setTimeout(() => { setStep(5); setBusy(false); }, 800); }
-    } else if (trimmed === 'watch verdi process list' && submittedJobs.length > 0) {
+    } else if ((trimmed === 'watch verdi process list --all' || trimmed === 'watch verdi process list -a') && submittedJobs.length > 0) {
       const lastPk = submittedJobs[submittedJobs.length - 1] ?? nextPk - 1;
       watchingPkRef.current = lastPk;
       const finishedLines = submittedJobs.slice(0, -1).map((pk, i) =>
         `${String(pk).padStart(4)}  ${(submittedJobs.length - i) * 2}m ago    ArithmeticAddCalc     \u23f9 Finished [0]`
       ).join('\n');
-      const header = 'Every 2.0s: verdi process list\n\n  PK  Created    Process label         Process State\n----  ---------  --------------------  ----------------------------';
+      const header = 'Every 2.0s: verdi process list --all\n\n  PK  Created    Process label         Process State\n----  ---------  --------------------  ----------------------------';
       const prefix = finishedLines ? `${header}\n${finishedLines}` : header;
       setHist([...newHist,
         {type: 'out', text: prefix},
@@ -3811,7 +3812,7 @@ function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: 
       ]);
       setPhase(0);
       setPhaseRunning(true);
-    } else if (trimmed === 'watch verdi process list') {
+    } else if (trimmed === 'watch verdi process list --all' || trimmed === 'watch verdi process list -a') {
       newHist.push({type: 'out', text: 'No processes to watch. Submit a calculation first with `verdi run submit.py`.'});
       setHist(newHist);
     } else {
