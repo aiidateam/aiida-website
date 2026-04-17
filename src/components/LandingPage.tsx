@@ -2016,6 +2016,21 @@ function HighThroughputCombined(): ReactNode {
 
   // ─── HPC server data ───
   const [hoveredHpc, setHoveredHpc] = useState<number | null>(null);
+  const [hoveredGate, setHoveredGate] = useState<'ssh' | 'firecrest' | null>(null);
+  const [copied, setCopied] = useState<string | null>(null);
+  const gateCommands = {
+    ssh: 'verdi computer setup --transport core.ssh_async',
+    firecrest: 'pip install aiida-firecrest\nverdi computer setup --transport core.ssh_async',
+  };
+  useEffect(() => {
+    if (!copied) return;
+    const t = setTimeout(() => setCopied(null), 1500);
+    return () => clearTimeout(t);
+  }, [copied]);
+  const copy = (text: string, key: string) => {
+    navigator.clipboard?.writeText(text).catch(() => {});
+    setCopied(key);
+  };
   const schedulers = [
     {label: 'Slurm', scheduler: 'slurm'},
     {label: 'PBS Pro', scheduler: 'pbspro'},
@@ -2147,18 +2162,43 @@ function HighThroughputCombined(): ReactNode {
       </svg>
       <div className="transport-gate">
         <div className="transport-gate-inner">
-          <div className="gate-card">
+          <div
+            className="gate-card gate-card--clickable"
+            role="button"
+            tabIndex={0}
+            onMouseEnter={() => setHoveredGate('ssh')}
+            onMouseLeave={() => setHoveredGate(null)}
+            onClick={() => copy(gateCommands.ssh, 'ssh')}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy(gateCommands.ssh, 'ssh'); } }}
+          >
             <span className="gate-led gate-led--green" />
             <span className="gate-led gate-led--blue" />
             <span className="gate-card-label">SSH</span>
-            <div className="gate-tooltip">verdi computer setup --transport core.ssh_async</div>
           </div>
-          <div className="gate-card">
+          <div
+            className="gate-card gate-card--clickable"
+            role="button"
+            tabIndex={0}
+            onMouseEnter={() => setHoveredGate('firecrest')}
+            onMouseLeave={() => setHoveredGate(null)}
+            onClick={() => copy(gateCommands.firecrest, 'firecrest')}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copy(gateCommands.firecrest, 'firecrest'); } }}
+          >
             <span className="gate-led gate-led--green" />
             <span className="gate-led gate-led--blue" />
             <span className="gate-card-label">FirecREST</span>
-            <div className="gate-tooltip">pip install aiida-firecrest<br/>verdi computer setup --transport core.ssh_async</div>
           </div>
+          {copied === 'ssh' || copied === 'firecrest' ? (
+            <div className="copy-callout copy-callout--gate">Copied!</div>
+          ) : hoveredGate ? (
+            <div className="gate-shared-tooltip">
+              {hoveredGate === 'firecrest' ? (
+                <>pip install aiida-firecrest<br/>verdi computer setup --transport core.ssh_async</>
+              ) : (
+                'verdi computer setup --transport core.ssh_async'
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
@@ -2182,7 +2222,8 @@ function HighThroughputCombined(): ReactNode {
               return (
                 <g key={i} className="server-unit"
                   onMouseEnter={() => setHoveredHpc(i)}
-                  onMouseLeave={() => setHoveredHpc(null)}>
+                  onMouseLeave={() => setHoveredHpc(null)}
+                  onClick={() => copy(`verdi computer setup --scheduler ${s.scheduler}`, `sched-${i}`)}>
                   <rect x="30" y={y} width="140" height="32" rx="4"
                     fill="var(--device-screen-bg)" stroke="var(--device-border)" strokeWidth="1" />
                   <circle cx="44" cy={y + 16} r="3" fill="#30b808" opacity="0.9" />
@@ -2196,11 +2237,13 @@ function HighThroughputCombined(): ReactNode {
             })}
           </g>
         </svg>
-        {hoveredHpc !== null && (
+        {copied?.startsWith('sched-') ? (
+          <div className="copy-callout copy-callout--server">Copied!</div>
+        ) : hoveredHpc !== null ? (
           <div className="tp-server-hover-tooltip">
             verdi computer setup --scheduler {schedulers[hoveredHpc].scheduler}
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

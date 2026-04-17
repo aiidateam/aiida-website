@@ -360,9 +360,8 @@ main > section > h2::after {
   color: var(--color-text);
 }
 
-/* Tooltip on hover */
-.gate-tooltip {
-  display: none;
+/* Shared tooltip above both gate cards (SSH / FirecREST) */
+.gate-shared-tooltip {
   position: absolute;
   bottom: calc(100% + 10px);
   left: 50%;
@@ -380,7 +379,7 @@ main > section > h2::after {
   line-height: 1.5;
 }
 
-.gate-tooltip::after {
+.gate-shared-tooltip::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -390,8 +389,56 @@ main > section > h2::after {
   border-top-color: #1e1e2e;
 }
 
-.gate-card:hover .gate-tooltip {
-  display: block;
+.gate-card--clickable {
+  cursor: pointer;
+}
+
+.server-unit {
+  cursor: pointer;
+}
+
+@keyframes copy-callout-fade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -4px);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -4px);
+  }
+}
+
+.copy-callout {
+  position: absolute;
+  background: #30b808;
+  color: #fff;
+  font-family: var(--font-base);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 9px;
+  border-radius: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(48, 184, 8, 0.35);
+  z-index: 11;
+  left: 50%;
+  animation: copy-callout-fade 1.5s ease-in-out both;
+}
+
+.copy-callout--gate {
+  bottom: calc(100% + 10px);
+}
+
+.copy-callout--server {
+  bottom: calc(100% + 8px);
 }
 
 /* ===== PLUGIN SHOWCASE ===== */
