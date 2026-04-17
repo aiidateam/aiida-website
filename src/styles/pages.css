@@ -324,6 +324,10 @@
   height: 40px;
   object-fit: contain;
   flex-shrink: 0;
+  background: #ffffff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  box-sizing: content-box;
 }
 
 .sponsor-card-info {

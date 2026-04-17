@@ -2007,6 +2007,9 @@ main > section > h2::after {
   opacity: 0.7;
   transition: opacity 0.3s;
   text-decoration: none;
+  background: #ffffff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
 }
 
 .supporter-item:hover {
