@@ -3354,6 +3354,8 @@ main > section > h2::after {
   border-top: 1px solid var(--color-border-accent);
   flex-wrap: wrap;
   gap: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .flow-proto-legend {
@@ -3842,6 +3844,8 @@ main > section > h2::after {
 .tp-try-instructions-bar {
   max-width: 1400px;
   margin: 1rem auto 0;
+  position: relative;
+  z-index: 1;
 }
 
 .tp-try-instructions-bar .tut-instructions {

@@ -7,252 +7,464 @@ const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
 
 const PROV_COLORS = ['#0096DE', '#30B808', '#FF7D17'] as const;
 
-interface CNode {
-  rx: number; ry: number; // offset from cluster center
-  dx: number; dy: number; // mouse-driven displacement (springs back)
-  radius: number;
-  filled: boolean; // filled vs stroke-only
-  ampX: number; ampY: number; freqX: number; freqY: number;
-  phaseX: number; phaseY: number;
+/*
+ * Floating provenance-graph background. Adapted from the aiidalab demo-server
+ * (basehub/files/static/external/js/background.js) so the look-and-feel is
+ * consistent across AiiDA frontends. Key behaviors:
+ *   - realistic tree clusters (weighted parent picking, min-separation between nodes)
+ *   - halo + core two-ring node rendering, parent-aware color so neighbors differ
+ *   - gentle vertical drift + jitter springing back toward rest position
+ *   - MAIN-COLUMN EXCLUSION — clusters spawn only in left/right gutters so they
+ *     never float behind the hero text (issue #126 readability concern)
+ *
+ * The demo-server version had a fade-in/out lifecycle with respawn; the aiida-website
+ * hero is scoped and long-lived, so we deliberately generate one set at mount and let
+ * those exact clusters float forever — no respawn, no regeneration on re-render.
+ */
+
+type NodeSizeMap = Record<string, {halo: number; core: number}>;
+
+interface ParticleNetworkProps {
+  palette?: readonly string[];
+  nodeSize?: NodeSizeMap;
+  mainColumnPx?: number;       // width of the central text column to keep clear
+  densityPxPerCluster?: number; // 1 cluster per this many gutter px² (default 40000)
+  clusterBounds?: [number, number]; // [min, max] cluster count
+  speedRange?: [number, number];    // vertical drift speed range
+  edgeAlpha?: number;
+  coreAlpha?: number;
+  haloAlpha?: number;
 }
 
-interface Cluster {
-  cx: number; cy: number; // center position
-  vx: number; vy: number; // drift velocity
+const DEFAULT_NODE_SIZE: NodeSizeMap = {
+  '#0096DE': {halo: 4.0, core: 3.0},
+  '#FF7D17': {halo: 5.0, core: 4.0},
+  '#30B808': {halo: 6.0, core: 5.0},
+};
+
+// Hoisted so they are stable references — otherwise default [a,b] tuples would be
+// recreated on every render, busting useEffect deps and re-generating clusters.
+const DEFAULT_CLUSTER_BOUNDS: [number, number] = [2, 10];
+const DEFAULT_SPEED_RANGE: [number, number] = [0.001, 0.005];
+
+const TAU = Math.PI * 2;
+
+interface PNode {
+  ox: number; oy: number;       // current offset from cluster center
+  ox0: number; oy0: number;     // rest offset (original placement)
+  jx: number; jy: number;       // jitter velocity
+  depth: number;
+  parent: number;
+  angle: number;
+  dist: number;
   color: string;
-  opacity: number;
-  // cluster-level swimming
-  ampX: number; ampY: number; freqX: number; freqY: number;
-  phaseX: number; phaseY: number;
-  nodes: CNode[];
-  edges: [number, number][]; // tree edges — no cycles
+  halo: number;
+  core: number;
 }
 
-function createClusters(count: number, w: number, h: number): Cluster[] {
-  const clusters: Cluster[] = [];
-  for (let c = 0; c < count; c++) {
-    const color = PROV_COLORS[c % 3];
-    const nodeCount = 5 + Math.floor(Math.random() * 5); // 5-9 nodes
-    const nodes: CNode[] = [];
-    const edges: [number, number][] = [];
-    const depth: number[] = []; // track depth of each node
-    const spread = 35 + Math.random() * 25;
+interface PCluster {
+  cx: number; cy: number;
+  r: number;
+  vx: number; vy: number;
+  nodes: PNode[];
+  edges: [number, number][];
+}
 
-    // Root node — largest
-    nodes.push({
-      rx: 0, ry: 0, dx: 0, dy: 0,
-      radius: 8 + Math.random() * 6,
-      filled: true,
-      ampX: 1 + Math.random() * 2, ampY: 1 + Math.random() * 2,
-      freqX: 0.5 + Math.random() * 0.5, freqY: 0.5 + Math.random() * 0.5,
-      phaseX: Math.random() * Math.PI * 2, phaseY: Math.random() * Math.PI * 2,
-    });
-    depth.push(0);
+function hexToRgb(hex: string): {r: number; g: number; b: number} {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex);
+  if (!m) return {r: 30, g: 60, b: 120};
+  const n = parseInt(m[1], 16);
+  return {r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255};
+}
 
-    // Build tree — bias toward recent nodes to create deeper chains (depth 2-4)
-    for (let i = 1; i < nodeCount; i++) {
-      // 60% chance to pick the most recent node as parent → promotes depth
-      const parent = Math.random() < 0.6
-        ? i - 1
-        : Math.floor(Math.random() * i);
-      const d = depth[parent] + 1;
-      depth.push(d);
-      const angle = (Math.PI * 2 * i / nodeCount) + (Math.random() - 0.5) * 0.8;
-      const dist = spread * (0.7 + Math.random() * 0.6);
-      const px = nodes[parent].rx;
-      const py = nodes[parent].ry;
-      // Nodes get smaller at deeper levels
-      const maxR = d === 0 ? 10 : d === 1 ? 5 : 3.5;
-      nodes.push({
-        rx: px + Math.cos(angle) * dist,
-        ry: py + Math.sin(angle) * dist,
-        dx: 0, dy: 0,
-        radius: 1.5 + Math.random() * maxR,
-        filled: Math.random() > 0.25, // 25% chance stroke-only
-        ampX: 1 + Math.random() * 2, ampY: 1 + Math.random() * 2,
-        freqX: 0.4 + Math.random() * 0.6, freqY: 0.4 + Math.random() * 0.6,
-        phaseX: Math.random() * Math.PI * 2, phaseY: Math.random() * Math.PI * 2,
-      });
-      edges.push([parent, i]);
+const rand = (a: number, b: number) => a + Math.random() * (b - a);
+const randInt = (a: number, b: number) => Math.floor(rand(a, b + 1));
+const pick = <T,>(arr: readonly T[]): T => arr[(Math.random() * arr.length) | 0];
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+
+interface ClusterShape {
+  r: number; n: number; branches: number; spread: number; minSep: number;
+}
+function clusterParams(size: number): ClusterShape {
+  if (size < 0.6) return {r: rand(100, 150), n: randInt(4, 8),  branches: randInt(2, 3), spread: 1.4, minSep: 14};
+  if (size < 0.9) return {r: rand(150, 200), n: randInt(8, 12), branches: randInt(3, 5), spread: 1.0, minSep: 16};
+  return             {r: rand(200, 250), n: randInt(12, 16),    branches: randInt(5, 7), spread: 0.7, minSep: 18};
+}
+
+function pickColorDifferentFrom(palette: readonly string[], excludeColor: string | null): string {
+  if (!excludeColor) return pick(palette);
+  const choices = palette.filter(c => c !== excludeColor);
+  return choices.length ? pick(choices) : pick(palette);
+}
+
+function pickPointOutsideMainColumn(w: number, h: number, mainWidthPx: number): {x: number; y: number} {
+  const x0 = (w - mainWidthPx) / 2;
+  const x1 = x0 + mainWidthPx;
+  // If viewport is narrower than the main column, just spawn anywhere.
+  if (x0 <= 0 || x1 >= w) return {x: rand(0, w), y: rand(0, h)};
+  const leftW = x0;
+  const rightW = w - x1;
+  const inLeft = Math.random() < leftW / (leftW + rightW);
+  return {x: inLeft ? rand(0, x0) : rand(x1, w), y: rand(0, h)};
+}
+
+function pickSeparatedClusterOrigin(
+  w: number, h: number, mainWidthPx: number, r: number,
+  clusters: PCluster[], excludeIdx: number,
+): {x: number; y: number} {
+  for (let tries = 0; tries < 60; tries++) {
+    const p = pickPointOutsideMainColumn(w, h, mainWidthPx);
+    const sepFactor = tries < 15 ? 0.95 : tries < 35 ? 0.8 : 0.65;
+    let ok = true;
+    for (let i = 0; i < clusters.length; i++) {
+      if (i === excludeIdx) continue;
+      const c = clusters[i];
+      if (!c) continue;
+      const dx = p.x - c.cx;
+      const dy = p.y - c.cy;
+      const minSep = sepFactor * (r + c.r) + 24;
+      if (dx * dx + dy * dy < minSep * minSep) {ok = false; break;}
     }
-
-    clusters.push({
-      cx: Math.random() * w,
-      cy: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
-      color,
-      opacity: 0.35 + Math.random() * 0.25,
-      ampX: 10 + Math.random() * 20,
-      ampY: 10 + Math.random() * 20,
-      freqX: 0.15 + Math.random() * 0.2,
-      freqY: 0.15 + Math.random() * 0.2,
-      phaseX: Math.random() * Math.PI * 2,
-      phaseY: Math.random() * Math.PI * 2,
-      nodes,
-      edges,
-    });
+    if (ok) return p;
   }
-  return clusters;
+  return pickPointOutsideMainColumn(w, h, mainWidthPx);
 }
 
-function ParticleNetwork(): ReactNode {
+function ParticleNetwork(props: ParticleNetworkProps = {}): ReactNode {
+  const {
+    palette = PROV_COLORS,
+    nodeSize = DEFAULT_NODE_SIZE,
+    mainColumnPx = 1100,
+    densityPxPerCluster = 80000,
+    clusterBounds = DEFAULT_CLUSTER_BOUNDS,
+    speedRange = DEFAULT_SPEED_RANGE,
+    edgeAlpha = 0.2,
+    coreAlpha = 0.5,
+    haloAlpha = 0.3,
+  } = props;
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const clustersRef = useRef<Cluster[]>([]);
-  const mouseRef = useRef({ x: 0, y: 0, active: false });
   const frameRef = useRef(0);
-  const darkRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', {alpha: true});
     if (!ctx) return;
-    const dpr = window.devicePixelRatio || 1;
-    darkRef.current = document.documentElement.getAttribute('data-theme') === 'dark';
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let prevW = 0, prevH = 0;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Precompute rgba per palette color
+    const RGB: Record<string, {r: number; g: number; b: number}> = {};
+    for (const h of palette) RGB[h] = hexToRgb(h);
+    const rgba = (hex: string, a: number) => {
+      const c = RGB[hex] || {r: 30, g: 60, b: 120};
+      return `rgba(${c.r}, ${c.g}, ${c.b}, ${a})`;
+    };
+
+    const state: {w: number; h: number; dpr: number; clusters: PCluster[]; prevT: number | null} = {
+      w: 0, h: 0, dpr: 1, clusters: [], prevT: null,
+    };
+
+    // Pointer-driven force field: nodes within HOVER_RADIUS get pulled toward
+    // the cursor. Active (mouse down) is a stronger pull — feels like a drag.
+    // Listens on window so pointer-events:none on the canvas doesn't block UI.
+    const mouse = {x: 0, y: 0, inside: false, active: false};
+    const HOVER_RADIUS = 180;
+    const ACTIVE_RADIUS = 260;
+    const HOVER_FORCE = 0.18;
+    const ACTIVE_FORCE = 1.3;
+
     function resize() {
       const rect = canvas!.getBoundingClientRect();
-      const w = rect.width;
-      const h = rect.height;
-      canvas!.width = w * dpr;
-      canvas!.height = h * dpr;
-      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const target = w < 768 ? 5 : 10;
-      // Recreate clusters when count changes or dimensions change significantly
-      if (clustersRef.current.length !== target || Math.abs(w - prevW) > 50 || Math.abs(h - prevH) > 50) {
-        clustersRef.current = createClusters(target, w, h);
-        prevW = w;
-        prevH = h;
+      state.w = rect.width;
+      state.h = rect.height;
+      state.dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas!.width = Math.floor(state.w * state.dpr);
+      canvas!.height = Math.floor(state.h * state.dpr);
+      ctx!.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
+    }
+
+    function makeCluster(speed: number, excludeIdx = -1): PCluster {
+      const size = Math.random();
+      const params = clusterParams(size);
+      const {r, n} = params;
+
+      const {x: cx, y: cy} = pickSeparatedClusterOrigin(
+        state.w, state.h, mainColumnPx, r, state.clusters, excludeIdx,
+      );
+
+      const vx = 0;
+      const vy = (Math.random() < 0.5 ? -1 : 1) * speed;
+
+      const nodes: PNode[] = Array.from({length: n}, () => ({
+        ox: 0, oy: 0, ox0: 0, oy0: 0,
+        jx: rand(-0.01, 0.01), jy: rand(-0.01, 0.01),
+        depth: 0, parent: -1, angle: 0, dist: 0,
+        color: palette[0], halo: 0, core: 0,
+      }));
+
+      const edges: [number, number][] = [];
+      const edgeSet = new Set<string>();
+      const addEdge = (i: number, j: number) => {
+        if (i === j) return;
+        const a = Math.min(i, j), b = Math.max(i, j);
+        const key = `${a}-${b}`;
+        if (edgeSet.has(key)) return;
+        edgeSet.add(key);
+        edges.push([a, b]);
+      };
+
+      const stepMin = r * 0.14;
+      const stepMax = r * 0.26;
+      const rootAngle = rand(0, TAU);
+
+      const minSep2 = params.minSep * params.minSep;
+      const isFarEnough = (ox: number, oy: number, placedCount: number) => {
+        for (let i = 0; i < placedCount; i++) {
+          const q = nodes[i];
+          const dx = ox - q.ox0, dy = oy - q.oy0;
+          if (dx * dx + dy * dy < minSep2) return false;
+        }
+        return true;
+      };
+
+      const assignPos = (p: PNode, placedCount: number) => {
+        for (let tries = 0; tries < 14; tries++) {
+          const ox = Math.cos(p.angle) * p.dist + rand(-2.0, 2.0);
+          const oy = Math.sin(p.angle) * p.dist + rand(-2.0, 2.0);
+          if (isFarEnough(ox, oy, placedCount)) {
+            p.ox0 = p.ox = ox;
+            p.oy0 = p.oy = oy;
+            return;
+          }
+          p.angle += rand(-0.18, 0.18);
+          p.dist = clamp(p.dist + rand(-8, 10), 0, r * 0.98);
+        }
+        p.ox0 = p.ox = Math.cos(p.angle) * p.dist;
+        p.oy0 = p.oy = Math.sin(p.angle) * p.dist;
+      };
+
+      // root
+      nodes[0].depth = 0;
+      nodes[0].parent = -1;
+      nodes[0].angle = rootAngle;
+      nodes[0].dist = 0;
+      assignPos(nodes[0], 0);
+
+      // main branches
+      const branchCount = Math.min(n - 1, params.branches);
+      for (let i = 1; i <= branchCount; i++) {
+        const p = nodes[i];
+        p.parent = 0;
+        p.depth = 1;
+        const base = (TAU * (i - 1)) / Math.max(1, branchCount);
+        p.angle = rootAngle + base + rand(-0.25, 0.25);
+        p.dist = rand(stepMin, stepMax);
+        assignPos(p, i);
+        addEdge(i, 0);
+      }
+
+      const pickParent = (maxExclusive: number) => {
+        let total = 0;
+        for (let i = 0; i < maxExclusive; i++) total += 1 / (1 + nodes[i].depth * 0.9);
+        let u = Math.random() * total;
+        for (let i = 0; i < maxExclusive; i++) {
+          const w = 1 / (1 + nodes[i].depth * 0.9);
+          if (u < w) return i;
+          u -= w;
+        }
+        return 0;
+      };
+
+      for (let i = branchCount + 1; i < n; i++) {
+        const p = nodes[i];
+        let parent = 0, angle = rootAngle, dist = 0;
+        for (let tries = 0; tries < 8; tries++) {
+          parent = pickParent(i);
+          const pp = nodes[parent];
+          const spread = params.spread / (1 + pp.depth * 0.35);
+          angle = pp.angle + rand(-spread, spread);
+          dist = pp.dist + rand(stepMin, stepMax);
+          if (dist <= r * 0.98) break;
+        }
+        p.parent = parent;
+        p.depth = nodes[parent].depth + 1;
+        p.angle = angle;
+        p.dist = Math.min(dist, r * 0.98);
+        assignPos(p, i);
+        addEdge(i, parent);
+      }
+
+      // Parent-aware color assignment so neighbors always differ.
+      nodes[0].color = pick(palette);
+      const rootSize = nodeSize[nodes[0].color] ?? {halo: 4, core: 3};
+      nodes[0].halo = rootSize.halo;
+      nodes[0].core = rootSize.core;
+      for (let i = 1; i < n; i++) {
+        const parentColor = nodes[nodes[i].parent]?.color ?? null;
+        nodes[i].color = pickColorDifferentFrom(palette, parentColor);
+        const sz = nodeSize[nodes[i].color] ?? {halo: 4, core: 3};
+        nodes[i].halo = sz.halo;
+        nodes[i].core = sz.core;
+      }
+
+      return {cx, cy, r, vx, vy, nodes, edges};
+    }
+
+    function init() {
+      resize();
+      state.prevT = null;
+      state.clusters = [];
+      const speed = rand(speedRange[0], speedRange[1]);
+      const gutterArea = Math.max(0, state.w - mainColumnPx) * state.h;
+      const count = Math.round(clamp(gutterArea / densityPxPerCluster, clusterBounds[0], clusterBounds[1]));
+      for (let i = 0; i < count; i++) state.clusters.push(makeCluster(speed));
+    }
+
+    const MIN_DT = 8, MAX_DT = 24, PAD_EXTRA = 40;
+
+    function drawCluster(c: PCluster) {
+      ctx!.lineWidth = 1;
+      ctx!.strokeStyle = `rgba(180,180,180,${edgeAlpha})`;
+      ctx!.beginPath();
+      const r2 = c.r * c.r * 0.75;
+      for (const [i, j] of c.edges) {
+        const a = c.nodes[i], b = c.nodes[j];
+        const ax = c.cx + a.ox, ay = c.cy + a.oy;
+        const bx = c.cx + b.ox, by = c.cy + b.oy;
+        const dx = ax - bx, dy = ay - by;
+        if (dx * dx + dy * dy < r2) {
+          ctx!.moveTo(ax, ay);
+          ctx!.lineTo(bx, by);
+        }
+      }
+      ctx!.stroke();
+      for (const p of c.nodes) {
+        const x = c.cx + p.ox, y = c.cy + p.oy;
+        ctx!.fillStyle = rgba(p.color, haloAlpha);
+        ctx!.beginPath(); ctx!.arc(x, y, p.halo, 0, TAU); ctx!.fill();
+        ctx!.fillStyle = rgba(p.color, coreAlpha);
+        ctx!.beginPath(); ctx!.arc(x, y, p.core, 0, TAU); ctx!.fill();
       }
     }
-    resize();
-    // Re-measure after layout settles (images load, content hydrates)
-    requestAnimationFrame(() => resize());
 
-    const themeObs = new MutationObserver(() => {
-      darkRef.current = document.documentElement.getAttribute('data-theme') === 'dark';
-    });
-    themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-    function onPointerDown(e: PointerEvent) {
-      const rect = canvas!.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top, active: true };
+    function drawStatic() {
+      ctx!.clearRect(0, 0, state.w, state.h);
+      for (const c of state.clusters) drawCluster(c);
     }
-    function onPointerMove(e: PointerEvent) {
-      const rect = canvas!.getBoundingClientRect();
-      mouseRef.current.x = e.clientX - rect.left;
-      mouseRef.current.y = e.clientY - rect.top;
-    }
-    function onPointerUp() { mouseRef.current.active = false; }
 
-    window.addEventListener('pointerdown', onPointerDown);
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerup', onPointerUp);
-    window.addEventListener('resize', resize);
+    function step(t: number) {
+      if (state.prevT === null) state.prevT = t;
+      const dt = clamp(t - state.prevT, MIN_DT, MAX_DT);
+      state.prevT = t;
 
-    function drawFrame(timestamp: number) {
-      const t = timestamp / 1000;
-      const rect = canvas!.getBoundingClientRect();
-      const w = rect.width;
-      const h = rect.height;
-      const gA = 0.9;
+      ctx!.clearRect(0, 0, state.w, state.h);
 
-      ctx!.clearRect(0, 0, w, h);
-      const mouse = mouseRef.current;
+      for (const c of state.clusters) {
+        c.cx += c.vx * dt;
+        c.cy += c.vy * dt;
 
-      for (const cl of clustersRef.current) {
-        // Drift
-        cl.cx += cl.vx;
-        cl.cy += cl.vy;
+        const pad = c.r + PAD_EXTRA;
+        if (c.cx < -pad) c.cx = state.w + pad;
+        else if (c.cx > state.w + pad) c.cx = -pad;
+        if (c.cy < -pad) c.cy = state.h + pad;
+        else if (c.cy > state.h + pad) c.cy = -pad;
 
-        // Wrap edges
-        if (cl.cx < -120) cl.cx = w + 120;
-        if (cl.cx > w + 120) cl.cx = -120;
-        if (cl.cy < -120) cl.cy = h + 120;
-        if (cl.cy > h + 120) cl.cy = -120;
+        const jitterDamp = Math.pow(0.985, dt);
+        const radius = mouse.active ? ACTIVE_RADIUS : HOVER_RADIUS;
+        const force = mouse.active ? ACTIVE_FORCE : HOVER_FORCE;
+        for (const p of c.nodes) {
+          p.ox += p.jx * dt;
+          p.oy += p.jy * dt;
+          p.ox += (p.ox0 - p.ox) * 0.0022 * dt;
+          p.oy += (p.oy0 - p.oy) * 0.0022 * dt;
+          p.jx *= jitterDamp;
+          p.jy *= jitterDamp;
 
-        // Cluster swimming offset
-        const sx = cl.cx + Math.sin(t * cl.freqX + cl.phaseX) * cl.ampX;
-        const sy = cl.cy + Math.sin(t * cl.freqY + cl.phaseY) * cl.ampY;
-
-        // Compute node world positions — each node reacts to mouse independently
-        const positions: [number, number][] = cl.nodes.map(n => {
-          const nx = sx + n.rx + Math.sin(t * n.freqX + n.phaseX) * n.ampX + n.dx;
-          const ny = sy + n.ry + Math.sin(t * n.freqY + n.phaseY) * n.ampY + n.dy;
-
-          // Per-node mouse attraction
-          const mdx = mouse.x - nx;
-          const mdy = mouse.y - ny;
-          const md = Math.sqrt(mdx * mdx + mdy * mdy);
-          const aRadius = mouse.active ? 250 : 180;
-          const aForce = mouse.active ? 1.2 : 0.15;
-          if (md < aRadius && md > 1) {
-            const f = (1 - md / aRadius) * aForce;
-            n.dx += mdx / md * f;
-            n.dy += mdy / md * f;
-          }
-
-          // Spring back toward rest position (damping)
-          n.dx *= 0.95;
-          n.dy *= 0.95;
-
-          return [nx, ny] as [number, number];
-        });
-
-        // Draw edges (fixed tree structure)
-        ctx!.strokeStyle = cl.color;
-        ctx!.lineWidth = 1.5;
-        ctx!.globalAlpha = cl.opacity * 0.5 * gA;
-        for (const [a, b] of cl.edges) {
-          ctx!.beginPath();
-          ctx!.moveTo(positions[a][0], positions[a][1]);
-          ctx!.lineTo(positions[b][0], positions[b][1]);
-          ctx!.stroke();
-        }
-
-        // Draw nodes
-        for (let i = 0; i < cl.nodes.length; i++) {
-          const n = cl.nodes[i];
-          const [px, py] = positions[i];
-          ctx!.beginPath();
-          ctx!.arc(px, py, n.radius, 0, Math.PI * 2);
-          if (n.filled) {
-            ctx!.fillStyle = cl.color;
-            ctx!.globalAlpha = cl.opacity * gA;
-            ctx!.fill();
-          } else {
-            ctx!.strokeStyle = cl.color;
-            ctx!.lineWidth = 1.5;
-            ctx!.globalAlpha = cl.opacity * 0.7 * gA;
-            ctx!.stroke();
+          // Pointer attraction — only while the cursor is over the canvas area.
+          if (mouse.inside) {
+            const nx = c.cx + p.ox, ny = c.cy + p.oy;
+            const mdx = mouse.x - nx, mdy = mouse.y - ny;
+            const md = Math.sqrt(mdx * mdx + mdy * mdy);
+            if (md > 1 && md < radius) {
+              const f = (1 - md / radius) * force;
+              p.jx += (mdx / md) * f * 0.02;
+              p.jy += (mdy / md) * f * 0.02;
+            }
           }
         }
+
+        drawCluster(c);
       }
-      ctx!.globalAlpha = 1;
+
+      frameRef.current = requestAnimationFrame(step);
     }
 
-    function animate(timestamp: number) {
-      drawFrame(timestamp);
-      frameRef.current = requestAnimationFrame(animate);
-    }
+    init();
 
-    if (reducedMotion) {
-      drawFrame(0);
+    if (reduceMotion) {
+      drawStatic();
     } else {
-      frameRef.current = requestAnimationFrame(animate);
+      frameRef.current = requestAnimationFrame(step);
     }
+
+    // On window resize, just re-fit the canvas to the new dimensions. Do NOT
+    // regenerate clusters — the user wants the same initial set to float forever.
+    // Off-screen clusters will naturally wrap back in thanks to step()'s wrap logic.
+    let resizeTimer: number | null = null;
+    const onResize = () => {
+      if (resizeTimer !== null) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        resize();
+        if (reduceMotion) drawStatic();
+      }, 120);
+    };
+    window.addEventListener('resize', onResize);
+
+    // Also observe the canvas element itself. The hero can change height (e.g.,
+    // when the "Try out a demo" toggle swaps in taller content) without firing
+    // a window resize. Without this, the canvas backing store stays at the old
+    // dimensions while its CSS box grows, so node positions (stored in internal
+    // coords) visually scale away from the cursor's CSS-px coords — clicks
+    // appear offset. Only call resize(); do NOT re-init, clusters must stay
+    // stable per the hard requirement.
+    const resizeObserver = new ResizeObserver(() => {
+      resize();
+      if (reduceMotion) drawStatic();
+    });
+    resizeObserver.observe(canvas);
+
+    // Pointer handlers. The canvas has pointer-events:none so clicks on UI above
+    // still work; we read the pointer from window events and convert to canvas-
+    // local coords via getBoundingClientRect.
+    const updateMouseFromEvent = (e: PointerEvent) => {
+      const rect = canvas!.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      mouse.x = x;
+      mouse.y = y;
+      mouse.inside = x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
+    };
+    const onPointerMove = (e: PointerEvent) => updateMouseFromEvent(e);
+    const onPointerDown = (e: PointerEvent) => { updateMouseFromEvent(e); mouse.active = true; };
+    const onPointerUp = () => { mouse.active = false; };
+    window.addEventListener('pointermove', onPointerMove, {passive: true});
+    window.addEventListener('pointerdown', onPointerDown, {passive: true});
+    window.addEventListener('pointerup', onPointerUp, {passive: true});
+    window.addEventListener('pointercancel', onPointerUp, {passive: true});
 
     return () => {
       cancelAnimationFrame(frameRef.current);
-      window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('resize', onResize);
+      resizeObserver.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointerup', onPointerUp);
-      window.removeEventListener('resize', resize);
-      themeObs.disconnect();
+      window.removeEventListener('pointercancel', onPointerUp);
+      if (resizeTimer !== null) window.clearTimeout(resizeTimer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <canvas ref={canvasRef} className="network-bg" aria-hidden="true" />;
