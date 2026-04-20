@@ -2489,9 +2489,8 @@ function HighThroughputCombined(): ReactNode {
           </div>
 
           {/* ═══ Footer ═══ */}
-          <div className="flow-proto-footer" style={{ maxWidth: '1400px', margin: '1.25rem auto 0' }}>
+          <div className="flow-proto-footer" style={{ maxWidth: '1400px', margin: '1.25rem auto 0', justifyContent: 'center' }}>
             <span className="flow-proto-rate">~10,000 processes/hour</span>
-            <span className="flow-proto-checkpoint">Fully checkpointed &mdash; restart from any point</span>
           </div>
           <p className="flow-proto-disclaimer">
             Stylized preview &mdash; actual <code>verdi process list</code> output is not as animated or colorful as shown.
@@ -3702,7 +3701,7 @@ const TUTORIAL_STEPS = [
   },
   {
     title: '6. Watch AiiDA work',
-    desc: "AiiDA automatically:\n\u2022 Generates a Slurm script\n\u2022 Uploads files via SSH\n\u2022 Submits the job\n\u2022 Monitors the scheduler\n\u2022 Retrieves results when done",
+    desc: "AiiDA automatically:\n\u2022 Generates a Slurm script\n\u2022 Uploads files via SSH\n\u2022 Submits the job\n\u2022 Monitors the scheduler\n\u2022 Retrieves results when done\n\nAnd it's all fully checkpointed \u2014 turn off your computer and AiiDA will resume from where it left off.",
     file: '_aiiida_submit_script.sh',
     code: SLURM_SCRIPT,
     hint: 'watch verdi process list --all',
