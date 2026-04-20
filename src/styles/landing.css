@@ -1292,12 +1292,7 @@ main > section > h2::after {
   margin-left: clamp(4px, 0.7vw, 10px);
   flex: 1;
   min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.tut-tabs::-webkit-scrollbar {
-  display: none;
+  overflow: hidden;
 }
 
 .tut-tab {
@@ -1310,7 +1305,8 @@ main > section > h2::after {
   border-radius: clamp(2px, 0.35vw, 4px);
   cursor: pointer;
   white-space: nowrap;
-  max-width: clamp(80px, 12vw, 140px);
+  flex: 0 1 auto;
+  min-width: clamp(40px, 6vw, 70px);
   overflow: hidden;
   text-overflow: ellipsis;
   transition:
