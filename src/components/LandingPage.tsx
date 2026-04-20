@@ -3702,7 +3702,7 @@ const TUTORIAL_STEPS = [
   {
     title: '6. Watch AiiDA work',
     desc: "AiiDA automatically:\n\u2022 Generates a Slurm script\n\u2022 Uploads files via SSH\n\u2022 Submits the job\n\u2022 Monitors the scheduler\n\u2022 Retrieves results when done\n\nAnd it's all fully checkpointed \u2014 turn off your computer and AiiDA will resume from where it left off.",
-    file: '_aiiida_submit_script.sh',
+    file: '_aiida_submit_script.sh',
     code: SLURM_SCRIPT,
     hint: 'watch verdi process list --all',
   },
@@ -4272,6 +4272,7 @@ function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: 
             type="button"
             className={`tut-tab${activeTab === null ? ' active' : ''}`}
             onClick={e => { e.stopPropagation(); setActiveTab(null); }}
+            title="terminal"
           >
             terminal
           </button>
