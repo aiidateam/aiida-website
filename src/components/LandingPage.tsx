@@ -2493,6 +2493,9 @@ function HighThroughputCombined(): ReactNode {
             <span className="flow-proto-rate">~10,000 processes/hour</span>
             <span className="flow-proto-checkpoint">Fully checkpointed &mdash; restart from any point</span>
           </div>
+          <p className="flow-proto-disclaimer">
+            Stylized preview &mdash; actual <code>verdi process list</code> output is not as animated or colorful as shown.
+          </p>
         </>
       ) : (
         <InteractiveTutorial
