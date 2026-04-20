@@ -952,7 +952,13 @@ main > section > h2::after {
 @media (max-width: 768px) {
   .provenance-graph-wrapper {
     margin: 0 -1rem;
-    padding: 0 1rem;
+    padding: 1rem;
+    overflow-x: visible;
+  }
+
+  .provenance-graph {
+    min-width: 0;
+    min-height: 0;
   }
 
   .provenance-info-bar {
