@@ -2126,6 +2126,56 @@ function FlowPrototype(): ReactNode {
   );
 }
 
+type PillarKey = 'scalable' | 'community' | 'fair';
+
+const HERO_PILLARS: ReadonlyArray<{
+  key: PillarKey;
+  variant: 'blue' | 'green' | 'orange';
+  label: string;
+  title: string;
+  body: ReactNode;
+}> = [
+  {
+    key: 'scalable',
+    variant: 'blue',
+    label: 'Scalable & Performant',
+    title: 'Scalable & Performant',
+    body: (
+      <>
+        Proven records of ~10,000 processes/hour, and fast enough to drive an
+        entire full supercomputer &mdash; with{' '}
+        <strong>zero installation on the server</strong>.
+      </>
+    ),
+  },
+  {
+    key: 'community',
+    variant: 'green',
+    label: 'Community-Driven',
+    title: 'Community-Driven',
+    body: (
+      <>
+        Over <strong>+100 registered plugins</strong>, a dedicated Discourse
+        channel for troubleshooting, and an active community welcoming new
+        contributors.
+      </>
+    ),
+  },
+  {
+    key: 'fair',
+    variant: 'orange',
+    label: 'F.A.I.R by design',
+    title: 'F.A.I.R by design',
+    body: (
+      <>
+        &ldquo;F.A.I.R.&rdquo; refers to the data management principles of{' '}
+        <strong>Findable, Accessible, Interoperable, and Reusable</strong>
+        &nbsp;&mdash; designed to improve data sharing and research efficiency.
+      </>
+    ),
+  },
+];
+
 function HighThroughputCombined(): ReactNode {
   // ─── Try-it-out mode ───
   const [tryMode, setTryMode] = useState(false);
@@ -2133,6 +2183,39 @@ function HighThroughputCombined(): ReactNode {
   const [syncPhase, setSyncPhase] = useState(-1);
   const [syncRunning, setSyncRunning] = useState(false);
   const enlargedRowRef = useRef<HTMLDivElement>(null);
+  const laptopRowRef = useRef<HTMLDivElement>(null);
+
+  // Measure the laptop's current position synchronously (before React unmounts
+  // the auto-mode row), then smoothly scroll it to the top of the viewport.
+  const enterTryMode = useCallback(() => {
+    const el = laptopRowRef.current;
+    if (el) {
+      const rect = el.getBoundingClientRect();
+      const offset = Math.max(20, window.innerHeight * 0.08);
+      window.scrollTo({ top: window.scrollY + rect.top - offset, behavior: 'smooth' });
+    }
+    setTryMode(true);
+  }, []);
+
+  // ─── Pillar popovers (Scalable / Community / F.A.I.R) ───
+  const [openPillar, setOpenPillar] = useState<PillarKey | null>(null);
+  const pillarsRef = useRef<HTMLUListElement | null>(null);
+  useEffect(() => {
+    if (!openPillar) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenPillar(null);
+    };
+    const onClick = (e: MouseEvent) => {
+      if (!pillarsRef.current) return;
+      if (!pillarsRef.current.contains(e.target as Node)) setOpenPillar(null);
+    };
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('mousedown', onClick);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('mousedown', onClick);
+    };
+  }, [openPillar]);
 
   // Reset enlarged flag whenever tryMode is toggled off so the next entry
   // into the tutorial starts from the standard side-by-side layout.
@@ -2493,19 +2576,69 @@ function HighThroughputCombined(): ReactNode {
           <img src={`${base}/img/aiida-logo-dark.svg`} alt="AiiDA" className="hero-brand-logo hero-brand-logo--dark" />
           <img src={`${base}/img/aiida-logo-light.svg`} alt="AiiDA" className="hero-brand-logo hero-brand-logo--light" />
         </div>
+        <p className="hero-tagline">Workflow Management System</p>
         <p className="hero-subtitle">
           <span className="hero-accent hero-accent--blue">A</span>utomated{' '}
           <span className="hero-accent hero-accent--green">I</span>nteractive{' '}
           <span className="hero-accent hero-accent--green">I</span>nfrastructure and{' '}
           <span className="hero-accent hero-accent--orange">D</span><span className="hero-accent hero-accent--orange">A</span>tabase
-          <br />
-          for Computational Science
         </p>
+        <ul className="hero-pillars" aria-label="Core principles" ref={pillarsRef}>
+          {HERO_PILLARS.map((p) => {
+            const isOpen = openPillar === p.key;
+            return (
+              <li key={p.key} className={`hero-pillar-wrap${isOpen ? ' is-open' : ''}`}>
+                <button
+                  type="button"
+                  className={`hero-pillar hero-pillar--${p.variant}${isOpen ? ' is-open' : ''}`}
+                  aria-expanded={isOpen}
+                  aria-haspopup="dialog"
+                  onClick={() => setOpenPillar(isOpen ? null : p.key)}
+                >
+                  <span className="hero-pillar-dot" aria-hidden="true" />
+                  <span className="hero-pillar-label">{p.label}</span>
+                </button>
+                {isOpen && (
+                  <div
+                    className={`hero-pillar-pop hero-pillar-pop--${p.variant}`}
+                    role="dialog"
+                    aria-label={p.title}
+                  >
+                    <div className="hero-pillar-pop-arrow" aria-hidden="true" />
+                    <button
+                      type="button"
+                      className="hero-pillar-pop-close"
+                      aria-label="Close"
+                      onClick={(e) => { e.stopPropagation(); setOpenPillar(null); }}
+                    >
+                      {'×'}
+                    </button>
+                    <h4 className="hero-pillar-pop-title">{p.title}</h4>
+                    <p className="hero-pillar-pop-body">{p.body}</p>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      {/* ═══ Try it out toggle (moved above laptop) ═══ */}
+      <div className="throughput-try-toggle throughput-try-toggle--top">
+        {!tryMode ? (
+          <button className="button button--primary throughput-try-btn" onClick={enterTryMode}>
+            Try out a demo
+          </button>
+        ) : (
+          <button className="tut-btn tut-btn-back throughput-try-btn" onClick={() => { setTryMode(false); setSyncPhase(-1); setSyncRunning(false); }}>
+            {'\u2190'} Back to overview
+          </button>
+        )}
       </div>
 
       {!tryMode ? (
         <>
-          <div className="tp-row">
+          <div ref={laptopRowRef} className="tp-row">
             {laptopFrame(autoScreenContent)}
             <div className="tp-right-group">
               {flowBridge}
@@ -2513,10 +2646,6 @@ function HighThroughputCombined(): ReactNode {
             </div>
           </div>
 
-          {/* ═══ Footer ═══ */}
-          <div className="flow-proto-footer" style={{ maxWidth: '1400px', margin: '1.25rem auto 0', justifyContent: 'center' }}>
-            <span className="flow-proto-rate">~10,000 processes/hour</span>
-          </div>
           <p className="flow-proto-disclaimer">
             Stylized preview &mdash; actual <code>verdi process list</code> output is not as animated or colorful as shown.
           </p>
@@ -2547,18 +2676,6 @@ function HighThroughputCombined(): ReactNode {
         />
       )}
 
-      {/* ═══ Try it out toggle ═══ */}
-      <div className="throughput-try-toggle">
-        {!tryMode ? (
-          <button className="button button--primary throughput-try-btn" onClick={() => setTryMode(true)}>
-            Try out a demo {'\u2192'}
-          </button>
-        ) : (
-          <button className="tut-btn tut-btn-back throughput-try-btn" onClick={() => { setTryMode(false); setSyncPhase(-1); setSyncRunning(false); }}>
-            {'\u2190'} Back to overview
-          </button>
-        )}
-      </div>
     </section>
   );
 }
