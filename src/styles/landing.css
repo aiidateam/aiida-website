@@ -3793,6 +3793,103 @@ main > section > h2::after {
   border-radius: 0;
 }
 
+/* ─── Green-dot enlarge toggle (tutorial terminal only) ───
+   Overrides the plain decorative dot: it becomes an interactive button
+   with pulse, pointer cursor, focus ring, and ARIA affordances. Scoped
+   via the parent so autoScreenContent's green dot stays inert. */
+.tp-screen-panel--try .verdi-console-titlebar .terminal-proto-dot--toggle {
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  /* Match the plain decorative dot's size exactly */
+  width: clamp(7px, 1vw, 12px);
+  height: clamp(7px, 1vw, 12px);
+  border-radius: 50%;
+  background: #28c840;
+  flex-shrink: 0;
+  animation: tut-green-pulse 2.6s ease-in-out infinite;
+  transition: transform 0.15s ease;
+}
+
+.tp-screen-panel--try
+  .verdi-console-titlebar
+  .terminal-proto-dot--toggle:hover {
+  transform: scale(1.15);
+}
+
+.tp-screen-panel--try
+  .verdi-console-titlebar
+  .terminal-proto-dot--toggle:focus-visible {
+  outline: 2px solid #28c840;
+  outline-offset: 2px;
+}
+
+@keyframes tut-green-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(40, 200, 64, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(40, 200, 64, 0);
+  }
+}
+
+/* Label that sits next to the green dot, same color family. Clickable
+   (forwards to the same toggle) so the whole affordance feels like one
+   larger tap target. */
+.tut-terminal-enlarge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: clamp(4px, 0.5vw, 6px);
+  font-family: var(--font-mono);
+  font-size: clamp(10px, 0.9vw, 11px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #1e9a30;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  opacity: 0.95;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease;
+}
+
+.tut-terminal-enlarge-label:hover {
+  opacity: 1;
+  color: #28c840;
+}
+
+.tut-terminal-enlarge-label-icon {
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+/* Enlarged layout: laptop fills the row, right group is not rendered. */
+.tp-row--enlarged {
+  justify-content: center;
+}
+
+.tp-row--enlarged .tp-laptop {
+  flex: 1 1 100%;
+  max-width: 1400px;
+}
+
+.tp-row--enlarged .tp-laptop-lid {
+  width: 96%;
+}
+
+/* Respect user preference: disable the dot pulse under reduced-motion. */
+@media (prefers-reduced-motion: reduce) {
+  .tp-screen-panel--try .verdi-console-titlebar .terminal-proto-dot--toggle {
+    animation: none;
+  }
+}
+
 /* ─── Flow bridge (between laptop and server) ─── */
 .tp-flow-bridge {
   position: relative;

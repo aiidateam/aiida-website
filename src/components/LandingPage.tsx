@@ -2129,8 +2129,33 @@ function FlowPrototype(): ReactNode {
 function HighThroughputCombined(): ReactNode {
   // ─── Try-it-out mode ───
   const [tryMode, setTryMode] = useState(false);
+  const [enlarged, setEnlarged] = useState(false);
   const [syncPhase, setSyncPhase] = useState(-1);
   const [syncRunning, setSyncRunning] = useState(false);
+  const enlargedRowRef = useRef<HTMLDivElement>(null);
+
+  // Reset enlarged flag whenever tryMode is toggled off so the next entry
+  // into the tutorial starts from the standard side-by-side layout.
+  useEffect(() => {
+    if (!tryMode && enlarged) setEnlarged(false);
+  }, [tryMode, enlarged]);
+
+  const handleToggleEnlarge = useCallback(() => {
+    setEnlarged(prev => !prev);
+  }, []);
+
+  // When the user enlarges, the laptop row is often well above or below
+  // the fold — bring it into view so they don't have to hunt for it.
+  useEffect(() => {
+    if (!enlarged) return;
+    requestAnimationFrame(() => {
+      const el = enlargedRowRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const offset = Math.max(20, window.innerHeight * 0.08);
+      window.scrollTo({ top: window.scrollY + rect.top - offset, behavior: 'smooth' });
+    });
+  }, [enlarged]);
 
   const handlePhaseChange = useCallback((phase: number, running: boolean) => {
     setSyncPhase(phase);
@@ -2499,16 +2524,20 @@ function HighThroughputCombined(): ReactNode {
       ) : (
         <InteractiveTutorial
           onPhaseChange={handlePhaseChange}
+          enlarged={enlarged}
+          onToggleEnlarge={handleToggleEnlarge}
           renderLayout={({ terminal, instructions }) => (
             <>
-              <div className="tp-row">
+              <div ref={enlargedRowRef} className={`tp-row${enlarged ? ' tp-row--enlarged' : ''}`}>
                 {laptopFrame(
                   <div className="tp-screen-panel tp-screen-panel--try">{terminal}</div>
                 )}
-                <div className="tp-right-group">
-                  {flowBridge}
-                  {serverCol}
-                </div>
+                {!enlarged && (
+                  <div className="tp-right-group">
+                    {flowBridge}
+                    {serverCol}
+                  </div>
+                )}
               </div>
               <div className="tp-try-instructions-bar">
                 {instructions}
@@ -3782,7 +3811,7 @@ function highlightCode(code: string, filename: string): ReactNode[] {
   return result;
 }
 
-function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: (phase: number, running: boolean) => void; renderLayout?: (parts: { terminal: ReactNode; instructions: ReactNode }) => ReactNode }): ReactNode {
+function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEnlarge }: { onPhaseChange?: (phase: number, running: boolean) => void; renderLayout?: (parts: { terminal: ReactNode; instructions: ReactNode }) => ReactNode; enlarged?: boolean; onToggleEnlarge?: () => void }): ReactNode {
   const [step, setStep] = useState(0);
   const [maxStepReached, setMaxStepReached] = useState(0);
   const [tutorialComplete, setTutorialComplete] = useState(false);
@@ -4266,7 +4295,29 @@ function InteractiveTutorial({ onPhaseChange, renderLayout }: { onPhaseChange?: 
       <div className="verdi-console-titlebar">
         <span className="terminal-proto-dot terminal-proto-dot--red" />
         <span className="terminal-proto-dot terminal-proto-dot--yellow" />
-        <span className="terminal-proto-dot terminal-proto-dot--green" />
+        {onToggleEnlarge ? (
+          <>
+            <button
+              type="button"
+              className="terminal-proto-dot terminal-proto-dot--green terminal-proto-dot--toggle"
+              onMouseDown={e => e.preventDefault()}
+              onClick={e => { e.stopPropagation(); onToggleEnlarge(); }}
+              aria-label={enlarged ? 'Shrink terminal back to side-by-side layout' : 'Enlarge terminal to full width'}
+              aria-pressed={!!enlarged}
+              title={enlarged ? 'tap to shrink' : 'tap to enlarge'}
+            />
+            <span
+              className="tut-terminal-enlarge-label"
+              aria-hidden="true"
+              onClick={e => { e.stopPropagation(); onToggleEnlarge(); }}
+            >
+              {enlarged ? 'tap to shrink' : 'tap to enlarge'}
+              <span className="tut-terminal-enlarge-label-icon">{enlarged ? '⇹' : '⇸'}</span>
+            </span>
+          </>
+        ) : (
+          <span className="terminal-proto-dot terminal-proto-dot--green" />
+        )}
         <div className="tut-tabs">
           <button
             type="button"
