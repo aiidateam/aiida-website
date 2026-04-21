@@ -2423,7 +2423,7 @@ function HighThroughputCombined(): ReactNode {
   );
 
   // ─── Laptop frame builder (same silhouette as LaptopSvg) ───
-  const laptopFrame = (screenContent: ReactNode) => (
+  const laptopFrame = (screenContent: ReactNode, footnote?: ReactNode) => (
     <div className="tp-laptop">
       <div className="tp-laptop-lid">
         <div className="tp-laptop-camera" />
@@ -2439,6 +2439,7 @@ function HighThroughputCombined(): ReactNode {
         <rect x="0" y="38" width="680" height="12" rx="5"
           fill="var(--device-border)" opacity="0.25" />
       </svg>
+      {footnote}
     </div>
   );
 
@@ -2637,19 +2638,18 @@ function HighThroughputCombined(): ReactNode {
       </div>
 
       {!tryMode ? (
-        <>
-          <div ref={laptopRowRef} className="tp-row">
-            {laptopFrame(autoScreenContent)}
-            <div className="tp-right-group">
-              {flowBridge}
-              {serverCol}
-            </div>
+        <div ref={laptopRowRef} className="tp-row">
+          {laptopFrame(
+            autoScreenContent,
+            <p className="flow-proto-disclaimer">
+              Stylized preview &mdash; actual <code>verdi process list</code> output is not as animated or colorful as shown.
+            </p>
+          )}
+          <div className="tp-right-group">
+            {flowBridge}
+            {serverCol}
           </div>
-
-          <p className="flow-proto-disclaimer">
-            Stylized preview &mdash; actual <code>verdi process list</code> output is not as animated or colorful as shown.
-          </p>
-        </>
+        </div>
       ) : (
         <InteractiveTutorial
           onPhaseChange={handlePhaseChange}
