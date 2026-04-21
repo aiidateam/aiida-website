@@ -3623,12 +3623,11 @@ main > section > h2::after {
 }
 
 .flow-proto-disclaimer {
-  max-width: 1400px;
-  margin: 0.6rem auto 0;
+  margin: 0.5rem 0 0;
   font-size: 0.8rem;
   font-style: italic;
   color: var(--color-text-muted);
-  text-align: center;
+  text-align: left;
   opacity: 0.75;
 }
 
