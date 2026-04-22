@@ -3,11 +3,17 @@ import { defineConfig } from "astro/config";
 
 import react from "@astrojs/react";
 
-const base = "/aiida-website";
+// `base` and `site` are overridable via env so CI can publish the same
+// source to different URLs without code changes:
+//   - Production:  defaults apply → https://aiidateam.github.io/aiida-website/
+//   - PR previews: ASTRO_BASE=/aiida-website/pr-preview/pr-<N>
+//   - Future custom domain: ASTRO_BASE=/ and ASTRO_SITE=https://aiida.net
+const base = process.env.ASTRO_BASE ?? "/aiida-website";
+const site = process.env.ASTRO_SITE ?? "https://aiidateam.github.io";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://khsrali.github.io",
+  site,
   base,
   integrations: [react()],
   // All backward-compatibility redirects from the old website live here.
