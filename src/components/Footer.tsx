@@ -11,9 +11,7 @@ export default function Footer() {
         <a href="https://github.com/aiidateam/aiida-core/blob/main/LICENSE.txt" target="_blank" rel="noopener noreferrer">License</a>
       </div>
       <p className="footer-copy">
-        &copy; {new Date().getFullYear()} AiiDA Team &mdash;
-        developed at <a href="https://www.psi.ch/en/lms/msd-group" target="_blank" rel="noopener noreferrer">PSI</a> and <a href="http://theossrv1.epfl.ch/" target="_blank" rel="noopener noreferrer">EPFL</a>.
-        All rights reserved.
+        &copy; {new Date().getFullYear()} AiiDA Team &mdash; All rights reserved.
       </p>
     </footer>
   );
