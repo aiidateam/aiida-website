@@ -317,8 +317,21 @@ main > section > h2::after {
 }
 
 @media (max-width: 640px) {
+  .hero-pillars {
+    position: relative;
+    transition: margin-bottom 180ms ease;
+  }
+  .hero-pillars:has(.hero-pillar-wrap.is-open) {
+    margin-bottom: calc(var(--pillar-pop-h, 200px) + 16px);
+  }
+  .hero-pillar-wrap {
+    position: static;
+  }
   .hero-pillar-pop {
-    width: min(300px, 92vw);
+    width: min(360px, 92vw);
+  }
+  .hero-pillar-pop-arrow {
+    display: none;
   }
 }
 
