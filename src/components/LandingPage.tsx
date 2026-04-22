@@ -905,8 +905,9 @@ function ProvenanceGraph(): ReactNode {
     <section className="provenance-section" data-reveal>
       <h2>Full provenance. Full control.</h2>
       <p className="provenance-subtitle">
-        Every input, calculation, and output is tracked automatically.
-        Hover a node to see what depends on it &mdash; then clean up mistakes or reuse successful results.
+        Every input, calculation, and output is tracked automatically &mdash;
+        keeping your research findable, traceable, and reusable, by FAIR design.
+        In this demo, hover a node to see what depends on what.
       </p>
       <div className="provenance-graph-wrapper">
         <svg viewBox="0 0 900 620" className="provenance-graph">
