@@ -2243,6 +2243,19 @@ function HighThroughputCombined(): ReactNode {
     };
   }, [openPillar]);
 
+  // Mobile: reserve exactly enough space below the pill row for the open
+  // popover, so the "Try out a demo" button below is never hidden.
+  useEffect(() => {
+    const el = pillarsRef.current;
+    if (!el) return;
+    if (!openPillar) {
+      el.style.removeProperty('--pillar-pop-h');
+      return;
+    }
+    const pop = el.querySelector<HTMLElement>('.hero-pillar-pop');
+    if (pop) el.style.setProperty('--pillar-pop-h', `${pop.offsetHeight}px`);
+  }, [openPillar]);
+
   // Reset enlarged flag whenever tryMode is toggled off so the next entry
   // into the tutorial starts from the standard side-by-side layout.
   useEffect(() => {
