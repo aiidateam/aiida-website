@@ -420,7 +420,6 @@
   }
 
   .eco-layer--extensions {
-    flex-wrap: wrap;
     gap: 1rem;
   }
 
@@ -436,6 +435,10 @@
 }
 
 @media (max-width: 600px) {
+  .eco-page {
+    padding: 0 1rem 3rem;
+  }
+
   .eco-hero h1 {
     font-size: 1.8rem;
   }
@@ -452,19 +455,83 @@
     grid-template-columns: 1fr;
   }
 
-  .eco-layer--platforms {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  /* Keep the desktop's layered shape on mobile — shrink, don't stack */
+  .eco-layers {
+    padding: 1.5rem 0 2rem;
   }
 
-  .eco-layer--extensions {
-    flex-direction: column;
-    align-items: center;
+  .eco-layer--platforms {
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .eco-layer-node {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .eco-mc-logo {
+    width: 48px;
+  }
+
+  .eco-lab-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .eco-layer-node-label {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .eco-layer-node-sub {
+    font-size: 0.64rem;
+    text-align: center;
   }
 
   .eco-layer-connectors {
-    display: none;
+    height: 24px;
+  }
+
+  .eco-core-block {
+    width: 100%;
+    padding: 1rem 0.75rem;
+  }
+
+  .eco-core-logo {
+    height: 34px;
+  }
+
+  .eco-core-sub {
+    font-size: 0.7rem;
+    text-align: center;
+  }
+
+  .eco-layer--extensions {
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .eco-ext-node {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.65rem 0.4rem;
+  }
+
+  .eco-ext-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .eco-ext-label {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .eco-ext-sub {
+    font-size: 0.6rem;
+    text-align: center;
   }
 }
 
