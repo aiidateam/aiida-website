@@ -3282,12 +3282,22 @@ const testimonials = [
 
 function TestimonialCard({t}: {t: typeof testimonials[number]}) {
   const [expanded, setExpanded] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const toggle = () => {
+    const next = !expanded;
+    setExpanded(next);
+    if (next && cardRef.current && window.matchMedia('(max-width: 600px)').matches) {
+      requestAnimationFrame(() => {
+        cardRef.current?.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'nearest'});
+      });
+    }
+  };
   return (
-    <div className={`testimonial-card ${expanded ? 'testimonial-card--expanded' : ''}`}>
+    <div ref={cardRef} className={`testimonial-card ${expanded ? 'testimonial-card--expanded' : ''}`}>
       <blockquote>
         <span className="testimonial-text">{t.quote}</span>
       </blockquote>
-      <button className="testimonial-toggle" onClick={() => setExpanded(!expanded)} aria-label={expanded ? 'Show less' : 'Read more'}>
+      <button className="testimonial-toggle" onClick={toggle} aria-label={expanded ? 'Show less' : 'Read more'}>
         {expanded ? 'Show less' : 'Read more'}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <polyline points={expanded ? '18 15 12 9 6 15' : '6 9 12 15 18 9'} />
