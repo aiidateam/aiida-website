@@ -485,7 +485,6 @@ const plugins = [
     code: 'Quantum ESPRESSO',
     color: '#e85d04',
     install: 'pip install aiida-quantumespresso',
-    url: 'https://aiida-quantumespresso.readthedocs.io',
     desc: 'Full integration for Quantum ESPRESSO — pw.x, ph.x, pp.x and more. Production-ready workflows for relaxation, bands, and phonons.',
     components: [
       {type: 'WorkChain', items: ['PwBaseWorkChain', 'PwRelaxWorkChain', 'PwBandsWorkChain']},
@@ -498,7 +497,6 @@ const plugins = [
     code: 'Any executable',
     color: '#0096de',
     install: 'pip install aiida-shell',
-    url: 'https://aiida-shell.readthedocs.io',
     desc: 'Run any command-line tool as an AiiDA process. No plugin code needed — the fastest way to get started.',
     components: [
       {type: 'Function', items: ['launch_shell_job']},
@@ -511,7 +509,6 @@ const plugins = [
     code: 'VASP',
     color: '#7209b7',
     install: 'pip install aiida-vasp',
-    url: 'https://aiida-vasp.readthedocs.io',
     desc: 'Automate VASP calculations with convergence testing, relaxation workflows, and structured output parsing.',
     components: [
       {type: 'WorkChain', items: ['RelaxWorkChain', 'ConvergeWorkChain']},
@@ -524,7 +521,6 @@ const plugins = [
     code: 'CP2K',
     color: '#2d6a4f',
     install: 'pip install aiida-cp2k',
-    url: 'https://aiida-cp2k.readthedocs.io',
     desc: 'Interface to the CP2K atomistic simulation package for DFT, molecular dynamics, and more.',
     components: [
       {type: 'WorkChain', items: ['Cp2kBaseWorkChain']},
@@ -650,7 +646,7 @@ function PluginShowcase(): ReactNode {
                 onMouseEnter={() => { setActiveIdx(i); setSelectedType(null); }}>
                 <div className="plugin-item-dot" style={{background: p.color}} />
                 <div className="plugin-item-content">
-                  <a className="plugin-item-name" href={p.url} target="_blank" rel="noopener noreferrer">{p.name}</a>
+                  <div className="plugin-item-name">{p.name}</div>
                   <div className="plugin-item-code">{p.code}</div>
                 </div>
               </div>
