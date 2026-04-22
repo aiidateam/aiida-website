@@ -2183,6 +2183,9 @@ function HighThroughputCombined(): ReactNode {
   const [enlarged, setEnlarged] = useState(false);
   const [syncPhase, setSyncPhase] = useState(-1);
   const [syncRunning, setSyncRunning] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [tabMessage, setTabMessage] = useState<string | null>(null);
+  const welcomeShownRef = useRef(false);
   const enlargedRowRef = useRef<HTMLDivElement>(null);
   const laptopRowRef = useRef<HTMLDivElement>(null);
 
@@ -2196,6 +2199,28 @@ function HighThroughputCombined(): ReactNode {
       window.scrollTo({ top: window.scrollY + rect.top - offset, behavior: 'smooth' });
     }
     setTryMode(true);
+    setEnlarged(true);
+    if (!welcomeShownRef.current) {
+      welcomeShownRef.current = true;
+      setShowWelcome(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showWelcome) return;
+    const t = setTimeout(() => setShowWelcome(false), 15000);
+    return () => clearTimeout(t);
+  }, [showWelcome]);
+
+  useEffect(() => {
+    if (!tabMessage) return;
+    const t = setTimeout(() => setTabMessage(null), 8000);
+    return () => clearTimeout(t);
+  }, [tabMessage]);
+
+  const handleTabOpen = useCallback((tabName: string) => {
+    setShowWelcome(false);
+    setTabMessage(tabName);
   }, []);
 
   // ─── Pillar popovers (Scalable / Community / FAIR) ───
@@ -2656,6 +2681,35 @@ function HighThroughputCombined(): ReactNode {
           onPhaseChange={handlePhaseChange}
           enlarged={enlarged}
           onToggleEnlarge={handleToggleEnlarge}
+          onTabOpen={handleTabOpen}
+          onTabActivate={(name) => setTabMessage(prev => (prev === name ? null : prev))}
+          overlay={tabMessage ? (
+            <div className="tut-welcome-banner" role="status">
+              <span className="tut-welcome-banner-icon" aria-hidden="true">{'▶'}</span>
+              <span className="tut-welcome-banner-text">
+                Nice! A new tab opened &mdash; click <strong>{tabMessage}</strong> to view it.
+              </span>
+              <button
+                type="button"
+                className="tut-welcome-banner-close"
+                onClick={() => setTabMessage(null)}
+                aria-label="Dismiss"
+              >{'×'}</button>
+            </div>
+          ) : showWelcome ? (
+            <div className="tut-welcome-banner" role="status">
+              <span className="tut-welcome-banner-icon" aria-hidden="true">{'▶'}</span>
+              <span className="tut-welcome-banner-text">
+                You're in a sandboxed demo &mdash; nothing is saved. Click the terminal and type any command, or hit <strong>Paste &amp; Run</strong> to follow along.
+              </span>
+              <button
+                type="button"
+                className="tut-welcome-banner-close"
+                onClick={() => setShowWelcome(false)}
+                aria-label="Dismiss"
+              >{'×'}</button>
+            </div>
+          ) : null}
           renderLayout={({ terminal, instructions }) => (
             <>
               <div ref={enlargedRowRef} className={`tp-row${enlarged ? ' tp-row--enlarged' : ''}`}>
@@ -3929,7 +3983,7 @@ function highlightCode(code: string, filename: string): ReactNode[] {
   return result;
 }
 
-function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEnlarge }: { onPhaseChange?: (phase: number, running: boolean) => void; renderLayout?: (parts: { terminal: ReactNode; instructions: ReactNode }) => ReactNode; enlarged?: boolean; onToggleEnlarge?: () => void }): ReactNode {
+function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEnlarge, overlay, onTabOpen, onTabActivate }: { onPhaseChange?: (phase: number, running: boolean) => void; renderLayout?: (parts: { terminal: ReactNode; instructions: ReactNode }) => ReactNode; enlarged?: boolean; onToggleEnlarge?: () => void; overlay?: ReactNode; onTabOpen?: (tabName: string) => void; onTabActivate?: (tabName: string) => void }): ReactNode {
   const [step, setStep] = useState(0);
   const [maxStepReached, setMaxStepReached] = useState(0);
   const [tutorialComplete, setTutorialComplete] = useState(false);
@@ -4008,9 +4062,10 @@ function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEn
       if (prev.some(t => t.name === tabName)) return prev;
       // First time this file appears — flash its tab so the user notices it.
       setTabCallout(tabName);
+      onTabOpen?.(tabName);
       return [...prev, {name: tabName, code: tabCode}];
     });
-  }, [step]);
+  }, [step, onTabOpen]);
 
   // Pin the live console to the bottom whenever new output arrives or the
   // user switches back to the terminal tab (the scroll container is
@@ -4450,18 +4505,13 @@ function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEn
               key={tab.name}
               type="button"
               className={`tut-tab${activeTab === tab.name ? ' active' : ''}${tabCallout === tab.name ? ' tut-tab-flash' : ''}`}
-              onClick={e => { e.stopPropagation(); setActiveTab(tab.name); setTabCallout(null); }}
+              onClick={e => { e.stopPropagation(); setActiveTab(tab.name); setTabCallout(null); onTabActivate?.(tab.name); }}
               title={tab.name}
             >
               {tab.name}
             </button>
           ))}
         </div>
-        {tabCallout && (
-          <div className="tut-tab-callout" aria-hidden="true">
-            file opened in a new tab
-          </div>
-        )}
       </div>
       {activeTab === null ? (
         <div className="tut-terminal-scroll" ref={outRef}>
@@ -4501,6 +4551,7 @@ function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEn
           {highlightCode(activeFile?.code || '', activeFile?.name || '')}
         </pre>
       )}
+      {overlay}
     </div>
   );
 

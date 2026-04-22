@@ -1278,6 +1278,7 @@ main > section > h2::after {
   cursor: text;
   min-width: 0;
   font-family: var(--font-mono);
+  position: relative;
 }
 
 .tut-terminal-scroll {
@@ -3970,41 +3971,89 @@ main > section > h2::after {
   }
 }
 
-.tut-tab-callout {
+.tut-welcome-banner {
   position: absolute;
-  top: calc(100% + 6px);
-  right: 12px;
-  background: #30b808;
-  color: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: max-content;
+  max-width: min(92%, 44rem);
+  padding: 0.7rem 0.95rem;
+  background: var(--color-bg-tinted);
+  border: 1px solid var(--color-border-accent);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 6px;
   font-family: var(--font-base);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 4px 9px;
-  border-radius: 4px;
-  pointer-events: none;
-  white-space: nowrap;
-  box-shadow: 0 4px 14px rgba(48, 184, 8, 0.35);
-  z-index: 5;
-  animation: tut-callout-fade 5.5s ease-in-out both;
+  font-size: 0.88rem;
+  color: var(--color-text);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18);
+  z-index: 10;
+  pointer-events: auto;
+  animation: tut-welcome-fade-in 0.25s ease-out;
 }
 
-@keyframes tut-callout-fade {
-  0% {
+@keyframes tut-welcome-fade-in {
+  from {
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translate(-50%, calc(-50% + 6px));
   }
-  10% {
+  to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, -50%);
   }
-  88% {
-    opacity: 1;
-    transform: translateY(0);
+}
+
+.tut-welcome-banner-icon {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.tut-welcome-banner-text {
+  flex: 1;
+  line-height: 1.45;
+}
+
+.tut-welcome-banner-close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.tut-welcome-banner-close:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .tut-welcome-banner {
+    max-width: 94%;
+    padding: 0.55rem 0.75rem;
+    gap: 0.55rem;
+    font-size: 0.78rem;
   }
-  100% {
-    opacity: 0;
-    transform: translateY(-4px);
+  .tut-welcome-banner-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
   }
 }
 
