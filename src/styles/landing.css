@@ -798,11 +798,6 @@ main > section > h2::after {
   font-size: 0.9rem;
   font-weight: 600;
   color: inherit;
-  text-decoration: none;
-}
-
-.plugin-item-name:hover {
-  text-decoration: underline;
 }
 
 .plugin-item-code {
@@ -956,9 +951,14 @@ main > section > h2::after {
 }
 
 @media (max-width: 600px) {
+  .plugin-section {
+    padding: 2rem 1rem;
+  }
+
   .plugin-left {
     flex-direction: column;
     align-items: center;
+    width: 100%;
   }
 
   .plugin-core {
@@ -973,10 +973,80 @@ main > section > h2::after {
   }
 
   .plugin-list {
-    width: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    width: 100%;
+    max-width: 360px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+
+  .plugin-item {
+    padding: 0.55rem 0.85rem;
+    gap: 0.6rem;
+  }
+
+  .plugin-item-name {
+    font-size: 0.85rem;
+  }
+
+  .plugin-item-code {
+    font-size: 0.7rem;
+  }
+
+  .plugin-registry-link {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+    padding-top: 0.75rem;
+  }
+
+  .plugin-right {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 420px;
+    gap: 0.75rem;
+    padding-top: 0;
+  }
+
+  .plugin-components {
+    gap: 0.5rem;
+  }
+
+  .plugin-component-group {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .plugin-component-type {
+    font-size: 0.65rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .plugin-component-item {
+    font-size: 0.68rem;
+    padding: 0.1rem 0.4rem;
+  }
+
+  .plugin-explain {
+    width: 100%;
+    padding: 1rem 1.1rem;
+    margin-left: 0;
+  }
+
+  .plugin-explain-title {
+    font-size: 0.78rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .plugin-explain-install {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .plugin-explain-text {
+    font-size: 0.85rem;
   }
 }
 
