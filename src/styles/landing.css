@@ -798,10 +798,11 @@ main > section > h2::after {
 }
 
 .plugin-registry-link {
-  font-size: 0.82rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding-left: 1.65rem;
-  margin-top: 0.25rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--color-border);
   color: var(--color-primary);
 }
 

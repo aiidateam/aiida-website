@@ -656,7 +656,7 @@ function PluginShowcase(): ReactNode {
               </div>
             ))}
             <a className="plugin-registry-link" href="https://aiidateam.github.io/aiida-registry/">
-              + 100 more plugins &rarr;
+              Browse all 100+ plugins in the registry &rarr;
             </a>
           </div>
         </div>
