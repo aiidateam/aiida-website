@@ -71,7 +71,7 @@ export default function Navbar() {
               <li><a href={`${base}/events`}>Events</a></li>
               <li><a href={`${base}/science`}>Science</a></li>
               <li><a href={`${base}/testimonials`}>Testimonials</a></li>
-              <li><a href={`${base}/graph_gallery`}>Graph Gallery</a></li>
+              <li><a href={`${base}/graph_gallery`}>Graph gallery</a></li>
               <li><a href={`${base}/acknowledgements`}>Acknowledgements</a></li>
             </ul>
           )}

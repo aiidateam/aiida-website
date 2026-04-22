@@ -23,7 +23,7 @@ const CATEGORIES: Record<string, { label: string; color: string }> = {
 const NODES: EcoNode[] = [
   {
     id: 'aiida-core',
-    name: 'AiiDA Core',
+    name: 'aiida-core',
     tagline: 'The engine',
     desc: 'The central Python framework. Provides the workflow engine, automatic provenance tracking, a plugin interface, and an ORM for managing computational data. Everything else builds on this.',
     url: 'https://github.com/aiidateam/aiida-core',
@@ -32,7 +32,7 @@ const NODES: EcoNode[] = [
   },
   {
     id: 'plugin-registry',
-    name: 'Plugin Registry',
+    name: 'Plugin registry',
     tagline: '100+ community plugins',
     desc: 'A curated directory of all AiiDA plugins — from simulation codes (Quantum ESPRESSO, VASP, CP2K, FLEUR, Siesta, …) to data types, schedulers, and transports. Plugins extend AiiDA via Python entry points.',
     url: 'https://aiidateam.github.io/aiida-registry/',
@@ -135,7 +135,7 @@ export default function Ecosystem(): ReactNode {
   return (
     <main className="eco-page">
       <section className="eco-hero">
-        <h1>The AiiDA Ecosystem</h1>
+        <h1>The AiiDA ecosystem</h1>
         <p className="eco-hero-sub">
           AiiDA is more than a workflow engine — it's a growing ecosystem of tools, platforms,
           and community plugins that cover the full lifecycle of computational research.
@@ -173,7 +173,7 @@ export default function Ecosystem(): ReactNode {
           </svg>
         </div>
 
-        {/* Centre: AiiDA Core — large and prominent */}
+        {/* Centre: aiida-core — large and prominent */}
         <div className="eco-layer eco-layer--core">
           <a className="eco-core-block" href="https://github.com/aiidateam/aiida-core" target="_blank" rel="noopener noreferrer">
             <img src={`${base}/img/aiida-logo-dark.svg`} alt="AiiDA" className="eco-core-logo eco-core-logo--dark" />
@@ -200,7 +200,7 @@ export default function Ecosystem(): ReactNode {
                 <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
               </svg>
             </div>
-            <span className="eco-ext-label">Plugin Registry</span>
+            <span className="eco-ext-label">Plugin registry</span>
             <span className="eco-ext-sub">100+ plugins</span>
           </a>
           <a className="eco-ext-node" href="https://github.com/aiidateam/aiida-workgraph" target="_blank" rel="noopener noreferrer"
@@ -277,7 +277,7 @@ export default function Ecosystem(): ReactNode {
         <div className="eco-narrative-grid">
           <div className="eco-narrative-card">
             <div className="eco-narrative-num" style={{ color: '#0096de' }}>1</div>
-            <h3>Start with AiiDA Core</h3>
+            <h3>Start with aiida-core</h3>
             <p>
               Install <code>aiida-core</code> to get the workflow engine, provenance tracking,
               and the <code>verdi</code> CLI. This is the foundation everything else plugs into.

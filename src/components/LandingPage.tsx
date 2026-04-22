@@ -2138,8 +2138,8 @@ const HERO_PILLARS: ReadonlyArray<{
   {
     key: 'scalable',
     variant: 'blue',
-    label: 'Scalable & Performant',
-    title: 'Scalable & Performant',
+    label: 'Scalable & performant',
+    title: 'Scalable & performant',
     body: (
       <>
         Proven records of ~10,000 processes/hour, and fast enough to drive an
@@ -2151,8 +2151,8 @@ const HERO_PILLARS: ReadonlyArray<{
   {
     key: 'community',
     variant: 'green',
-    label: 'Community-Driven',
-    title: 'Community-Driven',
+    label: 'Community-driven',
+    title: 'Community-driven',
     body: (
       <>
         Over <strong>+100 registered plugins</strong>, a dedicated Discourse
@@ -2164,11 +2164,11 @@ const HERO_PILLARS: ReadonlyArray<{
   {
     key: 'fair',
     variant: 'orange',
-    label: 'F.A.I.R by design',
-    title: 'F.A.I.R by design',
+    label: 'FAIR by design',
+    title: 'FAIR by design',
     body: (
       <>
-        &ldquo;F.A.I.R.&rdquo; refers to the data management principles of{' '}
+        &ldquo;FAIR&rdquo; refers to the data management principles of{' '}
         <strong>Findable, Accessible, Interoperable, and Reusable</strong>
         &nbsp;&mdash; designed to improve data sharing and research efficiency.
       </>
@@ -2197,7 +2197,7 @@ function HighThroughputCombined(): ReactNode {
     setTryMode(true);
   }, []);
 
-  // ─── Pillar popovers (Scalable / Community / F.A.I.R) ───
+  // ─── Pillar popovers (Scalable / Community / FAIR) ───
   const [openPillar, setOpenPillar] = useState<PillarKey | null>(null);
   const pillarsRef = useRef<HTMLUListElement | null>(null);
   useEffect(() => {
@@ -2577,7 +2577,7 @@ function HighThroughputCombined(): ReactNode {
           <img src={`${base}/img/aiida-logo-dark.svg`} alt="AiiDA" className="hero-brand-logo hero-brand-logo--dark" />
           <img src={`${base}/img/aiida-logo-light.svg`} alt="AiiDA" className="hero-brand-logo hero-brand-logo--light" />
         </div>
-        <p className="hero-tagline">Workflow Management System</p>
+        <p className="hero-tagline">Workflow management system</p>
         <p className="hero-subtitle">
           <span className="hero-accent hero-accent--blue">A</span>utomated{' '}
           <span className="hero-accent hero-accent--green">I</span>nteractive{' '}
@@ -3347,7 +3347,7 @@ function LatestNews({items}: {items: NewsItem[]}): ReactNode {
   return (
     <section className="news-section" data-reveal>
       <div className="news-header-row">
-        <h2>Latest News</h2>
+        <h2>Latest news</h2>
         <div className="news-nav">
           <button
             className={`news-nav-btn${canScrollLeft ? '' : ' news-nav-btn--disabled'}`}
