@@ -2696,33 +2696,32 @@ function HighThroughputCombined(): ReactNode {
           onToggleEnlarge={handleToggleEnlarge}
           onTabOpen={handleTabOpen}
           onTabActivate={(name) => setTabMessage(prev => (prev === name ? null : prev))}
-          overlay={tabMessage ? (
-            <div className="tut-welcome-banner" role="status">
-              <span className="tut-welcome-banner-icon" aria-hidden="true">{'▶'}</span>
-              <span className="tut-welcome-banner-text">
-                Nice! A new tab opened &mdash; click <strong>{tabMessage}</strong> to view it.
-              </span>
-              <button
-                type="button"
-                className="tut-welcome-banner-close"
-                onClick={() => setTabMessage(null)}
-                aria-label="Dismiss"
-              >{'×'}</button>
-            </div>
-          ) : showWelcome ? (
-            <div className="tut-welcome-banner" role="status">
-              <span className="tut-welcome-banner-icon" aria-hidden="true">{'▶'}</span>
-              <span className="tut-welcome-banner-text">
-                You're in a sandboxed demo &mdash; nothing is saved. Click the terminal and type any command, or hit <strong>Paste &amp; Run</strong> to follow along.
-              </span>
-              <button
-                type="button"
-                className="tut-welcome-banner-close"
-                onClick={() => setShowWelcome(false)}
-                aria-label="Dismiss"
-              >{'×'}</button>
-            </div>
-          ) : null}
+          overlay={(() => {
+            const banner = tabMessage
+              ? {
+                  onDismiss: () => setTabMessage(null),
+                  text: <>Nice! A new tab opened &mdash; click <strong>{tabMessage}</strong> to view it.</>,
+                }
+              : showWelcome
+              ? {
+                  onDismiss: () => setShowWelcome(false),
+                  text: <>You're in a sandboxed demo &mdash; nothing is saved. Click the terminal and type any command, or hit <strong>Paste &amp; Run</strong> to follow along.</>,
+                }
+              : null;
+            if (!banner) return null;
+            return (
+              <div className="tut-welcome-banner" role="status">
+                <span className="tut-welcome-banner-icon" aria-hidden="true">{'▶'}</span>
+                <span className="tut-welcome-banner-text">{banner.text}</span>
+                <button
+                  type="button"
+                  className="tut-welcome-banner-close"
+                  onClick={(e) => { e.stopPropagation(); banner.onDismiss(); }}
+                  aria-label="Dismiss"
+                >{'×'}</button>
+              </div>
+            );
+          })()}
           renderLayout={({ terminal, instructions }) => (
             <>
               <div ref={enlargedRowRef} className={`tp-row${enlarged ? ' tp-row--enlarged' : ''}`}>
@@ -4008,6 +4007,10 @@ function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEn
   const outRef = useRef<HTMLDivElement>(null);
   const inRef = useRef<HTMLInputElement>(null);
   const termContainerRef = useRef<HTMLDivElement>(null);
+  // On touch devices, suppress programmatic re-focus of the text input after
+  // "Paste & Run" so the mobile keyboard doesn't pop open uninvited. Flips back
+  // on when the user directly taps the terminal.
+  const allowInputFocusRef = useRef(true);
 
   // Command history for up/down arrow navigation
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
@@ -4056,7 +4059,7 @@ function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEn
     if (activeTab !== null) return;
     if (inputDisabled) {
       termContainerRef.current?.focus({ preventScroll: true });
-    } else {
+    } else if (allowInputFocusRef.current) {
       inRef.current?.focus({ preventScroll: true });
     }
   }, [inputDisabled, activeTab]);
@@ -4381,6 +4384,13 @@ function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEn
 
   function runHint() {
     if (inputDisabled) return;
+    // On touch devices, don't let the subsequent auto-refocus yank the mobile
+    // keyboard back up — the user asked to run, not to type. The flag re-arms
+    // when they tap the terminal directly.
+    if (typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)').matches) {
+      allowInputFocusRef.current = false;
+      inRef.current?.blur();
+    }
     // "Soft landing": when the user can't currently see the prompt — either
     // because they're on a file tab, they've scrolled the live console up,
     // or the whole panel is off-viewport (common on small screens where the
@@ -4474,7 +4484,11 @@ function InteractiveTutorial({ onPhaseChange, renderLayout, enlarged, onToggleEn
       tabIndex={-1}
       onClick={() => {
         if (activeTab !== null) return;
-        if (!window.getSelection()?.toString()) inRef.current?.focus({ preventScroll: true });
+        if (!window.getSelection()?.toString()) {
+          // Direct user tap — re-arm focus and bring the keyboard back.
+          allowInputFocusRef.current = true;
+          inRef.current?.focus({ preventScroll: true });
+        }
       }}
       onKeyDown={e => { if (e.key === 'Tab') e.preventDefault(); }}
     >
