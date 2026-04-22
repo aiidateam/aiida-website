@@ -1,0 +1,51 @@
+name: PR preview
+
+# Builds each PR with a base path scoped to the preview subdir, then publishes
+# under gh-pages:/pr-preview/pr-<N>/. The rossjrw action comments the preview
+# URL on the PR and deletes the subdir when the PR closes.
+#
+# Runs only for same-repo PRs (uses the default read-write GITHUB_TOKEN).
+# Fork PRs would need a separate `pull_request_target` workflow; not wired
+# here because all contributors work from aiidateam branches.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: preview-pr-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build only when the PR is open. On close, skip straight to the
+      # pr-preview-action step below — it handles cleanup with no artifacts.
+      - if: github.event.action != 'closed'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - if: github.event.action != 'closed'
+        run: npm ci
+
+      - if: github.event.action != 'closed'
+        run: npm run build
+        env:
+          ASTRO_BASE: /aiida-website/pr-preview/pr-${{ github.event.number }}
+          ASTRO_SITE: https://aiidateam.github.io
+
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./dist
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
