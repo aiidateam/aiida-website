@@ -92,12 +92,12 @@ export default function Docs(): ReactNode {
         </p>
       </section>
 
-      {/* Featured: AiiDA Core */}
+      {/* Featured: aiida-core */}
       <section className="docs-featured">
         <a className="docs-featured-card" href="https://aiida.readthedocs.io" target="_blank" rel="noopener noreferrer">
           <div className="docs-featured-content">
             <span className="docs-featured-badge">Start here</span>
-            <h2>AiiDA Core Documentation</h2>
+            <h2>aiida-core documentation</h2>
             <p>
               The complete reference for the AiiDA framework — installation, configuration,
               the workflow engine, provenance tracking, the plugin system, and the REST API.
@@ -153,7 +153,7 @@ export default function Docs(): ReactNode {
               </svg>
             </div>
             <div>
-              <h3>Discourse Forum</h3>
+              <h3>Discourse forum</h3>
               <p>Ask questions and get help from the community</p>
             </div>
           </a>
@@ -175,7 +175,7 @@ export default function Docs(): ReactNode {
               </svg>
             </div>
             <div>
-              <h3>Plugin Registry</h3>
+              <h3>Plugin registry</h3>
               <p>Find documentation for 100+ community plugins</p>
             </div>
           </a>
