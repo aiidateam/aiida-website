@@ -42,7 +42,7 @@ For general information concerning the tutorial you can contact Chris (christoph
 
 Below is the schedule for the event (click to zoom). Two time slots will be provided for each session to accommodate for participants in different timezones.
 
-![schedule](/aiida-website/blog-img/2020-tutorial-schedule.jpg)
+![schedule](/blog-img/2020-tutorial-schedule.jpg)
 
 ## Videos
 
@@ -61,16 +61,16 @@ The [MaX European Centre of Excellence,](http://www.max-centre.eu/) the [swis
 :::{subfigure} 2
 :layout-sm: 1
 
-![](/aiida-website/blog-img/sponsors/max-logo-300x150.png)
+![](/blog-img/sponsors/max-logo-300x150.png)
 
-![](/aiida-website/blog-img/sponsors/marvel-logo-300x150.png)
+![](/blog-img/sponsors/marvel-logo-300x150.png)
 
-![](/aiida-website/blog-img/sponsors/swissuniversities-logo-300x150.png)
+![](/blog-img/sponsors/swissuniversities-logo-300x150.png)
 
-![](/aiida-website/blog-img/sponsors/intersect-logo-300x150.png)
+![](/blog-img/sponsors/intersect-logo-300x150.png)
 
-![](/aiida-website/blog-img/sponsors/marketplace-logo-300x150.png)
+![](/blog-img/sponsors/marketplace-logo-300x150.png)
 
-![](/aiida-website/blog-img/sponsors/pasc-logo-300x150.png)
+![](/blog-img/sponsors/pasc-logo-300x150.png)
 
 :::

@@ -18,7 +18,7 @@ This is the first patch release of the `v1.1` series and as such contains mostly
 Due to a bug, certain calculations were not cached where they should, which has now been fixed. In addition, the format of the caching configuration file was broken, which has now been fixed (see [the documentation](https://aiida-core.readthedocs.io/en/v1.1.1/working_with_aiida/caching.html#configuration)).
 
 **BaseRestartWorkChain
-**The `BaseRestartWorkChain`class and associated utilities were added for beta trial in `aiida-core==1.1.0`. We have had useful discussions with developers and users during the AiiDA hackathon at CINECA from 17–21 February (see [the report](/aiida-website/blog-img/legacy/Bologna-hackathon-report.pdf)).
+**The `BaseRestartWorkChain`class and associated utilities were added for beta trial in `aiida-core==1.1.0`. We have had useful discussions with developers and users during the AiiDA hackathon at CINECA from 17–21 February (see [the report](/blog-img/legacy/Bologna-hackathon-report.pdf)).
 
 As a result of these discussions, we have decided to change the use of the `register_process_handler`. It has been renamed to `process_handler` and can now _only_ be used to decorate instance methods of the work chain class within its scope and no longer outside of it. In addition, the decorator has a new keyword argument `enabled`, which determines whether the handler is by default considered during process handling. This default value can be overridden on a per work chain basis through the new `handler_overrides` input. Since the interface changed since its introduction in `aiida-core==1.1.0`, please **only use the `BaseRestartWorkChain` from `aiida-core>=v1.1.1`**.
 

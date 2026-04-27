@@ -13,4 +13,4 @@ The project, dubbed [PREMISE](https://ord-premise.org/), aims to establish, prom
 During their project, the researchers will draw on the existing platforms [openBIS](https://openbis.ch/), an open-source data management platform developed at ETH Zurich, and [AiiDA](https://www.aiida.net), an open-source workflow management system mainly developed at PSI and EPFL. The two platforms focus on different parts of the data life cycle—experiments and simulations, respectively.
 You can read the [full press release here](https://nccr-marvel.ch/news/communication/11-PREMISE).
 
-![PREMISE project](/aiida-website/blog-img/2022-PREMISE.jpg)
+![PREMISE project](/blog-img/2022-PREMISE.jpg)

@@ -33,7 +33,7 @@ By combining these tools, researchers can:
 
 To give you an idea of the complexity of typical MBPT simulations, in Figure 1 we show an AiiDA provenance graph for the G0W0 quasiparticle convergences workflow of a single material.
 
-![Figure 1: YamboConvergence workflow provenance graph.](/aiida-website/blog-img/GW_conv_graph.png)
+![Figure 1: YamboConvergence workflow provenance graph.](/blog-img/GW_conv_graph.png)
 
 _Figure 1: Provenance graph of a G0W0 quasiparticle convergence workflow for a single material, generated using the `aiida-yambo` plugin. This graph highlights the complexity and interdependence of the calculations involved in MBPT simulations._
 

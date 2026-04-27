@@ -17,5 +17,5 @@ Thank you, Sharan!
 
 For more details of the outcome, see the [project report](https://github.com/aiidateam/aiida-explorer/blob/gsoc/gsoc/README.md).
 
-[![soc](/aiida-website/blog-img/2020-summer-of-code/gsoc-logo.png)](https://summerofcode.withgoogle.com/)
-[![NumFocus](/aiida-website/blog-img/2020-summer-of-code/NumFocus_LRG-1-300x100.png)](http://www.numfocus.org/)
+[![soc](/blog-img/2020-summer-of-code/gsoc-logo.png)](https://summerofcode.withgoogle.com/)
+[![NumFocus](/blog-img/2020-summer-of-code/NumFocus_LRG-1-300x100.png)](http://www.numfocus.org/)

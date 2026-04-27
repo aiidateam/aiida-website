@@ -47,7 +47,7 @@ For local information of Vilnius you can contact Andrius (andrius.merkys at gmc.
 
 Below is a tentative schedule for the event (click to zoom).
 
-![schedule](/aiida-website/blog-img/legacy/schedule-1024x562.png)
+![schedule](/blog-img/legacy/schedule-1024x562.png)
 
 ## Funding
 
@@ -59,19 +59,19 @@ We are very grateful to our sponsors for helping to make this event possible:
 :layout-sm: 1
 :gap: 1em
 
-![logovu](/aiida-website/blog-img/legacy/logovu.png)
+![logovu](/blog-img/legacy/logovu.png)
 
-![max_](/aiida-website/blog-img/legacy/ebdc2ee9.max_-300x170.png)
+![max_](/blog-img/legacy/ebdc2ee9.max_-300x170.png)
 
-![cecam](/aiida-website/blog-img/legacy/cecam-300x56.png)
+![cecam](/blog-img/legacy/cecam-300x56.png)
 
-![swissuniversities](/aiida-website/blog-img/legacy/894d22ec.swissuniversities-300x35.png)
+![swissuniversities](/blog-img/legacy/894d22ec.swissuniversities-300x35.png)
 
-![marvel_nccr](/aiida-website/blog-img/legacy/214f921c.marvel_nccr.png)
+![marvel_nccr](/blog-img/legacy/214f921c.marvel_nccr.png)
 
-![marketplace](/aiida-website/blog-img/legacy/marketplace-300x60.png)
+![marketplace](/blog-img/legacy/marketplace-300x60.png)
 
-![intersect](/aiida-website/blog-img/legacy/intersect-300x100.png)
+![intersect](/blog-img/legacy/intersect-300x100.png)
 
-![pasc](/aiida-website/blog-img/legacy/pasc.png)
+![pasc](/blog-img/legacy/pasc.png)
 :::

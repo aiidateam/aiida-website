@@ -34,5 +34,5 @@ Besides coding, participants had a lovely dinner at the “Le Leysin” restaura
 
 The outcomes of the week and the feedback from the participants indicate also that similar events should be organized again in the future, either online or on-site, with on-site participation being preferred if the situation permits.
 
-![Group picture](/aiida-website/blog-img/Coding-week-2021-12-10-1.jpeg)
-![Working picture](/aiida-website/blog-img/Coding-week-2021-12-10-2.png)
+![Group picture](/blog-img/Coding-week-2021-12-10-1.jpeg)
+![Working picture](/blog-img/Coding-week-2021-12-10-2.png)
