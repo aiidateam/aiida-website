@@ -6,10 +6,17 @@ import Footer from '../components/Footer';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = 'AiiDA: an open-source Python framework for computational science workflows.' } = Astro.props;
+const {
+  title,
+  description = 'AiiDA: an open-source Python framework for computational science workflows.',
+  image = '/img/og-default.png',
+} = Astro.props;
 const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const imageUrl = new URL(image, Astro.site).href;
 ---
 
 <!doctype html>
@@ -18,8 +25,22 @@ const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href={`${base}/favicon.png`} />
+    <link rel="canonical" href={canonical} />
     <title>{title}</title>
     <meta name="description" content={description} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content="AiiDA" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />

@@ -1,0 +1,32 @@
+# Cloudflare Pages redirects.
+# Format: <source>  <destination>  <status>
+# Default status is 302; 301s must be explicit.
+
+# Legacy blog post URLs (RTD served /news/posts/<slug>[.html]).
+/news/posts/:slug.html            /blog/:slug/                    301
+/news/posts/:slug                 /blog/:slug/                    301
+/news.html                        /blog                           301
+/news                             /blog                           301
+
+# Legacy section pages (RTD served /sections/<page>[.html]).
+# /about and /download intentionally land at the homepage for now —
+# dedicated pages are planned in a follow-up PR and these will be
+# repointed at that time.
+/sections/about.html              /                               301
+/sections/about                   /                               301
+/sections/download.html           /                               301
+/sections/download                /                               301
+/sections/team.html               /team                           301
+/sections/team                    /team                           301
+/sections/events.html             /events                         301
+/sections/events                  /events                         301
+/sections/science.html            /science                        301
+/sections/science                 /science                        301
+/sections/testimonials.html       /testimonials                   301
+/sections/testimonials            /testimonials                   301
+/sections/acknowledgements.html   /acknowledgements               301
+/sections/acknowledgements        /acknowledgements               301
+/sections/graph_gallery.html      /graph_gallery                  301
+/sections/graph_gallery           /graph_gallery                  301
+/sections/mailing_list.html       https://aiida.discourse.group/  301
+/sections/mailing_list            https://aiida.discourse.group/  301
