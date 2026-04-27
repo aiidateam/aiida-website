@@ -32,7 +32,7 @@ The goal of this 4 day-tutorial is to help students and researchers from the fie
 
 **When**: 4-7 October 2022. Two time slots are organised for each hands-on session, as shown in the schedule below:
 
-![schedule](/aiida-website/blog-img/legacy/AiiDA-Tutorial2022-Schedule-1.png)
+![schedule](/blog-img/legacy/AiiDA-Tutorial2022-Schedule-1.png)
 
 **Where:** Talks will be pre-recorded and made available to participants before the event. Hands-on tutorials will be held _via_ Zoom, with participants running the tutorial in their browser by accessing a multi-user AiiDAlab deployed on the [Azure Kubernetes Service](https://azure.microsoft.com/en-us/products/kubernetes-service/).
 
@@ -57,9 +57,9 @@ Computational resources on Azure were provided by [Microsoft Azure Quantum](http
 :layout-sm: 1
 :gap: 1em
 
-![max logo](/aiida-website/blog-img/sponsors/max-logo-300x150.png)
-![marvel logo](/aiida-website/blog-img/sponsors/marvel-logo-300x150.png)
-![swissuniversities logo](/aiida-website/blog-img/sponsors/swissuniversities-logo-300x150.png)
-![bigmap logo](/aiida-website/blog-img/sponsors/bigmap-267x300.png)
-![marketplace logo](/aiida-website/blog-img/sponsors/marketplace-logo-300x150.png)
+![max logo](/blog-img/sponsors/max-logo-300x150.png)
+![marvel logo](/blog-img/sponsors/marvel-logo-300x150.png)
+![swissuniversities logo](/blog-img/sponsors/swissuniversities-logo-300x150.png)
+![bigmap logo](/blog-img/sponsors/bigmap-267x300.png)
+![marketplace logo](/blog-img/sponsors/marketplace-logo-300x150.png)
 :::

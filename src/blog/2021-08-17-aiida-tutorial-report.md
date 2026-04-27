@@ -44,18 +44,18 @@ On the last day a Q&A panel was arranged with a number of plugin developers, who
 As many of the instructors were present for most of the hands-on sessions of both groups, this resulted in some long days for some! However, their energy and dedication never wavered, which was very much appreciated by the participants.
 
 ```{list-table}
-* - ![participant feedback](/aiida-website/blog-img/2021-tutorial-feedback1a.png)
-  - ![participant feedback](/aiida-website/blog-img/2021-tutorial-feedback1b.png)
+* - ![participant feedback](/blog-img/2021-tutorial-feedback1a.png)
+  - ![participant feedback](/blog-img/2021-tutorial-feedback1b.png)
 ```
 
 This second edition of the virtual tutorial also allowed us to test new technologies to support our teaching efforts. We already had some experience in the previous instance with Zoom to handle the Q&As, hand-on sessions and one-on-one assistance. We also had used Slack before to handle general questions and support. This year we decided to introduce two new tools: besides the aforementioned use of the gather.town platform, Simon Adorf set up and deployed an AiiDAlab JupyterHub cluster to provide the participants with a uniform and accessible work environment. We are happy to see that the feedback on these technological aspects has been positive and that we are on the right track!
 
 ```{list-table}
-* - ![participant feedback](/aiida-website/blog-img/2021-tutorial-feedback2a.png)
-  - ![participant feedback](/aiida-website/blog-img/2021-tutorial-feedback2b.png)
-  - ![participant feedback](/aiida-website/blog-img/2021-tutorial-feedback2c.png)
-* - ![participant feedback](/aiida-website/blog-img/2021-tutorial-feedback2d.png)
-  - ![participant feedback](/aiida-website/blog-img/2021-tutorial-feedback2e.png)
+* - ![participant feedback](/blog-img/2021-tutorial-feedback2a.png)
+  - ![participant feedback](/blog-img/2021-tutorial-feedback2b.png)
+  - ![participant feedback](/blog-img/2021-tutorial-feedback2c.png)
+* - ![participant feedback](/blog-img/2021-tutorial-feedback2d.png)
+  - ![participant feedback](/blog-img/2021-tutorial-feedback2e.png)
   -
 ```
 

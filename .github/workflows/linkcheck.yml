@@ -20,18 +20,9 @@ jobs:
 
       - run: npm run build
 
-      # Stage the build under a directory that mirrors the site's base path
-      # so that root-relative links like /aiida-website/foo resolve to real
-      # files when lychee is given --root-dir.
-      - name: Stage built site under base path
-        run: |
-          mkdir -p serve-root
-          mv dist serve-root/aiida-website
-
       # On PRs, run in --offline mode: resolve root-relative links locally
       # via --root-dir, skip all absolute URLs. This keeps PR feedback fast
-      # and deterministic (no flaky external hosts, no self-referential
-      # canonicals pointing at aiidateam.github.io). Pushes to main do the
+      # and deterministic (no flaky external hosts). Pushes to main do the
       # full check and catch external link rot.
       - name: Check links in built site
         uses: lycheeverse/lychee-action@v2
@@ -41,9 +32,9 @@ jobs:
           args: >-
             --no-progress
             --config .github/lychee.toml
-            --root-dir ${{ github.workspace }}/serve-root
+            --root-dir ${{ github.workspace }}/dist
             ${{ github.event_name == 'pull_request' && '--offline' || '' }}
-            './serve-root/aiida-website/**/*.html'
+            './dist/**/*.html'
           format: json
           output: ${{ github.workspace }}/lychee-report.json
           # Don't let the action itself fail the job — the next step decides.

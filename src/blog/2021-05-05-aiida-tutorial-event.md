@@ -45,7 +45,7 @@ For general information concerning the tutorial you can contact Francisco (franc
 
 Below is the schedule for the event (click to zoom). Two time slots are provided for each session to accommodate for participants in different time zones. The event will be repeated identically for group A and B, so you can select the group that best fits your timezone.
 
-![schedule](/aiida-website/blog-img/2021-tutorial-schedule1.png)
+![schedule](/blog-img/2021-tutorial-schedule1.png)
 
 ## Funding
 
@@ -56,11 +56,11 @@ The [MaX European Centre of Excellence,](http://www.max-centre.eu/) the [swissun
 :::{list-table}
 :widths: 50 50
 
-- - ![](/aiida-website/blog-img/sponsors/max-logo-300x150.png)
-  - ![](/aiida-website/blog-img/sponsors/marvel-logo-300x150.png)
-- - ![](/aiida-website/blog-img/sponsors/swissuniversities-logo-300x150.png)
-  - ![](/aiida-website/blog-img/sponsors/big-map-logo.png)
-- - ![](/aiida-website/blog-img/sponsors/marketplace-logo-300x150.png)
+- - ![](/blog-img/sponsors/max-logo-300x150.png)
+  - ![](/blog-img/sponsors/marvel-logo-300x150.png)
+- - ![](/blog-img/sponsors/swissuniversities-logo-300x150.png)
+  - ![](/blog-img/sponsors/big-map-logo.png)
+- - ![](/blog-img/sponsors/marketplace-logo-300x150.png)
   -
 
 :::

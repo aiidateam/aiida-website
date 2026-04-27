@@ -35,4 +35,4 @@ Some photos of the event can be found on our [Facebook page](https://www.faceboo
 
 ## **Summary of the results of the feedback form**
 
-![Results of the feedback form for the AiiDA Coding week (Dec 2016)](/aiida-website/blog-img/legacy/aiida_coding_week_2016_results.png)
+![Results of the feedback form for the AiiDA Coding week (Dec 2016)](/blog-img/legacy/aiida_coding_week_2016_results.png)

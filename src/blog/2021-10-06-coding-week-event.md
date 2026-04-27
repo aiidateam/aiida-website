@@ -185,13 +185,13 @@ We are very grateful to our sponsors for helping to make this event possible:
 :::{list-table}
 :widths: 30 30 30
 
-- - ![epfl](/aiida-website/blog-img/sponsors/epfl-logo-300x150.png)
-  - ![marvel](/aiida-website/blog-img/sponsors/marvel-logo-300x150.png)
-  - ![dome](/aiida-website/blog-img/sponsors/dome-logo.png)
-- - ![max](/aiida-website/blog-img/sponsors/max-logo-300x150.png)
-  - ![openmodel](/aiida-website/blog-img/sponsors/OpenModel-Logo.jpeg)
-  - ![empa](/aiida-website/blog-img/sponsors/empa_logo.png)
-- - ![marketplace](/aiida-website/blog-img/sponsors/marketplace-logo-300x150.png)
-    - ![intersect](/aiida-website/blog-img/sponsors/intersect-logo-300x150.png)
-    - ![swissuniversities](/aiida-website/blog-img/sponsors/swissuniversities-logo-300x150.png)
+- - ![epfl](/blog-img/sponsors/epfl-logo-300x150.png)
+  - ![marvel](/blog-img/sponsors/marvel-logo-300x150.png)
+  - ![dome](/blog-img/sponsors/dome-logo.png)
+- - ![max](/blog-img/sponsors/max-logo-300x150.png)
+  - ![openmodel](/blog-img/sponsors/OpenModel-Logo.jpeg)
+  - ![empa](/blog-img/sponsors/empa_logo.png)
+- - ![marketplace](/blog-img/sponsors/marketplace-logo-300x150.png)
+    - ![intersect](/blog-img/sponsors/intersect-logo-300x150.png)
+    - ![swissuniversities](/blog-img/sponsors/swissuniversities-logo-300x150.png)
       :::

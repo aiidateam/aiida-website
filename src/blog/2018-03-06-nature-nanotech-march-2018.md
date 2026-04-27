@@ -7,7 +7,7 @@ tags: [article]
 
 The [March 2018 issue of Nature Nanotechnology](https://www.nature.com/nnano/volumes/13/issues/3) features a paper by N. Mounet and coworkers who have used AiiDA to identify close to 2000 well-known inorganic compounds that may be exfoliated into novel 2D materials and compute, for a large subset of over 250 of them, their electronic, vibrational, magnetic and topological properties.
 
-[![](/aiida-website/blog-img/legacy/cover-nnano-2018-3.jpg)](https://www.nature.com/nnano/volumes/13/issues/3)
+[![](/blog-img/legacy/cover-nnano-2018-3.jpg)](https://www.nature.com/nnano/volumes/13/issues/3)
 
 Copyright: Image: Giovanni Pizzi, EPFL, Switzerland.
 

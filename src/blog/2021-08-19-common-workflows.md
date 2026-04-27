@@ -11,4 +11,4 @@ You can read more information on the [news release by NCCR MARVEL](https://nccr-
 
 Sebastiaan P. Huber, Emanuele Bosoni, Marnik Bercx et al., Common workflows for computing material properties using different quantum engines, npj Comput. Mater. 7 , 136 (2021), <https://doi.org/10.1038/s41524-021-00594-6>
 
-![computer](/aiida-website/blog-img/aiida-common-wf-image-2000x1000-1.png)
+![computer](/blog-img/aiida-common-wf-image-2000x1000-1.png)

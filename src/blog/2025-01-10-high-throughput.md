@@ -12,7 +12,7 @@ A straightforward example from the condensed matter community here would be to c
 1. Optimize the geometry of the input structure.
 2. Calculate the band structure of the optimized geometry.
 
-![Flowchart of the simple high-throughput setup](/aiida-website/blog-img/high-throughput-flow.png)
+![Flowchart of the simple high-throughput setup](/blog-img/high-throughput-flow.png)
 
 There are many ways to use AiiDA to solve this problem!
 In this blog post, we will use a collection of submission controllers to set up a command line interface for automatically calculating the band structure for all the structures in an AiiDA group using the `aiida-quantumespresso` plugin.

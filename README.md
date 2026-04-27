@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The site runs at `http://localhost:4321/aiida-website/`.
+The site runs at `http://localhost:4321/`.
 
 ## Build
 
@@ -25,4 +25,4 @@ npm run preview
 
 ## Deployment
 
-The site is deployed to GitHub Pages via GitHub Actions.
+The site is deployed to Cloudflare Pages.

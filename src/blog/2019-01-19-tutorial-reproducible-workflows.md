@@ -68,9 +68,9 @@ Our tool of choice is the AiiDA framework for workflow management and provenance
     - includes: Getting started with the AiiDAlab
 
 - Throughout the tutorial, lectures by the organizers and core developers of AiiDA are complemented by talks by the invited speakers highlighting the use of the workflows in computational materials science.
-  - **NEW**: [Your answers to Stefaan's questions](/aiida-website/blog-img/legacy/questions-by-stefaan.pdf) & [Stefaan's answers to your questions](/aiida-website/blog-img/legacy/questions-by-participants.pdf)
+  - **NEW**: [Your answers to Stefaan's questions](/blog-img/legacy/questions-by-stefaan.pdf) & [Stefaan's answers to your questions](/blog-img/legacy/questions-by-participants.pdf)
 
-- Discussion sessions, as well as a poster session (**NEW** [Poster abstracts](/aiida-website/blog-img/legacy/Posters-abstracts.pdf)) and an open-mic session are scheduled to foster interaction between the participants, to discuss and answer questions.
+- Discussion sessions, as well as a poster session (**NEW** [Poster abstracts](/blog-img/legacy/Posters-abstracts.pdf)) and an open-mic session are scheduled to foster interaction between the participants, to discuss and answer questions.
 
 While this tutorial is deliberately open to computational materials scientists at many levels, we do require the following for participation:
 
@@ -124,14 +124,14 @@ We are very grateful to our sponsors for helping to make this event possible:
 - The [swissuniversities P-5 project "Materials Cloud"](https://www.materialscloud.org/swissuniversities) for funding
 - The INTERSECT project for funding
 
-[![](/aiida-website/blog-img/legacy/psi-k-crystal_low.png)](http://psi-k.net)
+[![](/blog-img/legacy/psi-k-crystal_low.png)](http://psi-k.net)
 
-![EPFL logo](/aiida-website/blog-img/legacy/EPFL_Logo_Digital_RGB_PROD.png)
+![EPFL logo](/blog-img/legacy/EPFL_Logo_Digital_RGB_PROD.png)
 
-[![](/aiida-website/blog-img/legacy/214f921c.marvel_nccr.png)](http://nccr-marvel.ch/)
+[![](/blog-img/legacy/214f921c.marvel_nccr.png)](http://nccr-marvel.ch/)
 
-[![](/aiida-website/blog-img/legacy/ebdc2ee9.max_.png)](http://www.max-centre.eu/)
+[![](/blog-img/legacy/ebdc2ee9.max_.png)](http://www.max-centre.eu/)
 
-[![](/aiida-website/blog-img/legacy/894d22ec.swissuniversities.png)](https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/)
+[![](/blog-img/legacy/894d22ec.swissuniversities.png)](https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/)
 
-![](/aiida-website/blog-img/legacy/74b6a401.intersect.png)
+![](/blog-img/legacy/74b6a401.intersect.png)

@@ -67,7 +67,7 @@ aiidalab-launch start -p QE
 Follow the URL that appears on your screen to open AiiDAlab in your browser.
 You will see a start page similar to this:
 
-![Start page](/aiida-website/blog-img/qeapp_start_page.png)
+![Start page](/blog-img/qeapp_start_page.png)
 
 ### Step 2: Setting Up a Calculation
 
@@ -93,7 +93,7 @@ In the first step, choose a structure from one of several sources:
 
 For this tutorial, select **From Examples** and then choose **Bulk silicon** from the dropdown menu:
 
-![Select structure](/aiida-website/blog-img/qeapp_step_1_select_structure.png)
+![Select structure](/blog-img/qeapp_step_1_select_structure.png)
 
 Click **Confirm** to finalize your selection.
 
@@ -130,7 +130,7 @@ For a quick run, choose **fast** and set the **Electronic type** to `Insulator`.
 
 When ready, click **Confirm**.
 
-![Configure Workflow](/aiida-website/blog-img/qeapp_step_2_configure_workflow.png)
+![Configure Workflow](/blog-img/qeapp_step_2_configure_workflow.png)
 
 ---
 
@@ -145,7 +145,7 @@ By default, a local machine (`localhost`) is configured alongside the following 
 
 For our example, we'll stick with these defaults, using four CPUs. Click **Submit** to launch the calculation.
 
-![Select computational resources](/aiida-website/blog-img/qeapp_step_3_computational_resources.png)
+![Select computational resources](/blog-img/qeapp_step_3_computational_resources.png)
 
 > **Note:**
 > For more substantial calculations, you can set up a remote computer (cluster, HPC, etc.), see the [How-To guide](https://aiidalab-qe.readthedocs.io/howto/setup_computer_code.html) for instructions on configuring remote machines.
@@ -160,11 +160,11 @@ You can download the raw input and output files upon completion, as well as an A
 
 This example calculation take around **3 minutes** to complete.
 
-![Status](/aiida-website/blog-img/qeapp_step_4_status.png)
+![Status](/blog-img/qeapp_step_4_status.png)
 
 When the calculation completes, switch to the **Results** panel for a summary of the run, along with interactive visualizations of the band structure and PDOS:
 
-![Status](/aiida-website/blog-img/qeapp_step_4_result.png)
+![Status](/blog-img/qeapp_step_4_result.png)
 
 ---
 
@@ -183,7 +183,7 @@ Below are some of the available plugins:
 
 These plugins significantly extend the capabilities of the app, allowing users to perform more specialized calculations while maintaining the ease of use of the AiiDAlab interface.
 
-![Plugins](/aiida-website/blog-img/qeapp_plugins.png)
+![Plugins](/blog-img/qeapp_plugins.png)
 
 ---
 

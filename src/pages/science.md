@@ -37,8 +37,8 @@ description: "Research publications powered by AiiDA."
 
 The AiiDA team conducts periodically a **survey** in parallel with each development milestone, formerly on the AiiDA mailing list and now on [Discourse](https://aiida.discourse.group/), to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](https://aiidateam.github.io/aiida-registry/) used, and further database indicators that inform future development choices.
 
-- **2024**: [results](/aiida-website/survey/Questionnaire_results_2024.pdf)
-- **2020**: [results](/aiida-website/survey/aiida-powered-research-projects-2020_Updated.pdf)
+- **2024**: [results](/survey/Questionnaire_results_2024.pdf)
+- **2020**: [results](/survey/aiida-powered-research-projects-2020_Updated.pdf)
 - **2019**: [results](http://bit.ly/2HRjTWo)
 
 Note: The lists below are incomplete — they were extracted manually from citations of the [Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086) AiiDA papers.

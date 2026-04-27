@@ -35,11 +35,11 @@ verdi process dump <pk>
 The following video shows the result of running the command for a `PwCalculation` that was used to execute the `pw.x`
 executable of Quantum ESPRESSO:
 
-![PwCalculation dump](/aiida-website/blog-img/_gifs/calculation-dump-white-10fps-2160p.gif)
+![PwCalculation dump](/blog-img/_gifs/calculation-dump-white-10fps-2160p.gif)
 
 And for a more complex `PwBandsWorkChain` (which actually contains the previously shown `PwCalculation` as one of its steps):
 
-![PwBandsWorkChain dump](/aiida-website/blog-img/_gifs/workflow-dump-white-10fps-2160p.gif)
+![PwBandsWorkChain dump](/blog-img/_gifs/workflow-dump-white-10fps-2160p.gif)
 
 As you can see, the command works both for individual calculations and for nested workflows, resulting in
 the following output directories [^3].

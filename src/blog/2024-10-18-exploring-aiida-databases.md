@@ -193,7 +193,7 @@ $ verdi node graph generate --process-in --process-out --ancestor-depth=4 --desc
 
 The result should look something like this:
 
-![provenance](/aiida-website/blog-img/2024-exploring-aiida-databases.png)
+![provenance](/blog-img/2024-exploring-aiida-databases.png)
 
 ## Systematic querying of the database
 

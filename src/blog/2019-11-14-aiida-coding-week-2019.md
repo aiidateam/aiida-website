@@ -46,12 +46,12 @@ We are very grateful to our sponsors for helping to make this event possible:
 
 - The [MarketPlace](https://www.the-marketplace-project.eu/) project for funding
 
-[![](/aiida-website/blog-img/legacy/EPFL_Logo_Digital_RGB_PROD.png)](http://epfl.ch)
+[![](/blog-img/legacy/EPFL_Logo_Digital_RGB_PROD.png)](http://epfl.ch)
 
-[![](/aiida-website/blog-img/legacy/214f921c.marvel_nccr.png)](http://nccr-marvel.ch/)
+[![](/blog-img/legacy/214f921c.marvel_nccr.png)](http://nccr-marvel.ch/)
 
-[![](/aiida-website/blog-img/legacy/ebdc2ee9.max_.png)](http://www.max-centre.eu/)
+[![](/blog-img/legacy/ebdc2ee9.max_.png)](http://www.max-centre.eu/)
 
-[![](/aiida-website/blog-img/legacy/894d22ec.swissuniversities.png)](https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/)
+[![](/blog-img/legacy/894d22ec.swissuniversities.png)](https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/)
 
-[![](/aiida-website/blog-img/legacy/marketplace.png)](https://www.the-marketplace-project.eu/)
+[![](/blog-img/legacy/marketplace.png)](https://www.the-marketplace-project.eu/)
