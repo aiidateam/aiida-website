@@ -1,6 +1,8 @@
 ---
 import '../styles/pages.css';
+import '../styles/cite.css';
 import Layout from '../layouts/Layout.astro';
+import Cite from '../components/Cite';
 
 const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
 
@@ -43,5 +45,7 @@ const sponsors = [
         );
       })}
     </div>
+
+    <Cite client:visible variant="panel" />
   </main>
 </Layout>

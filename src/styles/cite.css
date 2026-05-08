@@ -1,0 +1,185 @@
+/* ===== CITATION BLOCK (How to cite AiiDA) ===== */
+
+.cite-section {
+  padding: 4rem 2rem;
+  background: var(--color-bg-tinted);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.cite-panel {
+  margin: 3rem auto 0;
+  padding: 2.5rem 2rem;
+  background: var(--color-bg-tinted);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+}
+
+.cite-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cite-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cite-header h2 {
+  font-size: 1.875rem;
+  margin: 0 0 0.5rem;
+  color: var(--color-heading-accent);
+}
+
+.cite-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+.cite-papers {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.cite-paper {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: 10px;
+  padding: 1.1rem 1.1rem 1rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.cite-paper:hover {
+  border-color: var(--color-border-accent);
+  box-shadow: 0 4px 14px var(--color-shadow-accent);
+  transform: translateY(-2px);
+}
+
+.cite-paper-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cite-paper-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-decoration: none;
+  color: var(--color-text);
+  flex: 1;
+  margin-bottom: 0.85rem;
+}
+
+.cite-paper-link:hover .cite-paper-citation,
+.cite-paper-link:hover .cite-paper-citation em {
+  color: var(--color-primary);
+}
+
+.cite-paper-citation {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  transition: color 0.15s ease;
+}
+
+.cite-paper-citation em {
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+.cite-paper-doi {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  word-break: break-all;
+}
+
+.cite-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.cite-copy-btn {
+  appearance: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cite-copy-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.cite-paper .cite-copy-btn {
+  align-self: flex-start;
+}
+
+.cite-actions .cite-copy-btn {
+  font-size: 0.95rem;
+  padding: 0.65rem 1.4rem;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.cite-actions .cite-copy-btn:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: white;
+}
+
+.cite-copy-btn--copied {
+  background: var(--color-accent-green) !important;
+  border-color: var(--color-accent-green) !important;
+  color: white !important;
+}
+
+.cite-copy-btn--error {
+  background: var(--color-accent-orange) !important;
+  border-color: var(--color-accent-orange) !important;
+  color: white !important;
+}
+
+@media (max-width: 900px) {
+  .cite-papers {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cite-section {
+    padding: 2.5rem 1.25rem;
+  }
+  .cite-panel {
+    padding: 2rem 1.25rem;
+  }
+  .cite-header h2 {
+    font-size: 1.5rem;
+  }
+}
