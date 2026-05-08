@@ -1,16 +1,5 @@
 name: Close fork PRs
 
-# This project's contribution policy asks the community to open issues rather
-# than PRs — the maintainers handle implementation. Fork PRs also can't get a
-# Cloudflare Pages preview deployment (CF skips them for security reasons), so
-# they'd be hard to review even if welcomed. This workflow detects fork PRs at
-# open time and closes them with a comment redirecting the contributor to
-# Issues. See README.md for the full policy.
-#
-# Uses `pull_request_target` so the action has write permission even on fork
-# PRs. Only event metadata (head/base repo names) is consulted — the PR's code
-# is never checked out, which is the security recommendation for any
-# `pull_request_target` workflow.
 
 on:
   pull_request_target:
