@@ -2,13 +2,20 @@
 """Generate verdi CLI tree from aiida-core for the website.
 
 Run: python scripts/fetch-verdi-cli.py
-Output: src/data/verdi-cli.json
+Output: src/data/verdi-cli.json (gitignored — generated fresh on every build)
 
-- Developer mode: uses locally installed aiida-core
-- CI / deploy: fetches the latest stable release from PyPI automatically
+- Developer mode: uses locally installed aiida-core (fast, no install).
+- CI / fresh clone without aiida-core: creates a temp venv, installs aiida-core
+  from PyPI, and re-runs this script inside it (slow first time, ~30 seconds).
 
-This only needs to be re-run when aiida-core updates its CLI.
-The generated JSON is committed to the repo and imported statically.
+Wired into:
+  - `npm run prebuild` — always re-fetches before every build (deploy, CI).
+  - `npm run predev`  — re-fetches only when any of the three data files is
+                        missing (first clone). Subsequent `npm run dev` is
+                        instant; refresh manually with `npm run fetch-data`.
+
+Build/dev fails loudly if generation fails — there is deliberately no graceful
+fallback to stale data. Expected output schema: src/data/verdi-cli.example.json.
 """
 import json
 import os
@@ -60,6 +67,9 @@ def generate():
         "help": tree["help"],
     }
 
+    if not output["commands"]:
+        raise RuntimeError("verdi command tree came back empty — aborting rather than write an empty CLI reference.")
+
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n")
     print(f"Generated {OUT_PATH} with {len(output['commands'])} commands, {len(output['subcommands'])} groups")
@@ -93,6 +103,10 @@ def fetch_and_generate():
 
 if __name__ == "__main__":
     try:
-        generate()
-    except ImportError:
-        fetch_and_generate()
+        try:
+            generate()
+        except ImportError:
+            fetch_and_generate()
+    except Exception as e:
+        print(f"fetch-verdi-cli: {e}", file=sys.stderr)
+        sys.exit(1)

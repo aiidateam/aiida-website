@@ -2,12 +2,20 @@
 """Fetch monthly PyPI download stats for aiida-core.
 
 Run: python scripts/fetch-pypi-stats.py
-Output: src/data/pypi-stats.json
+Output: src/data/pypi-stats.json (gitignored — generated fresh on every build)
 
-Intended to run at build time or periodically.
-The generated JSON is committed to the repo and imported statically.
+Wired into:
+  - `npm run prebuild` — always re-fetches before every build (deploy, CI).
+  - `npm run predev`  — re-fetches only when any of the three data files is
+                        missing (first clone). Subsequent `npm run dev` is
+                        instant; refresh manually with `npm run fetch-data`.
+
+Build/dev fails loudly if pypistats.org is unreachable or returns zero
+downloads — there is deliberately no graceful fallback to stale data.
+Expected output schema: src/data/pypi-stats.example.json.
 """
 import json
+import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -52,10 +60,17 @@ def fetch_stats():
         "package": "aiida-core",
     }
 
+    if monthly_total <= 0:
+        raise RuntimeError("pypistats returned zero downloads — refusing to overwrite with empty data.")
+
     out_path = Path(__file__).resolve().parent.parent / "src" / "data" / "pypi-stats.json"
     out_path.write_text(json.dumps(result, indent=2) + "\n")
     print(f"PyPI stats: {display} downloads/month ({result['period_start']} to {result['period_end']})")
     return result
 
 if __name__ == "__main__":
-    fetch_stats()
+    try:
+        fetch_stats()
+    except Exception as e:
+        print(f"fetch-pypi-stats: {e}", file=sys.stderr)
+        sys.exit(1)

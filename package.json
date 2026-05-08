@@ -3,8 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "fetch-data": "python3 scripts/fetch-verdi-cli.py && python3 scripts/fetch-pypi-stats.py",
+    "predev": "test -f src/data/verdi-cli.json && test -f src/data/pypi-stats.json || npm run fetch-data",
     "dev": "astro dev",
-    "prebuild": "python3 scripts/fetch-verdi-cli.py",
+    "prebuild": "npm run fetch-data",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
