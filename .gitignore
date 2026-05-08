@@ -27,5 +27,6 @@ Thumbs.db
 
 # Generated at build time by scripts/fetch-*.py — never committed.
 # Schema-only examples (*.example.json) are committed alongside as documentation.
+src/data/plugins_metadata.json
 src/data/verdi-cli.json
 src/data/pypi-stats.json

@@ -59,9 +59,15 @@ html {
   --color-bg-tinted-alt: #eaf0f8;
   --color-bg-tinted-green: #eef8ec;
   --color-bg-tinted-orange: #fdf3ea;
+  --color-bg-tinted-red: #fde8ea;
   --color-border-accent: rgba(0, 150, 222, 0.18);
   --color-border-accent-green: rgba(48, 184, 8, 0.15);
   --color-border-accent-orange: rgba(255, 125, 23, 0.15);
+  --color-border-accent-red: rgba(193, 18, 31, 0.18);
+  /* Foreground text designed for legibility on the matching tinted backgrounds */
+  --color-text-on-tint-green: #186b07;
+  --color-text-on-tint-orange: #934d00;
+  --color-text-on-tint-red: #8c1018;
   --color-shadow-accent: rgba(0, 150, 222, 0.08);
   --color-heading-accent: #0077b3;
   /* Syntax highlighting (light mode — darker variants for contrast on
@@ -94,9 +100,14 @@ html {
   --color-bg-tinted-alt: #14162c;
   --color-bg-tinted-green: #101a10;
   --color-bg-tinted-orange: #1a1410;
+  --color-bg-tinted-red: #2a1416;
   --color-border-accent: rgba(0, 150, 222, 0.15);
   --color-border-accent-green: rgba(48, 184, 8, 0.12);
   --color-border-accent-orange: rgba(255, 125, 23, 0.12);
+  --color-border-accent-red: rgba(193, 18, 31, 0.22);
+  --color-text-on-tint-green: #6dd14e;
+  --color-text-on-tint-orange: #f7b369;
+  --color-text-on-tint-red: #f0a4ab;
   --color-shadow-accent: rgba(0, 150, 222, 0.08);
   --color-heading-accent: #4ab8f0;
   --screen-prompt-interactive: #f9e2af;

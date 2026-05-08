@@ -1,0 +1,366 @@
+---
+import '../../styles/registry.css';
+import Layout from '../../layouts/Layout.astro';
+import data from '../../data/plugins_metadata.json';
+
+interface SummaryInfo { text: string; count: number; colorclass: string; }
+interface PluginMetadata {
+  description?: string;
+  author?: string;
+  author_email?: string;
+  version?: string;
+  release_date?: string;
+  classifiers?: string[];
+}
+interface PluginEntryPointSpec {
+  inputs?: { name: string; required: boolean; valid_types: string; info: string }[];
+  outputs?: { name: string; required: boolean; valid_types: string; info: string }[];
+  exit_codes?: { status: number; message: string }[];
+}
+interface PluginEntryPointDetail {
+  class?: string;
+  description?: string[];
+  spec?: PluginEntryPointSpec;
+}
+type PluginEntryPointVal = string | PluginEntryPointDetail;
+interface PluginRecord {
+  name: string;
+  package_name?: string;
+  code_home: string;
+  documentation_url?: string;
+  pip_url?: string;
+  pip_install_cmd?: string;
+  development_status: string;
+  entry_point_prefix?: string;
+  aiida_version?: string;
+  is_installable?: string;
+  metadata: PluginMetadata;
+  summaryinfo?: SummaryInfo[];
+  warnings?: string[];
+  errors?: string[];
+  entry_points?: Record<string, Record<string, PluginEntryPointVal>>;
+}
+
+export async function getStaticPaths() {
+  const plugins = data.plugins as Record<string, PluginRecord>;
+  return Object.keys(plugins).map(key => ({ params: { key } }));
+}
+
+const { key } = Astro.params;
+const plugins = data.plugins as Record<string, PluginRecord>;
+const statusDict = data.status_dict as Record<string, [string, string]>;
+const entryPointTypes = data.entrypointtypes as Record<string, string>;
+const plugin = plugins[key as string];
+
+/* Static (SSG) build: getStaticPaths enumerates every plugin key, so this branch
+   is unreachable in production. Throwing here makes a misconfiguration loud at
+   build time rather than producing a silent broken page. */
+if (!plugin) {
+  throw new Error(`Plugin "${key}" rendered without a matching entry in plugins_metadata.json`);
+}
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
+const STATUS_COLOR: Record<string, string> = {
+  planning: 'red',
+  'pre-alpha': 'red',
+  alpha: 'orange',
+  beta: 'yellow',
+  stable: 'green',
+  mature: 'brightgreen',
+  inactive: 'gray',
+};
+function statusColorClass(statusKey: string): string {
+  return STATUS_COLOR[statusKey] ?? 'gray';
+}
+
+/* Upstream registry checks come as HTML strings shaped like
+   `<a href='https://github.com/aiidateam/aiida-registry#W001'>W001</a>: <text>`
+   where the text portion can include data sourced from third-party plugin
+   metadata (pyproject.toml, setup.cfg). To avoid set:html on author-controlled
+   content, parse the well-known shape and render it as JSX with text escaping. */
+function parseCheck(raw: string): { code: string | null; codeUrl: string | null; text: string } {
+  const m = raw.match(/^<a\s+href=(?:'|")([^'"]+)(?:'|")>([WE]\d{3,})<\/a>:\s*([\s\S]*)$/);
+  if (m) {
+    return { codeUrl: m[1], code: m[2], text: m[3].trim() };
+  }
+  /* Fallback: strip any tags so unexpected shapes can't inject HTML either. */
+  return { code: null, codeUrl: null, text: raw.replace(/<[^>]*>/g, '').trim() };
+}
+
+const statusKey = plugin.development_status;
+const statusTooltip = statusDict[statusKey]?.[0] ?? statusKey;
+const description = plugin.metadata?.description ?? '';
+const hasEntryPoints = plugin.entry_points && Object.keys(plugin.entry_points).length > 0;
+const warnings = plugin.warnings ?? [];
+const errors = plugin.errors ?? [];
+const allClean = warnings.length === 0 && errors.length === 0;
+---
+
+<Layout
+  title={`${key} — AiiDA plugin registry`}
+  description={description || `${key} — an AiiDA plugin. ${statusKey} development status.`}
+>
+  <main class="reg-detail">
+    <div class="reg-detail-main">
+      <a class="reg-back" href={`${base}/plugin-registry/`}>
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="10 4 6 8 10 12" />
+        </svg>
+        All plugins
+      </a>
+
+      <h1>
+        <a href={plugin.code_home} target="_blank" rel="noopener noreferrer">{key}</a>
+      </h1>
+      {description && <p style="font-size:1.05rem;color:var(--color-text-secondary);margin:0 0 1rem;">{description}</p>}
+
+      <div class="reg-card-badges" style="margin-bottom:1rem;">
+        <span class="reg-badge" title={statusTooltip}>
+          <span class={`reg-badge-left ${statusColorClass(statusKey)}`}>status</span>
+          <span class="reg-badge-right">{statusKey}</span>
+        </span>
+        {plugin.aiida_version && (
+          <span class="reg-badge">
+            <span class="reg-badge-left blue">aiida-core</span>
+            <span class="reg-badge-right">{plugin.aiida_version}</span>
+          </span>
+        )}
+        {plugin.is_installable === 'True' && (
+          <span class="reg-installable" title="Installs successfully against the latest aiida-core docker image">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 8 7 12 13 4" />
+            </svg>
+            installs
+          </span>
+        )}
+      </div>
+
+      <h2 id="general">General information</h2>
+      <div class="reg-meta">
+        {plugin.pip_install_cmd && (
+          <div class="reg-meta-row">
+            <span class="reg-meta-key">Install</span>
+            <span class="reg-meta-val"><code>{plugin.pip_install_cmd}</code></span>
+          </div>
+        )}
+        <div class="reg-meta-row">
+          <span class="reg-meta-key">Source code</span>
+          <span class="reg-meta-val">
+            <a href={plugin.code_home} target="_blank" rel="noopener noreferrer">{plugin.code_home}</a>
+          </span>
+        </div>
+        <div class="reg-meta-row">
+          <span class="reg-meta-key">Documentation</span>
+          <span class="reg-meta-val">
+            {plugin.documentation_url ? (
+              <a href={plugin.documentation_url} target="_blank" rel="noopener noreferrer">{plugin.documentation_url}</a>
+            ) : (
+              <span style="color:var(--color-text-muted);">No documentation provided by the package author.</span>
+            )}
+          </span>
+        </div>
+        {plugin.metadata?.author && (
+          <div class="reg-meta-row">
+            <span class="reg-meta-key">Author(s)</span>
+            <span class="reg-meta-val">{plugin.metadata.author}</span>
+          </div>
+        )}
+        {plugin.metadata?.author_email && (
+          <div class="reg-meta-row">
+            <span class="reg-meta-key">Contact</span>
+            <span class="reg-meta-val">
+              {plugin.metadata.author_email.split(',').map(email => (
+                <a href={`mailto:${email.trim()}`} style="margin-right:.5rem;">{email.trim()}</a>
+              ))}
+            </span>
+          </div>
+        )}
+        {plugin.package_name && (
+          <div class="reg-meta-row">
+            <span class="reg-meta-key">Python import</span>
+            <span class="reg-meta-val"><code>import {plugin.package_name}</code></span>
+          </div>
+        )}
+        {plugin.metadata?.version && (
+          <div class="reg-meta-row">
+            <span class="reg-meta-key">Latest version</span>
+            <span class="reg-meta-val">{plugin.metadata.version}</span>
+          </div>
+        )}
+        {plugin.metadata?.release_date && (
+          <div class="reg-meta-row">
+            <span class="reg-meta-key">Released</span>
+            <span class="reg-meta-val">{plugin.metadata.release_date}</span>
+          </div>
+        )}
+      </div>
+
+      <h2 id="checks">Registry checks</h2>
+      {allClean ? (
+        <div class="reg-alert reg-alert--success">
+          <svg class="reg-alert-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 8 7 12 13 4" />
+          </svg>
+          <span>All checks passed.</span>
+        </div>
+      ) : (
+        <>
+          {warnings.map(w => {
+            const c = parseCheck(w);
+            return (
+              <div class="reg-alert reg-alert--warning">
+                <svg class="reg-alert-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 1 L15 14 L1 14 Z" />
+                  <line x1="8" y1="6" x2="8" y2="9" />
+                  <circle cx="8" cy="11.5" r="0.5" fill="currentColor" />
+                </svg>
+                <span>
+                  {c.code && c.codeUrl && (
+                    <><a href={c.codeUrl} target="_blank" rel="noopener noreferrer">{c.code}</a>: </>
+                  )}
+                  {c.text}
+                </span>
+              </div>
+            );
+          })}
+          {errors.map(e => {
+            const c = parseCheck(e);
+            return (
+              <div class="reg-alert reg-alert--error">
+                <svg class="reg-alert-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="8" cy="8" r="6.5" />
+                  <line x1="5" y1="5" x2="11" y2="11" />
+                  <line x1="11" y1="5" x2="5" y2="11" />
+                </svg>
+                <span>
+                  {c.code && c.codeUrl && (
+                    <><a href={c.codeUrl} target="_blank" rel="noopener noreferrer">{c.code}</a>: </>
+                  )}
+                  {c.text}
+                </span>
+              </div>
+            );
+          })}
+          <div class="reg-alert reg-alert--info">
+            <span>
+              Click any code (W001, E001…) to jump to{' '}
+              <a href="https://github.com/aiidateam/aiida-registry#how-to-fix-registry-warnings-and-errors" target="_blank" rel="noopener noreferrer">
+                troubleshooting instructions
+              </a>.
+            </span>
+          </div>
+        </>
+      )}
+
+      {plugin.summaryinfo && plugin.summaryinfo.length > 0 && (
+        <>
+          <h2 id="plugins">Plugins provided</h2>
+          <div class="reg-card-summary">
+            {plugin.summaryinfo.map(s => (
+              <span class="reg-badge">
+                <span class={`reg-badge-left ${s.colorclass}`}>{s.text}</span>
+                <span class="reg-badge-right">{s.count}</span>
+              </span>
+            ))}
+          </div>
+        </>
+      )}
+
+      {hasEntryPoints && (
+        <>
+          <h2 id="entry-points">Entry points</h2>
+          {Object.entries(plugin.entry_points!).map(([groupKey, eps]) => (
+            <section class="reg-ep-group" id={groupKey}>
+              <header class="reg-ep-group-head">
+                <span>{entryPointTypes[groupKey] ?? groupKey}</span>
+                <span class="reg-ep-group-raw">{groupKey}</span>
+              </header>
+              <ul class="reg-ep-list">
+                {Object.entries(eps).map(([epName, epVal]) => (
+                  <li class="reg-ep-item" id={`${groupKey}.${epName}`}>
+                    <p class="reg-ep-name">{epName}</p>
+                    {typeof epVal === 'string' ? (
+                      <span class="reg-ep-class">{epVal}</span>
+                    ) : (
+                      <>
+                        {epVal.class && (
+                          <span class="reg-ep-class">class: <code>{epVal.class}</code></span>
+                        )}
+                        {epVal.description && epVal.description.length > 0 && (
+                          <p style="margin:.4rem 0;font-size:.92rem;color:var(--color-text-secondary);">
+                            {epVal.description.join(' ').trim()}
+                          </p>
+                        )}
+                        {epVal.spec?.inputs && epVal.spec.inputs.length > 0 && (
+                          <table class="reg-ep-table">
+                            <thead><tr><th>Input</th><th>Required</th><th>Valid types</th><th>Description</th></tr></thead>
+                            <tbody>
+                              {epVal.spec.inputs.map(s => (
+                                <tr>
+                                  <td><code>{s.name}</code></td>
+                                  <td>{String(s.required)}</td>
+                                  <td><code>{s.valid_types}</code></td>
+                                  <td>{s.info}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        )}
+                        {epVal.spec?.outputs && epVal.spec.outputs.length > 0 && (
+                          <table class="reg-ep-table">
+                            <thead><tr><th>Output</th><th>Required</th><th>Valid types</th><th>Description</th></tr></thead>
+                            <tbody>
+                              {epVal.spec.outputs.map(s => (
+                                <tr>
+                                  <td><code>{s.name}</code></td>
+                                  <td>{String(s.required)}</td>
+                                  <td><code>{s.valid_types}</code></td>
+                                  <td>{s.info}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        )}
+                        {epVal.spec?.exit_codes && epVal.spec.exit_codes.length > 0 && (
+                          <table class="reg-ep-table">
+                            <thead><tr><th>Exit status</th><th>Message</th></tr></thead>
+                            <tbody>
+                              {epVal.spec.exit_codes.map(c => (
+                                <tr>
+                                  <td>{c.status}</td>
+                                  <td>{c.message}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        )}
+                      </>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </>
+      )}
+    </div>
+
+    {hasEntryPoints && (
+      <aside class="reg-sidebar">
+        <p class="reg-sidebar-title">On this page</p>
+        <ul class="reg-sidebar-list">
+          <li><a href="#general">General</a></li>
+          <li><a href="#checks">Registry checks</a></li>
+          {plugin.summaryinfo && plugin.summaryinfo.length > 0 && (
+            <li><a href="#plugins">Plugins provided</a></li>
+          )}
+          <li><a href="#entry-points"><strong>Entry points</strong></a></li>
+          {Object.keys(plugin.entry_points!).map(g => (
+            <li><a href={`#${g}`} class="reg-sidebar-sub">{entryPointTypes[g] ?? g}</a></li>
+          ))}
+        </ul>
+      </aside>
+    )}
+  </main>
+</Layout>
