@@ -35,7 +35,7 @@ const NODES: EcoNode[] = [
     name: 'Plugin registry',
     tagline: '100+ community plugins',
     desc: 'A curated directory of all AiiDA plugins — from simulation codes (Quantum ESPRESSO, VASP, CP2K, FLEUR, Siesta, …) to data types, schedulers, and transports. Plugins extend AiiDA via Python entry points.',
-    url: 'https://aiidateam.github.io/aiida-registry/',
+    url: `${base}/plugin-registry/`,
     color: '#0096de',
     category: 'core',
   },
@@ -193,7 +193,7 @@ export default function Ecosystem(): ReactNode {
 
         {/* Bottom row: extensions and tools */}
         <div className="eco-layer eco-layer--extensions">
-          <a className="eco-ext-node" href="https://aiidateam.github.io/aiida-registry/" target="_blank" rel="noopener noreferrer"
+          <a className="eco-ext-node" href={`${base}/plugin-registry/`}
             style={{ '--ext-color': '#0096de' } as React.CSSProperties}>
             <div className="eco-ext-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="#0096de" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

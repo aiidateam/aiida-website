@@ -56,7 +56,7 @@ export default function Navbar() {
         <li><a href={`${base}/ecosystem`}>Ecosystem</a></li>
         <li><a href={`${base}/docs`}>Docs</a></li>
         <li><a href={`${base}/blog/`}>News</a></li>
-        <li><a href="https://aiidateam.github.io/aiida-registry/" target="_blank" rel="noopener noreferrer">Plugins <ExtIcon /></a></li>
+        <li><a href={`${base}/plugin-registry/`}>Plugins</a></li>
         <li><a href="https://aiida.discourse.group/" target="_blank" rel="noopener noreferrer">Community <ExtIcon /></a></li>
         <li className="navbar-dropdown" ref={moreRef}>
           <button className="navbar-dropdown-btn" onClick={() => setMoreOpen(!moreOpen)}>

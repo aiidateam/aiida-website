@@ -652,7 +652,7 @@ function PluginShowcase(): ReactNode {
                 </div>
               </div>
             ))}
-            <a className="plugin-registry-link" href="https://aiidateam.github.io/aiida-registry/">
+            <a className="plugin-registry-link" href={`${base}/plugin-registry/`}>
               Browse all 100+ plugins in the registry &rarr;
             </a>
           </div>
@@ -3112,7 +3112,7 @@ function Numbers(): ReactNode {
           <span className="number-value">1000+</span>
           <span className="number-label">Publications</span>
         </a>
-        <a className="number-item number-item--link" href="https://aiidateam.github.io/aiida-registry/" target="_blank" rel="noopener noreferrer">
+        <a className="number-item number-item--link" href={`${base}/plugin-registry/`}>
           <span className="number-value">100+</span>
           <span className="number-label">Plugins</span>
         </a>

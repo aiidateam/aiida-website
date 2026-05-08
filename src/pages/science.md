@@ -35,7 +35,7 @@ description: "Research publications powered by AiiDA."
 
 ## AiiDA-powered research surveys
 
-The AiiDA team conducts periodically a **survey** in parallel with each development milestone, formerly on the AiiDA mailing list and now on [Discourse](https://aiida.discourse.group/), to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](https://aiidateam.github.io/aiida-registry/) used, and further database indicators that inform future development choices.
+The AiiDA team conducts periodically a **survey** in parallel with each development milestone, formerly on the AiiDA mailing list and now on [Discourse](https://aiida.discourse.group/), to gather information on research projects using AiiDA, including papers published, [AiiDA plugins](/plugin-registry/) used, and further database indicators that inform future development choices.
 
 - **2024**: [results](/survey/Questionnaire_results_2024.pdf)
 - **2020**: [results](/survey/aiida-powered-research-projects-2020_Updated.pdf)
