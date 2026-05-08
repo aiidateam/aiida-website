@@ -1,6 +1,7 @@
 import {type ReactNode, type CSSProperties, useState, useRef, useEffect, useCallback} from 'react';
 import verdiCliData from '../data/verdi-cli.json';
 import pypiStats from '../data/pypi-stats.json';
+import Cite from './Cite';
 
 
 const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
@@ -4737,6 +4738,7 @@ export default function LandingPage({news = []}: {news?: NewsItem[]}): ReactNode
       <Supporters />
       <LatestNews items={news} />
       <Testimonials />
+      <Cite />
     </main>
   );
 }
