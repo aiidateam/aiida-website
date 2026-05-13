@@ -55,13 +55,21 @@ html {
   /* Design system — all three AiiDA brand colors */
   --color-accent-orange: #e06800;
   --color-accent-green: #28a006;
+  --color-accent-seafoam: #9fe2bf;
+  --color-text-on-seafoam: #1a1d2e;
   --color-bg-tinted: #f0f5fa;
   --color-bg-tinted-alt: #eaf0f8;
   --color-bg-tinted-green: #eef8ec;
   --color-bg-tinted-orange: #fdf3ea;
+  --color-bg-tinted-red: #fde8ea;
   --color-border-accent: rgba(0, 150, 222, 0.18);
   --color-border-accent-green: rgba(48, 184, 8, 0.15);
   --color-border-accent-orange: rgba(255, 125, 23, 0.15);
+  --color-border-accent-red: rgba(193, 18, 31, 0.18);
+  /* Foreground text designed for legibility on the matching tinted backgrounds */
+  --color-text-on-tint-green: #186b07;
+  --color-text-on-tint-orange: #934d00;
+  --color-text-on-tint-red: #8c1018;
   --color-shadow-accent: rgba(0, 150, 222, 0.08);
   --color-heading-accent: #0077b3;
   /* Syntax highlighting (light mode — darker variants for contrast on
@@ -94,9 +102,14 @@ html {
   --color-bg-tinted-alt: #14162c;
   --color-bg-tinted-green: #101a10;
   --color-bg-tinted-orange: #1a1410;
+  --color-bg-tinted-red: #2a1416;
   --color-border-accent: rgba(0, 150, 222, 0.15);
   --color-border-accent-green: rgba(48, 184, 8, 0.12);
   --color-border-accent-orange: rgba(255, 125, 23, 0.12);
+  --color-border-accent-red: rgba(193, 18, 31, 0.22);
+  --color-text-on-tint-green: #6dd14e;
+  --color-text-on-tint-orange: #f7b369;
+  --color-text-on-tint-red: #f0a4ab;
   --color-shadow-accent: rgba(0, 150, 222, 0.08);
   --color-heading-accent: #4ab8f0;
   --screen-prompt-interactive: #f9e2af;
@@ -502,4 +515,59 @@ a:hover .navbar-ext-icon {
 
 .footer-copy a:hover {
   color: var(--color-primary);
+}
+
+#back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary-dark);
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease;
+  z-index: 90;
+}
+
+#back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-darker);
+}
+
+#back-to-top:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+#back-to-top svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #back-to-top {
+    transition:
+      opacity 0ms,
+      transform 0ms;
+  }
 }

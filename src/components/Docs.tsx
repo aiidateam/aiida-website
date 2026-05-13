@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
 const ExtIcon = () => (
   <svg className="docs-ext-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M4.5 1.5H2a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V7.5" />
@@ -168,7 +170,7 @@ export default function Docs(): ReactNode {
               <p>Source code, issues, and contributing</p>
             </div>
           </a>
-          <a className="docs-extra-card" href="https://aiidateam.github.io/aiida-registry/" target="_blank" rel="noopener noreferrer">
+          <a className="docs-extra-card" href={`${base}/plugin-registry/`}>
             <div className="docs-extra-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" />
