@@ -55,6 +55,8 @@ html {
   /* Design system — all three AiiDA brand colors */
   --color-accent-orange: #e06800;
   --color-accent-green: #28a006;
+  --color-accent-seafoam: #9fe2bf;
+  --color-text-on-seafoam: #1a1d2e;
   --color-bg-tinted: #f0f5fa;
   --color-bg-tinted-alt: #eaf0f8;
   --color-bg-tinted-green: #eef8ec;

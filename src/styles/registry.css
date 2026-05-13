@@ -144,6 +144,11 @@
 .reg-sum-label.lightblue {
   background: var(--color-primary-light);
 }
+.reg-badge-left.seafoam,
+.reg-sum-label.seafoam {
+  background: var(--color-accent-seafoam);
+  color: var(--color-text-on-seafoam);
+}
 .reg-badge-left.brightgreen,
 .reg-sum-label.brightgreen {
   background: var(--color-accent-green);
@@ -155,6 +160,26 @@
 .reg-badge-left.purple,
 .reg-sum-label.purple {
   background: #6f3aad;
+}
+
+/* Entry-point category badges (.reg-card-summary on cards, .reg-summary-grid in
+   the top inventory). Override the shared palette to a non-alarming set so
+   red / orange / yellow / green stay reserved for status indicators above. */
+.reg-card-summary .reg-badge-left.blue,
+.reg-summary-grid .reg-sum-label.blue {
+  background: #0e7490; /* Calculations: cyan-teal */
+}
+.reg-card-summary .reg-badge-left.red,
+.reg-summary-grid .reg-sum-label.red {
+  background: #4338ca; /* Data: indigo */
+}
+.reg-card-summary .reg-badge-left.green,
+.reg-summary-grid .reg-sum-label.green {
+  background: #1e40af; /* Workflows: deep navy */
+}
+.reg-card-summary .reg-badge-left.orange,
+.reg-summary-grid .reg-sum-label.orange {
+  background: #475569; /* Other: slate */
 }
 
 /* --- Toolbar (search + sort) --- */

@@ -346,7 +346,7 @@ export default function PluginRegistryList({ plugins, statusDict }: Props): Reac
                 )}
                 {sortMode === 'release' && p.metadata?.release_date && (
                   <span className="reg-badge">
-                    <span className="reg-badge-left lightblue">released</span>
+                    <span className="reg-badge-left seafoam">released</span>
                     <span className="reg-badge-right">{p.metadata.release_date}</span>
                   </span>
                 )}
