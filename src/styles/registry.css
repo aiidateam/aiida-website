@@ -83,10 +83,11 @@
 }
 
 .reg-sum-count {
-  background: var(--color-bg);
+  background: var(--color-border);
   color: var(--color-text);
   border-radius: 0 4px 4px 0;
   border-left: none;
+  text-align: right;
 }
 
 .reg-badge {
@@ -110,7 +111,7 @@
 }
 
 .reg-badge-right {
-  background: var(--color-bg);
+  background: var(--color-border);
   color: var(--color-text);
 }
 
@@ -530,6 +531,11 @@
   line-height: 1.5;
 }
 
+.reg-alert > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .reg-alert a {
   color: inherit;
   font-weight: 600;
@@ -625,12 +631,14 @@
   font-weight: 600;
   color: var(--color-primary-dark);
   margin: 0 0 0.3rem;
+  overflow-wrap: anywhere;
 }
 
 .reg-ep-class {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   color: var(--color-text-muted);
+  overflow-wrap: anywhere;
 }
 
 .reg-ep-table {
@@ -732,5 +740,54 @@
   }
   .reg-detail h1 {
     font-size: 1.5rem;
+  }
+
+  /* Stack entry-point tables into per-row cards so the rightmost column
+     (Description) isn't pushed off-screen by horizontal scroll. */
+  .reg-ep-table,
+  .reg-ep-table tbody,
+  .reg-ep-table tr,
+  .reg-ep-table td {
+    display: block;
+    overflow-x: visible;
+  }
+  .reg-ep-table thead {
+    display: none;
+  }
+  .reg-ep-table tr {
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    background: var(--color-bg-alt);
+  }
+  .reg-ep-table td {
+    padding: 0.2rem 0;
+    border: none;
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+  .reg-ep-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .reg-ep-table td:first-child {
+    display: block;
+    padding: 0.1rem 0 0.45rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border-light);
+    font-weight: 600;
+  }
+  .reg-ep-table td:first-child::before {
+    display: none;
+  }
+  .reg-ep-table td code {
+    word-break: break-word;
   }
 }

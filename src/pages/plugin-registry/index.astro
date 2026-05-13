@@ -19,15 +19,15 @@ const totalPackages = Object.keys(plugins).length;
       <h1>Plugin registry</h1>
       <p class="reg-hero-sub">
         {totalPackages} community plugins extending AiiDA — simulation codes, data types,
-        schedulers, transports, and workflows. To add yours, open a PR against{' '}
+        schedulers, transports, and workflows. Register your plugin{' '}
         <a href="https://github.com/aiidateam/aiida-registry" target="_blank" rel="noopener noreferrer">
-          aiidateam/aiida-registry
-        </a>.
+          here
+        </a>
       </p>
     </section>
 
     <section class="reg-summary" aria-label="Plugin summary">
-      <p class="reg-summary-title">{totalPackages} packages, by entry-point category</p>
+      <p class="reg-summary-title">Registered plugin packages: {totalPackages}</p>
       <div class="reg-summary-grid">
         {globalSummary.map(s => (
           <Fragment>

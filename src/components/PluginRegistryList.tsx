@@ -53,6 +53,11 @@ const SORT_LABELS: Record<SortMode, string> = {
   alpha: 'Alphabetical',
 };
 
+function splitOther(text: string): { label: string; tooltip?: string } {
+  const m = text.match(/^Other\s*\(([^)]*)\)\s*$/);
+  return m ? { label: 'Other', tooltip: m[1].trim() } : { label: text };
+}
+
 /* Upstream encodes status colours as hex in SVG filenames; we map the well-known
    keys to our colour palette instead so the badges fit our theme. */
 const STATUS_COLOR: Record<string, string> = {
@@ -315,8 +320,8 @@ export default function PluginRegistryList({ plugins, statusDict }: Props): Reac
               <div className="reg-card-head">
                 <h2 className="reg-card-name">{key}</h2>
                 {p.is_installable === 'True' && (
-                  <span className="reg-installable" title="Installs successfully against the latest aiida-core docker image">
-                    <CheckIcon /> installs
+                  <span className="reg-installable" title="Installable against the latest aiida-core docker image">
+                    <CheckIcon /> installs successfully
                   </span>
                 )}
               </div>
@@ -335,13 +340,13 @@ export default function PluginRegistryList({ plugins, statusDict }: Props): Reac
                 )}
                 {sortMode === 'commits' && p.commits_count != null && (
                   <span className="reg-badge">
-                    <span className="reg-badge-left blue">commits/yr</span>
+                    <span className="reg-badge-left lightblue">commits/yr</span>
                     <span className="reg-badge-right">{p.commits_count}</span>
                   </span>
                 )}
                 {sortMode === 'release' && p.metadata?.release_date && (
                   <span className="reg-badge">
-                    <span className="reg-badge-left blue">released</span>
+                    <span className="reg-badge-left lightblue">released</span>
                     <span className="reg-badge-right">{p.metadata.release_date}</span>
                   </span>
                 )}
@@ -351,12 +356,20 @@ export default function PluginRegistryList({ plugins, statusDict }: Props): Reac
               )}
               {p.summaryinfo && p.summaryinfo.length > 0 && (
                 <div className="reg-card-summary">
-                  {p.summaryinfo.map(s => (
-                    <span key={s.text} className="reg-badge">
-                      <span className={`reg-badge-left ${s.colorclass}`}>{s.text}</span>
-                      <span className="reg-badge-right">{s.count}</span>
-                    </span>
-                  ))}
+                  {p.summaryinfo.map(s => {
+                    const { label, tooltip } = splitOther(s.text);
+                    return (
+                      <span key={s.text} className="reg-badge">
+                        <span
+                          className={`reg-badge-left ${s.colorclass}`}
+                          title={tooltip}
+                        >
+                          {label}
+                        </span>
+                        <span className="reg-badge-right">{s.count}</span>
+                      </span>
+                    );
+                  })}
                 </div>
               )}
             </a>
