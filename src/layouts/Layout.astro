@@ -52,5 +52,36 @@ const imageUrl = new URL(image, Astro.site).href;
     <Navbar client:load />
     <slot />
     <Footer />
+    <button id="back-to-top" type="button" aria-label="Back to top" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('back-to-top');
+        if (!btn) return;
+        var threshold = 400;
+        var visible = false;
+        function update() {
+          var shouldShow = (window.scrollY || document.documentElement.scrollTop) > threshold;
+          if (shouldShow === visible) return;
+          visible = shouldShow;
+          if (shouldShow) {
+            btn.hidden = false;
+            requestAnimationFrame(function () { btn.classList.add('is-visible'); });
+          } else {
+            btn.classList.remove('is-visible');
+            setTimeout(function () { if (!visible) btn.hidden = true; }, 200);
+          }
+        }
+        btn.addEventListener('click', function () {
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        });
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+      })();
+    </script>
   </body>
 </html>
