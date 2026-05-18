@@ -488,6 +488,148 @@
   margin: 0;
 }
 
+/* ===== USE CASES PAGE ===== */
+
+.usecases-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+.usecase-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  border: 1px solid var(--color-border-light);
+  border-radius: 14px;
+  background: var(--color-bg-surface);
+  /* card-hover convention, matching .cite-paper */
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.usecase-card:hover {
+  border-color: var(--color-border-accent);
+  box-shadow: 0 4px 14px var(--color-shadow-accent);
+  transform: translateY(-2px);
+}
+
+.usecase-card:hover h2 {
+  color: var(--color-primary);
+}
+
+.usecase-figure {
+  margin: 0;
+}
+
+.usecase-figure img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border: 1px solid var(--color-border-light);
+  border-radius: 10px;
+  /* keep white in both themes: the source figures have white backgrounds */
+  background: #ffffff;
+}
+
+.usecase-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.usecase-figure figcaption a {
+  color: var(--color-primary);
+}
+
+.usecase-content {
+  flex: 1;
+}
+
+.usecase-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  margin: 0 0 0.35rem;
+}
+
+.usecase-card h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 0.85rem;
+  transition: color 0.15s ease;
+}
+
+.usecase-body p {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0 0 0.75rem;
+}
+
+.usecase-body p:last-child {
+  margin-bottom: 0;
+}
+
+.usecase-study {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1.15rem;
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-bg-alt);
+  border-radius: 0 8px 8px 0;
+}
+
+.usecase-study-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  margin: 0 0 0.35rem;
+}
+
+.usecase-study-cite {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.usecase-study-cite a {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-primary);
+}
+
+.usecase-study-cite a:hover {
+  color: var(--color-primary);
+}
+
+.usecase-study-ref {
+  color: var(--color-text-muted);
+}
+
+.usecases-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.usecases-note a {
+  color: var(--color-primary);
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 600px) {
@@ -509,5 +651,9 @@
 
   .sponsors-grid {
     grid-template-columns: 1fr;
+  }
+
+  .usecase-card {
+    padding: 1.5rem;
   }
 }

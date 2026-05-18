@@ -3964,6 +3964,13 @@ main > section > h2::after {
   margin: 0 auto 4rem;
 }
 
+.throughput-try-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .throughput-try-btn {
   font-size: 1rem;
   padding: 0.75rem 2rem;
