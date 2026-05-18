@@ -1,0 +1,101 @@
+---
+import '../styles/pages.css';
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+
+const useCases = [
+  {
+    image: `${base}/img/use-cases/superconductor-screening.png`,
+    imageAlt:
+      'High-throughput screening funnel: roughly 900,000 known crystal structures are narrowed through successive AiiDA workflow stages down to a shortlist of candidate superconductors.',
+    caption: 'The high-throughput screening funnel, from the featured study',
+    license: { name: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' },
+    category: 'High-throughput materials science',
+    title: 'Screening thousands of compounds for new superconductors',
+    body: [
+      'High-throughput studies push a single computational method across thousands of materials at once — far more calculations than any researcher could launch, babysit, and bookkeep by hand. AiiDA submits the jobs, retries the ones that fail, and records every input, code, and result in a queryable provenance graph, so a campaign of this size stays reproducible from the first structure to the last.',
+      'In one recent screening, researchers searched the Materials Cloud three-dimensional structure database (MC3D) of experimentally known inorganic compounds for conventional, phonon-mediated superconductors. AiiDA orchestrated the full pipeline — electronic-structure relaxations, phonon calculations, electron–phonon coupling, and critical-temperature estimates — across more than 4,500 candidate metals. The search recovered known superconductors and surfaced 24 previously unreported ones with predicted critical temperatures above 10 K.',
+    ],
+    study: {
+      authors: 'M. Bercx, S. Poncé, Y. Zhang et al.',
+      title:
+        'Charting the landscape of Bardeen–Cooper–Schrieffer superconductors in experimentally known compounds',
+      reference: 'PRX Energy 4, 033012 (2025)',
+      url: 'https://journals.aps.org/prxenergy/abstract/10.1103/sb28-fjc9',
+    },
+  },
+  {
+    image: `${base}/img/use-cases/aurora-battery-cycling.png`,
+    imageAlt:
+      'Aurora platform graphical abstract: a truss bridge linking a handshake (trust) and a robotic arm (control), spanning AiiDA workflows and FAIR data.',
+    caption: 'Graphical abstract of the featured study',
+    license: { name: 'CC BY 3.0', url: 'https://creativecommons.org/licenses/by/3.0/' },
+    category: 'Driving experiments',
+    title: 'Autonomous battery testing with the Aurora platform',
+    body: [
+      'AiiDA is not limited to simulations: the same engine that manages computational jobs can also drive physical instruments. That makes it possible to plan, run, and track a laboratory experiment with exactly the reproducibility and provenance researchers expect from a calculation.',
+      'The Aurora platform pairs a robotic line that assembles and cycles coin-cell batteries with AiiDA. Each real-world experiment is submitted and monitored like a computational job, and AiiDA records complete provenance for every cell — linking protocols, raw measurements, and analysis into a single graph. Live monitoring lets the platform stop underperforming cells early, and legacy measurements are folded into the same digital record, bridging trust in the data with hands-off control of the lab.',
+    ],
+    study: {
+      authors: 'P. Kraus, E. Bainglass, F. F. Ramirez et al.',
+      title:
+        'A bridge between trust and control: computational workflows meet automated battery cycling',
+      reference: 'J. Mater. Chem. A 12, 10773–10783 (2024)',
+      url: 'https://doi.org/10.1039/D3TA06889G',
+    },
+  },
+];
+---
+
+<Layout
+  title="Use cases — AiiDA"
+  description="How researchers use AiiDA — from high-throughput materials screening to autonomous laboratory experiments."
+>
+  <main class="section-page">
+    <header class="section-header">
+      <h1>Use cases</h1>
+      <p class="section-header-sub">
+        From large-scale computational screening to autonomous laboratory
+        experiments — a look at what researchers build with AiiDA.
+      </p>
+    </header>
+
+    <div class="usecases-list">
+      {useCases.map(uc => (
+        <article class="usecase-card">
+          <figure class="usecase-figure">
+            <img src={uc.image} alt={uc.imageAlt} loading="lazy" />
+            <figcaption>
+              {uc.caption} (<a href={uc.license.url} target="_blank" rel="noopener noreferrer">{uc.license.name}</a>).
+            </figcaption>
+          </figure>
+          <div class="usecase-content">
+            <p class="usecase-eyebrow">{uc.category}</p>
+            <h2>{uc.title}</h2>
+            <div class="usecase-body">
+              {uc.body.map(p => <p>{p}</p>)}
+            </div>
+            <div class="usecase-study">
+              <p class="usecase-study-label">Featured study</p>
+              <p class="usecase-study-cite">
+                {uc.study.authors},{' '}
+                <a href={uc.study.url} target="_blank" rel="noopener noreferrer">
+                  “{uc.study.title}”
+                </a>
+                , <span class="usecase-study-ref">{uc.study.reference}</span>.
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="usecases-note">
+      This collection will grow over time. Using AiiDA in your research?{' '}
+      <a href="https://aiida.discourse.group/" target="_blank" rel="noopener noreferrer">
+        Tell us about it on Discourse
+      </a>.
+    </p>
+  </main>
+</Layout>

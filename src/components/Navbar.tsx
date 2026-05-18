@@ -54,6 +54,7 @@ export default function Navbar() {
       </button>
       <ul className={`navbar-links${menuOpen ? ' navbar-links--open' : ''}`}>
         <li><a href={`${base}/ecosystem`}>Ecosystem</a></li>
+        <li><a href={`${base}/use-cases`}>Use cases</a></li>
         <li><a href={`${base}/docs`}>Docs</a></li>
         <li><a href={`${base}/blog/`}>News</a></li>
         <li><a href={`${base}/plugin-registry/`}>Plugins</a></li>
