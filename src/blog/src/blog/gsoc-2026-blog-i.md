@@ -48,7 +48,7 @@ On the communication side: I joined the AiiDA Slack workspace, attended the biwe
 
 The team is small and technically sharp.
 
-Julian will be guiding the AiiDA domain side; I bring the AI systems knowledge.
+Mentors will be guiding the AiiDA domain side; I bring the AI systems knowledge.
 
 That division makes sense given what the project needs.
 
