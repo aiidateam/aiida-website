@@ -72,4 +72,4 @@ Updates to this post will be provided every two weeks as the build progresses.
 
 ---
 
-*Jaweria Batool is a software developer and GSoC 2026 contributor working on the AiiDA natural language interface project under the NumFOCUS umbrella.*
+_Jaweria Batool is a software developer and GSoC 2026 contributor working on the AiiDA natural language interface project under the NumFOCUS umbrella._
