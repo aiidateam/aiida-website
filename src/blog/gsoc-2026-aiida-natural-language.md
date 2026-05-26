@@ -1,6 +1,6 @@
 ---
 title: "Teaching AiiDA to Speak Human: GSoC 2026 Journey Begins"
-date: 2026-05-19
+date: 2026-05-26
 author: Jaweria Batool
 category: Blog
 tags: [gsoc, aiida, ai, gsoc2026]
@@ -12,9 +12,9 @@ The project is a **natural language interface for AiiDA** built on a multi-agent
 Various specialized agents handle different parts of the interaction, among others: an Orchestrator that routes the user's intent, a Workflow Agent that submits jobs, a Config Agent that builds simulation parameters, a Diagnostic Agent that interprets calculation failures, and an Analysis Agent that queries results from AiiDA's provenance graph.
 
 The agents connect to AiiDA through an MCP (Model Context Protocol) server that exposes AiiDA's Python API as typed, validated tools.
-This means the AI never directly calls AiiDA or writes free-form custom Python code.
+This means the AI never directly calls AiiDA or writes arbitrary Python code.
 Instead, every action goes through a defined interface with input validation.
-That matters because wrong parameters on a supercomputer job waste real compute time, and catching errors before submission is much cheaper than catching them after.
+That matters because wrong parameters on a supercomputer job waste compute time, and catching errors before submission is much cheaper than catching them after.
 
 Before anything gets submitted to an HPC cluster, the scientist sees the generated parameters and confirms.
 This is because AI can produce inputs that look correct but are physically nonsensical, thus, a human confirmation step is a necessary safeguard here.
@@ -31,7 +31,7 @@ In AiiDA, the framework manages it, and you work within its structure.
 The provenance graph was the concept that clicked most clearly.
 Every input, output, and calculation is stored permanently and linked together, to produce a complete record of how every result was obtained.
 When I ran `verdi node graph generate` and saw the WorkChain laid out visually, inputs flowing in, processes running, outputs coming back, it gave me a much more concrete picture of what the Analysis Agent will be querying.
-I also went through `PwBaseWorkChain` and `pw.relax`, some of the target Quantum ESPRESSO workflows of the project.
+I also went through the `PwBaseWorkChain` and `pw.relax`, some of the target Quantum ESPRESSO workflows of the project.
 
 On the communication side: I joined the AiiDA Slack workspace, attended the biweekly team meeting, and met with the mentors and development team.
 The team is small and technically sharp.
