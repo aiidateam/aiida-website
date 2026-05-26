@@ -31,7 +31,7 @@ In AiiDA, the framework manages it, and you work within its structure.
 The provenance graph was the concept that clicked most clearly.
 Every input, output, and calculation is stored permanently and linked together, to produce a complete record of how every result was obtained.
 When I ran `verdi node graph generate` and saw the WorkChain laid out visually, inputs flowing in, processes running, outputs coming back, it gave me a much more concrete picture of what the Analysis Agent will be querying.
-I also went through the `PwBaseWorkChain` and `pw.relax`, some of the target Quantum ESPRESSO workflows of the project.
+I also went through the `PwBaseWorkChain` and `PwRelaxWorkChain` some of the target Quantum ESPRESSO workflows of the project.
 
 On the communication side: I joined the AiiDA Slack workspace, attended the biweekly team meeting, and met with the mentors and development team.
 The team is small and technically sharp.
