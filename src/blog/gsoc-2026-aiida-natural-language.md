@@ -58,13 +58,20 @@ Following the end of the community bonding period, the first official coding wee
 
 ### Alignment and planning
 
-To align on the project structure, I discussed with the mentor and we also had a dedicated session with AiiDA's creator, Giovanni. We discussed project timeline, and the specific modules to be included in our architecture. Having this high-level feedback early on was extremely valuable for mapping out how the agents will interact with AiiDA's database.
+To align on the project structure, I discussed with the mentor and we also had a dedicated session with AiiDA's creator, Giovanni.
+We discussed project timeline, and the specific modules to be included in our architecture.
+Having this high-level feedback early on was extremely valuable for mapping out how the agents will interact with AiiDA's database.
 
 ### The REST API and building the first tools
 
-With the architecture aligned, the first concrete technical task was to connect our Model Context Protocol (MCP) server to AiiDA. We decided that wrapping `aiida-restapi` (an external package that exposes Pydantic models and handlers for AiiDA) was much cleaner than hand-rolling AiiDA access from scratch. We wanted to import and call these Pydantic models in-process, without standing up a live web server, to serve as clean building blocks for our tool schema.
+With the architecture aligned, the first concrete technical task was to connect our Model Context Protocol (MCP) server to AiiDA.
+We decided that wrapping `aiida-restapi` (an external package that exposes Pydantic models and handlers for AiiDA) was much cleaner than hand-rolling AiiDA access from scratch.
+We wanted to import and call these Pydantic models in-process, without standing up a live web server, to serve as clean building blocks for our tool schema.
 
-However, the initial integration was not smooth. We ran into compatibility issues and errors where the existing REST API code wasn't quite working for our needs. This sent us back to the drawing board to think through the query layer and single-node database access. By pulling the latest updates and pull requests from the `aiida-restapi` repository, we managed to integrate it and make the tool schemas work.
+However, the initial integration was not smooth.
+We ran into compatibility issues and errors where the existing REST API code wasn't quite working for our needs.
+This sent us back to the drawing board to think through the query layer and single-node database access.
+By pulling the latest updates and pull requests from the `aiida-restapi` repository, we managed to integrate it and make the tool schemas work.
 
 Through this process, we refined our tool-design strategy:
 
@@ -75,11 +82,16 @@ With this foundation, I built and defined the first six MCP tools for our server
 
 ### Collaborative feedback
 
-A highlight of these past two weeks has been the close collaboration with the mentor. We did what felt like asynchronous pair programming; after developing the tools on a separate branch, I opened the pull request on GitHub. This collaboration was incredibly active and considerate, providing detailed, constructive feedback on the design. We went through the review process, made necessary adjustments, and successfully refined the pull request.
+A highlight of these past two weeks has been the close collaboration with the mentor.
+We did what felt like asynchronous pair programming; after developing the tools on a separate branch, I opened the pull request on GitHub.
+This collaboration was incredibly active and considerate, providing detailed, constructive feedback on the design.
+We went through the review process, made necessary adjustments, and successfully refined the pull request.
 
 ### Initial agent configuration
 
-With the tool layer taking shape, I also started setting up the initial configuration for the agents. Getting the analysis agent configured early is critical so that we can begin testing end-to-end interactions with our newly created tools. Laying this groundwork now ensures we stay on track with our GSoC timeline.
+With the tool layer taking shape, I also started setting up the initial configuration for the agents.
+Getting the analysis agent configured early is critical so that we can begin testing end-to-end interactions with our newly created tools.
+Laying this groundwork now ensures we stay on track with our GSoC timeline.
 
 Updates to this post will be provided every two weeks as the build progresses.
 
