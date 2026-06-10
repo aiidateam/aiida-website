@@ -64,9 +64,10 @@ To align on the project structure, I discussed with the mentor and we also had a
 
 With the architecture aligned, the first concrete technical task was to connect our Model Context Protocol (MCP) server to AiiDA. We decided that wrapping `aiida-restapi` (an external package that exposes Pydantic models and handlers for AiiDA) was much cleaner than hand-rolling AiiDA access from scratch. We wanted to import and call these Pydantic models in-process, without standing up a live web server, to serve as clean building blocks for our tool schema.
 
-However, the initial integration was not smooth. We ran into compatibility issues and errors where the existing REST API code wasn't quite working for our needs. This sent us back to the drawing board to think through the query layer and single-node database access. By pulling the latest updates and pull requests from the `aiida-restapi` repository, we managed to integrate it and make the tool schemas work. 
+However, the initial integration was not smooth. We ran into compatibility issues and errors where the existing REST API code wasn't quite working for our needs. This sent us back to the drawing board to think through the query layer and single-node database access. By pulling the latest updates and pull requests from the `aiida-restapi` repository, we managed to integrate it and make the tool schemas work.
 
 Through this process, we refined our tool-design strategy:
+
 - For querying collections of nodes, we use the `NodeService` wrapper from `aiida-restapi`.
 - For simple single-node operations (like fetching attributes of a loaded node), we bypass the service layer and call `aiida-core`'s native ORM directly to avoid unnecessary query round-trips and database overhead.
 
