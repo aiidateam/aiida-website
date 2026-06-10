@@ -74,6 +74,7 @@ This sent us back to the drawing board to think through the query layer and sing
 By pulling the latest updates and pull requests from the `aiida-restapi` repository, we managed to integrate it and make the tool schemas work.
 
 Through this process, we refined our tool-design strategy:
+
 - For querying collections of nodes, we use the `NodeService` wrapper from `aiida-restapi`.
 - For simple single-node operations (like fetching attributes of a loaded node), we bypass the service layer and call `aiida-core`'s native ORM directly to avoid unnecessary query round-trips and database overhead.
 
