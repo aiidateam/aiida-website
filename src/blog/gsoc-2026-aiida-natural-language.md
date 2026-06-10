@@ -19,7 +19,7 @@ That matters because wrong parameters on a supercomputer job waste compute time,
 Before anything gets submitted to an HPC cluster, the scientist sees the generated parameters and confirms.
 This is because AI can produce inputs that look correct but are physically nonsensical, thus, a human confirmation step is a necessary safeguard here.
 
-## Community Bonding, What I Have Been Up To
+## Weeks 1 & 2: community bonding, what I have been up to
 
 Coding starts May 25, but I have been working through the AiiDA codebase since the community bonding period opened.
 
@@ -49,6 +49,49 @@ Build the foundation, then expand.
 The harder part will be the Quantum ESPRESSO domain knowledge, valid parameter ranges, which inputs matter for which calculation types, and what the outputs actually mean.
 That is where the team's expertise becomes essential.
 The project is genuinely collaborative, which is what makes it interesting.
+
+---
+
+## Weeks 3 & 4: setting up the MCP tools and the first agent
+
+Following the end of the community bonding period, the first official coding weeks kicked off with a mix of high-level architecture alignment and hands-on tool development.
+
+### Alignment and planning
+
+To align on the project structure, I discussed with the mentor and we also had a dedicated session with the group leader at PSI and AiiDA's original creator, Giovanni Pizzi.
+We discussed project timeline, and the specific modules to be included in our architecture.
+Having this high-level feedback early on was extremely valuable for mapping out how the agents will interact with AiiDA's database.
+
+### Setting up the MCP tools
+
+With the architecture aligned, the first concrete technical task was to build the Model Context Protocol (MCP) server tools for AiiDA.
+We decided it was cleaner to build on `aiida-restapi`, an external package that already provides the filtering, pagination, and projection logic we would otherwise have written ourselves on top of `aiida-core`'s `orm` and `QueryBuilder`.
+We wanted to import and call these Pydantic models in-process, without standing up a live web server, to serve as clean building blocks for our tool schema.
+
+However, the initial integration was not smooth.
+We ran into compatibility issues and errors where the existing REST API code wasn't quite working for our needs.
+This was mainly due to a recent rework of the use of pydantic in AiiDA's `orm` module in [PR #6990](https://www.github.com/aiidateam/aiida-core/pull/6990) that required changes to `aiida-restapi` that were still under review.
+By pulling in the latest updates and pull requests from the `aiida-restapi` repository, we managed to integrate it and make the tool schemas work.
+
+Through this process, we refined our tool-design strategy:
+
+- For querying collections of nodes, we use the `NodeService` wrapper from `aiida-restapi`.
+- For simple single-node operations (like fetching attributes of an already-loaded node), we call `aiida-core`'s ORM directly, which is simpler than adding an unnecessary layer of `aiida-restapi` indirection.
+
+With this foundation, I built and defined the first six MCP tools for our server.
+
+### Collaborative feedback
+
+A highlight of these past two weeks has been the close collaboration with the mentor.
+We did what felt like asynchronous pair programming; after developing the tools on a separate branch, I opened the pull request on GitHub.
+This collaboration was incredibly active and considerate, providing detailed, constructive feedback on the design.
+We went through the review process, made necessary adjustments, and successfully refined the pull request.
+
+### Initial agent configuration
+
+With the tool layer taking shape, I also started setting up the initial configuration for the agents.
+Getting the analysis agent configured early is critical so that we can begin testing end-to-end interactions with our newly created tools.
+Laying this groundwork now ensures we stay on track with our GSoC timeline.
 
 Updates to this post will be provided every two weeks as the build progresses.
 
