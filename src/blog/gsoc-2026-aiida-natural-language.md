@@ -74,6 +74,7 @@ This was mainly due to a recent rework of the use of pydantic in AiiDA's `orm` m
 By pulling in the latest updates and pull requests from the `aiida-restapi` repository, we managed to integrate it and make the tool schemas work.
 
 Through this process, we refined our tool-design strategy:
+
 - For querying collections of nodes, we use the `NodeService` wrapper from `aiida-restapi`.
 - For simple single-node operations (like fetching attributes of an already-loaded node), we call `aiida-core`'s ORM directly, which is simpler than adding an unnecessary layer of `aiida-restapi` indirection.
 
