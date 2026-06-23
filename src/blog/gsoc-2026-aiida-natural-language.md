@@ -6,7 +6,7 @@ category: Blog
 tags: [gsoc, aiida, ai, gsoc2026]
 ---
 
-## What I Am Building
+## Community bonding: what I have been up to
 
 The project is a **natural language interface for AiiDA** built on a multi-agent AI architecture.
 Various specialized agents handle different parts of the interaction, among others: an Orchestrator that routes the user's intent, a Workflow Agent that submits jobs, a Config Agent that builds simulation parameters, a Diagnostic Agent that interprets calculation failures, and an Analysis Agent that queries results from AiiDA's provenance graph.
@@ -19,7 +19,7 @@ That matters because wrong parameters on a supercomputer job waste compute time,
 Before anything gets submitted to an HPC cluster, the scientist sees the generated parameters and confirms.
 This is because AI can produce inputs that look correct but are physically nonsensical, thus, a human confirmation step is a necessary safeguard here.
 
-## Weeks 1 & 2: community bonding, what I have been up to
+## Weeks 1 & 2: setting up the MCP tools and the first agent
 
 Coding starts May 25, but I have been working through the AiiDA codebase since the community bonding period opened.
 
@@ -93,20 +93,18 @@ With the tool layer taking shape, I also started setting up the initial configur
 Getting the analysis agent configured early is critical so that we can begin testing end-to-end interactions with our newly created tools.
 Laying this groundwork now ensures we stay on track with our GSoC timeline.
 
-Here's the Weeks 5 & 6 section, written to match the spacing, sentence-per-line style, and voice of the earlier posts. I pulled the technical specifics straight from ADR-05 (and the agent's tool list from ADR-04), kept it scoped to just the RAG + Analysis Agent work as you asked, and left out anything from later in the timeline.
-
 ---
 
-## Weeks 5 & 6: grounding the Analysis Agent in the AiiDA docs
+## Weeks 3 & 4: grounding the Analysis Agent in the AiiDA docs
 
 With the MCP tools landed and the Analysis Agent configured, the next gap was obvious.
 The agent could query the provenance graph through the MCP tools, but it had no way to answer a question like "what is the difference between a CalcJobNode and a WorkChainNode?"
 That kind of question is not a database query, it is a documentation question, and the base model's general knowledge on AiiDA-specific terminology is thin and prone to hallucination.
-So weeks 5 & 6 were spent building a retrieval-augmented generation (RAG) pipeline over the official AiiDA documentation, and wiring it into the Analysis Agent as a new tool.
+So weeks 3 & 4 were spent building a retrieval-augmented generation (RAG) pipeline over the official AiiDA documentation, and wiring it into the Analysis Agent as a new tool.
 
 ### Keeping it local
 
-The project's local-first constraint, no required cloud vendor, applies just as much to retrieval as it does to the model itself.
+The project's local-first constraint, no required cloud vendor, for cost, privacy, and control reasons, applies just as much to retrieval as it does to the model itself.
 That ruled out OpenAI or Cohere embeddings outright, since either would reintroduce the exact vendor dependency we are trying to avoid.
 So both the embedding model and the vector store needed to run locally, with no subscription and no API key.
 
@@ -124,7 +122,7 @@ Sections under 150 characters are dropped as noise.
 The full v2.8 docs came out to 1,111 chunks at around 1,100 characters each.
 
 One more thing had to be filtered out by hand: the changelog.
-It is high-volume, low-conceptual-value text, and it was outranking the real concept pages, it landed at rank one for "What is a CalcJobNode?", which is exactly the question this pipeline exists to answer.
+It is high-volume, low-conceptual-value text, and it was outranking the real concept pages — it landed at rank one for "What is a CalcJobNode?", which is exactly the question this pipeline exists to answer.
 Release notes and the API reference are both excluded from the corpus now for the same reason.
 
 ### Picking an embedding model
@@ -137,6 +135,10 @@ The root cause turned out to be missing task prefixes, but even after adding tho
 It has its own quirk: no prefix at index time, but a fixed prefix added at query time, which `OllamaEmbedding.embed_query()` now handles automatically so nothing upstream has to think about it.
 A `sentence-transformers/all-MiniLM-L6-v2` fallback is selected automatically when Ollama is unreachable, which matters for CI and for anyone developing offline.
 
+Getting the embedding calls working at all surfaced a smaller bug.
+The original code called Ollama's old `/api/embeddings` endpoint with a `prompt` field, and newer Ollama versions reject that outright with HTTP 500 errors.
+The fix was switching to `/api/embed` with a list-based `input` field, which also batches natively, so embedding calls are now sub-batched at ten texts per request to stay comfortable on CPU-only hardware.
+
 ### Wiring it into the agent
 
 The embeddings land in a persistent local ChromaDB collection, keyed by both the docs version and the embedding model, since a collection built with `mxbai` at 1024 dimensions cannot be queried with `MiniLM` at 384.
@@ -148,8 +150,7 @@ That brings the agent to seven tools, six for querying the provenance graph and 
 ### Review and merge
 
 As with the MCP tools in the last update, this went through the same close back-and-forth with the mentor: branch, pull request, detailed review, revisions, merge.
-By the end of these two weeks the Analysis Agent could do both halves of its job, pulling facts from the provenance graph through the MCP tools and explanations from the documentation through RAG, end to end, reviewed, and running.
-
+By the end of these two weeks the Analysis Agent could do both halves of its job in one conversation, pulling facts from the provenance graph through the MCP tools and explanations from the documentation through RAG, end to end, reviewed, and running.
 
 Updates to this post will be provided every two weeks as the build progresses.
 
