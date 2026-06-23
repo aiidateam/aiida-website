@@ -6,7 +6,7 @@ category: Blog
 tags: [gsoc, aiida, ai, gsoc2026]
 ---
 
-## Community bonding: what I have been up to
+## What I Am Building
 
 The project is a **natural language interface for AiiDA** built on a multi-agent AI architecture.
 Various specialized agents handle different parts of the interaction, among others: an Orchestrator that routes the user's intent, a Workflow Agent that submits jobs, a Config Agent that builds simulation parameters, a Diagnostic Agent that interprets calculation failures, and an Analysis Agent that queries results from AiiDA's provenance graph.
@@ -19,7 +19,7 @@ That matters because wrong parameters on a supercomputer job waste compute time,
 Before anything gets submitted to an HPC cluster, the scientist sees the generated parameters and confirms.
 This is because AI can produce inputs that look correct but are physically nonsensical, thus, a human confirmation step is a necessary safeguard here.
 
-## Weeks 1 & 2: setting up the MCP tools and the first agent
+## Community bonding: what I have been up to
 
 Coding starts May 25, but I have been working through the AiiDA codebase since the community bonding period opened.
 
@@ -52,7 +52,7 @@ The project is genuinely collaborative, which is what makes it interesting.
 
 ---
 
-## Weeks 3 & 4: setting up the MCP tools and the first agent
+## Weeks 1 & 2: setting up the MCP tools and the first agent
 
 Following the end of the community bonding period, the first official coding weeks kicked off with a mix of high-level architecture alignment and hands-on tool development.
 
