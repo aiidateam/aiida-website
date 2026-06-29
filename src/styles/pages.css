@@ -506,9 +506,12 @@
   gap: 1.25rem;
 }
 
-.usecase + .usecase {
+.usecase-divider {
+  width: 100%;
+  height: 0;
+  margin: 0;
+  border: none;
   border-top: 1px solid var(--color-border-light);
-  padding-top: 3rem;
 }
 
 .usecase-figure {

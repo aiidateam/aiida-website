@@ -2663,16 +2663,16 @@ function HighThroughputCombined(): ReactNode {
       {/* ═══ Try it out toggle (moved above laptop) ═══ */}
       <div className="throughput-try-toggle throughput-try-toggle--top">
         {!tryMode ? (
-          <div className="throughput-try-actions">
-            <button className="button button--primary throughput-try-btn" onClick={enterTryMode}>
+          <div className="top-actions">
+            <button className="button button--primary top-btn" onClick={enterTryMode}>
               Try it out
             </button>
-            <a className="button button--secondary throughput-try-btn" href={`${base}/use-cases`}>
+            <a className="button button--secondary top-btn" href={`${base}/use-cases`}>
               Use cases
             </a>
           </div>
         ) : (
-          <button className="tut-btn tut-btn-back throughput-try-btn" onClick={() => { setTryMode(false); setSyncPhase(-1); setSyncRunning(false); }}>
+          <button className="tut-btn tut-btn-back top-btn" onClick={() => { setTryMode(false); setSyncPhase(-1); setSyncRunning(false); }}>
             {'\u2190'} Back to overview
           </button>
         )}

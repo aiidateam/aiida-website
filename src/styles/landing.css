@@ -3964,14 +3964,14 @@ main > section > h2::after {
   margin: 0 auto 4rem;
 }
 
-.throughput-try-actions {
+.top-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
 
-.throughput-try-btn {
+.top-btn {
   font-size: 1rem;
   padding: 0.75rem 2rem;
   cursor: pointer;
@@ -3980,7 +3980,7 @@ main > section > h2::after {
     box-shadow 0.2s;
 }
 
-.throughput-try-btn:hover {
+.top-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(0, 150, 222, 0.25);
 }

@@ -68,7 +68,9 @@ const useCases = [
     </header>
 
     <div class="usecases-list">
+      <hr class="usecase-divider" />
       {useCases.map(uc => (
+        <Fragment>
         <article class="usecase">
           <figure class="usecase-figure">
             {uc.figures.map(fig => <img src={fig.src} alt={fig.alt} loading="lazy" />)}
@@ -92,11 +94,13 @@ const useCases = [
             </div>
           </div>
         </article>
+        <hr class="usecase-divider" />
+        </Fragment>
       ))}
     </div>
 
     <p class="usecases-note">
-      This collection will grow over time. Using AiiDA in your research?{' '}
+      Using AiiDA in your research?{' '}
       <a href="https://aiida.discourse.group/" target="_blank" rel="noopener noreferrer">
         Tell us about it on Discourse
       </a>.
