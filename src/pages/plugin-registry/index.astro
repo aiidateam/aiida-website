@@ -15,16 +15,16 @@ const totalPackages = Object.keys(plugins).length;
   description={`Browse the official AiiDA plugin registry — ${totalPackages} community plugins for simulation codes, data types, schedulers, and workflows.`}
 >
   <main class="reg-page">
-    <section class="reg-hero">
+    <header class="page-header">
       <h1>Plugin registry</h1>
-      <p class="reg-hero-sub">
+      <p class="page-header-sub">
         Community plugins extending AiiDA — simulation codes, data types,
         schedulers, transports, and workflows. Register your plugin{' '}
         <a href="https://github.com/aiidateam/aiida-registry" target="_blank" rel="noopener noreferrer">
           here
         </a>
       </p>
-    </section>
+    </header>
 
     <section class="reg-summary" aria-label="Plugin summary">
       <p class="reg-summary-title">Registered plugin packages: {totalPackages}</p>

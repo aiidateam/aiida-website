@@ -134,13 +134,13 @@ export default function Ecosystem(): ReactNode {
 
   return (
     <main className="eco-page">
-      <section className="eco-hero">
+      <header className="page-header">
         <h1>The AiiDA ecosystem</h1>
-        <p className="eco-hero-sub">
+        <p className="page-header-sub">
           AiiDA is more than a workflow engine — it's a growing ecosystem of tools, platforms,
           and community plugins that cover the full lifecycle of computational research.
         </p>
-      </section>
+      </header>
 
       {/* Layered architecture diagram */}
       <section className="eco-layers">

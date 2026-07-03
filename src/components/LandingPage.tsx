@@ -607,7 +607,7 @@ function PluginShowcase(): ReactNode {
 
   return (
     <section className="plugin-section" data-reveal>
-      <h2>Plugin ecosystem</h2>
+      <h2 className="section-heading">Plugin ecosystem</h2>
       <p className="plugin-subtitle">
         Extend AiiDA with community plugins for your simulation codes.
         Each plugin wraps a code with workflows, parsers, and data types &mdash; all fully tracked in the provenance graph.
@@ -900,7 +900,7 @@ function ProvenanceGraph(): ReactNode {
 
   return (
     <section className="provenance-section" data-reveal>
-      <h2>Full provenance. Full control.</h2>
+      <h2 className="section-heading">Full provenance. Full control.</h2>
       <p className="provenance-subtitle">
         Every input, calculation, and output is tracked automatically &mdash;
         keeping your research findable, traceable, and reusable, by FAIR design.
@@ -3212,7 +3212,7 @@ function Supporters(): ReactNode {
 
   return (
     <section className="supporters-section" data-reveal>
-      <h2>Supported by</h2>
+      <h2 className="section-heading">Supported by</h2>
       <div className="supporters-marquee">
         <div
           className="supporters-track"
@@ -3347,7 +3347,7 @@ function Testimonials(): ReactNode {
   return (
     <section className="testimonials-section" data-reveal>
       <div className="testimonials-header-row">
-        <h2>What researchers say</h2>
+        <h2 className="section-heading section-heading--left">What researchers say</h2>
         <div className="testimonials-nav">
           <button
             className={`news-nav-btn${canScrollLeft ? '' : ' news-nav-btn--disabled'}`}
@@ -3426,7 +3426,7 @@ function LatestNews({items}: {items: NewsItem[]}): ReactNode {
   return (
     <section className="news-section" data-reveal>
       <div className="news-header-row">
-        <h2>Latest news</h2>
+        <h2 className="section-heading section-heading--left">Latest news</h2>
         <div className="news-nav">
           <button
             className={`news-nav-btn${canScrollLeft ? '' : ' news-nav-btn--disabled'}`}

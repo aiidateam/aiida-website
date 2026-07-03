@@ -6,26 +6,6 @@
   padding: 0 2rem 4rem;
 }
 
-.section-header {
-  text-align: center;
-  padding: 3rem 0 2rem;
-}
-
-.section-header h1 {
-  font-size: 2.4rem;
-  font-weight: 800;
-  margin: 0 0 0.5rem;
-}
-
-.section-header-sub {
-  font-size: 1.05rem;
-  color: var(--color-text-secondary);
-  margin: 0;
-  max-width: 640px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
 /* ===== TEAM PAGE ===== */
 
 .team-intro {
@@ -636,10 +616,6 @@
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 600px) {
-  .section-header h1 {
-    font-size: 1.8rem;
-  }
-
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
   }
