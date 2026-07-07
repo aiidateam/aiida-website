@@ -152,6 +152,71 @@ That brings the agent to seven tools, six for querying the provenance graph and 
 As with the MCP tools in the last update, this went through the same close back-and-forth with the mentor: branch, pull request, detailed review, revisions, merge.
 By the end of these two weeks the Analysis Agent could do both halves of its job in one conversation, pulling facts from the provenance graph through the MCP tools and explanations from the documentation through RAG, end to end, reviewed, and running.
 
+---
+
+## Weeks 5 & 6: closing the write path and hardening the infrastructure
+
+With the Analysis Agent reading reliably from the provenance graph, the natural next step was closing the other half of the loop: letting it write.
+Not freely, and not without a safeguard, but write nonetheless.
+
+### The write path and human confirmation
+
+The core deliverable for these two weeks was `submit_workflow`, a tool that takes an entry point and a set of inputs, validates them, and submits a calculation or workflow to AiiDA.
+The validation step matters more than it might seem.
+The agent resolves the user's natural language inputs into AiiDA node references, but the model can hallucinate, pass wrong types, or omit required ports entirely.
+Rather than letting a bad submission reach the database, the resolved inputs are first validated against the process's own input spec, exactly as AiiDA would at submit time, catching structural errors before the user is ever asked.
+
+The human confirmation step was the other non-negotiable piece.
+Every submission the agent proposes pauses the run and surfaces a preview, showing the resolved entry point and the actual node types the agent is about to write, not the raw arguments it was given.
+Throughout development the running example was `core.arithmetic.add`, a toy CalcJob that adds two numbers and takes three inputs: a `code`, `x`, and `y`.
+For such a call the user sees `InstalledCode(pk=1)`, `Int(value=5)`, and `Int(value=7)`, not `{"code": {"pk": 1}, "x": 5, "y": 7}`.
+Only an explicit yes proceeds.
+This is enforced structurally: `submit_workflow` is registered with `requires_approval=True`, so pydantic-ai returns a `DeferredToolRequests` object before executing anything.
+There is no code path that writes to the database without passing through that gate.
+A regression test proves it.
+
+One subtlety surfaced during dogfooding.
+Each calculation plugin declares defaults for its optional ports in its own process spec (its `define()` method), and `pre_process` fills them in.
+`core.arithmetic.add`, for example, sets a default `metadata.options.resources` of `{num_machines: 1, num_mpiprocs_per_machine: 1}`, so the user never has to spell it out.
+Validating before `pre_process` was stricter than the engine itself, rejecting submissions that AiiDA would have happily accepted and forcing the user to spell out boilerplate options by hand.
+The fix was to fill in those defaults before validating, the same way the engine does at submit time, so the check sees the user's inputs together with AiiDA's own defaults rather than the bare inputs alone.
+
+A second issue came from SQLAlchemy's session-per-thread model, which AiiDA's storage backend uses: each thread gets its own database session, and an ORM object is tied to the session that loaded it.
+Building the approval preview resolves the agent's inputs into AiiDA nodes on the main thread, binding those objects (the default user, the resolved input nodes) to the main thread's session.
+The first design then performed the write by re-running the agent, but pydantic-ai runs sync tools on a worker thread, so reusing those main-thread objects from the worker thread raised a cross-thread SQLAlchemy error.
+The fix was to run the confirmed submission directly on the main thread, right after the user approves, so the worker thread never touches the database at all.
+
+### Refactoring, configuration, and the REPL
+
+The write path work exposed a structural issue that had been there since the beginning.
+The tool functions lived under `mcp/`, which was the right home when they only served the MCP server.
+With the agent now also calling them directly, the `mcp/` namespace was the wrong one.
+The tools were lifted into a new surface-agnostic `tools/` layer, shared cleanly between the MCP server and the agent without either owning the other.
+
+Two configuration gaps were fixed alongside this.
+The `max_tokens` setting had no way to be controlled from the environment, which meant long tool-calling runs could be silently truncated.
+A `context_length` knob was added for Ollama specifically, sent as `num_ctx` per request so the context window is opt-in rather than a hidden default.
+Both live in `ModelSettings` and are validated against each other at startup, so a budget that cannot fit inside its own window fails fast with a clear message rather than silently misbehaving mid-run.
+
+The REPL also got a proper overhaul.
+The bare `input()` loop was replaced with `prompt_toolkit`, giving the session persistent history across restarts via an XDG-compliant file, arrow-key and `Ctrl-R` recall, real multiline editing, and emacs-style line keys.
+The `rich` library replaced the hand-rolled threading spinner.
+History is now capped on turn boundaries rather than raw message count, which matters because slicing mid-turn orphans a tool call that providers then reject.
+The mentor updated the README with a demo of the current state.
+
+### Cloud model access
+
+Local-only had been the constraint from day one, but testing against the RAG and write-path changes made its cost obvious: small local models produced unreliable answers, and the larger local models capable enough to compete with cloud models were too slow for practical iteration.
+So for evaluation and development speed, cloud access became necessary, while keeping the local path fully intact as the default.
+
+Towards the end of these two weeks, OpenRouter support landed as a first-class provider, sitting alongside Ollama, OpenAI, and Anthropic in the model factory.
+
+### Where things stand
+
+At the end of week six the agent can read from the provenance graph, answer conceptual questions from the documentation, and submit calculations with validated inputs and enforced human confirmation.
+The infrastructure is solid enough to start real testing.
+That is what the next phase is for.
+
 Updates to this post will be provided every two weeks as the build progresses.
 
 ---
