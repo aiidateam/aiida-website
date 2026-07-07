@@ -175,7 +175,8 @@ There is no code path that writes to the database without passing through that g
 A regression test proves it.
 
 One subtlety surfaced during dogfooding.
-AiiDA fills certain port defaults at submit time, for example `metadata.options.resources` defaults to `{num_machines: 1}` on a local profile.
+Each calculation plugin declares defaults for its optional ports in its own process spec (its `define()` method), and `pre_process` fills them in.
+`core.arithmetic.add`, for example, sets a default `metadata.options.resources` of `{num_machines: 1, num_mpiprocs_per_machine: 1}`, so the user never has to spell it out.
 Validating before `pre_process` was stricter than the engine itself, rejecting submissions that AiiDA would have happily accepted and forcing the user to spell out boilerplate options by hand.
 The fix was to fill in those defaults before validating, the same way the engine does at submit time, so the check sees the user's inputs together with AiiDA's own defaults rather than the bare inputs alone.
 
