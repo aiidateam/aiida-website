@@ -207,7 +207,7 @@ The mentor updated the README with a demo of the current state.
 
 Towards the end of these two weeks, OpenRouter support landed as a first-class provider, sitting alongside Ollama, OpenAI, and Anthropic in the model factory.
 One API key gives access to a wide range of models without managing separate credentials, which makes it much easier to test the agent against capable cloud models rather than being limited to what runs locally.
-The difference in response quality and latency is substantial.
+We found the difference to be substantial: small local models give poor answers, large local models are slow to respond. In contrast, a capable cloud model is both accurate and fast.
 
 ### Where things stand
 
