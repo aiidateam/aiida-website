@@ -177,7 +177,7 @@ A regression test proves it.
 One subtlety surfaced during dogfooding.
 AiiDA fills certain port defaults at submit time, for example `metadata.options.resources` defaults to `{num_machines: 1}` on a local profile.
 Validating before `pre_process` was stricter than the engine itself, rejecting submissions that AiiDA would have happily accepted and forcing the user to spell out boilerplate options by hand.
-The fix was running `pre_process` on a copy of the inputs first, so validation sees the same picture the engine does, without mutating what the preview shows.
+The fix was to fill in those defaults before validating, the same way the engine does at submit time, so the check sees the user's inputs together with AiiDA's own defaults rather than the bare inputs alone.
 
 A second issue came from AiiDA's thread model.
 The approval preview bound the default user and node objects to the main thread session.
