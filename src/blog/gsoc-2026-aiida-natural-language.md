@@ -1,6 +1,6 @@
 ---
 title: "Teaching AiiDA to Speak Human: GSoC 2026 Journey Begins"
-date: 2026-05-26
+date: 2026-07-07
 author: Jaweria Batool
 category: Blog
 tags: [gsoc, aiida, ai, gsoc2026]
@@ -205,9 +205,10 @@ The mentor updated the README with a demo of the current state.
 
 ### Cloud model access
 
+Local-only had been the constraint from day one, but testing against the RAG and write-path changes made its cost obvious: small local models produced unreliable answers, and the larger local models capable enough to compete with cloud models were too slow for practical iteration.
+So for evaluation and development speed, cloud access became necessary, while keeping the local path fully intact as the default.
+
 Towards the end of these two weeks, OpenRouter support landed as a first-class provider, sitting alongside Ollama, OpenAI, and Anthropic in the model factory.
-One API key gives access to a wide range of models without managing separate credentials, which makes it much easier to test the agent against capable cloud models rather than being limited to what runs locally.
-We found the difference to be substantial: small local models give poor answers, large local models are slow to respond. In contrast, a capable cloud model is both accurate and fast.
 
 ### Where things stand
 
