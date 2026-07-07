@@ -180,10 +180,10 @@ Each calculation plugin declares defaults for its optional ports in its own proc
 Validating before `pre_process` was stricter than the engine itself, rejecting submissions that AiiDA would have happily accepted and forcing the user to spell out boilerplate options by hand.
 The fix was to fill in those defaults before validating, the same way the engine does at submit time, so the check sees the user's inputs together with AiiDA's own defaults rather than the bare inputs alone.
 
-A second issue came from AiiDA's thread model.
-The approval preview bound the default user and node objects to the main thread session.
-pydantic-ai executes sync tools on a worker thread, so re-running the agent after approval to trigger the actual write raised a cross-thread SQLAlchemy error.
-The fix was extracting `_run_submission` and calling it from `_handle_deferred` on the main thread directly after confirmation, keeping the worker thread entirely away from any database write.
+A second issue came from SQLAlchemy's session-per-thread model, which AiiDA's storage backend uses: each thread gets its own database session, and an ORM object is tied to the session that loaded it.
+Building the approval preview resolves the agent's inputs into AiiDA nodes on the main thread, binding those objects (the default user, the resolved input nodes) to the main thread's session.
+The first design then performed the write by re-running the agent, but pydantic-ai runs sync tools on a worker thread, so reusing those main-thread objects from the worker thread raised a cross-thread SQLAlchemy error.
+The fix was to run the confirmed submission directly on the main thread, right after the user approves, so the worker thread never touches the database at all.
 
 ### Refactoring, configuration, and the REPL
 
