@@ -164,7 +164,7 @@ Not freely, and not without a safeguard, but write nonetheless.
 The core deliverable for these two weeks was `submit_workflow`, a tool that takes an entry point and a set of inputs, validates them, and submits a calculation or workflow to AiiDA.
 The validation step matters more than it might seem.
 The agent resolves the user's natural language inputs into AiiDA node references, but the model can hallucinate, pass wrong types, or omit required ports entirely.
-Rather than letting a bad submission reach the database, `_prepare_submission` runs AiiDA's own `pre_process` and `validate` on the resolved inputs first, catching structural errors before the user is ever asked.
+Rather than letting a bad submission reach the database, the resolved inputs are first validated against the process's own input spec, exactly as AiiDA would at submit time, catching structural errors before the user is ever asked.
 
 The human confirmation step was the other non-negotiable piece.
 Every submission the agent proposes pauses the run and surfaces a preview, showing the resolved entry point and the actual node types the agent is about to write, not the raw arguments it was given.
