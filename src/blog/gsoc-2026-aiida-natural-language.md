@@ -168,8 +168,9 @@ Rather than letting a bad submission reach the database, the resolved inputs are
 
 The human confirmation step was the other non-negotiable piece.
 Every submission the agent proposes pauses the run and surfaces a preview, showing the resolved entry point and the actual node types the agent is about to write, not the raw arguments it was given.
-The user sees `InstalledCode(pk=1)` and `Int(value=5)`, not `{"code": {"pk": 1}, "x": 5}`.
-Only an explicit `y` proceeds.
+Throughout development the running example was `core.arithmetic.add`, a toy CalcJob that adds two numbers and takes three inputs: a `code`, `x`, and `y`.
+For such a call the user sees `InstalledCode(pk=1)`, `Int(value=5)`, and `Int(value=7)`, not `{"code": {"pk": 1}, "x": 5, "y": 7}`.
+Only an explicit yes proceeds.
 This is enforced structurally: `submit_workflow` is registered with `requires_approval=True`, so pydantic-ai returns a `DeferredToolRequests` object before executing anything.
 There is no code path that writes to the database without passing through that gate.
 A regression test proves it.
