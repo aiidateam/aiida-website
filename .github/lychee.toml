@@ -15,6 +15,12 @@ exclude = [
   "^https?://dome40\\.eu/",
   "^https?://aiidalab\\.materialscloud\\.org/",
 
+  # PRACE's main site answers anonymous bots with 401, and OpenModel's host
+  # no longer resolves at all. Both are only referenced from archived event
+  # posts, so there is nothing to rewrite them to.
+  "^https?://(www\\.)?prace-ri\\.eu/",
+  "^https?://(www\\.)?open-model\\.eu/",
+
   # Legacy third-party URLs referenced from old (2017–2020) blog posts that
   # have since gone 404 / 503 / away, and which we don't plan to rewrite in
   # the archive. Scoped to the specific paths so we still catch new breakage
