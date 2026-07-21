@@ -217,6 +217,73 @@ At the end of week six the agent can read from the provenance graph, answer conc
 The infrastructure is solid enough to start real testing.
 That is what the next phase is for.
 
+---
+
+## Weeks 7 & 8: From theory to reality
+
+After the midterm evaluation wrapped up, the project shifted in an important way.
+I stopped polishing infrastructure and started testing against real data.
+
+The mentor provided a real AiiDA archive of roughly 340,000 nodes, containing close to 15,000 Wannier90 calculations and as many Fermi surface calculations.
+I set up a new AiiDA profile to access it and began asking the kinds of questions a materials scientist would actually ask.
+The first round of queries went well.
+The Analysis Agent listed processes correctly, diagnosed why calculations had failed, and searched for structures by chemical formula.
+But then I asked a simple question: how many metallic structures are in this database?
+The agent couldn't answer.
+
+### The metadata gap
+
+In the archive, critical information was registered as metadata attached to nodes, specifically in the node extras.
+Whether a structure is metallic or insulating, its crystal symmetry, its bandgap, all of this lives in node extras, custom key-value fields.
+The agent had no way to search by this metadata.
+
+I first built a new tool called `query_nodes_by_extras` to fix it.
+It let the agent filter nodes by any metadata field using AiiDA's QueryBuilder.
+Testing against the archive, it returned exactly the right numbers: 5,597 metallic structures, 2,781 cubic structures, matching the ground truth from the researchers' own scripts.
+But solving this one problem revealed a bigger issue.
+If I added a new tool every time I discovered a missing query pattern, I would spend forever building special cases.
+
+Rather than continuing to add special-case tools, I generalized the solution.
+I built a generic `query_nodes` tool ([PR #28](https://github.com/aiidateam/aiida-agents/pull/28), currently under review) that accepts a structured specification with nested AND/OR filters, sorting, pagination, and group scoping.
+This approach moved the complexity from tool-building into prompt-based spec generation: the model now composes query specifications instead of requiring custom code for each new pattern.
+
+### Discovering workflows at runtime
+
+That's when I started thinking about the Execution Agent, the system for helping researchers set up and run new simulations.
+The initial plan was to have the model generate workflow specifications as JSON, validate those specs against AiiDA's schema, then execute them.
+Then the mentor asked a question that made me reconsider.
+What happens when someone installs a new AiiDA plugin tomorrow?
+If the agent only knows about hardcoded workflows for Quantum ESPRESSO and VASP, it wouldn't recognize the new plugin.
+The system would be obsolete as soon as it shipped.
+
+I decided to rethink the architecture.
+Instead of predefining which workflows exist, I would ask the system to discover them at runtime.
+I built tools that dynamically inspect what AiiDA has installed and learn the requirements of any workflow on the fly.
+The model no longer needs to know about Quantum ESPRESSO or VASP or SIESTA specifically.
+It just asks: what workflows are available?
+What do they need?
+How do I build inputs for them?
+
+This required rewriting a lot of code.
+I deleted the hard-coded logic for specific codes and replaced it with generic recursion that handles nested input structures of any depth.
+The submission system now correctly processes workflows with complex hierarchical inputs.
+Rather than requiring the agent to figure out the entire nested tree of input parameters from scratch, I integrated it with the `get_builder_from_protocol` methods implemented on many workchains.
+
+The flagship workchains maintained by the team, such as those in aiida-quantumespresso, provide these high-level interfaces.
+They allow the agent to leverage existing protocols instead of reconstructing simulation parameters from scratch.
+By the end of week eight, I had 360 passing tests while removing 2,400 lines of hard-coded logic, with clean linting and zero type errors.
+The agent was genuinely plugin-agnostic.
+Install a new AiiDA workflow plugin, and the system will discover it and help users run it without any changes to the code.
+
+### Where things stand
+
+The biggest lesson from these two weeks came from testing against real data.
+Isolated testing never would have revealed that the agent couldn't filter by metadata.
+Wrestling with actual AiiDA workflow complexity forced me to build abstractions that are far more robust than the initial design.
+
+The work is visible in two pull requests under review: [the core execution framework](https://github.com/aiidateam/aiida-agents/pull/29) and [the plugin discovery system](https://github.com/aiidateam/aiida-agents/pull/31).
+The architectural foundation is now solid enough for the next phase, once these PRs are merged.
+
 Updates to this post will be provided every two weeks as the build progresses.
 
 ---
