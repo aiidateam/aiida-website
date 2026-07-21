@@ -1,0 +1,45 @@
+---
+import '../../styles/registry.css';
+import Layout from '../../layouts/Layout.astro';
+import PluginRegistryList from '../../components/PluginRegistryList';
+import data from '../../data/plugins_metadata.json';
+
+const plugins = data.plugins as Record<string, any>;
+const statusDict = data.status_dict as Record<string, [string, string]>;
+const globalSummary = data.globalsummary as { name: string; total_num: number; num_entries: number; colorclass: string; tooltip?: string }[];
+const totalPackages = Object.keys(plugins).length;
+---
+
+<Layout
+  title="Plugin registry — AiiDA"
+  description={`Browse the official AiiDA plugin registry — ${totalPackages} community plugins for simulation codes, data types, schedulers, and workflows.`}
+>
+  <main class="reg-page">
+    <section class="reg-hero">
+      <h1>Plugin registry</h1>
+      <p class="reg-hero-sub">
+        Community plugins extending AiiDA — simulation codes, data types,
+        schedulers, transports, and workflows. Register your plugin{' '}
+        <a href="https://github.com/aiidateam/aiida-registry" target="_blank" rel="noopener noreferrer">
+          here
+        </a>
+      </p>
+    </section>
+
+    <section class="reg-summary" aria-label="Plugin summary">
+      <p class="reg-summary-title">Registered plugin packages: {totalPackages}</p>
+      <div class="reg-summary-grid">
+        {globalSummary.map(s => (
+          <Fragment>
+            <span class={`reg-sum-label ${s.colorclass}`} title={s.tooltip ?? ''}>{s.name}</span>
+            <span class="reg-sum-count">
+              {s.total_num} plugin{s.total_num === 1 ? '' : 's'} in {s.num_entries} package{s.num_entries === 1 ? '' : 's'}
+            </span>
+          </Fragment>
+        ))}
+      </div>
+    </section>
+
+    <PluginRegistryList plugins={plugins} statusDict={statusDict} client:load />
+  </main>
+</Layout>

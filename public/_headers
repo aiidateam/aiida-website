@@ -1,0 +1,15 @@
+# Cloudflare Pages headers.
+# Multiple matching rules are merged; for the same header name, later
+# rules override earlier ones, so put global defaults first and specific
+# overrides after.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=()
+
+# Astro emits hashed filenames under /_astro/, so they are content-addressed
+# and safe to cache forever.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

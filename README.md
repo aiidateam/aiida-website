@@ -1,48 +1,42 @@
-# aiida-website
+# AiiDA Website
 
-The primary website for AiiDA.
+The official website for [AiiDA](https://www.aiida.net), built with [Astro](https://astro.build/).
 
-## How to add a post
+## Development
 
-Clone this repository and create a new branch.
+```bash
+npm install
+npm run dev
+```
 
-Then, either run `python create_post.py -h` or follow the steps manually:
+The site runs at `http://localhost:4321/`.
 
-1. Create a Markdown file in `docs/news/posts`, named by the date and keyword.
-2. Add the [ablog topmatter](https://ablog.readthedocs.io/en/latest/manual/markdown.html) to the page
-3. Write in [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html)
-4. If the post announces or reports on an event, then update the [`docs/events.yaml`](docs/events.yaml) file.
+## Build
 
-Finally, create a PR to this repository.
+```bash
+npm run build
+npm run preview
+```
 
-### Tips
+## Scripts
 
-The top-matter `category` should be one of the following:
+- `npm run update-cli` — Fetch the latest verdi CLI reference from aiida-core
+- `npm run update-stats` — Fetch PyPI download stats
 
-- `News`: To announce a general news
-- `Events`: To announce an event
-- `Reports`: To report on an event
-- `Release`: To announce a new release
-- `Blog`: A blog post
+## Deployment
 
-You can use the [update](https://ablog.readthedocs.io/en/latest/manual/posting-and-listing/#directive-update) directive to note an update to an existing post.
+The site is deployed to Cloudflare Pages.
 
-Use the [subfigure directive](https://sphinx-subfigure.readthedocs.io), to arrange multiple images in a figure.
+## Contributing
 
-## Building the documentation locally
+Thanks for your interest in helping! This site is maintained directly by the AiiDA team, and we kindly ask the community to share feedback through [**issues**](https://github.com/aiidateam/aiida-website/issues/new) rather than pull requests. Whether it's a typo, a broken link, outdated content, or a content suggestion — please open an issue and we'll take care of the implementation. To keep the workflow consistent, PRs opened from forks are gently auto-closed with a comment pointing back here.
 
-Install and run [`tox`](https://tox.wiki/en/latest/) to install a local virtual environment and build the documentation,
-or directly install `requirements.txt` and run: `sphinx-build -nW --keep-going -b html docs/ docs/_build/html`.
+Two reasons behind the policy: (1) the site benefits from a single editorial voice, so changes flow through the team rather than landing piecemeal; and (2) Cloudflare Pages doesn't build preview deployments for fork PRs (a security default — the build environment can hold project secrets), so a fork PR can't be reviewed visually anyway. Routing through issues keeps the loop short for everyone.
 
-To check HTML links, run `tox -e linkcheck` or `sphinx-build -b linkcheck docs/ docs/_build/linkcheck`.
+## How to cite AiiDA
 
-## TODO
+If AiiDA helped your research, please cite the relevant papers below.
 
-- Feedback forms (contact us, Join us)
-- Decide on set of post categories/tags
-- Upstream to ablog
-  - Empty `postlist` placeholder
-  - image number for topmatter
-  - event date
-  - fix `blog_post_pattern`?
-  - config for "All Posts"
+- **Main paper** — S.P. Huber et al., _Scientific Data_ **7**, 300 (2020). [doi:10.1038/s41597-020-00638-4](https://doi.org/10.1038/s41597-020-00638-4)
+- **Engine paper** — M. Uhrin et al., _Computational Materials Science_ **187**, 110086 (2021). [doi:10.1016/j.commatsci.2020.110086](https://doi.org/10.1016/j.commatsci.2020.110086)
+- **First paper (ADES model)** — G. Pizzi et al., _Computational Materials Science_ **111**, 218–230 (2016). [doi:10.1016/j.commatsci.2015.09.013](https://doi.org/10.1016/j.commatsci.2015.09.013)
