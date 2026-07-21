@@ -282,7 +282,6 @@ Wrestling with actual AiiDA workflow complexity forced me to build abstractions 
 The work is visible in two pull requests under review: [the core execution framework](https://github.com/aiidateam/aiida-agents/pull/29) and [the plugin discovery system](https://github.com/aiidateam/aiida-agents/pull/31).
 The architectural foundation is now solid enough for the next phase, once these PRs are merged.
 
-
 Updates to this post will be provided every two weeks as the build progresses.
 
 ---
