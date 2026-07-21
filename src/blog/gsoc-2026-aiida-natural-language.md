@@ -234,7 +234,7 @@ The agent couldn't answer.
 ### The metadata gap
 
 In the archive, critical information was registered as metadata attached to nodes, specifically in the node extras.
-Whether a structure is metallic or insulating, its crystal symmetry, its bandgap—all of this lives in node extras, custom key-value fields.
+Whether a structure is metallic or insulating, its crystal symmetry, its bandgap, all of this lives in node extras, custom key-value fields.
 The agent had no way to search by this metadata.
 
 I first built a new tool called `query_nodes_by_extras` to fix it.
@@ -243,7 +243,9 @@ Testing against the archive, it returned exactly the right numbers: 5,597 metall
 But solving this one problem revealed a bigger issue.
 If I added a new tool every time I discovered a missing query pattern, I would spend forever building special cases.
 
-Rather than continuing to add special-case tools, I generalized the solution. I built a generic `query_nodes` tool that accepts a structured specification with nested AND/OR filters, sorting, pagination, and group scoping. This approach moved the complexity from tool-building into prompt-based spec generation—the model now composes query specifications instead of requiring custom code for each new pattern.
+Rather than continuing to add special-case tools, I generalized the solution.
+I built a generic `query_nodes` tool ([PR #28](https://github.com/aiidateam/aiida-agents/pull/28), currently under review) that accepts a structured specification with nested AND/OR filters, sorting, pagination, and group scoping.
+This approach moved the complexity from tool-building into prompt-based spec generation: the model now composes query specifications instead of requiring custom code for each new pattern.
 
 ### Discovering workflows at runtime
 
@@ -258,7 +260,7 @@ I decided to rethink the architecture.
 Instead of predefining which workflows exist, I would ask the system to discover them at runtime.
 I built tools that dynamically inspect what AiiDA has installed and learn the requirements of any workflow on the fly.
 The model no longer needs to know about Quantum ESPRESSO or VASP or SIESTA specifically.
-It just asks: What workflows are available?
+It just asks: what workflows are available?
 What do they need?
 How do I build inputs for them?
 
@@ -267,8 +269,8 @@ I deleted the hard-coded logic for specific codes and replaced it with generic r
 The submission system now correctly processes workflows with complex hierarchical inputs.
 Rather than requiring the agent to figure out the entire nested tree of input parameters from scratch, I integrated it with the `get_builder_from_protocol` methods implemented on many workchains.
 
-The flagship workchains maintained by our team, such as those in aiida-quantumespresso, provide these high-level interfaces.
-They allow the agent to leverage existing protocols instead of reconstructing workflows from first principles.
+The flagship workchains maintained by the team, such as those in aiida-quantumespresso, provide these high-level interfaces.
+They allow the agent to leverage existing protocols instead of reconstructing simulation parameters from scratch.
 By the end of week eight, I had 360 passing tests while removing 2,400 lines of hard-coded logic, with clean linting and zero type errors.
 The agent was genuinely plugin-agnostic.
 Install a new AiiDA workflow plugin, and the system will discover it and help users run it without any changes to the code.
