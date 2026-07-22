@@ -3151,7 +3151,7 @@ const supporterLogos = [
   { name: 'EPFL', img: `${base}/img/sponsors/epfl-logo-300x150.png`, url: 'https://www.epfl.ch/en/' },
   { name: 'Harvard', img: `${base}/img/sponsors/harvard-logo-300x150.png`, url: 'https://www.harvard.edu/' },
   { name: 'Bosch', img: `${base}/img/sponsors/bosch-logo-300x150.png`, url: 'https://www.bosch.com/research/' },
-  { name: 'ORD-PREMISE', img: `${base}/img/sponsors/premise-logo-300x150.png`, url: 'https://www.ord-premise.org/' },
+  { name: 'ORD-PREMISE', img: `${base}/img/sponsors/premise-logo-300x150.png`, url: 'https://ord-premise.org/' },
   { name: 'SwissTwins', img: `${base}/img/sponsors/swisstwins_300*150.png`, url: 'https://www.cscs.ch/about/collaborations/swisstwins' },
 ];
 
