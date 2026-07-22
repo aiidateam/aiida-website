@@ -11,7 +11,7 @@ The successful candidate will contribute to the development of a web-based colla
 
 S/he will work under the joint supervision of Dr. G. Pizzi ([NCCR MARVEL](http://nccr-marvel.ch/) - Open Science Project) and Dr. S. Bonella ([CECAM](https://www.cecam.org)) to devise and implement tools for research and teaching in the domain of atomistic simulations.
 
-The initial appointment is for one year, renewable upon mutual satisfaction for up to 36 months. Level of employment: 100%. More information, requirements for the position, and instructions on how to apply can be found at <https://www.cecam.org/wp-content/uploads/2019/04/2019_03_EPFL_materials_science_researcher_software_engineer.pdf>
+The initial appointment is for one year, renewable upon mutual satisfaction for up to 36 months. Level of employment: 100%. More information, requirements for the position, and instructions on how to apply can be found at `https://www.cecam.org/wp-content/uploads/2019/04/2019_03_EPFL_materials_science_researcher_software_engineer.pdf` (advertisement no longer online).
 
 For best consideration, applications must be submitted **by April 28th 2019**.
 The position will however remain open until a suitable candidate is found.

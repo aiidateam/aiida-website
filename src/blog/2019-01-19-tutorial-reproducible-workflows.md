@@ -132,6 +132,6 @@ We are very grateful to our sponsors for helping to make this event possible:
 
 [![](/blog-img/legacy/ebdc2ee9.max_.png)](http://www.max-centre.eu/)
 
-[![](/blog-img/legacy/894d22ec.swissuniversities.png)](https://www.swissuniversities.ch/en/organisation/projects-and-programmes/p-5/)
+[![](/blog-img/legacy/894d22ec.swissuniversities.png)](https://www.swissuniversities.ch/en/topics/digitalisation/p-5-scientific-information)
 
 ![](/blog-img/legacy/74b6a401.intersect.png)

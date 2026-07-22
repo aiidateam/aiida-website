@@ -39,7 +39,7 @@ The AiiDA team conducts periodically a **survey** in parallel with each developm
 
 - **2024**: [results](/survey/Questionnaire_results_2024.pdf)
 - **2020**: [results](/survey/aiida-powered-research-projects-2020_Updated.pdf)
-- **2019**: [results](http://bit.ly/2HRjTWo)
+- **2019**: [results](https://object.cscs.ch/v1/AUTH_b1d80408b3d340db9f03d373bbde5c1e/learn-public/materials/2019_05_aiida_tutorial/aiida-research-projects-2019.pdf)
 
 Note: The lists below are incomplete — they were extracted manually from citations of the [Main](https://doi.org/10.1038/s41597-020-00638-4) and [Engine](https://doi.org/10.1016/j.commatsci.2020.110086) AiiDA papers.
 
