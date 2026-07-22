@@ -15,12 +15,14 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const date = post.data.date;
 const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
 ---
 
 <Layout title={`${post.data.title} — AiiDA Blog`}>
   <main class="blog-post-page">
     <article class="blog-post">
-      <a href={`${import.meta.env.BASE_URL}/blog/`} class="blog-back">&larr; All posts</a>
+      <a href={`${base}/blog/`} class="blog-back">&larr; All posts</a>
       <header class="blog-post-header">
         <div class="blog-post-meta">
           <time datetime={date.toISOString().slice(0,10)}>{dateStr}</time>
