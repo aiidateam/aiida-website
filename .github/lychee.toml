@@ -20,7 +20,8 @@ exclude = [
   # Expired certificate.
   "^https?://dome40\\.eu/",
 
-  # WAF rejects GitHub runner IPs; answers 200 from an ordinary network.
+  # Web application firewall rejects GitHub runner IPs; answers 200 from
+  # an ordinary network.
   "^https?://(www\\.)?prace-ri\\.eu/",
 
   # Slower than the timeout from GitHub's runners.
@@ -29,9 +30,4 @@ exclude = [
 
   # Loops through an idp.nature.com cookie bounce for non-browser clients.
   "^https?://www\\.nature\\.com/sdata/publish/",
-
-  # TODO: unverified. The 2019 survey PDF timed out from two networks outside
-  # CI, so a dead object is indistinguishable from local egress filtering.
-  # Better fix: self-host it under /survey/ like the 2020 and 2024 results.
-  "^https?://object\\.cscs\\.ch/",
 ]
