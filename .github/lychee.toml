@@ -4,46 +4,34 @@
 accept = "200..=299,403,429"
 
 max_retries = 2
-# Generous, because pages we link into web.archive.org can take a while to
-# replay a snapshot, and archive.org is slower under load than a live host.
+# Generous: archive.org replays snapshots slower than a live host answers.
 timeout = 60
 # Some DOI / publisher redirect chains (Springer, Nature) hop through more
 # than the default 5 redirects before landing on the final page.
 max_redirects = 15
 
-# Every entry below is a URL that works for a human in a browser but that a
-# checker running on a GitHub runner cannot reach. A link that is genuinely
-# dead does not belong here: it gets repointed at a web.archive.org snapshot,
-# or demoted to plain text in the page, so that readers are not sent to a dead
-# end and nobody has to remember to re-test an invisible exclusion.
-#
-# Each entry records what was observed and when, so it can be re-checked and
-# dropped once the host behaves again. Last verified 2026-07-22.
+# Only hosts that work in a browser but not from a GitHub runner. Dead links
+# get repointed at a web.archive.org snapshot or demoted to plain text in the
+# page, never parked here. Symptoms last verified 2026-07-22.
 exclude = [
-  # Serves an incomplete certificate chain (no intermediate). Reachable with
-  # `curl -k`; the Indico instance itself moved to prace-indico.hinfra.hu.
+  # Incomplete certificate chain (reachable with `curl -k`).
   "^https?://events\\.prace-ri\\.eu/",
 
   # Expired certificate.
   "^https?://dome40\\.eu/",
 
-  # WAF rejects requests from GitHub runner IP ranges. Apex and www both
-  # answer 200 from an ordinary network, with or without a browser UA, so
-  # this is about where the request comes from, not who it claims to be.
+  # WAF rejects GitHub runner IPs; answers 200 from an ordinary network.
   "^https?://(www\\.)?prace-ri\\.eu/",
 
-  # Consistently slower than the HTTP timeout from GitHub's runners: ICTP
-  # Indico event pages, and a Jülich thesis record.
+  # Slower than the timeout from GitHub's runners.
   "^https?://indico\\.ictp\\.it/",
   "^https?://juser\\.fz-juelich\\.de/",
 
-  # Bounces through idp.nature.com to set a cookie and loops indefinitely for
-  # a client that is not a browser. The article itself is fine.
+  # Loops through an idp.nature.com cookie bounce for non-browser clients.
   "^https?://www\\.nature\\.com/sdata/publish/",
 
-  # TODO: unverified. The 2019 survey PDF on the CSCS object store timed out
-  # from two networks outside CI on 2026-07-22, so we could not tell a dead
-  # object from local egress filtering. Recheck, and prefer self-hosting it
-  # under /survey/ like the 2020 and 2024 results.
+  # TODO: unverified. The 2019 survey PDF timed out from two networks outside
+  # CI, so a dead object is indistinguishable from local egress filtering.
+  # Better fix: self-host it under /survey/ like the 2020 and 2024 results.
   "^https?://object\\.cscs\\.ch/",
 ]

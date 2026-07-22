@@ -20,14 +20,12 @@ jobs:
 
       - run: npm run build
 
-      # On PRs, run in --offline mode: resolve root-relative links locally
-      # via --root-dir, skip all absolute URLs. This keeps PR feedback fast
-      # and deterministic (no flaky external hosts). Pushes to main do the
-      # full check and catch external link rot.
-      # Both the action and the lychee binary it installs are pinned. The
-      # floating `@v2` tag silently moved lychee from 0.23 to 0.24, which
-      # changed how protocol-relative URLs resolve and turned a long-standing
-      # bug into a red build on an unrelated PR. Bump these deliberately.
+      # On PRs, run --offline: resolve root-relative links locally via
+      # --root-dir and skip absolute URLs, for fast deterministic feedback.
+      # Pushes to main do the full check and catch external link rot.
+      # Action and binary are both pinned: the floating `@v2` tag moved
+      # lychee 0.23 -> 0.24, which changed protocol-relative URL resolution
+      # and reddened an unrelated PR. Bump deliberately.
       - name: Check links in built site
         uses: lycheeverse/lychee-action@v2.9.0
         env:
