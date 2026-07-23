@@ -1,11 +1,18 @@
-/* ===== DESIGN SYSTEM — Section heading accents ===== */
-/* Every section h2 gets a short colored bar underneath */
-main > section > h2 {
+/* ===== DESIGN SYSTEM — Section headings ===== */
+/* One heading treatment for every landing section: same size, weight and
+   colour, with a single accent bar. Use .section-heading--left for headings
+   that sit in a row beside carousel controls (news, testimonials). */
+.section-heading {
   position: relative;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin: 0 0 0.75rem;
   padding-bottom: 0.75rem;
 }
 
-main > section > h2::after {
+.section-heading::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -17,24 +24,16 @@ main > section > h2::after {
   background: var(--color-primary);
 }
 
-/* Rotate heading accents through all three AiiDA brand colors */
-.provenance-section h2::after {
-  background: var(--color-accent-orange);
+/* Headings that share a flex row with carousel controls: left-aligned, and
+   the row's own margin handles the spacing below. */
+.section-heading--left {
+  text-align: left;
+  margin: 0;
 }
-.plugin-section h2::after {
-  background: var(--color-accent-green);
-}
-.news-section h2::after {
-  background: var(--color-primary);
-}
-.testimonials-section h2::after {
-  background: var(--color-accent-orange);
-}
-.supporters-section h2::after {
-  background: var(--color-accent-green);
-}
-.cta-section h2::after {
-  background: rgba(255, 255, 255, 0.6);
+
+.section-heading--left::after {
+  left: 0;
+  transform: none;
 }
 
 /* ===== HERO ===== */
@@ -690,12 +689,6 @@ main > section > h2::after {
   margin: 0 auto;
 }
 
-.plugin-section h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 0.75rem;
-}
-
 .plugin-subtitle {
   text-align: center;
   color: var(--color-text-secondary);
@@ -1053,12 +1046,6 @@ main > section > h2::after {
 /* ===== PROVENANCE GRAPH ===== */
 .provenance-section {
   padding: 3rem 2rem;
-}
-
-.provenance-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
 }
 
 .provenance-subtitle {
@@ -1972,12 +1959,6 @@ main > section > h2::after {
   margin-right: auto;
 }
 
-.news-section h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
-}
-
 /* Navigation arrows */
 .news-nav {
   display: flex;
@@ -2275,15 +2256,6 @@ main > section > h2::after {
   overflow: hidden;
 }
 
-.supporters-section h2 {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  color: var(--color-heading-accent);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 .supporters-marquee {
   position: relative;
   max-width: 1300px;
@@ -2383,12 +2355,6 @@ main > section > h2::after {
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.testimonials-section h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
 }
 
 .testimonials-nav {

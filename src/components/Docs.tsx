@@ -86,13 +86,13 @@ const DOCS: DocEntry[] = [
 export default function Docs(): ReactNode {
   return (
     <main className="docs-page">
-      <section className="docs-hero">
+      <header className="page-header">
         <h1>Documentation</h1>
-        <p className="docs-hero-sub">
+        <p className="page-header-sub">
           Find the right documentation for the AiiDA package you're working with.
           All docs are hosted on Read the Docs.
         </p>
-      </section>
+      </header>
 
       {/* Featured: aiida-core */}
       <section className="docs-featured">
