@@ -358,8 +358,8 @@ Everything that writes to the database still stops and asks first, and that guar
 
 Twelve pull requests merged over the fortnight, and the architecture is written down in an overview, an extension guide and eleven decision records ([#51](https://github.com/aiidateam/aiida-agents/pull/51)).
 
-What I have not done is run the whole thing against a real calculation from end to end.
-The unit suite covers the plumbing thoroughly and cannot tell me whether the planner routes a real question sensibly or whether a generated query returns what a researcher expected.
+While the unit suite covers the plumbing thoroughly, it cannot tell me whether the planner routes a real question sensibly or whether a generated query returns what a researcher expected.
+In addition, tests that run the whole architecture for a real calculation from end to end are still missing.
 That is what the next two weeks are for.
 
 Updates to this post will be provided every two weeks as the build progresses.
