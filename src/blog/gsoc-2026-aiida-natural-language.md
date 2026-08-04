@@ -292,7 +292,7 @@ The architectural foundation is now solid enough for the next phase, once these 
 
 I asked it what k-point spacing to use for a silicon relaxation, and it told me.
 The number looked completely reasonable.
-It had come from nowhere: no tool had returned it, and the documentation search had not been called.
+However, it had come from nowhere: no tool had returned it, and the documentation search had not been called.
 
 A wrong number here is not a wrong sentence.
 It configures a calculation that then runs for hours and produces something quietly incorrect.
