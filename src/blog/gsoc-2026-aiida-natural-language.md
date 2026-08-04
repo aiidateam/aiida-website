@@ -315,7 +315,7 @@ I added a router that picks the specialist per request ([#45](https://github.com
 The planner has no tools of its own, so the step that decides what to do cannot touch the database.
 
 Passing a step's findings to the next one as prose lost the part that mattered.
-A diagnosis says the failure is in `PwCalculation` 334407, and the next step needs that number, not a sentence containing it.
+A diagnosis says the failure is in a `PwCalculation` with a PK of 334407, and the next step needs that number, not a sentence containing it.
 The handoff is now a typed message carrying the node references the first step's tools returned ([#58](https://github.com/aiidateam/aiida-agents/pull/58)), so a second model never has to read a pk back out of prose.
 
 ### Diagnosing a real failure
