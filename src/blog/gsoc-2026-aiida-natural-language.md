@@ -354,7 +354,7 @@ Python cannot be contained in-process, and a guard that claimed otherwise would 
 ### Where things stand
 
 The two agents became three, joined by a planner that decides which of them a request needs.
-Everything that writes to the database still stops and asks first, and that guarantee lives on the tool rather than in any prompt.
+Everything that writes to the database still stops and asks first, and that guarantee lives on the tool rather than in the prompt.
 
 Twelve pull requests merged over the fortnight, and the architecture is written down in an overview, an extension guide and eleven decision records ([#51](https://github.com/aiidateam/aiida-agents/pull/51)).
 
