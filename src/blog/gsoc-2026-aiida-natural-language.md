@@ -311,7 +311,7 @@ Until this point you had to tell the tool which agent you wanted with `-a analys
 That is a reasonable thing to ask of me and an unreasonable thing to ask of a researcher who has not read the architecture.
 
 I added a router that picks the specialist per request ([#45](https://github.com/aiidateam/aiida-agents/pull/45)), then replaced it with a planner ([#50](https://github.com/aiidateam/aiida-agents/pull/50)) once it became clear that some questions need both.
-"Why did this fail, and can you resubmit it with a longer wallclock" is two steps with a handoff in the middle.
+"Why did this fail, and can you resubmit it with a longer wallclock limit" is two steps with a handoff in the middle.
 The planner has no tools of its own, so the step that decides what to do cannot touch the database.
 
 Passing a step's findings to the next one as prose lost the part that mattered.
