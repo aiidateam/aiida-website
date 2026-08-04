@@ -327,7 +327,7 @@ The work chain is reporting that something below it failed, and the calculation 
 The tool I built walks that chain and reads the exit code's meaning from the process class itself ([#53](https://github.com/aiidateam/aiida-agents/pull/53)).
 
 The part I did not anticipate was the restart handlers.
-AiiDA work chains record which recovery strategies they already attempted, and without reading that record an agent will happily recommend a fix the work chain tried twice.
+AiiDA WorkChains record which recovery strategies they already attempted, and without reading that record an agent will happily recommend a fix the WorkChain already tried twice.
 On pk 334599 it now reports that `handle_vcrelax_converged_except_final_scf` fired on iteration 1 and the run still failed, which is the sentence that tells you restarting is not the answer.
 
 Reading the calculation's own SCF trace came out of the same work ([#55](https://github.com/aiidateam/aiida-agents/pull/55)).
@@ -346,7 +346,7 @@ Code that raises comes back to the model as a traceback, and it fixes its own sn
 Executing model-written Python against a research database needed more thought than the rest of the fortnight combined.
 The answer is that it runs against a second AiiDA profile pointing at the same database through a PostgreSQL role holding no write privilege ([#64](https://github.com/aiidateam/aiida-agents/pull/64)).
 A write is refused by PostgreSQL rather than caught by a check I wrote.
-A scratch database would have been safer and useless, since an empty one cannot answer any question worth asking.
+While a scratch database would have been safer, it would have been useless, though, since it cannot answer any question worth asking.
 
 There is a static guard on top of that, and I have been careful in the code and the decision record not to call it a sandbox.
 Python cannot be contained in-process, and a guard that claimed otherwise would be believed.
