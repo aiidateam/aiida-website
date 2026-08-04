@@ -322,7 +322,7 @@ The handoff is now a typed message carrying the node references the first step's
 
 The data archive gave me failed Quantum ESPRESSO runs to work with, which is different from a test fixture in a way I had underestimated.
 
-A `PwBaseWorkChain` that exits 501 has not really told you anything.
+A `PwBaseWorkChain` that exits with 501 has not really told you anything.
 The work chain is reporting that something below it failed, and the calculation that actually broke is somewhere further down.
 The tool I built walks that chain and reads the exit code's meaning from the process class itself ([#53](https://github.com/aiidateam/aiida-agents/pull/53)).
 
