@@ -286,23 +286,22 @@ The architectural foundation is now solid enough for the next phase, once these 
 
 ---
 
-## Weeks 9 & 10: Making the agent prove what it says
+## Weeks 9 & 10: making the agent prove what it says
 
 ### The agent made up a number
 
-I asked it what k-point spacing to use for a silicon relaxation, and it told me.
+I asked the agent what k-point spacing to use for a silicon relaxation, and it told me.
 The number looked completely reasonable.
 However, it had come from nowhere: no tool had returned it, and the documentation search had not been called.
 
-A wrong number here is not a wrong sentence.
-It configures a calculation that then runs for hours and produces something quietly incorrect.
+A wrong number here configures a calculation that then runs for hours and produces something quietly incorrect.
 
 My first fix was to add a line to the system prompt telling the agent never to state a value it had not retrieved.
 I tested it five times and it ignored the instruction five times.
 
-So the check moved out of the prompt and into code that runs after the answer is written ([#48](https://github.com/aiidateam/aiida-agents/pull/48)).
+So the check moved out of the prompt and into code that runs after the answer is written ([aiida-agents#48](https://github.com/aiidateam/aiida-agents/pull/48)).
 Every reply is now scanned for numbers carrying a unit, written as a percentage, or sitting in a sentence that names a simulation parameter.
-Anything that appears in no tool output gets flagged in the terminal before the user reads the answer.
+Anything that appears in no tool output is flagged in the terminal underneath the answer, before anyone acts on it.
 The detector is deliberately narrow, because a warning that fires on correct answers is one people learn to scroll past.
 
 ### One question, several specialists
@@ -310,27 +309,27 @@ The detector is deliberately narrow, because a warning that fires on correct ans
 Until this point you had to tell the tool which agent you wanted with `-a analysis` or `-a execution`.
 That is a reasonable thing to ask of me and an unreasonable thing to ask of a researcher who has not read the architecture.
 
-I added a router that picks the specialist per request ([#45](https://github.com/aiidateam/aiida-agents/pull/45)), then replaced it with a planner ([#50](https://github.com/aiidateam/aiida-agents/pull/50)) once it became clear that some questions need both.
-"Why did this fail, and can you resubmit it with a longer wallclock limit" is two steps with a handoff in the middle.
+I added a router that picks the specialist per request ([aiida-agents#45](https://github.com/aiidateam/aiida-agents/pull/45)), then replaced it with a planner ([aiida-agents#50](https://github.com/aiidateam/aiida-agents/pull/50)) once it became clear that some questions need both.
+"Why did this fail, and can you resubmit it with a longer wallclock limit?" is two steps with a handoff in the middle.
 The planner has no tools of its own, so the step that decides what to do cannot touch the database.
 
 Passing a step's findings to the next one as prose lost the part that mattered.
 A diagnosis says the failure is in a `PwCalculation` with a PK of 334407, and the next step needs that number, not a sentence containing it.
-The handoff is now a typed message carrying the node references the first step's tools returned ([#58](https://github.com/aiidateam/aiida-agents/pull/58)), so a second model never has to read a pk back out of prose.
+The handoff is now a typed message carrying the node references the first step's tools returned ([aiida-agents#58](https://github.com/aiidateam/aiida-agents/pull/58)), so a second model never has to read a PK back out of prose.
 
 ### Diagnosing a real failure
 
 The data archive gave me failed Quantum ESPRESSO runs to work with, which is different from a test fixture in a way I had underestimated.
 
-A `PwBaseWorkChain` that exits with 501 has not really told you anything.
-The work chain is reporting that something below it failed, and the calculation that actually broke is somewhere further down.
-The tool I built walks that chain and reads the exit code's meaning from the process class itself ([#53](https://github.com/aiidateam/aiida-agents/pull/53)).
+A `PwRelaxWorkChain` that exits with 401 has not really told you anything.
+The work chain is reporting that the `PwBaseWorkChain` below it failed, and the calculation that actually broke is somewhere further down.
+The tool I built walks that chain and reads the exit code's meaning from the process class itself ([aiida-agents#53](https://github.com/aiidateam/aiida-agents/pull/53)).
 
 The part I did not anticipate was the restart handlers.
 AiiDA WorkChains record which recovery strategies they already attempted, and without reading that record an agent will happily recommend a fix the WorkChain already tried twice.
-On pk 334599 it now reports that `handle_vcrelax_converged_except_final_scf` fired on iteration 1 and the run still failed, which is the sentence that tells you restarting is not the answer.
+On one failed relaxation from the archive it now reports that `handle_vcrelax_converged_except_final_scf` fired on the first iteration and the run still failed, which is the sentence that tells you restarting is not the answer.
 
-Reading the calculation's own SCF trace came out of the same work ([#55](https://github.com/aiidateam/aiida-agents/pull/55)).
+Reading the calculation's own SCF trace came out of the same work ([aiida-agents#55](https://github.com/aiidateam/aiida-agents/pull/55)).
 A cycle that ran out of iterations and one that never settled look identical from the exit code and call for different responses.
 My first version of the parser reported oscillation on a relaxation that was converging fine, because I had treated the restart between ionic steps as part of one electronic cycle.
 
@@ -340,23 +339,23 @@ Some questions do not fit any fixed tool.
 Finding every structure in a group that contains a particular element and reporting its final energy is several filters and a projection, and the `QueryBuilder` expresses it in six lines.
 Adding a tool for each combination does not converge.
 
-So the agent now writes the Python ([#63](https://github.com/aiidateam/aiida-agents/pull/63)) and runs it before showing it to anyone ([#65](https://github.com/aiidateam/aiida-agents/pull/65)).
+So the agent now writes the Python ([aiida-agents#63](https://github.com/aiidateam/aiida-agents/pull/63)) and runs it before showing it to anyone ([aiida-agents#65](https://github.com/aiidateam/aiida-agents/pull/65)).
 Code that raises comes back to the model as a traceback, and it fixes its own snippet rather than handing you one that does not work.
 
-Executing model-written Python against a research database needed more thought than the rest of the fortnight combined.
-The answer is that it runs against a second AiiDA profile pointing at the same database through a PostgreSQL role holding no write privilege ([#64](https://github.com/aiidateam/aiida-agents/pull/64)).
+Executing model-written Python against a research database needed more thought than the rest of these two weeks combined.
+The answer is that it runs against a second AiiDA profile pointing at the same database through a PostgreSQL role holding no write privilege ([aiida-agents#64](https://github.com/aiidateam/aiida-agents/pull/64)).
 A write is refused by PostgreSQL rather than caught by a check I wrote.
-While a scratch database would have been safer, it would have been useless, though, since it cannot answer any question worth asking.
+While a scratch database would have been safer, it would have been useless, since it cannot answer any question worth asking.
 
-There is a static guard on top of that, and I have been careful in the code and the decision record not to call it a sandbox.
-Python cannot be contained in-process, and a guard that claimed otherwise would be believed.
+There is a static guard on top of that, and I have been careful not to present it as containment.
+Python cannot be contained in-process, and a guard that claimed otherwise would be believed; what holds the line is the database role, which is why the decision record rejects a restricted interpreter outright.
 
 ### Where things stand
 
 The two agents became three, joined by a planner that decides which of them a request needs.
 Everything that writes to the database still stops and asks first, and that guarantee lives on the tool rather than in the prompt.
 
-Twelve pull requests merged over the fortnight, and the architecture is written down in an overview, an extension guide and eleven decision records ([#51](https://github.com/aiidateam/aiida-agents/pull/51)).
+The architecture is now written down in an overview, an extension guide, and eleven decision records, three of them added over these two weeks ([aiida-agents#51](https://github.com/aiidateam/aiida-agents/pull/51)).
 
 While the unit suite covers the plumbing thoroughly, it cannot tell me whether the planner routes a real question sensibly or whether a generated query returns what a researcher expected.
 In addition, tests that run the whole architecture for a real calculation from end to end are still missing.
