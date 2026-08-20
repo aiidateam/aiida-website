@@ -449,7 +449,7 @@ Plugins extend all of this through one entry point, contributing tools, document
 ### What got merged
 
 **[51 of my 58 pull requests](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B+is%3Amerged)**, making up **56 commits** on `main`.
-The tree carries 1066 tests, runs strict typing across Python 3.10 to 3.14, and documents its design in eleven decision records.
+The tree carries ~1k tests, runs strict typing across Python 3.10 to 3.14, and documents its design in eleven Architectural Decision Records (ADRs).
 
 By area:
 
