@@ -403,7 +403,7 @@ Two of them had tests written against real transcripts that still passed with th
 
 Every open pull request went red at once, and none of them had caused it.
 The package depended on an unpinned `aiida-core` git branch, which had moved to a 3.0 development version that conflicted with `aiida-pseudo`'s cap.
-I pinned it ([aiida-agents#89](https://github.com/aiidateam/aiida-agents/pull/89)), and once `aiida-core` 2.9 was released project was moved onto the released version.
+I pinned it ([aiida-agents#89](https://github.com/aiidateam/aiida-agents/pull/89)), and once `aiida-core` 2.9 was released, the project was moved onto the released version.
 
 I nearly shipped a silent regression here.
 An override I added dropped Sphinx and fifty other packages from the lock file, which I caught only because the pull request's diff summary said 883 deletions on what should have been a two-file change.
