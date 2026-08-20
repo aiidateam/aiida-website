@@ -1,5 +1,5 @@
 ---
-title: "Teaching AiiDA to Speak Human: GSoC 2026 Journey Begins"
+title: "Teaching AiiDA to Speak Human: A GSoC 2026 Journey"
 date: 2026-05-26
 author: Jaweria Batool
 category: Blog
