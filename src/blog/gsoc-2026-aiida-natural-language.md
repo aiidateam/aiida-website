@@ -441,7 +441,7 @@ Three specialists do the work.
 Three guarantees hold underneath.
 Nothing is written without confirmation, and the gate lives on the tool rather than in the prompt, so no phrasing talks it out of asking.
 Nothing is quoted that no tool produced: every reply is scanned afterwards for quantities that appear in no tool output, because the prompt-level version of the same rule was ignored in five test runs out of five.
-Generated code runs against a disposable copy of the storage, never the researcher's own.
+Generated code runs against a disposable copy of the user's AiiDA profile storage, never the researcher's own production data.
 
 The same tool layer is served over MCP for any compatible client, with the write tools deliberately absent, because a generic client has no approval gate.
 Plugins extend all of this through one entry point, contributing tools, documentation corpora, and prompt fragments without this package ever importing theirs.
