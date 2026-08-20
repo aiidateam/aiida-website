@@ -376,7 +376,7 @@ The read-only role was never the weak point.
 The destructive command is run by the user, as themselves, against a profile they had been told was disposable, and no database privilege stands between a person and `verdi profile delete`.
 What I had got wrong was upstream of the implementation: I framed the choice as shared-storage versus empty, and a copy is neither.
 
-The sandbox is now a disposable copy of the user's storage, with one rule expressed as a single function that asks whether deleting one profile's data would destroy another's.
+That's why now, the sandbox is a disposable copy of the user's profile storage, with one rule expressed as a single function that asks whether deleting one profile's data would destroy another's.
 It fails closed, so a backend the code cannot reason about counts as sharing.
 `init` refuses to register a sandbox that shares storage, `check` fails on one, `teardown` refuses to delete one, and `doctor` reports it, all through that one implementation ([aiida-agents#85](https://github.com/aiidateam/aiida-agents/pull/85), closing [#73](https://github.com/aiidateam/aiida-agents/issues/73)).
 
