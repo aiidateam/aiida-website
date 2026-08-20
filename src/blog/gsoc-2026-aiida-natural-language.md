@@ -417,7 +417,7 @@ _The sections above are the running log written fortnightly as the work happened
 
 **Project:** a natural-language, multi-agent interface to [AiiDA](https://www.aiida.net/)
 **Code:** [github.com/aiidateam/aiida-agents](https://github.com/aiidateam/aiida-agents)
-**My contributions:** [all 58 pull requests](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B) · [the 51 that merged](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B+is%3Amerged) · [my commits on `main`](https://github.com/aiidateam/aiida-agents/commits/main?author=Jaweria-B)
+**My contributions:** [58 pull requests](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B) · [the 51 that merged](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B+is%3Amerged) · [my commits on `main`](https://github.com/aiidateam/aiida-agents/commits/main?author=Jaweria-B)
 **Mentor:** [Julian Geiger](https://github.com/GeigerJ2)
 
 ### The problem
