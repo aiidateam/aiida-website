@@ -397,8 +397,8 @@ It now validates every member before submitting any, and a failure during the ru
 
 The root options only worked before the subcommand, so `aiida-agents ask -a analysis "..."` failed while `aiida-agents -a analysis ask "..."` worked, for no reason a user could infer ([aiida-agents#88](https://github.com/aiidateam/aiida-agents/pull/88)).
 
-For each of these I reverted the fix after writing the test and confirmed the test failed.
-Two of them had tests written against real transcripts that still passed with the bug present, which is why the convention exists.
+For each of these I wrote the test first, then reverted the fix and confirmed the test failed.
+Two of them already had tests written against real transcripts, and those passed with the bug present, which is why that order is the rule and not a formality.
 
 ### Dependencies, and CI going red everywhere
 
@@ -444,7 +444,7 @@ Three specialists do the work.
 
 Three guarantees hold underneath.
 Nothing is written without confirmation, and the gate lives on the tool rather than in the prompt, so no phrasing talks it out of asking.
-Nothing is quoted that no tool produced: every reply is scanned afterwards for quantities that appear in no tool output, because the prompt-level version of the same rule was ignored in five test runs out of five.
+Every number in a reply came from a tool: each one is scanned afterwards for quantities that appear in no tool output, because the prompt-level version of the same rule was ignored in five test runs out of five.
 Generated code runs against a disposable copy of the user's AiiDA profile storage, never the researcher's own production data.
 
 The same tool layer is served over MCP for any compatible client, with the write tools deliberately absent, because a generic client has no approval gate.
@@ -454,20 +454,20 @@ That is how the extension point is designed to work rather than something any do
 ### What got merged
 
 **[51 of my 58 pull requests](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B+is%3Amerged)**, making up **56 commits** on `main`.
-The tree carries ~1k tests, runs strict typing across Python 3.10 to 3.14, and documents its design in eleven Architectural Decision Records (ADRs).
+The tree carries ~1k tests, type-checks strictly, runs its tests on Python 3.10 and 3.14, and documents its design in eleven Architectural Decision Records (ADRs).
 
-By area:
+By area, every number an `aiida-agents` pull request:
 
-- **Tool layer and MCP server** — the read-only surface over AiiDA's API, served both to the agents and to external MCP clients ([#18](https://github.com/aiidateam/aiida-agents/pull/18), [#28](https://github.com/aiidateam/aiida-agents/pull/28))
-- **Analysis agent** — provenance queries, process reports, retrieved-file reading, and failure diagnosis that walks from a work chain's exit code down to the calculation that actually broke ([#4](https://github.com/aiidateam/aiida-agents/pull/4), [#35](https://github.com/aiidateam/aiida-agents/pull/35), [#43](https://github.com/aiidateam/aiida-agents/pull/43), [#53](https://github.com/aiidateam/aiida-agents/pull/53))
-- **RAG over the AiiDA documentation** — local embeddings, fenced corpora, atomic indexing, and citations that link to the page the answer came from ([#5](https://github.com/aiidateam/aiida-agents/pull/5), [#23](https://github.com/aiidateam/aiida-agents/pull/23), [#34](https://github.com/aiidateam/aiida-agents/pull/34), [#61](https://github.com/aiidateam/aiida-agents/pull/61))
-- **Execution agent and the approval gate** — workflow discovery, schema introspection, protocol and spec-driven input building, cutoff range checks, sequential runs, and batch resubmission under a single approval ([#8](https://github.com/aiidateam/aiida-agents/pull/8), [#36](https://github.com/aiidateam/aiida-agents/pull/36), [#52](https://github.com/aiidateam/aiida-agents/pull/52), [#54](https://github.com/aiidateam/aiida-agents/pull/54), [#56](https://github.com/aiidateam/aiida-agents/pull/56), [#57](https://github.com/aiidateam/aiida-agents/pull/57))
-- **Grounding** — the structural check that catches invented quantities and unsourced API symbols ([#47](https://github.com/aiidateam/aiida-agents/pull/47), [#48](https://github.com/aiidateam/aiida-agents/pull/48), [#87](https://github.com/aiidateam/aiida-agents/pull/87))
-- **Codegen agent and sandbox** — writing AiiDA code from retrieved examples and running it against a disposable copy ([#63](https://github.com/aiidateam/aiida-agents/pull/63), [#64](https://github.com/aiidateam/aiida-agents/pull/64), [#65](https://github.com/aiidateam/aiida-agents/pull/65), [#85](https://github.com/aiidateam/aiida-agents/pull/85))
-- **Planner** — routing and multi-step plans across specialists ([#45](https://github.com/aiidateam/aiida-agents/pull/45), [#50](https://github.com/aiidateam/aiida-agents/pull/50))
-- **Evaluation harness** — scoring answers against solved AiiDA Discourse threads, and asserting on what an agent did rather than what it said ([#40](https://github.com/aiidateam/aiida-agents/pull/40), [#62](https://github.com/aiidateam/aiida-agents/pull/62), [#66](https://github.com/aiidateam/aiida-agents/pull/66))
-- **CLI** — subcommands, configuration reporting, history, multiline input, and a `doctor` that names the fix for each failure ([#15](https://github.com/aiidateam/aiida-agents/pull/15), [#19](https://github.com/aiidateam/aiida-agents/pull/19), [#88](https://github.com/aiidateam/aiida-agents/pull/88))
-- **Architecture documentation** — the overview, the extension guide, and the decision records ([#42](https://github.com/aiidateam/aiida-agents/pull/42), [#51](https://github.com/aiidateam/aiida-agents/pull/51))
+- **Tool layer and MCP server**: the read-only surface over AiiDA's API, served both to the agents and to external MCP clients ([#18](https://github.com/aiidateam/aiida-agents/pull/18), [#28](https://github.com/aiidateam/aiida-agents/pull/28))
+- **Analysis agent**: provenance queries, process reports, retrieved-file reading, and failure diagnosis that walks from a work chain's exit code down to the calculation that actually broke ([#4](https://github.com/aiidateam/aiida-agents/pull/4), [#35](https://github.com/aiidateam/aiida-agents/pull/35), [#43](https://github.com/aiidateam/aiida-agents/pull/43), [#53](https://github.com/aiidateam/aiida-agents/pull/53))
+- **RAG over the AiiDA documentation**: local embeddings, fenced corpora, atomic indexing, and citations that link to the page the answer came from ([#5](https://github.com/aiidateam/aiida-agents/pull/5), [#23](https://github.com/aiidateam/aiida-agents/pull/23), [#34](https://github.com/aiidateam/aiida-agents/pull/34), [#61](https://github.com/aiidateam/aiida-agents/pull/61))
+- **Execution agent and the approval gate**: workflow discovery, schema introspection, protocol and spec-driven input building, cutoff range checks, sequential runs, and batch resubmission under a single approval ([#8](https://github.com/aiidateam/aiida-agents/pull/8), [#36](https://github.com/aiidateam/aiida-agents/pull/36), [#52](https://github.com/aiidateam/aiida-agents/pull/52), [#54](https://github.com/aiidateam/aiida-agents/pull/54), [#56](https://github.com/aiidateam/aiida-agents/pull/56), [#57](https://github.com/aiidateam/aiida-agents/pull/57))
+- **Grounding**: the structural check that catches invented quantities and unsourced API symbols ([#47](https://github.com/aiidateam/aiida-agents/pull/47), [#48](https://github.com/aiidateam/aiida-agents/pull/48), [#87](https://github.com/aiidateam/aiida-agents/pull/87))
+- **Codegen agent and sandbox**: writing AiiDA code from retrieved examples and running it against a disposable copy ([#63](https://github.com/aiidateam/aiida-agents/pull/63), [#64](https://github.com/aiidateam/aiida-agents/pull/64), [#65](https://github.com/aiidateam/aiida-agents/pull/65), [#85](https://github.com/aiidateam/aiida-agents/pull/85))
+- **Planner**: routing and multi-step plans across specialists ([#45](https://github.com/aiidateam/aiida-agents/pull/45), [#50](https://github.com/aiidateam/aiida-agents/pull/50))
+- **Evaluation harness**: scoring answers against solved AiiDA Discourse threads, and asserting on what an agent did rather than what it said ([#40](https://github.com/aiidateam/aiida-agents/pull/40), [#62](https://github.com/aiidateam/aiida-agents/pull/62), [#66](https://github.com/aiidateam/aiida-agents/pull/66))
+- **CLI**: subcommands, configuration reporting, history, multiline input, and a `doctor` that names the fix for each failure ([#15](https://github.com/aiidateam/aiida-agents/pull/15), [#19](https://github.com/aiidateam/aiida-agents/pull/19), [#88](https://github.com/aiidateam/aiida-agents/pull/88))
+- **Architecture documentation**: the overview, the extension guide, and the decision records ([#42](https://github.com/aiidateam/aiida-agents/pull/42), [#51](https://github.com/aiidateam/aiida-agents/pull/51))
 
 ### What did not get merged
 
@@ -480,17 +480,17 @@ One ([#70](https://github.com/aiidateam/aiida-agents/pull/70)) was folded into a
 ### What is left to do
 
 The gap I would close first is **an end-to-end test against a real DFT calculation**.
-The unit suite covers the plumbing thoroughly, and cannot tell anyone whether a generated query returns what a researcher expected.
+The unit suite covers the plumbing thoroughly, but cannot tell anyone whether a generated query returns what a researcher expected.
 
-Beyond that, in the repository's open issues:
+Beyond that:
 
-- **Isolation for generated code** — the disposable copy protects the database, and nothing protects the filesystem or the network: generated code runs as the user, and can read any file they can read and open any connection they can open. OS-level isolation is the missing layer, and the static guard is a speed bump rather than a boundary
-- **Onboarding** ([#83](https://github.com/aiidateam/aiida-agents/issues/83)) — a meta issue tracking the chain a fresh profile needs: a computer, a code, a domain plugin and pseudopotentials. The agent correctly asks for all of them without being able to provide any
-- **Serving the documentation search over MCP** ([#84](https://github.com/aiidateam/aiida-agents/issues/84)) — the tools are exposed to MCP clients but the RAG search is not, so an MCP client gets ungrounded answers where the CLI gets cited ones
-- **Moving the grounding vocabulary to domain-specific plugins** ([#80](https://github.com/aiidateam/aiida-agents/issues/80)) — units and parameter names are DFT-specific and should not live in a generic package
-- **Restoring token streaming** ([#78](https://github.com/aiidateam/aiida-agents/issues/78)) — lost when the approval gate landed, and it has to compose with the deferred-tool output type
-- **Consolidating the agent builders** ([#77](https://github.com/aiidateam/aiida-agents/issues/77)) — a mechanical refactor that would put two safety invariants in one place instead of three
-- **Plugin tools reaching the other agents** — today a plugin can only contribute to Analysis
+- **Isolation for generated code** (not filed yet): the disposable copy protects the database, and nothing protects the filesystem or the network; generated code runs as the user, and can read any file they can read and open any connection they can open. OS-level isolation is the missing layer, and the static guard is a speed bump rather than a boundary
+- **Onboarding** ([#83](https://github.com/aiidateam/aiida-agents/issues/83)): a meta issue tracking the chain a fresh profile needs: a computer, a code, a domain plugin and pseudopotentials. The agent correctly asks for all of them without being able to provide any
+- **Serving the documentation search over MCP** ([#84](https://github.com/aiidateam/aiida-agents/issues/84)): the tools are exposed to MCP clients but the RAG search is not, so an MCP client gets ungrounded answers where the CLI gets cited ones
+- **Moving the grounding vocabulary to domain-specific plugins** ([#80](https://github.com/aiidateam/aiida-agents/issues/80)): units and parameter names are DFT-specific and should not live in a generic package
+- **Restoring token streaming** ([#78](https://github.com/aiidateam/aiida-agents/issues/78)): lost when the approval gate landed, and it has to compose with the deferred-tool output type
+- **Consolidating the agent builders** ([#77](https://github.com/aiidateam/aiida-agents/issues/77)): a mechanical refactor that would put two safety invariants in one place instead of three
+- **Plugin tools reaching the other agents** (not filed yet): today a plugin can only contribute to Analysis
 
 ### Trying it, and building on it
 
