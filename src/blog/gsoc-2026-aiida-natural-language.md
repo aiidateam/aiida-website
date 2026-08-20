@@ -468,7 +468,7 @@ By area:
 - **Evaluation harness** — scoring answers against solved AiiDA Discourse threads, and asserting on what an agent did rather than what it said ([#40](https://github.com/aiidateam/aiida-agents/pull/40), [#62](https://github.com/aiidateam/aiida-agents/pull/62), [#66](https://github.com/aiidateam/aiida-agents/pull/66))
 - **CLI** — subcommands, configuration reporting, history, multiline input, and a `doctor` that names the fix for each failure ([#15](https://github.com/aiidateam/aiida-agents/pull/15), [#19](https://github.com/aiidateam/aiida-agents/pull/19), [#88](https://github.com/aiidateam/aiida-agents/pull/88))
 - **Architecture documentation** — the overview, the extension guide, and the decision records ([#42](https://github.com/aiidateam/aiida-agents/pull/42), [#51](https://github.com/aiidateam/aiida-agents/pull/51))
-  
+
 ### What did not get merged
 
 Seven pull requests closed without merging, and none were rejected on their merits.
