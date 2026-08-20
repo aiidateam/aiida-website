@@ -370,20 +370,21 @@ That is what the next two weeks are for.
 The codegen sandbox shipped in week 10 as a second profile pointing at the same database, through a PostgreSQL role with no write privilege.
 The reasoning was that an empty scratch database, while safer, would be useless, as it cannot answer any questions about the real data.
 
-Then mentor deleted the sandbox profile, agreed when `verdi` asked whether to delete its data, and lost his own database.
+If the sandbox is a new AiiDA profile, a user would reasonably assume that profile can be deleted without touching any of the others.
+Because the storage was shared, and the sandbox was enforced only by the read-only role on the SQL database, that assumption did not hold: deleting the sandbox profile, and agreeing when `verdi` asks whether to delete its data, could destroy the storage of the real profile the sandbox was created from.
 
 The read-only role was never the weak point.
 The destructive command is run by the user, as themselves, against a profile they had been told was disposable, and no database privilege stands between a person and `verdi profile delete`.
 What I had got wrong was upstream of the implementation: I framed the choice as shared-storage versus empty, and a copy is neither.
 
-That's why now, the sandbox is a disposable copy of the user's profile storage, with one rule expressed as a single function that asks whether deleting one profile's data would destroy another's.
+That is why the sandbox is now a disposable copy of the user's profile storage, with one rule expressed as a single function that asks whether deleting one profile's data would destroy another's.
 It fails closed, so a backend the code cannot reason about counts as sharing.
 `init` refuses to register a sandbox that shares storage, `check` fails on one, `teardown` refuses to delete one, and `doctor` reports it, all through that one implementation ([aiida-agents#85](https://github.com/aiidateam/aiida-agents/pull/85), closing [#73](https://github.com/aiidateam/aiida-agents/issues/73)).
 
-The layers above it are not containment and are documented as such.
-The static guard is a pre-check, and dogfooding it found a one-line bypass that I closed in the same pull request.
-The subprocess now gets a scrubbed environment rather than inheriting every API key I had exported, along with memory and file-size limits and its own process group.
-What the copy does not protect is the filesystem or the network, and that is written down as a known gap rather than implied away.
+The layers above the copy are not isolation in the operating-system sense, and are documented as such.
+The static guard rejects a snippet that imports `os` or `socket` before it runs, which raises the effort of reaching outside AiiDA but cannot stop a determined bypass, because Python cannot be restricted from inside Python; dogfooding it found a one-line bypass that I closed in the same pull request.
+The subprocess gets a scrubbed environment rather than inheriting every API key I had exported, along with memory and file-size limits and its own process group, and none of that is a boundary either.
+What actually protects the data is that the profile the code runs against is a copy; what remains unprotected is the filesystem and the network.
 
 ### Three bugs my own tests had certified
 
@@ -402,8 +403,11 @@ Two of them had tests written against real transcripts that still passed with th
 ### Dependencies, and CI going red everywhere
 
 Every open pull request went red at once, and none of them had caused it.
-The package depended on an unpinned `aiida-core` git branch, which had moved to a 3.0 development version that conflicted with `aiida-pseudo`'s cap.
-I pinned it ([aiida-agents#89](https://github.com/aiidateam/aiida-agents/pull/89)), and once `aiida-core` 2.9 was released, the project was moved onto the released version.
+The package depended on `aiida-core`'s development branch rather than a release, because the project needed features that were not in a released version yet.
+When `aiida-core` 2.9.0 went out, its default branch was bumped to `3.0.dev0`, which conflicted with `aiida-pseudo`'s upper bound, and every build that resolved dependencies picked it up.
+Nobody thought much of the version bump at the time, and the same breakage surfaced in other repositories tracking the branch.
+That is the cost of building against unreleased dependencies, which is what this project was deliberately doing.
+I pinned it ([aiida-agents#89](https://github.com/aiidateam/aiida-agents/pull/89)), and once `aiida-core` 2.9 was released, the project moved onto the released version.
 
 I nearly shipped a silent regression here.
 An override I added dropped Sphinx and fifty other packages from the lock file, which I caught only because the pull request's diff summary said 883 deletions on what should have been a two-file change.
@@ -415,16 +419,16 @@ An override I added dropped Sphinx and fifty other packages from the lock file, 
 _This is the closing report for the Google Summer of Code 2026 project described throughout this post._
 _The sections above are the running log written fortnightly as the work happened; this one summarises what shipped, what did not, and what is left for whoever picks it up._
 
-**Project:** a natural-language, multi-agent interface to [AiiDA](https://www.aiida.net/)
-**Code:** [github.com/aiidateam/aiida-agents](https://github.com/aiidateam/aiida-agents)
-**My contributions:** [58 pull requests](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B) · [the 51 that merged](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B+is%3Amerged) · [my commits on `main`](https://github.com/aiidateam/aiida-agents/commits/main?author=Jaweria-B)
-**Mentor:** [Julian Geiger](https://github.com/GeigerJ2), [Edan Bainglass](https://github.com/edan-bainglass)
+- **Project:** a natural-language, multi-agent interface to [AiiDA](https://www.aiida.net/)
+- **Code:** [github.com/aiidateam/aiida-agents](https://github.com/aiidateam/aiida-agents)
+- **My contributions:** [58 pull requests](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B) · [the 51 that merged](https://github.com/aiidateam/aiida-agents/pulls?q=is%3Apr+author%3AJaweria-B+is%3Amerged) · [my commits on `main`](https://github.com/aiidateam/aiida-agents/commits/main?author=Jaweria-B)
+- **Mentors:** [Julian Geiger](https://github.com/GeigerJ2), [Edan Bainglass](https://github.com/edan-bainglass)
 
 ### The problem
 
 AiiDA records every calculation a researcher runs and how each one connects to the others, which makes it possible to ask precise questions about a body of work.
 Asking them means knowing which of several dozen `verdi` commands to reach for, and often chaining four or five together.
-"Why did this calculation fail?" is a five-step investigation that assumes you already know the five steps exist.
+The other route is AiiDA's Python API, which is a reasonable thing to expect of anyone using a Python library, and still a step that natural language removes for a newcomer.
 
 This project is a natural-language interface that answers those questions and, with confirmation, acts on them.
 
@@ -445,6 +449,7 @@ Generated code runs against a disposable copy of the user's AiiDA profile storag
 
 The same tool layer is served over MCP for any compatible client, with the write tools deliberately absent, because a generic client has no approval gate.
 Plugins extend all of this through one entry point, contributing tools, documentation corpora, and prompt fragments without this package ever importing theirs.
+That is how the extension point is designed to work rather than something any domain plugin uses today: the hook exists and is documented, and no released AiiDA plugin ships an agent provider yet.
 
 ### What got merged
 
@@ -453,17 +458,17 @@ The tree carries ~1k tests, runs strict typing across Python 3.10 to 3.14, and d
 
 By area:
 
-- **Tool layer and MCP server** — the read-only surface over AiiDA's API, served both to the agents and to external MCP clients ([#2](https://github.com/aiidateam/aiida-agents/pull/2), [#18](https://github.com/aiidateam/aiida-agents/pull/18), [#28](https://github.com/aiidateam/aiida-agents/pull/28))
+- **Tool layer and MCP server** — the read-only surface over AiiDA's API, served both to the agents and to external MCP clients ([#18](https://github.com/aiidateam/aiida-agents/pull/18), [#28](https://github.com/aiidateam/aiida-agents/pull/28))
 - **Analysis agent** — provenance queries, process reports, retrieved-file reading, and failure diagnosis that walks from a work chain's exit code down to the calculation that actually broke ([#4](https://github.com/aiidateam/aiida-agents/pull/4), [#35](https://github.com/aiidateam/aiida-agents/pull/35), [#43](https://github.com/aiidateam/aiida-agents/pull/43), [#53](https://github.com/aiidateam/aiida-agents/pull/53))
 - **RAG over the AiiDA documentation** — local embeddings, fenced corpora, atomic indexing, and citations that link to the page the answer came from ([#5](https://github.com/aiidateam/aiida-agents/pull/5), [#23](https://github.com/aiidateam/aiida-agents/pull/23), [#34](https://github.com/aiidateam/aiida-agents/pull/34), [#61](https://github.com/aiidateam/aiida-agents/pull/61))
-- **Execution agent and the approval gate** — workflow discovery, schema introspection, protocol and spec-driven input building, cutoff range checks, sequential runs, and batch resubmission under a single approval ([#8](https://github.com/aiidateam/aiida-agents/pull/8), [#29](https://github.com/aiidateam/aiida-agents/pull/29), [#36](https://github.com/aiidateam/aiida-agents/pull/36), [#52](https://github.com/aiidateam/aiida-agents/pull/52), [#54](https://github.com/aiidateam/aiida-agents/pull/54), [#56](https://github.com/aiidateam/aiida-agents/pull/56), [#57](https://github.com/aiidateam/aiida-agents/pull/57))
+- **Execution agent and the approval gate** — workflow discovery, schema introspection, protocol and spec-driven input building, cutoff range checks, sequential runs, and batch resubmission under a single approval ([#8](https://github.com/aiidateam/aiida-agents/pull/8), [#36](https://github.com/aiidateam/aiida-agents/pull/36), [#52](https://github.com/aiidateam/aiida-agents/pull/52), [#54](https://github.com/aiidateam/aiida-agents/pull/54), [#56](https://github.com/aiidateam/aiida-agents/pull/56), [#57](https://github.com/aiidateam/aiida-agents/pull/57))
 - **Grounding** — the structural check that catches invented quantities and unsourced API symbols ([#47](https://github.com/aiidateam/aiida-agents/pull/47), [#48](https://github.com/aiidateam/aiida-agents/pull/48), [#87](https://github.com/aiidateam/aiida-agents/pull/87))
 - **Codegen agent and sandbox** — writing AiiDA code from retrieved examples and running it against a disposable copy ([#63](https://github.com/aiidateam/aiida-agents/pull/63), [#64](https://github.com/aiidateam/aiida-agents/pull/64), [#65](https://github.com/aiidateam/aiida-agents/pull/65), [#85](https://github.com/aiidateam/aiida-agents/pull/85))
 - **Planner** — routing and multi-step plans across specialists ([#45](https://github.com/aiidateam/aiida-agents/pull/45), [#50](https://github.com/aiidateam/aiida-agents/pull/50))
 - **Evaluation harness** — scoring answers against solved AiiDA Discourse threads, and asserting on what an agent did rather than what it said ([#40](https://github.com/aiidateam/aiida-agents/pull/40), [#62](https://github.com/aiidateam/aiida-agents/pull/62), [#66](https://github.com/aiidateam/aiida-agents/pull/66))
 - **CLI** — subcommands, configuration reporting, history, multiline input, and a `doctor` that names the fix for each failure ([#15](https://github.com/aiidateam/aiida-agents/pull/15), [#19](https://github.com/aiidateam/aiida-agents/pull/19), [#88](https://github.com/aiidateam/aiida-agents/pull/88))
-- **Architecture documentation** — the overview, the extension guide, and eleven decision records ([#42](https://github.com/aiidateam/aiida-agents/pull/42), [#51](https://github.com/aiidateam/aiida-agents/pull/51))
-
+- **Architecture documentation** — the overview, the extension guide, and the decision records ([#42](https://github.com/aiidateam/aiida-agents/pull/42), [#51](https://github.com/aiidateam/aiida-agents/pull/51))
+  
 ### What did not get merged
 
 Seven pull requests closed without merging, and none were rejected on their merits.
@@ -472,9 +477,6 @@ Five were early iterations superseded by reworked versions that landed instead: 
 One ([#92](https://github.com/aiidateam/aiida-agents/pull/92)) was overtaken by my mentor's equivalent change once `aiida-core` 2.9 was released.
 One ([#70](https://github.com/aiidateam/aiida-agents/pull/70)) was folded into a later pull request.
 
-One piece of finished work is not yet open as a pull request: folding `check` and `warm` into a single `doctor` command with `--only` and `--warm` flags ([#75](https://github.com/aiidateam/aiida-agents/issues/75)).
-It waits on a related change of my mentor's that touches the same command.
-
 ### What is left to do
 
 The gap I would close first is **an end-to-end test against a real DFT calculation**.
@@ -482,19 +484,20 @@ The unit suite covers the plumbing thoroughly, and cannot tell anyone whether a 
 
 Beyond that, in the repository's open issues:
 
-- **OS-level isolation for generated code** — the copy protects the database; the filesystem and network are narrowed but not closed
-- **Onboarding** ([#83](https://github.com/aiidateam/aiida-agents/issues/83)) — a fresh profile needs a computer, a code, a plugin and pseudopotentials, and the agent correctly asks for all of them without being able to provide any
-- **Serving RAG and plugin tools over MCP** ([#84](https://github.com/aiidateam/aiida-agents/issues/84)) — an MCP client currently gets ungrounded answers because the doc-search tool is not registered there
-- **Moving the grounding vocabulary to a plugin hook** ([#80](https://github.com/aiidateam/aiida-agents/issues/80)) — units and parameter names are DFT-specific and should not live in a generic package
+- **Isolation for generated code** — the disposable copy protects the database, and nothing protects the filesystem or the network: generated code runs as the user, and can read any file they can read and open any connection they can open. OS-level isolation is the missing layer, and the static guard is a speed bump rather than a boundary
+- **Onboarding** ([#83](https://github.com/aiidateam/aiida-agents/issues/83)) — a meta issue tracking the chain a fresh profile needs: a computer, a code, a domain plugin and pseudopotentials. The agent correctly asks for all of them without being able to provide any
+- **Serving the documentation search over MCP** ([#84](https://github.com/aiidateam/aiida-agents/issues/84)) — the tools are exposed to MCP clients but the RAG search is not, so an MCP client gets ungrounded answers where the CLI gets cited ones
+- **Moving the grounding vocabulary to domain-specific plugins** ([#80](https://github.com/aiidateam/aiida-agents/issues/80)) — units and parameter names are DFT-specific and should not live in a generic package
 - **Restoring token streaming** ([#78](https://github.com/aiidateam/aiida-agents/issues/78)) — lost when the approval gate landed, and it has to compose with the deferred-tool output type
 - **Consolidating the agent builders** ([#77](https://github.com/aiidateam/aiida-agents/issues/77)) — a mechanical refactor that would put two safety invariants in one place instead of three
-- **Plugin tools reaching the Execution agent** — today a plugin can only contribute to Analysis
+- **Plugin tools reaching the other agents** — today a plugin can only contribute to Analysis
 
 ### Trying it, and building on it
 
 ```bash
 pip install "aiida-agents[rag] @ git+https://github.com/aiidateam/aiida-agents.git"
-aiida-agents doctor      # every subsystem, and the command that fixes each failure
+aiida-agents config init   # writes a commented .env template
+aiida-agents doctor        # every subsystem, and the command that fixes each failure
 aiida-agents rag build
 aiida-agents chat
 ```
