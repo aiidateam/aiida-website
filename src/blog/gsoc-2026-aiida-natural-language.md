@@ -368,7 +368,7 @@ That is what the next two weeks are for.
 ### A read-only role is not a sandbox
 
 The codegen sandbox shipped in week 10 as a second profile pointing at the same database, through a PostgreSQL role with no write privilege.
-The reasoning was that a scratch database would be safer and useless, because an empty one cannot answer "which structures did I relax last month".
+The reasoning was that an empty scratch database, while safer, would be useless, as it cannot answer any questions about the real data.
 
 Then mentor deleted the sandbox profile, agreed when `verdi` asked whether to delete its data, and lost his own database.
 
