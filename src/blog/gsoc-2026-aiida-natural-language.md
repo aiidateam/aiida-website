@@ -6,6 +6,18 @@ category: Blog
 tags: [gsoc, aiida, ai, gsoc2026]
 ---
 
+## Summary
+
+This post is the running log I kept during my Google Summer of Code 2026 project.
+I worked on giving AiiDA a natural language interface, basically letting you talk to it instead of memorizing verdi commands or writing Python for every little question.
+It grew into a small team of AI agents rather than one big model trying to do everything, each one handling a different part of the job, and a planner deciding who should answer what.
+
+You can find the code at [github.com/aiidateam/aiida-agents](https://github.com/aiidateam/aiida-agents).
+
+If you want the full story of what got built, what broke along the way, and what's still left to do, that's all below, or you can jump straight to the [Final report](#final-report) for the short version.
+
+---
+
 ## What I Am Building
 
 The project is a **natural language interface for AiiDA** built on a multi-agent AI architecture.
