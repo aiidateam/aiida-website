@@ -110,12 +110,13 @@ export default function Cite({variant = 'section'}: {variant?: 'section' | 'pane
   const Wrapper = variant === 'section' ? 'section' : 'div';
   const wrapperClass = variant === 'section' ? 'cite-section' : 'cite-panel';
   const revealAttrs = variant === 'section' ? {'data-reveal': true} : {};
+  const headingClass = variant === 'section' ? 'section-heading' : undefined;
 
   return (
     <Wrapper className={wrapperClass} {...revealAttrs}>
       <div className="cite-inner">
         <header className="cite-header">
-          <h2>How to cite AiiDA</h2>
+          <h2 className={headingClass}>How to cite AiiDA</h2>
           <p>If AiiDA helped your research, please cite the papers below.</p>
         </header>
 

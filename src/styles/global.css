@@ -571,3 +571,46 @@ a:hover .navbar-ext-icon {
       transform 0ms;
   }
 }
+
+/* ===== SHARED PAGE HEADER ===== */
+/* One header primitive for every sub-page (ecosystem, docs, blog, plugin
+   registry, team, events, …). Keep the markup as <header class="page-header">
+   for consistency across the app. */
+
+.page-header {
+  text-align: center;
+  padding: 3rem 0 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0 0 0.6rem;
+}
+
+.page-header-sub {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.page-header-sub a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.page-header-sub a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .page-header-sub {
+    font-size: 0.95rem;
+  }
+}

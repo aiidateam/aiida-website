@@ -14,36 +14,6 @@
   padding: 0 2rem 4rem;
 }
 
-/* --- Hero --- */
-
-.reg-hero {
-  text-align: center;
-  padding: 3rem 0 1.25rem;
-}
-
-.reg-hero h1 {
-  font-size: 2.4rem;
-  font-weight: 800;
-  margin: 0 0 0.6rem;
-}
-
-.reg-hero-sub {
-  font-size: 1.05rem;
-  color: var(--color-text-secondary);
-  max-width: 720px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.reg-hero-sub a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.reg-hero-sub a:hover {
-  text-decoration: underline;
-}
-
 /* --- Global summary badges --- */
 
 .reg-summary {
