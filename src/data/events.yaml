@@ -158,8 +158,9 @@
 - name: Introduction to AiiDA 1.0
   start: 2019-09-06
   location: Xiamen University (CN)
-  url: http://pcoss.xmu.edu.cn/workshop/
-  description: As part of a workshop on computational chemistry and machine learning
+  description: >-
+    As part of a workshop on computational chemistry and machine learning.
+    The workshop page `pcoss.xmu.edu.cn/workshop/` is no longer online.
 
 - name: Writing reproducible workflows for computational materials science, using AiiDA 1.0
   start: 2019-05-21

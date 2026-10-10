@@ -179,7 +179,7 @@ We are very grateful to our sponsors for helping to make this event possible:
 - The [swissuniversities P-5 project](https://www.swissuniversities.ch/en/topics/digitalisation/p-5-scientific-information) “Materials Cloud” and [Empa](https://www.empa.ch/) for funding
 - The [MarketPlace](https://www.the-marketplace-project.eu/) project for funding
 - The [DOME](https://dome40.eu/) project for funding
-- The [Open-Model project](https://www.open-model.eu/) funding
+- The [Open-Model project](https://web.archive.org/web/20260419142401/https://open-model.eu/) funding
 - The INTERSECT project funding
 
 :::{list-table}

@@ -4,35 +4,30 @@
 accept = "200..=299,403,429"
 
 max_retries = 2
-timeout = 30
+# Generous: archive.org replays snapshots slower than a live host answers.
+timeout = 60
 # Some DOI / publisher redirect chains (Springer, Nature) hop through more
 # than the default 5 redirects before landing on the final page.
 max_redirects = 15
 
+# Only hosts that work in a browser but not from a GitHub runner. Dead links
+# get repointed at a web.archive.org snapshot or demoted to plain text in the
+# page, never parked here. Symptoms last verified 2026-07-22.
 exclude = [
-  # Hosts whose certificate chains fail in CI's trust store.
+  # Incomplete certificate chain (reachable with `curl -k`).
   "^https?://events\\.prace-ri\\.eu/",
-  "^https?://dome40\\.eu/",
-  "^https?://aiidalab\\.materialscloud\\.org/",
 
-  # Legacy third-party URLs referenced from old (2017–2020) blog posts that
-  # have since gone 404 / 503 / away, and which we don't plan to rewrite in
-  # the archive. Scoped to the specific paths so we still catch new breakage
-  # on the same hosts.
-  "^https?://www\\.max-centre\\.eu/2017/07/18/prize/",
-  "^https?://www\\.eurekalert\\.org/pub_releases/",
-  "^https?://www\\.swissuniversities\\.ch/en/organisation/projects-and-programmes/p-5/",
-  "^https?://www\\.cecam\\.org/wp-content/uploads/2019/",
-  "^https?://developers\\.google\\.com/season-of-docs/",
-  "^https?://pcoss\\.xmu\\.edu\\.cn/",
-  "^https?://morty\\.tech/",
-  "^https?://www\\.ord-premise\\.org/",
-  "^https?://bit\\.ly/",
-  "^https?://www\\.nature\\.com/sdata/publish/",
-  # Hosts that are consistently slow from GitHub's runners and time out even
-  # with a generous budget. ICTP event and visitor pages respond far slower
-  # than the HTTP timeout from CI; juser.fz-juelich.de hosts a Jülich thesis
-  # record with the same problem.
-  "^https?://(www|indico)\\.ictp\\.it/",
+  # Expired certificate.
+  "^https?://dome40\\.eu/",
+
+  # Web application firewall rejects GitHub runner IPs; answers 200 from
+  # an ordinary network.
+  "^https?://(www\\.)?prace-ri\\.eu/",
+
+  # Slower than the timeout from GitHub's runners.
+  "^https?://indico\\.ictp\\.it/",
   "^https?://juser\\.fz-juelich\\.de/",
+
+  # Loops through an idp.nature.com cookie bounce for non-browser clients.
+  "^https?://www\\.nature\\.com/sdata/publish/",
 ]
