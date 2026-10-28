@@ -5,34 +5,35 @@ import Layout from '../layouts/Layout.astro';
 const base = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
 
 const team = [
-  { name: 'Edan Bainglass', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/bainglass_edan.png` },
-  { name: 'Marnik Bercx', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/marnik.jpg` },
-  { name: 'Miki Bonacci', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/bonacci_miki.png` },
-  { name: 'Kristjan Eimre', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/eimre_kristjan.png` },
-  { name: 'Julian Geiger', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/geiger_julian.png` },
-  { name: 'Alexander Goscinski', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/alexander_goscinski.png` },
-  { name: 'Sebastiaan P. Huber', role: 'Former PostDoc Research Scientist, Theory and Simulation of Materials, EPFL', img: `${base}/img/team/huber.png` },
-  { name: 'Ali Khosravi', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/khosravi_ali.png` },
-  { name: 'Zisen Liu', role: 'Master Student, University of Zurich (UZH)', img: `${base}/img/team/liu_zisen.png` },
-  { name: 'Nicola Marzari', role: 'Chair, Theory and Simulation of Materials, EPFL · Director, NCCR MARVEL · Head of LMS, PSI', img: `${base}/img/team/nicola.png` },
-  { name: 'Giovanni Pizzi', role: 'Group Leader, Materials Software and Data Group, PSI', img: `${base}/img/team/gio.png` },
+  { name: 'Edan Bainglass', role: 'Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/bainglass_edan.png` },
+  { name: 'Julian Geiger', role: 'Postdoctoral Researcher, Materials Software and Data Group, PSI', img: `${base}/img/team/geiger_julian.png` },
+  { name: 'Alexander Goscinski', role: 'Postdoctoral Researcher, Materials Software and Data Group, PSI', img: `${base}/img/team/alexander_goscinski.png` },
+  { name: 'Ali Khosravi', role: 'Postdoctoral Researcher, Materials Software and Data Group, PSI', img: `${base}/img/team/khosravi_ali.png` },
   { name: 'Timo Reents', role: 'PhD student, Materials Software and Data Group, PSI', img: `${base}/img/team/reents_timo.png` },
-  { name: 'Xing Wang', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/wang_xing.png` },
   { name: 'Aliaksandr Yakutovich', role: 'Research Software engineer, Empa', img: `${base}/img/team/Yakutovich.jpg` },
-  { name: 'Jusong Yu', role: 'PostDoc Research Scientist, Materials Software and Data Group, PSI', img: `${base}/img/team/JusongYu.jpg` },
 ];
+
+const leaders = [
+  { name: 'Giovanni Pizzi', role: 'Group Leader, Materials Software and Data Group, PSI', img: `${base}/img/team/gio.png` },
+  { name: 'Nicola Marzari', role: 'Chair, Theory and Simulation of Materials, EPFL · Director, NCCR MARVEL · Head of LMS, PSI', img: `${base}/img/team/nicola.png` },
+]
 
 const formerMembers = [
   'Simon Adorf (EPFL, 2019–2022)',
   'Casper W. Andersen (EPFL, 2018–2021)',
+  'Marnik Bercx (PSI, 2020-2026)',
+  'Miki Bonacci (PSI, 2023–2026)',
   'Andrea Cepellotti (EPFL, 2011–2016)',
   'Flaviano Dos Santos (EPFL, 2020–2022)',
+  'Kristjan Eimre (PSI, 2022–2026)',
   'Fernando Gargiulo (EPFL, 2015–2017)',
   'Rico Häuselmann (EPFL, 2016–2018)',
+  'Sebastiaan P. Huber (EPFL, 2016-2024)',
   'Conrad Johnston (EPFL, 2018–2019)',
   'Leonid Kahle (EPFL, 2015–2020)',
   'Boris Kozinsky (Bosch, first pre-AiiDA prototypes before 2012, and 2012-2018)',
   'Snehal Kumbhar (EPFL, 2015–2020)',
+  'Zisen Liu (PSI, 2024-2025)',
   'Andrius Merkys (EPFL, 2014–2015)',
   'Nicolas Mounet (EPFL, 2015–2018)',
   'Elsa Passaro (EPFL, 2017–2021)',
@@ -41,8 +42,11 @@ const formerMembers = [
   'Christopher Sewell (EPFL, 2020–2023)',
   'Leopold Talirz (EPFL, 2017–2024)',
   'Martin Uhrin (EPFL, 2015–2019)',
+  'Xing Wang (PSI, 2022-2026)',
+  'Jusong Yu (PSI, 2022–2026)',
   'Spyros Zoupanos (EPFL, 2015–2019)',
 ];
+
 ---
 
 <Layout title="Team — AiiDA" description="Meet the AiiDA development team and contributors.">
@@ -52,9 +56,20 @@ const formerMembers = [
       <p class="section-header-sub">Meet the people behind AiiDA.</p>
     </header>
 
-    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem;">The AiiDA development team (alphabetical order)</h2>
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem;">Core development (alphabetical order)</h2>
     <div class="team-grid">
       {team.map(m => (
+        <div class="team-card">
+          <img src={m.img} alt={m.name} loading="lazy" />
+          <p class="team-card-name">{m.name}</p>
+          <p class="team-card-role">{m.role}</p>
+        </div>
+      ))}
+    </div>
+
+    <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1rem;">Leadership (alphabetical order)</h2>
+    <div class="team-grid">
+      {leaders.map(m => (
         <div class="team-card">
           <img src={m.img} alt={m.name} loading="lazy" />
           <p class="team-card-name">{m.name}</p>
